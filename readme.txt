@@ -50,6 +50,7 @@ iConvert Promoter provides essential tools to help you create engaging popups an
   - Slide-in  
   - Floating Bar  
   - Inline Bar  
+  - Fullscreen 
 
 **Triggers:**  
 - Page Load  
@@ -91,7 +92,7 @@ Unlock the full potential of iConvert Promoter with the **PRO version**, offerin
 ❓ **FAQs:**  
 
 = What types of popups can I create? =  
-You can create Simple Popups, Lightboxes, Slide-ins, Floating Bars, and Inline Bars.
+You can create Simple Popups, Lightboxes, Slide-ins, Floating Bars, Inline Bars and Fullscreen.
 
 = Is coding required to use this plugin? =  
 No coding is required. The drag-and-drop editor makes it easy to design and customize popups.
@@ -101,15 +102,6 @@ Yes, you can use advanced targeting rules such as exit intent, scroll percentage
 
 = Are the popups mobile-friendly? =  
 Yes, all popup templates are responsive and optimized for mobile devices.
-
-== Screenshots ==
-
-📸 **Screenshots:**  
-1. Drag-and-drop editor for popup creation.  
-2. Predefined templates for quick setup.  
-3. Advanced targeting rules configuration.  
-4. Mobile-friendly popup preview.  
-5. Contacts management interface.
 
 == Source Files ==
 
