@@ -135,6 +135,9 @@
             value="${plugin_label}" />
         <quite_file_replace file="${build_dir}/iconvert-promo-plugin.php" token="@@build_type@@"
             value="${is_pro_build}" />
+
+               <quite_file_replace file="${build_dir}/readme.txt" token="@@buildversion@@"
+            value="${build_version}" />
     </target>
 
 
