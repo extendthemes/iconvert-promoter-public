@@ -1,0 +1,1360 @@
+{
+	"title": "Subscribe Form",
+	"name": "cspromo/subscribe",
+	"category": "kubio-basic",
+	"attributes": {
+		"kubio": {
+			"type": "object"
+		},
+		"popup_id": {
+			"type": "number"
+		},
+		"showNotices": {
+			"type": "boolean",
+			"default": true
+		},
+		"successNotice": {
+			"type": "object",
+			"default": {
+				"label": "Submitted successfully"
+			}
+		},
+		"infoNotice": {
+			"type": "object",
+			"default": {
+				"label": "This email is already registered!"
+			}
+		},
+		"errorNotice": {
+			"type": "object",
+			"default": {
+				"label": "Error! Form was not processed."
+			}
+		},
+		"formUniqueId": {
+			"type": "string"
+		},
+		"formId": {
+			"type": "number",
+			"default": 1
+		},
+		"formFields": {
+			"type": "string",
+			"default": "name-email"
+		},
+		"formLayout": {
+			"type": "string",
+			"default": "vertical"
+		},
+		"stackOnMobile": {
+			"type": "boolean",
+			"default": true
+		},
+		"formConsent": {
+			"type": "boolean",
+			"default": true
+		},
+		"nameLabelDisplay": {
+			"type": "boolean",
+			"default": true
+		},
+		"nameLabel": {
+			"type": "string",
+			"default": "Name"
+		},
+		"nameFieldPlaceholder": {
+			"type": "string",
+			"default": "Name"
+		},
+		"emailLabelDisplay": {
+			"type": "boolean",
+			"default": true
+		},
+		"emailLabel": {
+			"type": "string",
+			"default": "Email"
+		},
+		"emailFieldPlaceholder": {
+			"type": "string",
+			"default": "Email"
+		},
+		"termsIcon": {
+			"type": "string",
+			"default": "font-awesome/check"
+		},
+		"termsLabelDisplay": {
+			"type": "boolean",
+			"default": true
+		},
+		"termsLabel": {
+			"type": "string",
+			"default": "I agree to terms & conditions"
+		},
+		"termsFieldChecked": {
+			"type": "boolean",
+			"default": false
+		},
+		"termsDescription": {
+			"type": "string",
+			"default": "By ticking this box you consent our <a href='#'>Privacy Policy</a> and <a href='#'>Terms and conditions</a>."
+		},
+		"submitText": {
+			"type": "string",
+			"default": "Subscribe"
+		},
+		"submitIconEnabled": {
+			"type": "boolean",
+			"default": true
+		},
+		"submitIcon": {
+			"type": "string",
+			"default": "font-awesome/envelope"
+		},
+		"submitIconPosition": {
+			"type": "string",
+			"default": "before"
+		},
+		"submitIconSpace": {
+			"type": "object",
+			"default": {
+				"unit": "px",
+				"value": 10
+			}
+		},
+		"onSuccessAction": {
+			"type": "string",
+			"default": "showNotice"
+		},
+		"onSuccessPopup": {
+			"type": "string",
+			"default": "0"
+		},
+		"link": {
+			"type": "object",
+			"default": {
+				"typeOpenLink": "sameWindow"
+			}
+		},
+		"migrations": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"supports": {
+		"kubio": {
+			"default": {
+				"props": {
+					"internal": {
+						"type": "object"
+					},
+					"overlapOptions": true
+				},
+				"style": {
+					"descendants": {
+						"gapSpacer": {
+							"gap": {
+								"value": 10,
+								"unit": "px"
+							}
+						},
+						"container": {
+							"display": "grid",
+							"textAlign": "left",
+							"border": {
+								"top": {
+									"radius": {
+										"left": {
+											"value": 0,
+											"unit": "px"
+										},
+										"right": {
+											"value": 0,
+											"unit": "px"
+										}
+									},
+									"style": "solid",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"color": "rgba(var(--kubio-color-5),0)"
+								},
+								"bottom": {
+									"radius": {
+										"right": {
+											"value": 0,
+											"unit": "px"
+										},
+										"left": {
+											"value": 0,
+											"unit": "px"
+										}
+									},
+									"style": "solid",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"color": "rgba(var(--kubio-color-5),0)"
+								},
+								"right": {
+									"style": "solid",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"color": "rgba(var(--kubio-color-5),0)"
+								},
+								"left": {
+									"style": "solid",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"color": "rgba(var(--kubio-color-5),0)"
+								}
+							},
+							"gap": {
+								"value": 10,
+								"unit": "px"
+							}
+						},
+						"mobileStackContainer": {
+							"media": {
+								"mobile": {
+									"textAlign": "center"
+								}
+							}
+						},
+						"innerForm": {
+							"display": "grid"
+						},
+						"containerFields": {
+							"display": "grid",
+							"alignItems": "flex-end"
+						},
+						"successNotice": {
+							"typography": {
+								"color": "#007F0B",
+								"size": {
+									"unit": "px",
+									"value": 13
+								}
+							},
+							"background": {
+								"color": "#D3F8C0"
+							},
+							"border": {
+								"top": {
+									"color": "#d3f8c0",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									}
+								},
+								"bottom": {
+									"color": "#d3f8c0",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									}
+								},
+								"left": {
+									"color": "#d3f8c0",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								},
+								"right": {
+									"color": "#d3f8c0",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								}
+							},
+							"padding": {
+								"top": {
+									"unit": "px",
+									"value": 3
+								},
+								"bottom": {
+									"unit": "px",
+									"value": 3
+								},
+								"left": {
+									"unit": "px",
+									"value": 5
+								},
+								"right": {
+									"unit": "px",
+									"value": 5
+								}
+							}
+						},
+						"infoNotice": {
+							"typography": {
+								"color": "#2595D9",
+								"size": {
+									"unit": "px",
+									"value": 13
+								}
+							},
+							"background": {
+								"color": "#D9F6FF"
+							},
+							"border": {
+								"top": {
+									"color": "#D9F6FF",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									}
+								},
+								"bottom": {
+									"color": "#D9F6FF",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									}
+								},
+								"left": {
+									"color": "#D9F6FF",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								},
+								"right": {
+									"color": "#D9F6FF",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								}
+							},
+							"padding": {
+								"top": {
+									"unit": "px",
+									"value": 3
+								},
+								"bottom": {
+									"unit": "px",
+									"value": 3
+								},
+								"left": {
+									"unit": "px",
+									"value": 5
+								},
+								"right": {
+									"unit": "px",
+									"value": 5
+								}
+							}
+						},
+						"errorNotice": {
+							"typography": {
+								"color": "#CC0000",
+								"size": {
+									"unit": "px",
+									"value": 13
+								}
+							},
+							"background": {
+								"color": "#FFD2D2"
+							},
+							"border": {
+								"top": {
+									"color": "#FFD2D2",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									}
+								},
+								"bottom": {
+									"color": "#FFD2D2",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									}
+								},
+								"left": {
+									"color": "#FFD2D2",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								},
+								"right": {
+									"color": "#FFD2D2",
+									"style": "none",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								}
+							},
+							"padding": {
+								"top": {
+									"unit": "px",
+									"value": 3
+								},
+								"bottom": {
+									"unit": "px",
+									"value": 3
+								},
+								"left": {
+									"unit": "px",
+									"value": 5
+								},
+								"right": {
+									"unit": "px",
+									"value": 5
+								}
+							}
+						},
+						"groupLabels": {
+							"typography": {
+								"color": "rgba(var(--kubio-color-6-variant-2),1)",
+								"size": {
+									"value": 14,
+									"unit": "px"
+								},
+								"weight": "600"
+							}
+						},
+						"groupFields": {
+							"width": {
+								"unit": "%",
+								"value": 100
+							},
+							"padding": {
+								"top": {
+									"value": 10,
+									"unit": "px"
+								},
+								"bottom": {
+									"value": 10,
+									"unit": "px"
+								},
+								"left": {
+									"value": 10,
+									"unit": "px"
+								},
+								"right": {
+									"value": 10,
+									"unit": "px"
+								}
+							},
+							"border": {
+								"top": {
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									},
+									"style": "solid",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"color": "rgba(var(--kubio-color-5-variant-2),1)"
+								},
+								"bottom": {
+									"radius": {
+										"right": {
+											"value": 3,
+											"unit": "px"
+										},
+										"left": {
+											"value": 3,
+											"unit": "px"
+										}
+									},
+									"style": "solid",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"color": "rgba(var(--kubio-color-5-variant-2),1)"
+								},
+								"right": {
+									"style": "solid",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"color": "rgba(var(--kubio-color-5-variant-2),1)"
+								},
+								"left": {
+									"style": "solid",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									},
+									"color": "rgba(var(--kubio-color-5-variant-2),1)"
+								}
+							},
+							"background": {
+								"color": "rgba(var(--kubio-color-5),1)"
+							},
+							"typography": {
+								"size": {
+									"value": 14,
+									"unit": "px"
+								},
+								"color": "rgba(var(--kubio-color-6),1)",
+								"lineHeight": 1,
+								"minHeight": "auto"
+							}
+						},
+						"nameContainer": {
+							"display": "inline-block",
+							"width": {
+								"unit": "%",
+								"value": 100
+							}
+						},
+						"emailContainer": {
+							"display": "inline-block",
+							"width": {
+								"unit": "%",
+								"value": 100
+							}
+						},
+						"termsContainerAlign": {
+							"display": "inline-block",
+							"padding": {
+								"top": {
+									"value": 5,
+									"unit": "px"
+								},
+								"bottom": {
+									"value": 5,
+									"unit": "px"
+								},
+								"left": {
+									"value": 0,
+									"unit": "px"
+								},
+								"right": {
+									"value": 0,
+									"unit": "px"
+								}
+							}
+						},
+						"termsContainer": {
+							"display": "flex",
+							"justifyContent": "flex-start",
+							"alignItems": "flex-start",
+							"margin": {
+								"bottom": {
+									"unit": "px",
+									"value": 0
+								}
+							}
+						},
+						"termsCheckbox": {
+							"display": "inline-block",
+							"lineHeight": 0
+						},
+						"termsField": {
+							"appearance": "none",
+							"outer": "none",
+							"background": {
+								"color": "rgba(var(--kubio-color-5),1)"
+							},
+							"margin": {
+								"top": {
+									"unit": "px",
+									"value": 0
+								},
+								"right": {
+									"unit": "px",
+									"value": 8
+								},
+								"left": {
+									"unit": "px",
+									"value": 0
+								},
+								"bottom": {
+									"unit": "px",
+									"value": 0
+								}
+							},
+							"height": {
+								"unit": "px",
+								"value": 16
+							},
+							"width": {
+								"unit": "px",
+								"value": 16
+							},
+							"border": {
+								"top": {
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									},
+									"style": "solid",
+									"color": "rgba(var(--kubio-color-6),1)",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								},
+								"bottom": {
+									"radius": {
+										"right": {
+											"value": 3,
+											"unit": "px"
+										},
+										"left": {
+											"value": 3,
+											"unit": "px"
+										}
+									},
+									"style": "solid",
+									"color": "rgba(var(--kubio-color-6),1)",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								},
+								"right": {
+									"style": "solid",
+									"color": "rgba(var(--kubio-color-6),1)",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								},
+								"left": {
+									"style": "solid",
+									"color": "rgba(var(--kubio-color-6),1)",
+									"width": {
+										"value": 1,
+										"unit": "px"
+									}
+								}
+							}
+						},
+						"termsIcon": {
+							"display": "none",
+							"typography": {
+								"color": "rgba(var(--kubio-color-3),1)"
+							},
+							"height": {
+								"unit": "px",
+								"value": 13
+							},
+							"width": {
+								"unit": "px",
+								"value": 13
+							},
+							"top": {
+								"unit": "px",
+								"value": 2
+							},
+							"left": {
+								"unit": "px",
+								"value": 2
+							},
+							"margin": {
+								"top": {
+									"unit": "px",
+									"value": 0
+								},
+								"right": {
+									"unit": "px",
+									"value": 0
+								},
+								"left": {
+									"unit": "px",
+									"value": 0
+								},
+								"bottom": {
+									"unit": "px",
+									"value": 0
+								}
+							}
+						},
+						"termsLabel": {
+							"typography": {
+								"color": "rgba(var(--kubio-color-6),1)",
+								"size": {
+									"unit": "px",
+									"value": 16
+								},
+								"lineHeight": 1,
+								"weight": "600"
+							},
+							"padding": {
+								"bottom": {
+									"value": 0,
+									"unit": "px"
+								},
+								"top": {
+									"value": 0,
+									"unit": "px"
+								}
+							},
+							"margin": {
+								"top": {
+									"value": 0,
+									"unit": "px"
+								}
+							},
+							"cursor": "pointer"
+						},
+						"termsDescription": {
+							"typography": {
+								"color": "rgba(var(--kubio-color-6),1)",
+								"size": {
+									"unit": "px",
+									"value": 14
+								},
+								"weight": "400"
+							},
+							"padding": {
+								"top": {
+									"value": 0,
+									"unit": "px"
+								},
+								"bottom": {
+									"value": 0,
+									"unit": "px"
+								},
+								"left": {
+									"value": 0,
+									"unit": "px"
+								},
+								"right": {
+									"value": 0,
+									"unit": "px"
+								}
+							},
+							"margin": {
+								"top": {
+									"value": 0,
+									"unit": "px"
+								},
+								"bottom": {
+									"value": 0,
+									"unit": "px"
+								},
+								"left": {
+									"value": 0,
+									"unit": "px"
+								},
+								"right": {
+									"value": 0,
+									"unit": "px"
+								}
+							}
+						},
+						"submitContainer": {
+							"display": "inline-block",
+							"width": {
+								"unit": "%",
+								"value": 100
+							}
+						},
+
+						"fakeFirstName": {
+							"display": "none"
+						},
+						"submitButton": {
+							"textAlign": "center",
+							"justifyContent": "center",
+							"whiteSpace": "nowrap",
+							"cursor": "pointer",
+							"background": {
+								"color": "rgba(var(--kubio-color-1),1)"
+							},
+							"typography": {
+								"color": "#ffffff",
+								"size": {
+									"unit": "px",
+									"value": 14
+								},
+								"transform": "uppercase",
+								"lineHeight": 1.1,
+								"weight": 600,
+								"letterSpacing": {
+									"value": 1,
+									"unit": "px"
+								}
+							},
+							"padding": {
+								"top": {
+									"unit": "px",
+									"value": 10
+								},
+								"bottom": {
+									"unit": "px",
+									"value": 10
+								},
+								"left": {
+									"unit": "px",
+									"value": 20
+								},
+								"right": {
+									"unit": "px",
+									"value": 20
+								}
+							},
+							"border": {
+								"top": {
+									"radius": {
+										"left": {
+											"value": 3,
+											"unit": "px"
+										},
+										"right": {
+											"value": 3,
+											"unit": "px"
+										}
+									},
+									"style": "solid",
+									"color": "rgba(var(--kubio-color-5),0)",
+									"width": {
+										"value": 2,
+										"unit": "px"
+									}
+								},
+								"bottom": {
+									"radius": {
+										"right": {
+											"value": 3,
+											"unit": "px"
+										},
+										"left": {
+											"value": 3,
+											"unit": "px"
+										}
+									},
+									"style": "solid",
+									"color": "rgba(var(--kubio-color-5),0)",
+									"width": {
+										"value": 2,
+										"unit": "px"
+									}
+								},
+								"right": {
+									"style": "solid",
+									"color": "rgba(var(--kubio-color-5),0)",
+									"width": {
+										"value": 2,
+										"unit": "px"
+									}
+								},
+								"left": {
+									"style": "solid",
+									"color": "rgba(var(--kubio-color-5),0)",
+									"width": {
+										"value": 2,
+										"unit": "px"
+									}
+								}
+							}
+						},
+						"submitIcon": {
+							"margin": {
+								"left": {
+									"unit": "px",
+									"value": 0
+								},
+								"right": {
+									"unit": "px",
+									"value": 10
+								}
+							},
+							"height": {
+								"unit": "px",
+								"value": "14"
+							},
+							"width": {
+								"unit": "px",
+								"value": "14"
+							}
+						}
+					}
+				}
+			},
+			"elementsEnum": {
+				"GAPSPACER": "gapSpacer",
+				"OUTER": "outer",
+				"CONTAINER": "container",
+				"MOBILE_STACK_CONTAINER": "mobileStackContainer",
+				"CONTAINERFIELDS": "containerFields",
+				"INNER_FORM": "innerForm",
+				"GROUPLABELS": "groupLabels",
+				"GROUPFIELDS": "groupFields",
+				"NAMECONTAINER": "nameContainer",
+				"NAMELABEL": "nameLabel",
+				"NAMEFIELD": "nameField",
+				"EMAILCONTAINER": "emailContainer",
+				"EMAILLABEL": "emailLabel",
+				"EMAILFIELD": "emailField",
+				"TERMSCHECKBOX": "termsCheckbox",
+				"TERMSICON": "termsIcon",
+				"TERMSLABEL": "termsLabel",
+				"TERMSDESCRIPTION": "termsDescription",
+				"TERMSDESCRIPTIONLINKS": "termsDescriptionLinks",
+				"TERMSCONTAINER": "termsContainer",
+				"TERMSCONTAINERALIGN": "termsContainerAlign",
+				"TERMSFIELD": "termsField",
+
+				"FAKEFIRSTNAME": "fakeFirstName",
+				"SUBMITCONTAINER": "submitContainer",
+				"SUBMITBUTTON": "submitButton",
+				"SUBMITTEXT": "submitText",
+				"SUBMITICON": "submitIcon",
+				"GROUPNOTICES": "groupNotices",
+				"SUCCESS_NOTICE": "successNotice",
+				"INFO_NOTICE": "infoNotice",
+				"ERROR_NOTICE": "errorNotice",
+
+				"SUCCESS_CONTAINER": "successContainer"
+			},
+			"elementsByName": {
+				"gapSpacer": {
+					"selector": ".wp-block-cspromo-subscribe__innerForm, .wp-block-cspromo-subscribe__containerFields, .wp-block-cspromo-subscribe__container"
+				},
+				"outer": {},
+				"container": {
+					"wrapper": true,
+					"default": true,
+					"tag": "form",
+					"className": []
+				},
+				"mobileStackContainer": {
+					"selector": "&.subscribe-stack-on-mobile"
+				},
+				"containerFields": {
+					"props": {
+						"tag": "div",
+						"className": [ "iconvert-subscribe-field" ]
+					}
+				},
+				"submitContainer": {},
+				"submitButton": {
+					"props": {
+						"tag": "button",
+						"className": [ "iconvert-subscribe-field" ]
+					}
+				},
+				"submitText": {
+					"props": {
+						"tag": "span"
+					}
+				},
+				"submitIcon": {
+					"props": {
+						"tag": "icon"
+					}
+				},
+				"nameContainer": {},
+				"groupLabels": {
+					"selector": ".wp-block-cspromo-subscribe__nameLabel, .wp-block-cspromo-subscribe__emailLabel"
+				},
+				"groupFields": {
+					"selector": ".wp-block-cspromo-subscribe__nameField, .wp-block-cspromo-subscribe__emailField"
+				},
+				"nameLabel": {},
+				"nameField": {
+					"props": {
+						"tag": "input"
+					}
+				},
+				"emailContainer": {},
+				"emailLabel": {},
+				"emailField": {
+					"props": {
+						"tag": "input"
+					}
+				},
+				"fakeFirstName": {
+					"props": {
+						"tag": "input",
+						"type": "hidden",
+						"value": "",
+						"name": "first_name"
+					}
+				},
+				"termsContainerAlign": {
+					"props": {
+						"tag": "div",
+						"className": [ "iconvert-subscribe-field" ]
+					}
+				},
+				"termsContainer": {
+					"props": {
+						"tag": "label",
+						"for": "agree"
+					}
+				},
+				"termsCheckbox": {},
+				"termsIcon": {
+					"props": {
+						"tag": "icon"
+					}
+				},
+				"termsLabel": {
+					"props": {
+						"tag": "span",
+						"selector": ".wp-block-cspromo-subscribe__termsLabel"
+					}
+				},
+				"termsDescription": {
+					"props": {
+						"tag": "span"
+					}
+				},
+				"termsDescriptionLinks": {
+					"selector": ".wp-block-cspromo-subscribe__termsDescription a"
+				},
+				"termsField": {
+					"props": {
+						"tag": "input"
+					}
+				},
+				"groupNotices": {
+					"selector": ".wp-block-cspromo-subscribe__successNotice, .wp-block-cspromo-subscribe__infoNotice, .wp-block-cspromo-subscribe__errorNotice"
+				},
+				"successNotice": {},
+				"infoNotice": {},
+				"errorNotice": {},
+				"innerForm": {
+					"className": []
+				},
+				"successContainer": {
+					"props": {
+						"tag": "div",
+						"className": []
+					}
+				}
+			},
+			"template": {
+				"type": "element",
+				"props": {
+					"name": "outer"
+				},
+				"shouldRender": "computed.formActive",
+				"children": [
+					{
+						"type": "element",
+						"props": {
+							"name": "container"
+						},
+						"children": [
+							{
+								"type": "element",
+								"props": {
+									"name": "innerForm"
+								},
+								"children": [
+									{
+										"type": "element",
+										"props": {
+											"name": "containerFields"
+										},
+										"children": [
+											{
+												"type": "element",
+												"props": {
+													"name": "nameContainer",
+													"shouldRender": "computed.nameFieldActive"
+												},
+												"children": [
+													{
+														"type": "element",
+														"props": {
+															"name": "nameLabel",
+															"shouldRender": "computed.nameLabelDisplay"
+														}
+													},
+													{
+														"type": "element",
+														"props": {
+															"name": "nameField"
+														}
+													}
+												]
+											},
+											{
+												"type": "element",
+												"props": {
+													"name": "emailContainer"
+												},
+												"children": [
+													{
+														"type": "element",
+														"props": {
+															"name": "emailLabel",
+															"shouldRender": "computed.emailLabelDisplay"
+														}
+													},
+													{
+														"type": "element",
+														"props": {
+															"name": "emailField"
+														}
+													}
+												]
+											},
+											{
+												"type": "element",
+												"props": {
+													"name": "submitContainer",
+													"shouldRender": "computed.formLayoutHorizontal"
+												},
+												"children": [
+													{
+														"type": "element",
+														"props": {
+															"name": "submitButton"
+														},
+														"children": [
+															{
+																"type": "element",
+																"props": {
+																	"name": "submitIcon",
+																	"shouldRender": "computed.submitIconPositionBefore"
+																}
+															},
+															{
+																"type": "element",
+																"props": {
+																	"name": "submitText"
+																}
+															},
+															{
+																"type": "element",
+																"props": {
+																	"name": "submitIcon",
+																	"shouldRender": "computed.submitIconPositionAfter"
+																}
+															}
+														]
+													}
+												]
+											}
+										]
+									},
+
+									{
+										"type": "element",
+										"props": {
+											"name": "termsContainerAlign",
+											"shouldRender": "computed.formConsent"
+										},
+										"children": [
+											{
+												"type": "element",
+												"props": {
+													"name": "termsContainer"
+												},
+												"children": [
+													{
+														"type": "element",
+														"props": {
+															"name": "termsCheckbox"
+														},
+														"children": [
+															{
+																"type": "element",
+																"props": {
+																	"name": "termsField"
+																}
+															},
+															{
+																"type": "element",
+																"props": {
+																	"name": "termsIcon"
+																}
+															}
+														]
+													},
+													{
+														"type": "element",
+														"props": {
+															"name": "termsLabel",
+															"shouldRender": "computed.termsLabelDisplay"
+														}
+													},
+													{
+														"type": "element",
+														"props": {
+															"name": "fakeFirstName"
+														}
+													}
+												]
+											},
+
+											{
+												"type": "element",
+												"props": {
+													"name": "termsDescription",
+													"shouldRender": "computed.formConsent"
+												}
+											}
+										]
+									},
+									{
+										"type": "element",
+										"props": {
+											"name": "submitContainer",
+											"shouldRender": "computed.formLayoutVertical"
+										},
+										"children": [
+											{
+												"type": "element",
+												"props": {
+													"name": "submitButton"
+												},
+												"children": [
+													{
+														"type": "element",
+														"props": {
+															"name": "submitIcon",
+															"shouldRender": "computed.submitIconPositionBefore"
+														}
+													},
+													{
+														"type": "element",
+														"props": {
+															"name": "submitText"
+														}
+													},
+													{
+														"type": "element",
+														"props": {
+															"name": "submitIcon",
+															"shouldRender": "computed.submitIconPositionAfter"
+														}
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "element",
+										"props": {
+											"name": "successNotice"
+										}
+									},
+									{
+										"type": "element",
+										"props": {
+											"name": "infoNotice"
+										}
+									},
+									{
+										"type": "element",
+										"props": {
+											"name": "errorNotice"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "element",
+						"props": { "name": "successContainer" },
+						"children": [
+							{
+								"type": "wp:InnerBlocks"
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

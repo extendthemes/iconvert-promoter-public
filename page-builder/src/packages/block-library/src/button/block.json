@@ -1,0 +1,26 @@
+{
+	"name": "cspromo/buttonextended",
+	"category": "kubio-basic",
+	"parent": ["cspromo/buttongroupextended"],
+	"attributes": {
+		"buttonType": {
+			"type": "string",
+			"default": "link"
+		},
+		"buttonTracking": {
+			"type": "boolean",
+			"default":true
+		},
+		"coupon":{
+			"type": "string"
+		},
+		"copyText":{
+			"type": "string",
+			"default":""
+		},
+		"copyTextSuccess": {
+			"type": "string",
+			"default": "Code copied"
+		}
+	}
+}

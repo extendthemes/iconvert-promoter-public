@@ -1,0 +1,18 @@
+.kubio-typography-for-text-button-edit-theme-default {
+	display: flex;
+	justify-content: center;
+}
+
+.color-indicator-with-cog {
+	.kubio-color-popover-control {
+	  	margin-right: 0;
+	}
+}
+
+.kubio-typography-container-control-container {
+	> .components-base-control__field {
+		> * {
+			margin-bottom: 10px !important;
+		}
+	}
+}

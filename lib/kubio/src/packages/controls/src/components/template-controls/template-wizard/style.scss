@@ -1,0 +1,37 @@
+.h-template-wizard__modal {
+  width: 480px;
+
+  .h-template-wizard__template-group{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	> *:nth-child(1){
+	  flex: 1 0 0;
+	}
+
+	//control
+	> *:nth-child(2) {
+	  flex: 0 0 62%;
+	}
+	label {
+	  font-weight: bold;
+	  padding: 0 !important;
+	}
+
+  }
+  .h-template-wizard__modal__footer {
+	margin-top: 20px;
+  }
+  button {
+	justify-content: center;
+  }
+.h-template-wizard__validation-errors {
+  color: red;
+}
+}
+#kubio .h-template-wizard__template-group--invalid  {
+	input.components-input-control__input + div.components-input-control__backdrop {
+	  border-color: red !important;
+	  box-shadow: none !important;
+	}
+}

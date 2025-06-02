@@ -1,0 +1,78 @@
+{
+	"compilerOptions": {
+		"forceConsistentCasingInFileNames": true,
+		"importHelpers": true,
+		"strict": true,
+		"paths": {
+			"@kubio/*": [
+				"./src/packages/*/src"
+			]
+		},
+		"typeRoots": [
+			"./node_modules/@types",
+			"./src/types"
+		],
+	},
+	"references": [
+		{
+			"path": "src/packages/advanced-panel"
+		},
+		{
+			"path": "src/packages/colibri"
+		},
+		{
+			"path": "src/packages/controls"
+		},
+		{
+			"path": "src/packages/constants"
+		},
+		{
+			"path": "src/packages/global-data"
+		},
+		{
+			"path": "src/packages/icons"
+		},
+		{
+			"path": "src/packages/core"
+		},
+		{
+			"path": "src/packages/core-hooks"
+		},
+		{
+			"path": "src/packages/inspectors"
+		},
+		{
+			"path": "src/packages/menu-data"
+		},
+		{
+			"path": "src/packages/utils"
+		},
+		{
+			"path": "src/packages/style-manager"
+		},
+		{
+			"path": "src/packages/log"
+		},
+		{
+			"path": "src/packages/editor-data"
+		},
+		{
+			"path": "src/packages/block-library"
+		},
+		{
+			"path": "src/packages/pro"
+		},
+		{
+			"path": "src/packages/interface-store"
+		},
+		{
+			"path": "bin"
+		}
+	],
+	"files": [],
+	"exclude": [
+		"**/node_modules/**",
+		"**/build/**",
+		"**/build-module/**",
+	]
+}

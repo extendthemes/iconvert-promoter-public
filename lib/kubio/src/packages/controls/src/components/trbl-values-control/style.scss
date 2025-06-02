@@ -1,0 +1,13 @@
+
+.kubio-components-trbl__controls {
+	max-width: $sidebar-width - ( 2 * $grid-unit-20 );
+	display: flex;
+	align-items: center;
+	margin-bottom: $grid-unit-30;
+
+	.components-base-control {
+		margin-bottom: 0px !important;
+		margin-left: 2px;
+		margin-right: 2px;
+	}
+}

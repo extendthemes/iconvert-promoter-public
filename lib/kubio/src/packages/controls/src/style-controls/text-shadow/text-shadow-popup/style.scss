@@ -1,0 +1,16 @@
+.kubio-text-shadow-preview {
+	width: 60px;
+	height: 60px;
+	margin: 20px 108px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 60px;
+	color: #ffffff;
+}
+
+.kubio-text-shadow-container {
+	> .kubio-box-shadow-values-container {
+		align-items: flex-end;
+	}
+}

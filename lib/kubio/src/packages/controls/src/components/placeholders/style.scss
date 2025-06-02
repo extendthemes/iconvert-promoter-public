@@ -1,0 +1,114 @@
+.h-block-placeholder {
+	background-color: #f5f7f7;
+	border: 1px solid #c1cdcd;
+
+	justify-content: flex-start !important;
+	align-items: flex-start !important;
+	padding: 30px 40px;
+	color: #454545;
+	font-size: 13px;
+	line-height: 1.4em;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+	width: 100%;
+	text-align: left;
+
+	&__title {
+		font-weight: 500;
+		font-size: 18px;
+		margin-bottom: 5px;
+		display: flex;
+		align-items: center;
+		line-height: 1.2;
+		a{
+		  cursor: pointer;
+		}
+		svg {
+			position: relative;
+			top: 1px;
+			width: 18px;
+			height: 18px;
+			margin-right: 10px;
+		}
+	}
+
+	&__description {
+		font-size: 13px;
+		line-height: 1.2;
+	}
+	.components-button-group {
+		margin-top: 0px !important;
+	}
+	&__controls {
+		margin-top: 10px;
+		width: 300px;
+		max-width: 100%;
+		position: relative;
+		z-index: 10000;
+
+		input,
+		textarea {
+			width: 100% !important;
+		}
+		.components-button-group {
+			background: white;
+		}
+		.components-select-control {
+			width: 100%;
+			.components-flex-item {
+				flex: 1;
+			}
+			.components-input-control__container,
+			select {
+				width: 100%;
+			}
+		}
+		select + .components-input-control__suffix {
+			display: none;
+		}
+		a:not(.components-button) {
+			color: #2271b1 !important;
+			text-decoration: underline !important;
+			font-size: inherit !important;
+		}
+
+		a.components-button {
+			text-decoration: none;
+
+			&.is-primary {
+				background: var(--wp-admin-theme-color-darker-10);
+				color: #fff;
+			}
+		}
+
+	  //TODO this needs to be moved to the menu css. Because general controls have spacing bottom and it adds extra spacing
+	  //if you use wordpress components
+	  	.components-input-control__container,
+		.components-input-control,
+		.kubio-select-control {
+		  	margin-top: 10px !important;
+		}
+	}
+
+	&__spinner {
+		background: url(../images/spinner.gif) no-repeat;
+		background-size: 20px 20px;
+		display: inline-block;
+		vertical-align: middle;
+		filter: alpha(opacity=70);
+		width: 20px;
+		height: 20px;
+		margin-right: 10px;
+
+		&--wrapper {
+			display: flex;
+			align-items: center;
+			font-size: 14px;
+			line-height: 100%;
+		}
+	}
+
+	&--small {
+		padding: 10px 20px;
+	}
+}

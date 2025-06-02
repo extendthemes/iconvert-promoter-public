@@ -1,0 +1,20 @@
+@import 'email-lists/sidebar.scss';
+@import 'email-lists/content-header.scss';
+@import 'email-lists/forms.scss';
+@import 'email-lists/subscribers.scss';
+@import 'email-lists/dialog-box.scss';
+@import 'email-lists/pagination.scss';
+
+.ic-email-lists-layout {
+    .container {
+        max-width: none;
+    }
+}
+
+.ic-email-lists-layout {
+    @include mediaQueryUpTo(700px) {
+        &.d-flex {
+            flex-direction: column;
+        }
+    }
+}

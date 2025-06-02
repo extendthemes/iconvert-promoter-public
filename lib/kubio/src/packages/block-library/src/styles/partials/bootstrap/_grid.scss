@@ -1,0 +1,71 @@
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+@include kubio-add-prefix-to-general-css() {
+  @if $enable-grid-classes {
+	.#{$library-prefix}container {
+	  @include make-container();
+	  @include make-container-max-widths();
+	}
+  }
+
+  // Fluid container
+  //
+  // Utilizes the mixin meant for fixed width containers, but with 100% width for
+  // fluid, full width layouts.
+
+  @if $enable-grid-classes {
+	.#{$library-prefix}container-fluid {
+	  @include make-container();
+	}
+  }
+  //Container for rows with custom gutters
+  @if $enable-grid-classes {
+	.#{$library-prefix}section-boxed-container {
+	  @include make-section-boxed-container();
+	  @include make-section-boxed-container-max-widths();
+	}
+  }
+
+  //Fluid container for rows with custom gutters
+  @if $enable-grid-classes {
+	.#{$library-prefix}section-fluid-container {
+	  @include make-section-boxed-container();
+	}
+  }
+
+  // Row
+  //
+  // Rows contain and clear the floats of your columns.
+
+  @if $enable-grid-classes {
+	.#{$library-prefix}row {
+	  @include make-row();
+	}
+
+	// Remove the negative margin from default .row, then the horizontal padding
+	// from all immediate children columns (to prevent runaway style inheritance).
+	.no-gutters {
+	  margin-right: 0;
+	  margin-left: 0;
+
+	  > .#{$library-prefix}col,
+	  > [class*='#{$library-prefix}col-'] {
+		padding-right: 0;
+		padding-left: 0;
+	  }
+	}
+
+	/* extra gutters */
+	@if $enable-grid-classes {
+	  @include make-custom-horizontal-gutters();
+	  @include make-custom-vertical-gutters();
+	}
+  }
+
+  @if $enable-grid-classes {
+	.#{$library-prefix}row > {
+	  @include make-grid-columns();
+	}
+  }
+}

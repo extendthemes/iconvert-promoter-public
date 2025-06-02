@@ -1,0 +1,28 @@
+.cs-popup-container-type-inline-promotion-bar { 
+    &.visible.cs-popup-container {
+        position: relative !important;
+        top: auto;
+        visibility: visible;
+        opacity: 1;
+        overflow: unset;
+        max-width: unset !important;
+        z-index: 1000;
+        height: auto !important;
+        min-height: auto;
+
+        .lcs-popup-content {
+            width: 100%;
+            height: auto;
+        }
+
+        .wp-block-cspromo-promopopup__outer {
+            display: flex;
+            height: auto;
+            position: relative !important;
+            width: 100%;
+            top: auto;
+            overflow: unset;
+            min-height: auto;
+        }
+    }
+}

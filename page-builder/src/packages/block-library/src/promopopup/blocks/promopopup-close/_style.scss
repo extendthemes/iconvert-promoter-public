@@ -1,0 +1,40 @@
+.wp-block-cspromo-promopopupclose {
+  &__outer {
+	position: absolute !important;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	z-index: 999;
+	pointer-events: none;
+	margin-bottom: 0 !important;
+  }
+
+  .wp-block-cspromo-icon__inner{
+	pointer-events: auto;
+  }
+   svg{
+	pointer-events: none;
+  }
+
+ &__container {
+	width: 100%;
+  }
+
+  &__inner {
+	text-align: center;
+	position: relative !important;
+	top: unset !important;
+	transform: translateY(0);
+	margin-top: 0px !important;
+	width: auto;
+	height: auto;
+	display: inline-block;
+	z-index: 200;
+	cursor: pointer;
+	left: 0;
+
+  }
+
+}

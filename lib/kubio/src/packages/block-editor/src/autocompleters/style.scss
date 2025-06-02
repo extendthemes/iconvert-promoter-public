@@ -1,0 +1,39 @@
+.block-editor-autocompleters__block {
+	white-space: nowrap;
+
+	.block-editor-block-icon {
+		margin-right: $grid-unit-10;
+	}
+
+	&[aria-selected="true"] .block-editor-block-icon {
+		color: inherit !important;
+	}
+
+	.kubio-pro-item .kubio-pro-item__badge {
+		right: 0;
+		font-size: 10px;
+		padding: 2px;
+	}
+}
+
+.block-editor-autocompleters__link {
+	white-space: nowrap;
+
+	.block-editor-block-icon {
+		margin-right: $grid-unit-10;
+	}
+}
+
+.toplevel_page_cspromo {
+	.components-autocomplete__result:not(#extra-1) {
+		padding: 0;
+		.kubio-autocomplete-item {
+			display: flex;
+			height: auto;
+			text-align: left;
+			padding: 6px 12px;
+			width: 100%;
+			align-items: center;
+		}
+	}
+}

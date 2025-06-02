@@ -1,0 +1,13 @@
+{
+	"name": "cspromo/buttongroupextended",
+	"category": "kubio-basic",
+	"supports": {
+		"kubio": {
+			"default": {
+				"props": {
+					"layout": { "hSpace": { "value": 10, "unit": "px" } }
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,93 @@
+.kubio-preview-box-control {
+  &__container {
+	position: relative;
+	background-color: #f0f0f0;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
+	height: 100px;
+	overflow: hidden;
+	.kubio-preview-box-control__label {
+	  position: absolute;
+	  bottom: 0;
+	  left: 0;
+	  z-index: 1;
+	  width: calc(100% + 20px);
+
+	  display: flex;
+	  justify-content: flex-start;
+	  align-items: center;
+	  padding: 6px 0 5px 8px;
+	  height: 23px;
+	  font-size: 12px;
+	  line-height: 1.17;
+	  font-weight: 300;
+	  visibility: hidden;
+	  color: #fff;
+	  text-transform: capitalize;
+	  background-color: rgba(29, 29, 29, 0.5);
+	  margin-left: -10px
+	}
+
+	&:hover {
+	  .kubio-preview-box-control__label {
+		visibility: visible;
+	  }
+	}
+  }
+
+  &__content {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	height: 100%;
+	width: calc(100% - 20px);
+  }
+  &__button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #dddddd;
+	background-color: white;
+
+	&.components-button {
+	  min-width: 30px;
+	  padding: 0;
+
+	  &:hover {
+		border: 1px solid $ui-menu-item;
+
+		svg {
+		  fill: $ui-menu-item;
+		}
+	  }
+
+	  &:focus {
+		background-color: rgb(229, 241, 248);
+		border: 1px solid $theme-controls-primary-color;
+
+		svg {
+		  fill: $ui-menu-item;
+		}
+	  }
+	}
+
+	&.opened.components-button {
+	  border: 1px solid $theme-controls-primary-color;
+	  background-color: rgb(229, 241, 248);
+
+	  svg {
+		fill: $theme-controls-primary-color;
+	  }
+	}
+  }
+}
+
+

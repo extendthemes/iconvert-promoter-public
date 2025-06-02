@@ -1,0 +1,94 @@
+@import './page-settings/style';
+@import './general-settings/style';
+@import './blog-import/style.scss';
+
+.kubio-header-active-section {
+	margin: 23px 0;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	font-size: $default-font-size;
+
+	& .page-title {
+		margin: 0 15px;
+	}
+}
+
+.kubio-color-scheme-selector {
+	padding: 0;
+	display: block;
+	width: 100%;
+}
+
+.kubio-color-scheme-base-control {
+	&:first-of-type {
+		margin-top: 10px;
+	}
+}
+
+.kubio-color-palette-panel {
+	.kubio-color-popover-wrapper .kubio-color-popover-button {
+		margin-right: unset;
+	}
+
+	.components-base-control__label {
+		margin-bottom: 10px;
+		display: inline-block;
+	}
+}
+
+.interface-complementary-area {
+	.components-panel__header {
+		.components-panel__header:not(.kubio-sidebar-header--has-back) {
+			display: block;
+			width: 100%;
+		}
+	}
+}
+
+.site-title {
+	display: block;
+	margin-bottom: 11px;
+
+	&.panel-title {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		display: block;
+		box-sizing: border-box;
+		overflow: hidden;
+		line-height: 1.5em;
+	}
+}
+
+.kubio-font-family-container.general-typography {
+	.kubio-font-picker-container .kubio-fonts-dropdown .is-secondary {
+		margin-top: 0;
+	}
+}
+
+.kubio-general-setting-templates {
+	&__item-container:not(:last-child) {
+		> * {
+			margin-bottom: 10px !important;
+		}
+	}
+	.kubio-template-list {
+		&__label {
+			font-weight: bold;
+			font-size: 16px;
+			margin-bottom: 20px;
+			display: inline-block;
+		}
+	}
+	&__not-found-notice {
+		.h-control-notice__content {
+			margin-top: 10px;
+		}
+	}
+}
+
+.add-colors-button {
+	user-select: none;
+	cursor: pointer;
+}

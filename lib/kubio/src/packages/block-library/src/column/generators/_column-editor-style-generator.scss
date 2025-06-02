@@ -1,0 +1,65 @@
+@mixin columnEditorStyleGenerator($component) {
+	@include c($component) {
+		@include c(align) {
+			min-height: 100px;
+		}
+	}
+
+	@include c($component) {
+		$self: &;
+		.editor-styles-wrapper & {
+			margin-left: initial;
+			margin-right: initial;
+			// this brakes margin on columns
+			//flex-direction: column;
+		}
+
+		// added direct child for appender so it will not break G default appenders
+		.wp-block-kubio-column__align > .block-list-appender.wp-block {
+			//position: absolute;
+			position: relative; // See bug: 39200
+			top: 50%;
+			left: 0;
+			right: 0;
+			transform: translateY(-50%);
+
+			.block-editor-inserter {
+				flex: 1 0 0;
+				max-width: 100%;
+				width: 100%;
+			}
+		}
+
+		@include e(inner) {
+			> .block-editor-block-list__layout {
+				> .kubio-block-inserter {
+					width: 100%;
+					z-index: 1000000;
+					bottom: -16px;
+					height: 0px;
+					padding: 0 !important;
+					position: relative;
+				}
+			}
+		}
+
+		> #{ $self }__inner {
+			> .kubio-is-small-column {
+				> .block-list-appender.wp-block button {
+					display: none !important;
+				}
+			}
+		}
+
+		&.is-selected {
+			> #{ $self }__inner {
+				> .kubio-is-small-column {
+					> .block-list-appender.wp-block button {
+						display: flex !important;
+						padding: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}

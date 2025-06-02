@@ -1,0 +1,71 @@
+@import "partials/editor/style";
+@import "partials/styles/reset";
+@import "partials/common";
+@import "partials/bootstrap/editor";
+
+.kubio-iframe {
+	height: auto;
+}
+
+.kubio-block-inserter {
+	.block-editor-block-list__insertion-point-indicator {
+		width: 100%;
+		height: 1px;
+		transition: height 0.2s linear;
+	}
+
+	&:hover {
+		.block-editor-block-list__insertion-point-indicator {
+			width: 100%;
+			height: 3px;
+		}
+	}
+}
+
+.#{$library-prefix}global-transition,
+.#{$library-prefix}global-transition-all * {
+	transition-property: $theme-transition-properties !important;
+}
+
+// General settings - Current color palette
+.more_palettes_base {
+	> div > span.components-base-control__label {
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+}
+
+.kubio-current-colors-palette {
+	flex-wrap: wrap;
+	justify-content: flex-start !important;
+	width: 107% !important;
+	margin-top: 10px;
+
+	.kubio-color-popover-wrapper {
+		flex-basis: 16.66%;
+		width: 16.66%;
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+		margin-bottom: 5px;
+	}
+}
+
+// Gutenberg editor css fixes 🤷
+.block-editor-writing-flow .css-1wkpk1y-Flex-ItemsColumn,
+.block-editor-page .css-1wkpk1y-Flex-ItemsColumn,
+.block-editor-page .css-rnkj6t-Flex-ItemsColumn {
+	height: unset;
+}
+
+#kubio-editor {
+	.components-popover.block-editor-block-list__block-popover {
+		z-index: 10000000;
+	}
+}
+
+.block-editor-page .kubio-create-menu-form {
+	.components-input-control,
+	.components-input-control__container {
+		margin-top: 0px !important;
+	}
+}

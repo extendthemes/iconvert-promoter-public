@@ -1,0 +1,37 @@
+.woocommerce-order {
+	text-align: initial;
+}
+
+ul.order_details {
+	margin-left: 0;
+	padding-left: 0;
+	display: flex;
+
+	> li {
+		display: block;
+		float: none;
+		flex-grow: 1;
+
+		&:last-of-type {
+			margin: 0;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		flex-direction: column;
+
+		> li {
+			border-right: none;
+		}
+	}
+}
+
+section.woocommerce-customer-details {
+	.woocommerce-column__title {
+		font-size: 1.5em;
+	}
+
+	address {
+		padding: 1rem;
+	}
+}

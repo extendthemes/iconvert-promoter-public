@@ -1,0 +1,27 @@
+.kubio-core-blocks-tabs > [role="tablist"] {
+	background: #fff;
+	border: 1px solid $interface-colors-light-gray-border;
+	border-left-width: 0px;
+	border-right-width: 0px;
+}
+
+.block-editor-inspector-controls-tabs__hint {
+	align-items: flex-start;
+	background: #ffffff;
+	border-radius: $radius-block-ui;
+	color: $gray-900;
+	display: flex;
+	flex-direction: row;
+	margin: $grid-unit-20;
+	font-size: $default-font-size;
+}
+
+.block-editor-inspector-controls-tabs__hint-content {
+	margin: $grid-unit-15 0 $grid-unit-15 $grid-unit-15;
+}
+
+.block-editor-inspector-controls-tabs__hint-dismiss {
+	// The dismiss button has a lot of empty space through its padding.
+	// Apply margin to visually align the icon with the top of the text to its left.
+	margin: $grid-unit-05 $grid-unit-05 $grid-unit-05 0;
+}

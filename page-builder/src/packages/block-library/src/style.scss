@@ -1,0 +1,61 @@
+@import "./kubio-style";
+@import "./reset";
+
+@include kubio-resizable-section-start();
+
+@import "./blocks-style";
+
+@include kubio-resizable-section-end();
+
+.wp-block-cspromo-subscribe__termsContainer {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: nowrap; // set this to nowrap to force the text break on multiple lines
+}
+.wp-block-cspromo-subscribe__termsCheckbox {
+	position: relative;
+}
+.wp-block-cspromo-subscribe__termsField {
+	position: absolute;
+	top: 0;
+	min-width: unset !important;
+	min-height: unset !important;
+}
+
+.wp-block-cspromo-subscribe__termsField:checked::before {
+	content: "" !important;
+}
+.wp-block-cspromo-subscribe__termsField:checked
+	~ .wp-block-cspromo-subscribe__termsIcon {
+	display: block !important;
+
+	&.h-svg-icon {
+		line-height: inherit !important;
+		display: block !important;
+	}
+}
+
+.wp-block-cspromo-subscribe__termsIcon {
+	position: absolute !important;
+}
+
+.terms-description-as-line {
+	width: 100% !important;
+	margin-top: 7px;
+}
+.terms-description-as-label {
+	margin-bottom: 0 !important;
+}
+
+// added gap fallback polyfill more generally
+.kubio-enable-gap-fallback {
+	.kubio-has-gap-fallback {
+		--kubio-gap-fallback-half: calc(var(--kubio-gap-fallback) * 0.5);
+		margin: calc(-1 * var(--kubio-gap-fallback-half)) !important;
+		gap: 0 !important;
+
+		> * {
+			margin: var(--kubio-gap-fallback-half) !important;
+		}
+	}
+}

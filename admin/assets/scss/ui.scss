@@ -1,0 +1,51 @@
+.ic-promo-admin {
+    .ic-promo-wrapper {
+        .ic-promo-inner {
+            .ic-promo-content {
+                .promo-page-list {
+                    .table-row {
+                        .wrapper-actions {
+                            a{
+                                padding-bottom: 2px;
+                            }
+                        }
+                    }
+                }
+
+                .icpm-pagination-wrapper {
+                    margin-top: 10px;
+                    padding-top: 10px;
+                    border-top: 1px solid #dddddd;
+                }
+
+                .pagination-links {
+                    
+
+
+                    li {
+                        display: inline-block;
+
+                        a, span {
+                            position: relative;
+                            display: block;
+                            padding: 5px 10px;
+                            margin-left: -1px;
+                            line-height: 1.25;
+                            color: #2271b1;
+                            background-color: #fff;
+                            border: 1px solid #dee2e6;
+                            
+                        }
+
+                        .current{
+                            color: #fff;
+                            background-color: #2271b1;
+                            border-color: #2271b1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+                

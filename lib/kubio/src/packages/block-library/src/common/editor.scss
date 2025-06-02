@@ -1,0 +1,120 @@
+@import "./template-part/editor";
+@import "./form-block/style";
+
+.components-menu-group .kubio-block-settings-control {
+	&:not(:first-of-type) {
+		border-top: none;
+	}
+
+	&:not(:last-of-type) {
+		border-bottom: 1px solid #cccccc !important;
+	}
+
+	+ .components-menu-group.kubio-block-settings-control {
+		border-top: none;
+	}
+}
+
+// due the CopyStyle grouping we need to handle the distance between CopyStyle and Group menu items in the toolbar dropdown.
+.components-menu-group .kubio-block-settings-control:not(:only-child) {
+	padding-bottom: 0;
+}
+
+.is-alternate
+	.components-dropdown-menu__menu
+	.components-menu-group
+	+ .components-menu-group {
+	border-color: #cccccc;
+}
+
+:root {
+	// --kubio-block-icon-color-primary: rgb(0, 147, 233);
+	// --kubio-block-icon-color-secondary: rgb(128, 208, 199);
+	--kubio-block-icon-color-primary: #4c73d2;
+	--kubio-block-icon-color-secondary: #4c73d2;
+}
+
+svg.kubio-block-icon {
+	// filter: drop-shadow(2px 3px 4px rgba(0, 164, 109, 0.2));
+	.kubio-block-icon-background-part {
+		fill: #ffffff;
+		display: none; // without drop shadow we don't need this. hiding it increases render time
+	}
+}
+.components-toolbar-group,
+.components-panel__header {
+	svg.kubio-block-icon {
+		filter: unset;
+	}
+}
+.kubio-block-icon--map {
+	height: 21px;
+}
+
+.block-editor-block-draggable-chip {
+	svg.kubio-block-icon {
+		.kubio-block-icon-background-part {
+			fill: transparent !important;
+		}
+
+		.kubio-block-icon-gradient-part {
+			fill: currentColor;
+		}
+	}
+}
+
+.editor-styles-wrapper [data-kubio] [data-kubio] {
+	margin-top: 0;
+}
+
+.kubio-focus-animation {
+	position: relative;
+
+	&::before {
+		content: "" !important;
+		display: block !important;
+		position: absolute;
+		z-index: 100;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background-color: rgba($theme-controls-primary-color-hover, 0);
+		animation: kubio-focus-animation-blink 1s;
+		animation-iteration-count: 2;
+		pointer-events: none;
+	}
+}
+
+@keyframes kubio-focus-animation-blink {
+	50% {
+		background-color: rgba($theme-controls-primary-color-hover, 0.4);
+	}
+}
+
+.kubio-appender.is-vertical {
+	transform: translateX(-50%);
+}
+
+.components-popover.components-dropdown__content {
+	.kubio-toolbar-container-width.components-menu-group {
+		.components-flex-block.components-flex-item {
+			text-align: left;
+		}
+	}
+}
+
+// overlay selected items
+[data-kubio][data-block].is-selected::after {
+	outline: 2px solid #007cba;
+	box-shadow: inset 0 0 0 2px white;
+	border-radius: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.kubio-block-wrapper .block-list-appender.wp-block {
+	margin: auto;
+	width: 100%;
+	max-width: unset;
+}

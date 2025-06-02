@@ -1,0 +1,52 @@
+@include c(divider) {
+	line-height: 0 !important;
+	font-size: 0px !important;
+
+	.divider-icon {
+		flex-grow: 0;
+		margin-left: 10px;
+		margin-right: 10px;
+		display: inline-block;
+		vertical-align: middle;
+
+		.h-svg-icon {
+			width: 40px;
+			height: 40px;
+			fill: #03a9f4;
+		}
+	}
+
+	@include e(line) {
+		flex-grow: 1;
+		border-top: 0px;
+		border-right: 0px;
+		border-bottom-width: 3px;
+		border-bottom-style: solid;
+		border-bottom-color: #03a9f4;
+		border-left: 0px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	@include e(inner) {
+		flex-shrink: 0;
+		justify-self: center;
+	}
+
+	.line-type {
+		.components-select-control__input {
+			width: 50%;
+			float: right;
+		}
+
+		.components-base-control__label {
+			margin-top: 8px;
+		}
+	}
+
+	@include e(width-container) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

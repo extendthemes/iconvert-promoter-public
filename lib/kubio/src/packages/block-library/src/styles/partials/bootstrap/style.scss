@@ -1,0 +1,23 @@
+@import 'functions';
+@import 'variables';
+
+@import 'mixins/breakpoints';
+@import 'mixins/grid-framework';
+@import 'mixins/grid';
+
+@import 'grid';
+@import 'utilities/display';
+@import 'utilities/flex';
+
+.#{$library-prefix}flex-basis {
+  flex: 1 0 auto;
+}
+
+.flex-basis-auto {
+  flex-basis: auto;
+}
+
+.flex-basis-100 {
+  flex-basis: 100%;
+}
+

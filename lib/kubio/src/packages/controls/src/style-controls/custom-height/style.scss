@@ -1,0 +1,9 @@
+.kubio-select-control-container {
+	.components-flex__item {
+		> label {
+			padding-bottom: 0 !important;
+			cursor: unset;
+			pointer-events: none;
+		}
+	}
+}

@@ -1,0 +1,134 @@
+@mixin iconListMediaData($position) {
+	.list-type-#{$position}-on- {
+		&desktop {
+			@media (min-width: 1024px) {
+				@content;
+			}
+		}
+
+		&tablet {
+			@media (min-width: 768px) and (max-width: 1023px) {
+				@content;
+			}
+		}
+
+		&mobile {
+			@media (max-width: 767px) {
+				@content;
+			}
+		}
+	}
+}
+
+@include c('iconlist') {
+	//needed a stronger selector
+	&.wp-block {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		padding: 0;
+		list-style-type: none;
+		line-height: initial;
+		text-align: left;
+
+		margin-left: auto;
+		margin-right: auto;
+
+		@include when-inside-kubio-block() {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	@include c('iconlistitem') {
+		@include e('item') {
+			display: block;
+			max-width: 100%;
+			word-break: keep-all;
+			justify-content: inherit;
+			.first-el-spacer {
+				padding-bottom: 0px !important;
+			}
+			.last-el-spacer {
+				padding-top: 0px !important;
+			}
+			&:last-child {
+			  [class$="__divider-wrapper"] {
+				&:last-child {
+				  display: none;
+				}
+			  }
+			}
+
+			> a {
+				display: inline-block;
+				text-decoration: none;
+			}
+		}
+
+		@include e('text-wrapper') {
+			display: flex;
+		}
+
+		@include e('text') {
+			overflow: hidden;
+		}
+
+		@include e('icon') {
+			flex: 0 0 auto;
+			vertical-align: middle;
+		}
+
+		@include e('divider') {
+			display: flex;
+			justify-content: inherit;
+		}
+
+		@include e('divider-wrapper') {
+			display: flex;
+			justify-content: inherit;
+		}
+	}
+}
+
+@include iconListMediaData(vertical) {
+	.first-el-spacer,
+	.last-el-spacer {
+		display: none;
+	}
+
+	@include c('iconlistitem') {
+		@include e('divider') {
+			border-left: none !important;
+			height: auto !important;
+		}
+
+		@include e('divider-wrapper') {
+			width: 100% !important;
+			height: auto !important;
+		}
+	}
+}
+
+@include iconListMediaData(horizontal) {
+	.first-el-spacer,
+	.last-el-spacer {
+		display: none;
+	}
+	@include c('iconlistitem') {
+		@include e('item') {
+			display: flex;
+		}
+
+		@include e('divider') {
+			width: auto !important;
+			border-bottom: none !important;
+		}
+
+		@include e('divider-wrapper') {
+			height: auto !important;
+			width: auto !important;
+			align-items: center;
+		}
+	}
+}

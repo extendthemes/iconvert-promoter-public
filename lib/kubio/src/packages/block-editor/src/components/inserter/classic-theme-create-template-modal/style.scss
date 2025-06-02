@@ -1,0 +1,19 @@
+.kubio-classic-theme-create-template-modal {
+  &__step2 {
+	$spacing: 10px;
+	&__input {
+	  margin-bottom: $spacing;
+	}
+	&__paragraph {
+		margin-bottom: $spacing;
+	}
+  }
+
+  .components-button.kubio-pro-item {
+	.kubio-pro-item__badge {
+	  top: -6px;
+	  right: -10px;
+	}
+  }
+
+}

@@ -1,0 +1,30 @@
+.kubio-radio-control-wrapper {
+  .components-radio-control {
+	.components-base-control__field {
+	  display: flex;
+	  gap: 10px;
+
+	  .components-base-control__label{
+		color: rgba(69, 69, 69, 0.6)
+	  }
+	  > * {
+		margin: 0;
+		display: flex;
+		align-items: center;
+	  }
+	  input:checked + label {
+		color: var(--wp-admin-theme-color);
+		text-decoration: underline;
+	  }
+	}
+  }
+  &.kubio-pro-item  {
+	padding-right: 45px;
+
+	.kubio-pro-item__badge {
+	  top: 50% !important;
+	  right: 3px !important;
+	  transform: translateY(-50%);
+	}
+  }
+}

@@ -1,0 +1,82 @@
+{
+	"name": "cspromo/countdownitem",
+	"parent": [
+		"cspromo/countdown"
+	],
+	"attributes": {
+		"kubio": {
+			"type": "object"
+		},
+		"itemType": {
+			"type": "string",
+			"default":"d"
+		},
+		"itemName": {
+			"type": "string",
+			"default": "Days"
+		},
+		"itemDisplay":{
+			"type": "string",
+			"default": "block"
+		},
+		"currentLabelShow": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"kubio": {
+			"default": {
+				"style": {
+					"descendants": {						
+						
+					}
+				}
+			},
+			"elementsEnum": {
+				"OUTER": "outer",
+				"NUMBER": "number",
+				"TEXT": "text"
+			},
+			"elementsByName": {
+				"outer": {
+					"default": true,
+					"wrapper": true,
+					"props": {
+						"className": "icp-countdown-item"
+					}
+				},
+				"number": {
+					"props": {
+						"tag": "span"
+					}
+				},
+				"text": {
+					"props": {
+						"tag": "span"
+					}
+				}
+			},
+			"template": {
+				"type": "element",
+				"props": {
+					"name": "outer"
+				},
+				"children": [
+					{
+						"type": "element",
+						"props": {
+							"name": "number"
+						}
+					},
+					{
+						"type": "element",
+						"props": {
+							"name": "text"
+						}
+					}
+				]
+			}
+		}
+	}
+}

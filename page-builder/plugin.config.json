@@ -1,0 +1,9 @@
+{
+  "textDomain": "cspromo",
+  "prefix": "cspromo",
+  "postType": "cs-promo-popups",
+  "pluginEntryPointRelativePath": "../iconvert-promo-plugin.php",
+  "popupsRootSelector": ".wp-block-cspromo-promopopup__outer.position-relative",
+  "builderLabel": "Promo Editor",
+  "pluginLabel": "CSPromo"
+}

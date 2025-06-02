@@ -1,0 +1,25 @@
+{
+    "name": "@kubio/style-manager",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {
+        "@kubio/constants": "file:../constants",
+        "@kubio/pro": "file:../pro",
+        "@kubio/utils": "file:../utils"
+    },
+    "devDependencies": {
+        "@wordpress/data": "10.8.3",
+        "@wordpress/hooks": "4.8.2",
+        "cssobj-core": "^1.1.9",
+        "cssobj-helper": "0.1.22",
+        "lodash": "4.17.21",
+        "memize": "^1.1.0",
+        "react-fast-compare": "3.2.0",
+        "string-template-parser": "^1.2.6",
+        "tinycolor2": "^1.4.1"
+    }
+}

@@ -1,0 +1,242 @@
+
+.kubio-sortable-accordion {
+  .accordion {
+	//border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
+  }
+
+  .accordion__button {
+	background-color: white;
+	cursor: pointer;
+	padding: 0;
+	width: 100%;
+	text-align: left;
+	border: none;
+	position: relative;
+  }
+
+  .accordion__panel {
+	color: #444;
+	padding: 20px;
+	font-weight: 400;
+  }
+
+  //.accordion__item + .accordion__item {
+  //	  border-top: 1px solid $ui-menu-item-light;
+  //}
+
+  .accordion__button:hover {
+	background-color: #ddd;
+  }
+
+  .accordion__button:before {
+	display: none !important;
+	pointer-events: none;
+	content: '';
+	height: 8px;
+	width: 8px;
+	border-bottom: 2px solid currentColor;
+	border-right: 2px solid currentColor;
+	position: absolute;
+	right: 0px;
+	top: 57%;
+	margin-right: 12px;
+	margin-top: -8px;
+	transform: rotate(45deg);
+	//transition: transform 0.5s;
+  }
+
+  .acco .accordion__button[aria-expanded='true']::before,
+  .accordion__button[aria-selected='true']::before {
+	transform: rotate(45deg);
+  }
+
+  &.kubio-sortable-accordion--simple {
+	.kubio-sortable-acordion-icon:last-child {
+	  margin-right: 10px;
+	}
+  }
+
+  &:not(.kubio-sortable-accordion--simple) {
+	.accordion__button:before {
+	  display: inline-block !important;
+	}
+
+	.kubio-sortable-acordion-icon:last-child {
+	  margin-right: 33px;
+	}
+  }
+
+  [hidden] {
+	display: none;
+  }
+
+  .accordion__panel {
+	padding: 10px;
+	animation: kubio-sortable-accordion-fadein 0.35s ease-in;
+  }
+
+  @keyframes kubio-sortable-accordion-fadein {
+	0% {
+	  opacity: 0;
+	}
+
+	100% {
+	  opacity: 1;
+	}
+  }
+
+  .kubio-sortable-accordion-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	p {
+	  margin-bottom: 0px;
+	}
+
+	&__icon {
+	  margin-right: 10px;
+	  width: 15px;
+	  height: 15px;
+	}
+
+	.kubio-sortable-accordion-info {
+	  display: flex;
+	  flex-direction: row;
+	  align-items: center;
+	  margin: 10px 6px;
+
+	  > *:first-child {
+		margin-right: 6px;
+	  }
+
+	  .kubio-sortable-accordion-title__text {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 144px;
+	  }
+
+	  span svg{
+		height: 16px;
+	  }
+
+	  svg.draggable-item{
+		height: 15px;
+		width: 15px;
+	  }
+
+	}
+
+
+  }
+
+  .kubio-sortable-acordion-icon-container {
+	display: flex;
+	align-items: center;
+  }
+
+  .kubio-sortable-accordion-list {
+	box-shadow: 0px 3px 30px 0px rgba(30, 30, 30, 0.1);
+
+	.kubio-sortable-acordion-icon-container {
+	  display: none;
+	}
+
+	.accordion__button::before {
+	  content: '';
+	  display: none;
+	}
+
+	&.accordion__item .accordion__button:before {
+	  display: none !important;
+	}
+  }
+
+  .kubio-sortable-acordion-icon {
+	color: #1e1e1e;
+	border: none;
+	font-weight: 500;
+	padding: 0 !important;
+	min-width: 14px;
+	margin: 0 1px;
+  }
+
+  .accordion__item {
+	z-index: 2;
+	margin: 10px 0;
+	border: 1px solid $ui-menu-item-light;
+	background: white;
+	border-radius: 2px;
+	font-weight: 500;
+  }
+
+  .accordion__item.is-selected,
+  .accordion__item:hover,
+  .accordion__item__is_opened {
+	margin: 10px 0;
+	border: 1px solid $ui-menu-active;
+	color: $ui-menu-active;
+
+	.accordion__button {
+	  background-color: rgba(0, 124, 186, 0.1);
+	  color: inherit;
+	  //&:hover {
+	  //	background-color: rgba(0, 124, 186, 0.1);
+	  //}
+	}
+
+	.draggable-item {
+	  fill: $ui-menu-active;
+	}
+
+	.kubio-sortable-acordion-icon {
+	  svg {
+		fill: $ui-menu-active;
+	  }
+	}
+  }
+
+  .accordion__item__is_opened {
+	.accordion__button {
+	  &:before {
+		margin-top: -2px;
+		transform: rotate(-135deg);
+		top: 50%;
+	  }
+	}
+  }
+}
+
+.sortable-collapse__add-button {
+  width: 100%;
+  display: flex;
+  justify-content: center !important;
+
+  svg {
+	width: 20px;
+	height: auto;
+  }
+}
+
+.kubio-is-default-editor {
+
+  .kubio-sortable-accordion-info {
+	max-width: 150px;
+
+	svg {
+	  width: 15px;
+	  min-width: 15px;
+	  height: auto;
+	}
+  }
+
+  .kubio-sortable-acordion-icon-container {
+	.components-toggle-control .components-base-control__field {
+		margin-bottom: 0;
+	}
+  }
+}
+
+

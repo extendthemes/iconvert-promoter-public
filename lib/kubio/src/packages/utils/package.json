@@ -1,0 +1,28 @@
+{
+    "name": "@kubio/utils",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {
+        "@kubio/editor-data": "file:../editor-data"
+    },
+    "devDependencies": {
+        "@wordpress/blocks": "13.8.4",
+        "@wordpress/data": "10.8.3",
+        "@wordpress/element": "6.8.1",
+        "@wordpress/hooks": "4.8.2",
+        "clean-deep": "^3.4.0",
+        "deepdash-es": "^5.3.0",
+        "deepmerge": "4.2.2",
+        "lodash": "4.17.21",
+        "react-fast-compare": "3.2.0",
+        "semver": "7.5.4",
+        "shortid": "^2.2.15",
+        "speakingurl": "14.0.1",
+        "tinycolor2": "^1.4.1",
+        "webfontloader": "^1.6.28"
+    }
+}

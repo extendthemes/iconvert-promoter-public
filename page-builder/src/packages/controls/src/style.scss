@@ -1,0 +1,111 @@
+.iconvert-promoter-datetime {
+
+
+    .components-datetime {
+        flex-direction: column-reverse;
+    }
+
+    .components-datetime__time {
+       margin-bottom: 10px;
+    }
+
+	.components-datetime__buttons {
+		display: none !important;
+	}
+
+	.components-datetime__time fieldset {
+		margin: 0;
+		margin-bottom: 5px;
+
+		legend {
+			border-top: 0;
+			margin-bottom: calc(8px);
+		}
+	}
+
+	.kubio-separator-line {
+		margin: 0;
+	}
+
+	.components-datetime__date {
+		margin-bottom: 4px;
+	}
+
+	.components-input-control__backdrop,
+	input,
+	select {
+		max-width: 100%;
+		border-color: rgb(204, 204, 204) !important;
+	}
+
+	.components-datetime__time,
+	.components-datetime__time-field {
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+	}
+
+	.components-datetime__time {
+		> * {
+			display: flex;
+			flex-wrap: nowrap;
+			align-items: center;
+		}
+
+		gap: 10px;
+	}
+
+	.components-datetime__timezone-wrapper {
+		max-width: 160px;
+	}
+}
+
+.components-datetime__time-field.components-datetime__time-field-time select {
+	max-width: 263px;
+	border-color: rgb(204, 204, 204) !important;
+}
+
+.components-popover .iconvert-promoter-datetime {
+	.iconvert-promoter-datetime .components-datetime__date {
+		border-top: 0;
+	}
+
+	.components-datetime__time:not(
+			.iconvert-promoter-components-datetime__time
+		) {
+		> fieldset {
+			&:nth-of-type(1) {
+				display: none;
+			}
+
+			&:nth-of-type(2) {
+				display: flex;
+                flex-grow: 1;
+			}
+		}
+
+		.components-datetime__time-wrapper * {
+			margin: 0;
+		}
+	}
+
+	.components-datetime__time-separator {
+		margin: 0 0.5em;
+	}
+}
+
+#kubio {
+	.block-editor-rich-text__typography-toolbar__container {
+		.kubio-select-control__control--wrapper {
+			margin-left: 0px !important;
+		}
+
+		.kubio-font-family-container .kubio-font-family__reset {
+			margin-left: 0 !important;
+		}
+	}
+
+	.block-editor-block-list__layout .h-y-container > :not(:last-child) {
+		margin-bottom: 0;
+	}
+}

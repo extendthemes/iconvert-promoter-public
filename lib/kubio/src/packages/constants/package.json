@@ -1,0 +1,16 @@
+{
+    "name": "@kubio/constants",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {
+        "@kubio/icons": "file:../icons"
+    },
+    "devDependencies": {
+        "@wordpress/hooks": "4.8.2",
+        "@wordpress/i18n": "5.8.2"
+    }
+}

@@ -1,0 +1,23 @@
+.kubio-color-popover {
+	.kubio-streched-radio-group__container {
+		margin-bottom: 10px;
+	}
+
+	.components-popover__content {
+		// width: 250px; - allow popover to expand
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input[type="number"] {
+			-moz-appearance: textfield;
+		}
+
+		.kubio-streched-radio-group__container {
+			margin-bottom: 8px;
+		}
+	}
+}

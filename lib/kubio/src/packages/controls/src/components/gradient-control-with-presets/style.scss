@@ -1,0 +1,226 @@
+@import "../mixins";
+
+.kubio-gradient-picker-wrapper {
+	position: relative;
+
+	.kubio-gradient-picker__label {
+		margin-bottom: 8px;
+	}
+
+	.kubio-gradient-picker-container {
+		position: relative;
+		margin-top: 10px;
+		padding-top: 45.5%;
+		background: #ffffff;
+		border: 1px solid #cccccc;
+		@include transparent-bg-grid;
+
+		.kubio-gradient-picker-preview {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 1;
+		}
+	}
+
+	.kubio-gradient-popover-ref {
+		position: absolute;
+		left: -30px;
+		top: 0;
+	}
+
+	.components-base-control__field {
+		margin-bottom: 10px;
+	}
+
+	.kubio-separator-line {
+		// margin-top: -2px;
+	}
+
+	.components-popover__content & {
+		min-width: 260px;
+	}
+
+	// overwrite wp core's enforced height on gradient's inputs
+	.components-custom-gradient-picker .components-select-control__input,
+	.components-custom-gradient-picker .components-input-control__input {
+		height: unset !important;
+	}
+
+	.components-custom-gradient-picker__gradient-bar
+		.components-custom-gradient-picker__markers-container {
+		width: 100%;
+	}
+}
+
+.components-popover__content {
+	.kubio-gradient-picker-container {
+		padding-top: 60%;
+	}
+}
+
+.kubio-gradient-custom-picker {
+	.components-angle-picker-control .components-base-control__label {
+		display: none;
+	}
+
+	.components-custom-gradient-picker__type-picker
+		.components-base-control__label {
+		margin-bottom: 0;
+	}
+
+	.components-custom-gradient-picker__ui-line {
+		&,
+		& .components-base-control__field {
+			align-items: center;
+			display: flex;
+		}
+	}
+}
+
+.kubio-gradient-popover {
+	--kubio-gradient-row-gap: 10px;
+	--kubio-gradient-column-gap: 10px;
+
+	.components-popover__content {
+		overflow: hidden;
+		padding: 10px;
+	}
+
+	& &__input-wrapper {
+		position: relative;
+	}
+
+	.kubio-gradient-popover__gradient-wrapper {
+		.kubio-gradient-data-container {
+			display: flex;
+			flex-direction: column;
+			width: calc(100% - var(--kubio-gradient-column-gap));
+			height: calc(100% - var(--kubio-gradient-row-gap));
+
+			&:hover {
+				.kubio-gradient-popover__gradient {
+					border: 1px solid $theme-controls-primary-color;
+					border-bottom: none;
+				}
+				.kubio-gradient-popover__label {
+					color: $theme-controls-primary-color;
+					background-color: rgba(0, 124, 186, 0.1);
+					border: 1px solid $theme-controls-primary-color;
+					border-top: none;
+				}
+			}
+		}
+	}
+
+	.kubio-gradient-popover__gradient {
+		flex-grow: 1;
+		cursor: pointer;
+		border: 1px solid #cccccc;
+		border-bottom: none;
+	}
+
+	.kubio-gradient-popover__label {
+		text-align: center;
+		color: #454545;
+		background: #fff;
+		font-size: 11px;
+		padding: 2px;
+		border: 1px solid #cccccc;
+		border-top: none;
+	}
+
+	.ReactVirtualized__Grid {
+		overflow: hidden auto !important;
+		margin-right: calc(-1 * var(--kubio-gradient-column-gap));
+	}
+
+	.ReactVirtualized__Grid__innerScrollContainer {
+		margin-top: 10px;
+	}
+
+	.block-editor-kubio-inserter__search-icon {
+		position: absolute;
+		top: 4px;
+		right: 0px;
+		padding-right: 10px;
+
+		> .kubio-gradient-reset-button {
+			position: absolute;
+			// top: -3px;
+			width: 24px;
+			height: 24px;
+			right: 0;
+		}
+	}
+}
+
+.kubio-gradient-select-container {
+	display: flex;
+	align-items: baseline;
+
+	.kubio-gradient-select-item {
+		display: flex;
+		justify-content: center;
+		cursor: pointer;
+		background-color: red;
+		width: 30px;
+		height: 30px;
+		border-radius: 15px;
+		margin: 0 5px;
+
+		&:last-of-type {
+			background-color: transparent;
+			border: 1px solid $ui-menu-item;
+		}
+	}
+
+	.components-button {
+		svg {
+			max-height: initial;
+		}
+	}
+
+	.components-circular-option-picker {
+		margin-right: 12px;
+	}
+}
+
+.kubio-more-gradients-circle {
+	display: flex;
+	justify-content: center;
+
+	svg {
+		min-width: 24px;
+		fill: #1e1e1e;
+		transform: translate(-11px, -4px);
+	}
+}
+
+.kubio-gradient-search-container {
+	> .kubio-gradient-search-icon {
+		position: absolute;
+		top: 2px;
+		right: 5px;
+	}
+}
+
+.kubio-gradient-search-input {
+	width: 100%;
+	background-color: #f0f0f0;
+	border: 1px solid #dddddd;
+	height: 30px;
+	&:focus {
+		outline: none;
+	}
+}
+
+.kubio-is-default-editor {
+	.components-circular-option-picker__swatches {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr) !important; // 5 columns
+		width: 100%;
+	}
+}

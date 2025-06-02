@@ -1,0 +1,32 @@
+.cspromo-slideshow {
+	&:not([data-loaded='true']) {
+		.slideshow-image {
+			display: none;
+
+			&:first-of-type {
+				opacity: 1 !important;
+				display: block;
+			}
+		}
+	}
+
+	.slideshow-image {
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		opacity: 1 !important;
+
+		&.current {
+			opacity: 0 !important;
+			z-index: 1001 !important;
+		}
+
+		&.next {
+			z-index: 1000 !important;
+		}
+	}
+}

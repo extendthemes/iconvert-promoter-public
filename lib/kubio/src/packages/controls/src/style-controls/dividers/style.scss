@@ -1,0 +1,160 @@
+.kubio-streched-tabs.kubio-divider-tabs {
+	> .components-tab-panel__tab-content {
+		height: 100%;
+	}
+}
+
+.kubio-divider-svg {
+	width: 100%;
+	height: 20px;
+}
+
+.kubio-divider-container {
+	.kubio-preview-box-control__container {
+		.divider-preview-label {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+			width: calc(100% + 20px);
+
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			padding: 6px 0 5px 8px;
+			height: 23px;
+			font-size: 12px;
+			line-height: 1.17;
+			color: #606266;
+			font-weight: 300;
+			visibility: hidden;
+			color: #fff;
+			text-transform: capitalize;
+			background-color: rgba(29, 29, 29, 0.5);
+			margin-left: -10px;
+		}
+
+		&:hover {
+			.divider-preview-label {
+				visibility: visible;
+			}
+		}
+	}
+
+	.kubio-divider-preview {
+		margin: 20px 0;
+		position: relative;
+		width: calc(100% - 20px);
+	}
+
+	.h-separator {
+		top: unset !important;
+		bottom: unset !important;
+		height: 30px;
+
+		svg {
+			display: block;
+			max-height: 100%;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.divider-icon-svg-button {
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 1;
+		width: 30px;
+		height: 30px;
+		border: 1px solid #dddddd;
+		background-color: white;
+
+		&.components-button {
+			min-width: 30px;
+			padding: 0;
+
+			&:hover {
+				border: 1px solid $ui-menu-item;
+
+				svg {
+					fill: $ui-menu-item;
+				}
+			}
+
+			&:focus {
+				background-color: rgb(229, 241, 248);
+				border: 1px solid $theme-controls-primary-color;
+
+				svg {
+					fill: $ui-menu-item;
+				}
+			}
+		}
+
+		&.opened.components-button {
+			border: 1px solid $theme-controls-primary-color;
+			background-color: rgb(229, 241, 248);
+			svg {
+				fill: $theme-controls-primary-color;
+			}
+		}
+	}
+}
+
+.kubio-divider-list {
+	height: 200px;
+	width: 250px;
+	padding: 10px 10px 0px 10px;
+	overflow-y: scroll;
+
+	> .ps__rail-y {
+		display: none;
+	}
+}
+
+.kubio-divider-item {
+	width: 100%;
+	height: 30px;
+	margin-bottom: 10px;
+	background-color: rgb(240, 240, 240);
+	border: 1px solid transparent;
+
+	&.selected {
+		background-color: rgba(0, 124, 186, 0.1);
+		border: 1px solid $theme-controls-primary-color;
+
+		.h-separator {
+			fill: $theme-controls-primary-color !important;
+		}
+	}
+
+	.h-separator {
+		top: unset !important;
+		bottom: unset !important;
+		height: 19px;
+		margin: 5px;
+		width: calc(100% - 10px);
+		position: unset;
+
+		svg {
+			display: block;
+			max-height: 100%;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&:hover {
+		border: 1px solid #ccc;
+	}
+
+	.kubio-pro-item__badge {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		padding-right: 3px;
+		padding-left: 3px;
+		font-size: 11px;
+	}
+}

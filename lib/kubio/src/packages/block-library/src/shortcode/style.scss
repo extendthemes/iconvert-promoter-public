@@ -1,0 +1,11 @@
+@include c(shortcode) {
+  @include e(outer) {
+  }
+}
+.h-shortcode-placeholder-preview {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #dadada;
+  color: #919191;
+  background-color: #f7f7f7;
+}

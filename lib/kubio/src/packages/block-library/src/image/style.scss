@@ -1,0 +1,53 @@
+@import "./block-mixins";
+
+@include imageTemplate(image);
+
+@include kubio-add-prefix-to-general-css {
+	.image-link {
+		display: contents;
+		text-decoration: none;
+	}
+
+	[data-align="wide"] > .wp-block-kubio-image img,
+	[data-align="full"] > .wp-block-kubio-image img,
+	.wp-block-kubio-image img {
+		width: 100%;
+	}
+
+	.wp-block[data-align="left"] > .wp-block-kubio-image {
+		margin-right: 1em;
+		margin-left: 0;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+
+	.wp-block[data-align="right"] > .wp-block-kubio-image {
+		margin-left: 1em;
+		margin-right: 0;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+
+	.wp-block[data-align="center"] > .wp-block-kubio-image {
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+
+	.wp-block-kubio-image {
+		&.is-resized,
+		.alignleft,
+		.alignright,
+		.aligncenter {
+			display: table;
+		}
+	}
+
+	.image-size-row-dropdown {
+		flex-grow: 1;
+	}
+}
+
+.image-size-row-dropdown {
+	flex-grow: 1;
+}

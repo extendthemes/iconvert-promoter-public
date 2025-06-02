@@ -1,0 +1,23 @@
+node_modules
+
+## Uncomment line below if you prefer to
+## keep compiled files out of version control
+dist
+build
+build-module
+build-style
+build-types
+.DS_Store
+vendor/
+.idea/
+bin/.cache
+/.env
+*.tsbuildinfo
+**/*.tsbuildinfo
+lerna-debug.log
+local-tasks.todo
+.history
+wp-cli.phar
+/languages
+static/ai-assets/generated/*
+!static/ai-assets/generated/.gitkeep 

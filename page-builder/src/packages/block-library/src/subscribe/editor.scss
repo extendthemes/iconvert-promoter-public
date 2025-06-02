@@ -1,0 +1,59 @@
+.kubio-options-popover.cs-promo-items-popover .components-popover__content {
+	min-width: 300px;
+}
+
+// fix issue: https://mantis.iconvert.pro/view.php?id=46060
+.wp-block-cspromo-subscribe__container * {
+	pointer-events: none;
+}
+
+.wp-block-cspromo-subscribe__container {
+	input,
+	button {
+		pointer-events: all;
+	}
+}
+
+.wp-block-cspromo-subscribe__outer {
+	[data-is-custom-content] {
+		display: none;
+	}
+
+	&[data-current-action="success-content"] {
+		> [data-block].is-selected::after {
+			display: none;
+		}
+
+		.wp-block-cspromo-subscribe__innerForm {
+			display: none !important;
+		}
+
+		[data-is-custom-content] {
+			display: block;
+		}
+
+		> [data-block].is-selected + [data-is-custom-content]:after {
+			top: 0 !important;
+			left: 0 !important;
+			right: 0 !important;
+			bottom: 0 !important;
+			border-radius: 0px !important;
+			position: absolute !important;
+			content: "";
+			transition: opacity 0.3s ease-in;
+			z-index: 10000 !important;
+			pointer-events: none !important;
+
+			outline: var(--kubio-overlay-width) solid
+				rgb(var(--kubio-overlay-hover-color)) !important;
+			box-shadow: inset 0 0 0 var(--kubio-overlay-width) white !important;
+			width: auto;
+			display: block;
+			opacity: 1 !important;
+		}
+	}
+}
+
+.subscribe-inspector-state-selector svg {
+	max-width: 28px;
+}

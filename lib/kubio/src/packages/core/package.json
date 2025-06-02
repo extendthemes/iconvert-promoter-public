@@ -1,0 +1,43 @@
+{
+    "name": "@kubio/core",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {
+        "@kubio/constants": "file:../constants",
+        "@kubio/core-hooks": "file:../core-hooks",
+        "@kubio/editor-data": "file:../editor-data",
+        "@kubio/log": "file:../log",
+        "@kubio/pro": "file:../pro",
+        "@kubio/style-manager": "file:../style-manager",
+        "@kubio/utils": "file:../utils"
+    },
+    "devDependencies": {
+        "@wordpress/api-fetch": "7.8.2",
+        "@wordpress/block-editor": "14.3.4",
+        "@wordpress/blocks": "13.8.4",
+        "@wordpress/components": "28.8.4",
+        "@wordpress/compose": "7.8.3",
+        "@wordpress/core-data": "7.8.4",
+        "@wordpress/data": "10.8.3",
+        "@wordpress/deprecated": "4.12.0",
+        "@wordpress/editor": "14.8.6",
+        "@wordpress/element": "6.8.1",
+        "@wordpress/hooks": "4.8.2",
+        "@wordpress/html-entities": "4.8.1",
+        "@wordpress/i18n": "5.8.2",
+        "@wordpress/is-shallow-equal": "5.8.1",
+        "@wordpress/shortcode": "4.8.1",
+        "@wordpress/url": "4.8.1",
+        "classnames": "^2.2.5",
+        "debounce-promise": "3.1.2",
+        "lodash": "4.17.21",
+        "memize": "^1.1.0",
+        "react-fast-compare": "3.2.0",
+        "shortid": "^2.2.15",
+        "use-memo-one": "1.1.2"
+    }
+}

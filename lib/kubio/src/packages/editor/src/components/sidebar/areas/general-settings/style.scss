@@ -1,0 +1,17 @@
+.kubio-core-global-styles {
+	background: #fff;
+	padding: 10px 0px 0px 0px;
+
+	.edit-site-global-styles-color-palette-panel {
+		padding: 1em;
+	}
+}
+
+.notice-general-settings {
+	padding: 10px;
+	background-color: #ffffff;
+
+	&.no-padding {
+		padding: 0px;
+	}
+}

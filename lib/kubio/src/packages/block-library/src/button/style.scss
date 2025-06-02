@@ -1,0 +1,31 @@
+@include c(button) {
+	@include e(outer) {
+		display: inline-flex;
+		// vertical-align: middle;
+	}
+
+	@include e(link) {
+		display: inline-flex;
+		align-items: center;
+	  	cursor: pointer;
+		//justify-content: center;
+	  svg {
+		transform: translateY(1px);
+	  }
+	}
+
+	@include e(inner) {
+		cursor: pointer;
+		text-decoration: none;
+	}
+
+	@include e(icon) {
+	  flex-shrink: 0;
+	}
+
+	@include e(text) {
+		&:empty{
+			display: none;
+		}
+	}
+}

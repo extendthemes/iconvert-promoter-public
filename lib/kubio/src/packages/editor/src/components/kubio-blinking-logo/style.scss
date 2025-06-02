@@ -1,0 +1,32 @@
+.kubio-iframe-holder--show .kubio-loading-logo-iframe {
+  display: none;
+  position: absolute;
+  z-index: 0;
+  background: transparent;
+}
+.kubio-loading-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.kubio-loading-logo  svg {
+  width: 120px !important;
+  height: 120px !important;
+  max-width: 120px !important;
+  fill: #a4afb7 !important;
+}
+@keyframes kubio-logo-blink {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.3;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}

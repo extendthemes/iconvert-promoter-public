@@ -1,0 +1,115 @@
+@mixin imageTemplate($blockName) {
+	@include c($blockName) {
+		vertical-align: middle;
+		display: block;
+		z-index: 1;
+		min-height: 20px;
+
+		@include when-inside-kubio-block() {
+			max-width: 100%;
+			display: inline-block;
+		}
+
+		&.wp-block.position-relative {
+			// if line height is bigger than 0 it adds some height to frame container
+			line-height: 0;
+		}
+
+		@include e(outer) {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			@include when-inside-kubio-block() {
+				width: 100%;
+				max-width: 100%;
+				margin: 0;
+			}
+		}
+		@include e(captionContainer) {
+			display: block;
+			line-height: 0;
+		}
+		@include e(caption) {
+			line-height: 1.6;
+			width: 100%;
+			z-index: 1;
+		}
+
+		@include e(image) {
+			width: auto;
+			max-height: 100%;
+			display: block;
+			height: auto;
+		}
+
+		@include e(frameContainer) {
+			position: relative;
+			display: inline-block;
+			z-index: 1;
+			max-width: 100%;
+
+			// maintain image aspect ratio - start
+			& img::before {
+				content: "\00a0" !important;
+				display: inline-block !important;
+				width: 100% !important;
+				height: 100% !important;
+				font-size: 300000px !important;
+				overflow: hidden;
+				max-width: var(--kubio-image-width, 100%);
+				background-color: rgba(0, 0, 0, 0);
+			}
+
+			img[data-width] {
+				width: var(--kubio-image-width, auto);
+			}
+			// maintain image aspect ratio - end
+
+			.frame-type-background {
+				border: inherit;
+				border-color: transparent !important;
+			}
+		}
+
+		@include e(overlay) {
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			position: absolute;
+			overflow: hidden;
+			pointer-events: none;
+			z-index: 1;
+		}
+
+		@include e(frameImage) {
+			position: absolute;
+			top: 0;
+			left: 0;
+			pointer-events: none;
+			z-index: -1;
+
+			&.frame-image-shadow {
+				box-shadow:
+					0 2px 4px -1px rgba(0, 0, 0, 0.2),
+					0 4px 5px 0 rgba(0, 0, 0, 0.14),
+					0 1px 10px 0 rgba(0, 0, 0, 0.12);
+			}
+		}
+
+		.components-placeholder {
+			line-height: 1.6 !important;
+			font: initial !important;
+			font-weight: normal;
+			text-transform: none;
+			font-style: normal;
+			letter-spacing: normal;
+			text-decoration: none;
+
+			.components-placeholder__fieldset .components-button {
+				padding: 6px 12px;
+			}
+		}
+	}
+}

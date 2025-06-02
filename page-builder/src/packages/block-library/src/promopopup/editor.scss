@@ -1,0 +1,116 @@
+#kubio-iframe-holder > iframe {
+	background-color: #f6f6f6;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+}
+
+body.editor-styles-wrapper {
+	background-color: transparent;
+	margin: 0;
+}
+
+.wp-block-cspromo-promopopup__container.animated {
+	animation-fill-mode: none !important;
+}
+
+.is-root-container .entry-content:first-child {
+	position: unset;
+	transform: unset;
+	margin: unset;
+	height: 100%;
+	max-width: unset;
+}
+
+/*Promo block corections*/
+.wp-block-cspromo-promopopup__outer {
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	transform: unset;
+	margin: unset;
+	min-height: 100%;
+	min-height: 100dvh;
+	height: auto;
+	display: flex;
+	position: fixed;
+	width: 100%;
+	max-width: initial !important;
+	z-index: 999;
+	background-color: unset;
+
+	&.cs-outer-popup-container-type-inline-promotion-bar,
+	&.cs-outer-popup-container-type-floating-bar.cs-fb-position-above-content.align-items-start {
+		position: relative !important;
+		min-height: auto;
+		overflow: visible;
+	}
+
+	.wp-block-cspromo-promopopup__container {
+		> .block-editor-block-list__layout {
+			position: static;
+		}
+
+		> .block-list-appender:nth-child(2) {
+			position: relative;
+			right: auto;
+			align-self: center;
+			list-style: none;
+			line-height: inherit;
+			padding: 20px;
+			margin-top: 15px;
+		}
+	}
+}
+.wp-block-cspromo-promopopup__outer.cs-outer-popup-container-type-inline-promotion-bar {
+	margin: 0 auto;
+	max-width: 1200px !important;
+}
+body#kubio.cspromo-iframe-holder--show #kubio-site-edit-content-holder {
+	flex: unset;
+	padding-bottom: unset;
+}
+
+/*Popup close*/
+
+.wp-block-cspromo-promopopupclose__outer {
+	position: absolute !important;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	pointer-events: none;
+	margin: 0 !important;
+}
+
+.wp-block-cspromo-promopopupclose__inner {
+	margin-left: unset !important;
+	margin-right: unset !important;
+	text-align: center;
+	position: relative !important;
+	top: unset !important;
+	transform: translateY(0);
+	margin-top: 0px !important;
+	width: auto;
+	height: auto;
+	display: inline-block;
+	z-index: 200;
+	cursor: pointer;
+	pointer-events: auto;
+	left: 0;
+}
+
+.linkInvalid {
+	margin-bottom: 0;
+	color: red;
+}
+
+.popover-slot .kubio-font-footer {
+	display: none;
+}

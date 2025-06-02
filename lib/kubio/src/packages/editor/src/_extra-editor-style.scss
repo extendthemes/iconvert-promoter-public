@@ -1,0 +1,507 @@
+.interface-interface-skeleton__body {
+	overflow: hidden;
+}
+
+// In order to use mix-blend-mode, this element needs to have an explicitly set background-color.
+// We scope it to .wp-toolbar to be wp-admin only, to prevent bleed into other implementations.
+html.wp-toolbar {
+	background: $white;
+}
+
+#kubio body.block-editor-page {
+	@include wp-admin-reset(".kubio");
+}
+
+.kubio,
+  // The modals are shown outside the .getdave-sbe-block-editor wrapper, they need these styles.
+.components-modal__frame {
+	@include reset;
+}
+
+.kubio {
+	.block-editor-block-list__layout.is-root-container {
+		padding: 0 !important;
+	}
+}
+
+.kubio {
+	// On mobile the main content area has to scroll, otherwise you can invoke
+	// the over-scroll bounce on the non-scrolling container, for a bad experience.
+	@include break-small {
+		bottom: 0;
+		left: 0;
+		min-height: calc(100vh - #{$admin-bar-height-big});
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	// The WP header height changes at this breakpoint.
+	@include break-medium {
+		min-height: calc(100vh - #{$admin-bar-height});
+	}
+
+	> .components-navigate-regions {
+		height: 100%;
+	}
+
+	// Todo: Remove this rule when edit site gets support
+	// for opening unpinned sidebar items.
+	.interface-complementary-area__pin-unpin-item.components-button {
+		display: none;
+	}
+}
+
+/**
+ * Animations
+ */
+
+// These keyframes should not be part of the _animations.scss mixins file.
+// Because keyframe animations can't be defined as mixins properly, they are duplicated.
+// Since they are intended only for the editor, we add them here instead.
+@keyframes edit-post__fade-in-animation {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+#kubio .kubio-inherit-typography {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	letter-spacing: inherit;
+	text-decoration: inherit;
+	text-transform: inherit;
+}
+
+.editor-styles-wrapper {
+	.layout-structures-close-button,
+	.components-button,
+	button.components-button,
+	.block-editor-block-list__block[data-empty="true"]
+		[data-rich-text-placeholder] {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+			Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+	}
+}
+
+.interface-interface-skeleton__content {
+	background-color: #ccd0d4;
+	position: relative;
+	overflow: hidden;
+	justify-content: center;
+	align-items: center;
+	//margin-bottom: 25px;
+
+	.edit-site-visual-editor {
+		width: 100%;
+		height: 100%;
+		background: #fff;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+}
+
+#kubio-editor-view {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 0;
+	// background: #2f2f2f;
+}
+
+.block-editor-block-contextual-toolbar.has-parent.is-fixed
+	+ div
+	+ #kubio-editor-view {
+	height: calc(100% - 48px);
+}
+
+#kubio-iframe-holder {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	transition: opacity 0.8s cubic-bezier(0, 0, 0.2, 1);
+	margin: auto;
+
+	> iframe {
+		background-color: #fff;
+		width: 100%;
+		height: 100%;
+		display: flex;
+	}
+
+	visibility: hidden;
+	opacity: 0;
+	display: none;
+}
+
+div#kubio-editor {
+	.interface-interface-skeleton__sidebar {
+		display: none;
+	}
+}
+
+.interface-interface-skeleton__body {
+	background-color: #ccd0d4;
+}
+
+.kubio-iframe-holder--hide * {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+
+	.edit-site-header_start,
+	.edit-site-header_end {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+.kubio-iframe-holder--show {
+	#kubio-iframe-holder {
+		visibility: visible;
+		opacity: 1;
+		display: block;
+	}
+
+	.kubio-loading-logo {
+		display: none;
+	}
+
+	div#kubio-editor {
+		.interface-interface-skeleton__sidebar {
+			display: block;
+		}
+	}
+}
+
+// selector should not have a higher priority than global styles, like .h-y-container > :not(:last-child), .h-x-container-inner > *
+.block-editor-block-list__block {
+	margin-top: unset;
+	margin-bottom: unset;
+}
+
+.block-editor-block-list__layout {
+	.block-editor-block-list__block {
+		&:after {
+			top: 0 !important;
+			left: 0 !important;
+			right: 0 !important;
+			bottom: 0 !important;
+			border-radius: 0 !important;
+			opacity: 0;
+			transition: opacity 0.3s ease-in;
+			z-index: 10000 !important;
+		}
+
+		&.is-selected::after,
+		&.is-selected.is-hovered::after {
+			outline: 2px solid $layout-hover-color !important;
+			box-shadow: inset 0 0 0 2px white !important;
+			width: auto;
+			display: block;
+			opacity: 1 !important;
+		}
+
+		&.is-highlighted:not(.is-selected)::after,
+		&.is-hovered:not(.is-selected)::after {
+			outline: 2px dotted #55a9d4 !important;
+			box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8) !important;
+			width: auto;
+			display: block;
+			opacity: 1 !important;
+		}
+
+		&.is-hovered.wp-block-post-content::after {
+			outline: none !important;
+			opacity: 0 !important;
+		}
+
+		// add overlay on dragged item
+		&.is-hovered.kubio-is-hovered-on-drop:not(.is-selected)::after {
+			background-color: transparentize(#55a9d4, 0.97);
+			pointer-events: none;
+		}
+
+		&.is-highlighted::after,
+		&.is-hovered::after {
+			opacity: 1;
+		}
+
+		position: relative;
+
+		&:focus {
+			outline: none;
+
+			&::after {
+				position: absolute;
+				z-index: 1;
+				pointer-events: none;
+				content: "";
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				display: flex;
+
+				// 2px outside.
+				box-shadow: 0 0 0 $border-width-focus
+					var(--wp-admin-theme-color);
+				border-radius: $radius-block-ui - $border-width; // Border is outset, so so subtract the width to achieve correct radius.
+
+				// Show a light color for dark themes.
+				.is-dark-theme & {
+					box-shadow: 0 0 0 $border-width-focus $dark-theme-focus;
+				}
+			}
+		}
+
+		// Spotlight mode.
+		&.is-focus-mode:not(.is-multi-selected) {
+			opacity: 0.5;
+			transition: opacity 0.5s ease-in;
+			@include reduce-motion("transition");
+
+			&:not(.is-focused) .block-editor-block-list__block,
+			&.is-focused {
+				opacity: 1;
+			}
+		}
+
+		.components-spinner {
+			width: 16px;
+			height: 16px;
+			color: $theme-controls-primary-color;
+			overflow: visible;
+
+			circle {
+				fill: transparent;
+				stroke-width: 1.5px;
+				stroke: $theme-controls-primary-color-background;
+			}
+
+			path {
+				fill: transparent;
+				stroke-width: 1.5px;
+				stroke: currentcolor;
+				stroke-linecap: round;
+				transform-origin: 50% 50%;
+				animation: 1.4s linear 0s infinite normal both running spin;
+			}
+		}
+	}
+}
+
+#kubio {
+	.block-editor-button-block-appender {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: $grid-unit-10;
+		width: 100%;
+		height: auto;
+		color: $theme-controls-primary-color;
+		box-shadow: none;
+		border: 1px dashed $theme-controls-primary-color;
+		transition: background-color 0.2s linear;
+
+		outline: 1px dashed rgba(255, 255, 255, 0.6);
+		background-color: rgba(255, 255, 255, 0.3);
+
+		&:hover {
+			box-shadow: none;
+			background-color: rgba($theme-controls-primary-color-hover, 0.2);
+		}
+
+		&:focus {
+			box-shadow: none;
+			background-color: rgba($theme-controls-primary-color-hover, 0.2);
+		}
+
+		&:active {
+			color: $black;
+		}
+
+		// This variant is used in inline situations, like Buttons, Social Links, Navigation Menu.
+		&.block-list-appender__toggle {
+			display: flex;
+			flex-direction: row;
+			color: $gray-900;
+			box-shadow: none;
+			height: $icon-size;
+			width: $icon-size;
+			padding: 0;
+			margin-left: $grid-unit-10;
+
+			&:active {
+				color: $white;
+			}
+
+			& > svg {
+				width: 24px;
+				background-color: $gray-900;
+				color: $white;
+				border-radius: $radius-block-ui;
+			}
+		}
+
+		span.components-visually-hidden {
+			border: 0px;
+			clip: rect(1px, 1px, 1px, 1px);
+			clip-path: inset(50%);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0px;
+			position: absolute;
+			width: 1px;
+			overflow-wrap: normal !important;
+		}
+	}
+}
+
+.interface-interface-skeleton__drawer {
+	z-index: 10000;
+}
+
+#kubio-site-edit-content-holder .block-editor-writing-flow {
+	background: transparent;
+	width: auto;
+	max-width: unset;
+}
+
+// is this necessary inside the iframe ?
+//#kubio .block-editor-block-list__layout {
+//	padding: 0;
+//}
+
+// scrollbar style - might not work on all browsers
+* {
+	@include kubio-scrollbar();
+}
+
+.interface-interface-skeleton__sidebar {
+	overflow-x: hidden;
+	background: #eff0f2;
+}
+
+//temporary fix
+.kubio-sidebar,
+.block-editor-writing-flow,
+.kubio-options-popover {
+	.components-popover__content {
+		overflow: hidden;
+	}
+
+	.components-base-control {
+		margin-bottom: 10px;
+
+		&:last-child,
+		&:last-of-type {
+			margin-top: auto;
+			margin-bottom: 0;
+
+			.components-base-control__field {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.kubio-options-popover {
+	&.kubio-create-menu-popover {
+		.components-base-control {
+			&:last-child,
+			&:last-of-type {
+				.components-base-control__field {
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+}
+
+#kubio-editor .interface-interface-skeleton__content {
+	> .components-notice-list {
+		width: 100%;
+	}
+
+	> .components-snackbar-list {
+		bottom: 0;
+		left: 0;
+	}
+}
+
+#kubio .block-editor-page .components-modal__screen-overlay {
+	z-index: 9999999;
+}
+
+.components-modal__content
+	.components-button-group
+	.components-button.is-primary {
+	box-shadow: none !important;
+}
+
+.components-popover.block-editor-block-list__block-popover {
+	z-index: 10000000;
+	position: absolute;
+}
+
+div#kubio-toolbar-boundary {
+	position: absolute;
+	z-index: -1;
+	width: 100%;
+	height: 100vh;
+	bottom: 0;
+}
+
+// move upper to allow block toolbar to be entirely displayed over UI
+.interface-interface-skeleton__content {
+	z-index: 10000;
+}
+
+.components-editor-notices__snackbar {
+	position: fixed;
+	right: 0;
+	bottom: 40px;
+	padding-left: 16px;
+	padding-right: 16px;
+	left: 0;
+}
+
+.interface-interface-skeleton {
+	&__footer {
+		z-index: 10123;
+	}
+}
+
+// notices
+
+.components-notice__content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.components-notice__actions {
+	flex-grow: 0;
+}
+
+.components-notice-list .components-notice__action.components-button {
+	margin-top: 0;
+}

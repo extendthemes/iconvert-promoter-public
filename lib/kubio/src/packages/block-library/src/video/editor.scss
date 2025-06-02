@@ -1,0 +1,14 @@
+.kubio-video-input-container {
+	flex: 1;
+}
+
+.video-options-panel {
+	.inner-block-button {
+		margin-top: 10px;
+	}
+}
+@include component(video) {
+	@include e(poster) {
+		position: absolute !important;
+	}
+}

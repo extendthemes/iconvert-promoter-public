@@ -1,0 +1,224 @@
+{
+	"name": "cspromo/countdown",
+	"category": "kubio-basic",
+	"attributes": {
+		"kubio": {
+			"type": "object"
+		},
+		"cdDateTime": {
+			"type": "string"
+		},
+		"utcZone":{
+			"type": "string"
+		},
+		"evergreenHours":{
+			"type": "number",
+			"default":2
+		},
+		"evergreenMinutes":{
+			"type": "number",
+			"default":0
+		},
+		"datetimetype":{
+			"type": "string",
+			"default":"due-date"
+		},
+		"datetimeendbehavior":{
+			"type": "string",
+			"default":"none"
+		},
+		"activateDays":{
+			"type": "boolean",
+			"default":true
+		},
+		"activateHours":{
+			"type": "boolean",
+			"default":true
+		},
+		"activateMinutes":{
+			"type": "boolean",
+			"default":true
+		},
+		"activateSeconds":{
+			"type": "boolean",
+			"default":true
+		},
+		"cookieId":{
+			"type":"string"
+		},		
+		"labels": {
+			"type": "object",
+			"default": {
+				"show": true,
+				"days": {
+					"show": true,
+					"text": "Days"
+				},
+				"hours": {
+					"show": true,
+					"text": "Hours"
+				},
+				"minutes": {
+					"show": true,
+					"text": "Minutes"
+				},
+				"seconds": {
+					"show": true,
+					"text": "Seconds"
+				}
+			}
+		},
+		"separator": {
+			"type": "object",
+			"default": {
+				"show": true,
+				"text": ":"
+			}
+		}
+
+	},
+
+	"supports": {
+		"kubio": {
+			"default": {
+				"props": {
+					"internal": {
+						"type": "object"
+					},
+					"overlapOptions": false
+				},
+				"style": {
+					"descendants": {
+						"container":{
+							"typography":{
+								"family": "Open Sans",
+								"weight": 800,
+								"style": "normal",
+								"size": {
+									"unit": "px",
+									"value": 20
+								},
+								"color": "rgba(var(--kubio-color-6),1)",
+								"lineHeight":{
+									"value":1,
+									"unit":""
+								}
+							}
+						},
+						"separator": {
+							"typography": {
+								"family": "Carter One",
+								"style": "normal",
+								"size": {
+									"unit": "px",
+									"value": 31
+								},
+								"color": "#000"
+							},
+							"margin": {
+								"left": {
+									"unit": "px",
+									"value": 10
+								},
+								"right": {
+									"unit": "px",
+									"value": 10
+								}
+							}
+						},
+						"countdownItemText": {
+							"typography": {
+								"family": "Open Sans",
+								"weight": 800,
+								"style": "normal",
+								"size": {
+									"unit": "px",
+									"value": 50
+								},
+								"color": "rgba(var(--kubio-color-6),1)",
+								"lineHeight": {
+									"value": 1,
+									"unit": ""
+								}
+							}
+						},
+						"countdownItemLabel": {
+							"typography": {
+								"family": "Open Sans",
+								"weight": 300,
+								"style": "normal",
+								"size": {
+									"unit": "px",
+									"value": 16
+								},
+								"color": "rgba(var(--kubio-color-6),1)",
+								"lineHeight": {
+									"value": 1,
+									"unit": ""
+								}
+							},
+							"margin": {
+								"top": {
+									"unit": "px",
+									"value": 20
+								}
+							}
+						}
+					}
+				}
+			},
+			"elementsEnum": {
+				"OUTER": "outer",
+				"CONTAINER": "container",
+				"COUNTDOWN_ITEM": "countdownItem",
+				"COUNTDOWN_ITEM_TEXT": "countdownItemText",
+				"COUNTDOWN_ITEM_LABEL": "countdownItemLabel",
+				"SEPARATOR": "separator",
+				"VSPACE": "v-space"
+			},
+			"elementsByName": {
+				"outer": {
+					"wrapper": true
+				},
+				"container": {
+		
+					"default": true
+				},
+				"countdownItem": {
+					"selector": ".wp-block-cspromo-countdownitem"
+				},
+				"countdownItemText": {
+					"selector": ".wp-block-cspromo-countdownitem span:nth-child(1)"
+				},								
+				"countdownItemLabel": {
+					"selector": ".wp-block-cspromo-countdownitem span:nth-child(2)"
+				},				
+				"separator": {
+					"selector": ".icp-countdown-separator"
+				},
+				"v-space": {
+					"selector": "&.countdown-hide-separator .wp-block-cspromo-countdownitem:not(:last-child)"
+				}
+			},
+			"template": {
+				"type": "element",
+				"props": {
+					"name": "outer"
+				},
+				"children": [
+					{
+						"type": "element",
+						"props": {
+							"name": "container"
+						},
+						"children": [
+							{
+								"type": "wp:InnerBlocks"
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

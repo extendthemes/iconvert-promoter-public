@@ -1,0 +1,9 @@
+@include c(button) {
+  .block-editor-rich-text__editable {
+	display: inline-block;
+	margin: 0;
+	&:after {
+	  display: none !important;
+	}
+  }
+}

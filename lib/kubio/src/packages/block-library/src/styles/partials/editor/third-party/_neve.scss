@@ -1,0 +1,10 @@
+#kubio {
+
+  //this is needed for neve template to display full width inside editor
+  #content.neve-main {
+	> .container {
+	  max-width: unset;
+	  padding: 0;
+	}
+  }
+}

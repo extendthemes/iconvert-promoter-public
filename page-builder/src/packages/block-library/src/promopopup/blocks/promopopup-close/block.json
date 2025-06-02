@@ -1,0 +1,91 @@
+{
+	"name": "cspromo/promopopupclose",
+	"category": "kubio-components",
+	"usesContext": [
+		"navigation"
+	],
+	"attributes": {
+		"kubio": {
+			"type": "object"
+		},
+		"icon": {
+			"type": "object",
+			"default": {
+				"name": "font-awesome/x"
+			}
+		},
+		"direction": {
+			"type": "string",
+			"default": "next"
+		}
+	},
+	"supports": {
+		"kubio": {
+			"default": {
+				"_style": {
+					"descendants": {
+						"inner": {
+							"transform": {
+								"translate": [
+									{
+										"axis": "x",
+										"value": {
+											"value": 0,
+											"unit": "px"
+										}
+									},
+									{
+										"axis": "y",
+										"value": {
+											"value": 0,
+											"unit": "px"
+										}
+									}
+								]
+							}
+						}
+					}
+				},
+				"props": {
+					"horizontalAlign": "end",
+					"verticalAlign": "start"
+				}
+			},
+			"elementsEnum": {
+				"OUTER": "outer",
+				"INNER": "inner",
+				"ICON": "icon"
+			},
+			"elementsByName": {
+				"outer": {},
+				"inner": {
+					"default": true,
+					"wrapper": true
+				},
+				"icon": {
+					"selector": "wp-block-cspromo-icon__inner"
+				}
+			},
+			"template": {
+				"type": "element",
+				"props": {
+					"name": "outer",
+					"shouldRender": "computed.closeButtonEnabled"
+				},
+				"children": [
+					{
+						"type": "element",
+						"props": {
+							"name": "inner"
+						},
+						"children": [
+							{
+								"type": "wp:InnerBlocks"
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

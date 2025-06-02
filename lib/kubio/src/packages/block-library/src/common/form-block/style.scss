@@ -1,0 +1,29 @@
+.kubio-block-placeholder-form__controls {
+
+  .kubio-block-placeholder-form__controls__kubio-loader {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	margin-bottom: 10px;
+	height: 30px;
+
+	svg {
+	  width: 19px !important;
+	  height: 19px !important;
+	  fill: var(--wp-admin-theme-color) !important;
+	}
+	&__text {
+	  margin-left: 10px;
+	}
+  }
+  
+  .kubio-select-control.components-base-control.kubio-select-control--no-label {
+	margin-top: 0px !important
+  }
+
+  &--sidebar {
+	margin-bottom: 10px;
+  }
+}
+
+

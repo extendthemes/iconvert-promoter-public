@@ -1,0 +1,37 @@
+.ic-promo-yes-no-toolbar-state-group {
+	padding: 0;
+}
+
+.ic-promo-yes-no-toolbar-state {
+	& {
+		background: #fff;
+		margin-top: 1px;
+		margin-bottom: 1px;
+	}
+
+	button.components-button:not(#undefined) {
+		padding-left: 20px;
+		padding-right: 20px;
+		height: 46px !important;
+		min-height: 46px !important;
+
+		&:before {
+			left: 2px;
+			right: 2px;
+			top: 2px;
+			bottom: 2px;
+			height: auto;
+			border-radius: 0px;
+		}
+	}
+}
+
+.ic-promo-yes-no-toolbar-state-popover {
+	.components-dropdown-menu__menu > * {
+		padding: 12px;
+	}
+}
+
+.yes-no-inspector-state-selector svg {
+	max-width: 28px;
+}

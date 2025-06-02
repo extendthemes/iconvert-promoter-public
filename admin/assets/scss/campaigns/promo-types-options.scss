@@ -1,0 +1,137 @@
+.ic-promo-wrapper .body .promo-page-create .sidebar-create,
+.ic-promo-wrapper .sidebar-edit {
+  .promo-type-options {
+    h3 {
+      font-size: 16px;
+      color: #454545;
+      font-weight: 500;
+      padding-bottom: 5px;
+    }
+
+    .position-matrix {
+      select {
+        width: 100%;
+      }
+    }
+
+    .position-matrix-content {
+      display: flex;
+      // justify-content: space-between;
+      flex-wrap: wrap;
+
+      height: 128px;
+      width: 100%;
+      background-color: #f4f8fb;
+      border: 1px solid #dddddd;
+      border-radius: 4px;
+      padding: 13px 15px 0px 15px;
+
+      span {
+        flex: 1 1 33%;
+        text-align: left;
+
+        &:nth-child(3n - 1) {
+          text-align: center;
+        }
+
+        &:nth-child(3n + 0) {
+          text-align: right;
+        }
+      }
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      a,
+      label {
+        display: inline-block;
+        text-indent: 9999px;
+        overflow: hidden;
+        width: 10px;
+        height: 10px;
+        background-color: #cccccc;
+        margin-bottom: 0;
+        transition: all 0.2s ease-in-out;
+
+        &.position-selected {
+          background-color: $primary;
+          width: 14px;
+          height: 14px;
+        }
+      }
+
+      input:checked + label {
+        background-color: $primary;
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    .icp-toggle-options {
+      background-color: #f6f7f7;
+      padding: 1px;
+      border: 1px solid #dddddd;
+      border-radius: 4px;
+      display: flex;
+      margin-bottom: 10px;
+
+      & > div {
+        width: 50%;
+
+        input {
+          display: none;
+        }
+
+        label {
+          display: block;
+          border: 1px solid #f6f7f7;
+          border-radius: 4px;
+          font-size: 12px;
+          font-weight: 500;
+          color: #454545;
+          padding: 5px;
+          margin-bottom: 0;
+          text-align: center;
+          transition: all 0.4s ease-in-out;
+        }
+
+        input:checked + label {
+          background-color: $primary-lightest;
+          border-color: $primary;
+        }
+      }
+    }
+
+    .pto-position-wrapper {
+      display: none;
+
+      &.pto-position-selected {
+        display: block;
+      }
+    }
+
+    .pto-animation-wrapper {
+      margin-top: 10px;
+      display: none;
+
+      .select2-container,
+      select {
+        width: 100% !important;
+      }
+
+      h4 {
+        font-size: 13px;
+        font-weight: normal;
+      }
+
+      .animations-in-options {
+        margin-bottom: 10px;
+      }
+
+      .animations-duration-options {
+        margin-top: 10px;
+      }
+    }
+  }
+}

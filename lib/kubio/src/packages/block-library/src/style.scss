@@ -1,0 +1,11 @@
+@import "styles/style";
+@import "blocks-style";
+
+// aos effects - //TODO THIS SHOULD BE MOVED IN FUTURE
+@import "../../scripts/src/aos/aos";
+
+@media screen and (max-width: 600px) {
+	#wpadminbar {
+		position: fixed;
+	}
+}

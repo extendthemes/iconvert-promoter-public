@@ -1,0 +1,20 @@
+.kubio-enable-gap-fallback {
+	.kubio-has-gap-fallback {
+		--kubio-gap-fallback-half: calc(var(--kubio-gap-fallback) * 0.5);
+		margin: calc(-1 * var(--kubio-gap-fallback-half)) !important;
+		gap: 0 !important;
+
+		> * {
+			margin: var(--kubio-gap-fallback-half) !important;
+		}
+	}
+}
+
+.kubio-attachment-fixed-support-fallback {
+	[data-kubio] {
+		&,
+		[class*='style-'] {
+			background-attachment: scroll !important;
+		}
+	}
+}

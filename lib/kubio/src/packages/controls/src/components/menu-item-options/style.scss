@@ -1,0 +1,56 @@
+.kubio-menu-item-options {
+	width: 300px;
+
+	.kubio-item-link-flex {
+		margin-top: 8px;
+
+		form {
+			margin-bottom: 0px !important;
+		}
+
+		body.toplevel_page_cspromo & form {
+			margin-bottom: 1px !important;
+		}
+	}
+
+	.kubio-menu-item-options--label {
+		overflow: hidden;
+		display: block;
+		text-overflow: ellipsis;
+	}
+
+	.kubio-menu-item-options--entity-label {
+		font-size: 12px;
+		color: rgb(148, 148, 148);
+	}
+
+	.components-button.has-icon.kubio-menu-item-options--edit-toggle {
+		width: 30px;
+		height: 30px;
+		border: 1px solid #ccc;
+		box-sizing: border-box;
+		min-width: 30px;
+		padding: 0px 6px;
+
+		&.is-pressed {
+			width: 30px;
+			height: 30px;
+			background-color: $theme-controls-primary-color-background;
+			border-color: $theme-controls-primary-color;
+			color: $theme-controls-primary-color;
+		}
+	}
+
+	.kubio-url-control__suggestions {
+		width: 100%;
+	}
+
+	.kubio-url-control-input-container {
+		margin: 0;
+	}
+
+	.kubio-menu-item-label-richtext {
+		border: 1px solid #1e1e1e;
+		padding: 2px 4px;
+	}
+}

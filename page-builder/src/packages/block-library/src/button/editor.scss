@@ -1,0 +1,14 @@
+/*@include c(button) {
+}
+*/
+
+.wp-block-cspromo-buttonextended {
+	.block-editor-rich-text__editable {
+		display: inline-flex;
+		align-items: center;
+		margin: 0;
+		&:after {
+			display: none !important;
+		}
+	}
+}

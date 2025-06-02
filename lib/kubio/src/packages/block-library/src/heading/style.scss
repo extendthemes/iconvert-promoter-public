@@ -1,0 +1,56 @@
+@include c(heading) {
+	.h-hidden {
+		visibility: hidden;
+	}
+	@include e(text) {
+	    // white-space: pre-wrap !important;  - this breaks content when multiple spaces are added before
+		@import 'frontend/animatedheadline.scss';
+		[data-kubio-block-script-wrapper] {
+			display: inline-block;
+		}
+
+		.ah-headline.clip span,
+		.ah-headline.loading-bar span,
+		.ah-headline.slide span {
+			padding: 0 !important;
+		}
+
+		.ah-headline.rotate-2 .ah-words-wrapper {
+			perspective: unset !important;
+		}
+		.bring-to-front + svg {
+			z-index: 2;
+		}
+		.fancy-title-headline {
+		  display: inline-flex;
+		}
+		@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+			.fancy-title-headline svg {
+				display: none;
+			}
+		}
+
+		.ah-words-wrapper {
+			b, i, em {
+				text-decoration: inherit;
+				font-weight: inherit;
+				font-style: inherit;
+				font-size: inherit !important;
+			}
+		}
+	}
+
+	a {
+		text-decoration: underline;
+	}
+}
+
+.h-link {
+  text-decoration: underline;
+}
+
+a.d-block {
+	@include c(heading) {
+		margin-bottom: 0;
+	}
+}

@@ -1,0 +1,37 @@
+.kubio-toggle-control {
+	margin-bottom: 10px;
+	> .components-base-control__field,
+	> .components-base-control__field .components-h-stack {
+		flex-direction: row-reverse;
+		justify-content: space-between;
+
+		.components-form-toggle {
+			margin-right: 0;
+		}
+
+		.components-toggle-control__label {
+			cursor: unset;
+		}
+	}
+}
+
+.components-form-toggle {
+	&:not(.is-checked) .components-form-toggle__track {
+		border: 1px solid $ui-menu-item-light;
+	}
+
+	&.is-disabled {
+		opacity: 1;
+
+		&.is-checked .components-form-toggle__track {
+			background: $ui-menu-item-light;
+		}
+
+		&:not(.is-checked) {
+			.components-form-toggle__thumb {
+				border: none;
+				background-color: $ui-menu-item-light;
+			}
+		}
+	}
+}

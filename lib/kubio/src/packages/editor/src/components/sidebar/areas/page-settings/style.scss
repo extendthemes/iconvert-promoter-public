@@ -1,0 +1,41 @@
+
+.kubio-page-settings {
+	.components-panel__body:first-of-type {
+		//margin-top: 8px;
+	}
+
+	h3.edit-post-post-link__preview-label {
+		margin-bottom: 8px;
+	}
+
+	.editor-post-link,
+	.edit-post-post-link__preview-link-container {
+		a.components-external-link {
+			display: block;
+		}
+	}
+
+	.editor-post-taxonomies__hierarchical-terms-filter,
+	.components-checkbox-control__input:not(:checked),
+	.components-form-token-field__input-container,
+	.components-text-control__input,
+	.components-combobox-control__suggestions-container {
+		border-radius: 0 !important;
+		border: 1px solid #ccc !important;
+	}
+
+	.editor-post-taxonomies__hierarchical-terms-filter {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	.components-checkbox-control {
+		margin-top: 0 !important;
+	}
+
+	.edit-post-template__actions {
+		.components-button.kubio-pro-item {
+			padding-right: calc(12px + 29px); //Existing padding + badge
+		}
+	}
+}

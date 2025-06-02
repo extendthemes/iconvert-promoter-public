@@ -1,0 +1,56 @@
+.icpm-pagination-wrapper {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #dddddd;
+}
+
+.promo-page-list {
+  .icpm-pagination-wrapper {
+    padding-right: 1.5rem;
+  }
+}
+
+.ic-email-lists-layout {
+  .icpm-pagination-wrapper {
+    padding-right: 1.5rem;
+    margin-left: -25px;
+    margin-right: -25px;
+    margin-top: 27px;
+  }
+}
+
+.pagination-links {
+  .page-numbers {
+    margin-bottom: 2px;
+  }
+  li {
+    display: inline-block;
+
+    a,
+    span {
+      position: relative;
+      display: block;
+      padding: 5px 10px;
+      margin-left: -1px;
+      line-height: 1.25;
+      color: $primary;
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+
+    &:last-child {
+      a,
+      span {
+        margin-right: 0;
+      }
+    }
+
+    .current {
+      color: #fff;
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+}

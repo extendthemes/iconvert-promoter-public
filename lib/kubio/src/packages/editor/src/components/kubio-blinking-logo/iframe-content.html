@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Kubio Loader</title>
+    <style>
+      :root {
+        --logo-size: 120px;
+        --logo-color: #a4afb7;
+        --bg-color: #f1f3f5;
+      }
+      html,
+      body {
+        background: var(--bg-color);
+      }
+
+      html,
+      body,
+      body * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .container {
+        text-align: center;
+      }
+      .message {
+        font-size: 1.2rem;
+        color: #15192b;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        margin: 1em;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .loader {
+        --size: calc(var(--logo-size) * 0.8);
+        width: var(--size);
+        height: var(--size);
+        border: clamp(5px, calc(var(--logo-size) * 0.1), 8px) solid
+          var(--logo-color);
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        animation: pulse 1s linear infinite;
+      }
+      .loader:after {
+        content: "";
+        position: absolute;
+        width: var(--size);
+        height: var(--size);
+        border: clamp(5px, calc(var(--logo-size) * 0.1), 8px) solid
+          var(--logo-color);
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        animation: scaleUp 1s linear infinite;
+      }
+
+      @keyframes scaleUp {
+        0% {
+          transform: translate(-50%, -50%) scale(0);
+        }
+        60%,
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        60%,
+        100% {
+          transform: scale(1);
+        }
+        80% {
+          transform: scale(1.2);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="content">
+      <div class="container">
+        <span class="loader"></span>
+        <p class="message hide"></p>
+      </div>
+    </div>
+    <script>
+      var search = new URLSearchParams(window.location.search);
+      var colorSearchMap = {
+        color: "--logo-color",
+        size: "--logo-size",
+        "bg-color": "--bg-color",
+      };
+
+      Object.keys(colorSearchMap).forEach((searchField) => {
+        var searchVal = search.get(searchField);
+        if (searchVal) {
+          document.documentElement.style.setProperty(
+            colorSearchMap[searchField],
+            searchVal
+          );
+        }
+      });
+
+      var message = search.get("message");
+
+      if (message) {
+        document.querySelector(".message").innerHTML = message;
+        document.querySelector(".message").classList.remove("hide");
+      }
+    </script>
+  </body>
+</html>

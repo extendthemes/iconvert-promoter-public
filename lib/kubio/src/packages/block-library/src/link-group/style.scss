@@ -1,0 +1,11 @@
+@include c(linkgroup) {
+	@include e(outer) {
+		display: block;
+		width: 100%;
+
+	//	try to fix issue: http://mantis.extendstudio.net/view.php?id=36038 - lowable if something else is broken by those rules
+		@include when-inside-kubio-block() {
+			display: inline-block;
+		}
+	}
+}

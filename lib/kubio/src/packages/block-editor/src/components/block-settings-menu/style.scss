@@ -1,0 +1,90 @@
+.block-editor-block-settings-menu__popover .components-dropdown-menu__menu {
+	.components-menu-group {
+		margin: 0;
+
+		.components-button:focus:not(:disabled) {
+			outline: 0;
+			box-shadow: none;
+		}
+
+		.components-button {
+			&:hover {
+				background-color: #f4f4f7;
+				color: rgba(21, 25, 43, 1);
+			}
+		}
+	}
+}
+
+.components-popover.components-dropdown__content {
+
+	.components-popover__content {
+		padding: 0;
+		overflow-x: hidden !important;
+
+		.components-menu-group:last-child {
+			margin-bottom: 0;
+		}
+
+		.components-menu-item__button.components-button {
+			padding: 12px 16px;
+			&:hover {
+				background-color: #f4f4f7;
+				color: rgba(21, 25, 43, 1);
+			}
+
+			&:focus {
+				box-shadow: none;
+				outline: 0;
+			}
+		}
+	}
+
+	.components-dropdown-menu__menu {
+		.components-menu-group__label {
+			padding: 6px 0px 0px 16px;
+		}
+
+		.components-menu-group {
+			margin: 0 !important;
+			padding: 0 !important;
+		}
+
+		.components-dropdown-menu__menu-item {
+			padding-left: 12px;
+			padding-right: 12px;
+			height: auto;
+			&:hover {
+				background-color: #f4f4f7;
+				color: rgba(21, 25, 43, 1);
+			}
+
+			&:focus {
+				box-shadow: none;
+				outline: 0;
+			}
+		}
+	}
+
+	.kubio-toolbar-container-width.components-menu-group {
+		.components-flex-block.components-flex-item {
+			text-align: left;
+		}
+	}
+}
+
+// set padding for specific popovers
+.block-library-query-toolbar__popover,
+.block-editor-duotone-control__popover {
+	.components-popover__content {
+		padding: 10px !important;
+	}
+}
+
+
+.wp-block-image__zoom:not(#undefined){
+	.components-popover__content{
+		overflow: visible !important;
+		padding: 8px 20px !important;
+	}
+}

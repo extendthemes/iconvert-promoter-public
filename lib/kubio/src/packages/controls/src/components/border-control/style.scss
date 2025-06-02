@@ -1,0 +1,96 @@
+.components-flex__block {
+	.components-base-control__field {
+		margin-bottom: 0;
+	}
+}
+
+.kubio-border-control-button {
+	padding: 7px !important;
+}
+
+// remove margins from controls inside border settings row
+.kubio-border-control .components-base-control,
+.kubio-border-control > div > *,
+.kubio-border-control .components-base-control__field {
+	margin-bottom: 0 !important;
+}
+
+.kubio-box-control-unlinked-container {
+	margin-bottom: 10px;
+}
+
+.kubio-border-side-control {
+	.components-unit-control__select {
+		background-color: #f0f0f0 !important;
+	}
+
+	.components-unit-control__unit-label {
+		background-color: #f0f0f0 !important;
+	}
+	.components-input-control {
+		max-width: unset !important;
+	}
+}
+
+.kubio-border-side-control {
+	margin-bottom: 10px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	.kubio-color-popover-wrapper {
+		margin-left: 11px;
+	}
+
+	.kubio-color-popover-indicator {
+		margin: 0;
+	}
+
+	.kubio-color-popover-button {
+		margin-right: 0;
+		margin-top: 3px;
+	}
+
+	.kubio-popover-options-icon.kubio-color-indicator-popover-reset-icon.kubio-border-control-button.is-small.has-icon {
+		margin: 0;
+	}
+}
+
+.kubio-link-button {
+	margin: 0 !important;
+}
+
+.kubio-linked-button {
+	border: 1px solid #007cba;
+	background-color: rgba(0, 122, 184, 0.1);
+}
+
+.kubio-popover-options-icon.kubio-color-indicator-popover-reset-icon.kubio-linked-button {
+	border: 1px solid $theme-controls-primary-color !important;
+	background-color: rgba(0, 122, 184, 0.1);
+	color: $theme-controls-primary-color;
+}
+
+.component-box-control {
+	&__header-control-wrapper .components-base-control {
+		margin-bottom: 0px !important;
+	}
+
+	&__label {
+		color: #454545 !important;
+	}
+}
+
+.kubio-border-select-control {
+	.components-select-control__input {
+		font-size: 12px !important;
+	}
+}
+.kubio-border-control {
+	&__width {
+		> *:first-child {
+			max-width: unset !important;
+		}
+	}
+}

@@ -1,0 +1,77 @@
+{
+	"name": "cspromo/promopopupoverflow",
+	"category": "kubio-components",
+	"usesContext": [ "navigation" ],
+	"attributes": {
+		"kubio": {
+			"type": "object"
+		}
+	},
+	"supports": {
+		"kubio": {
+			"default": {
+				"style": {
+					"descendants": {
+						"outer": {
+							"--scrollbar-width": {
+								"value": "10",
+								"unit": "px"
+							},
+							"--scrollbar-track": "rgba(0, 0, 0, 0.38)",
+							"--scrollbar-handle": "#000000",
+							"--scrollbar-handle-hover": "rgba(var(--kubio-color-6),0.79)"
+						},
+						"inner": {
+							"overflowY": "auto",
+							"height": {
+								"value": "200",
+								"unit": "px"
+							}
+						}
+					}
+				}
+			},
+			"elementsEnum": {
+				"INNER": "inner",
+				"OUTER": "outer"
+			},
+			"elementsByName": {
+				"outer": {
+					"default": true,
+					"wrapper": true,
+					"props": {
+						
+					}
+				},
+				"inner": {
+					"props": {
+						"className": [
+							"cs-inner-scroll-content",
+							"h-y-container",
+							"h-column__v-align"
+						]
+					}
+				}
+			},
+			"template": {
+				"type": "element",
+				"props": {
+					"name": "outer"
+				},
+				"children": [
+					{
+						"type": "element",
+						"props": {
+							"name": "inner"
+						},
+						"children": [
+							{
+								"type": "wp:InnerBlocks"
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

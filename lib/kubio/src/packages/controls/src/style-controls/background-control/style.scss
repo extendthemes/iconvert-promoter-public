@@ -1,0 +1,261 @@
+.kubio-background-overlay-container{
+	min-width: 260px;
+}
+
+.components-popover.kubio-options-popover{
+  .kubio-background-overlay-container {
+	// overflow: hidden; - Commented this as it's cutting the gradient preset dots
+  }
+}
+
+.kubio-background-control-popover {
+	.kubio-inlined-label-control__control {
+		min-width: 200px;
+	}
+
+	.components-base-control {
+		margin-bottom: 10px;
+	}
+}
+
+.kubio-popover-options-button__button-wrapper {
+	.components-button.kubio-popover-options-icon.is-small.has-icon {
+		&:first-child {
+			padding: 7px;
+		}
+	}
+}
+
+.kubio-background-type-container:not(.extra-1) {
+
+	//border: 1px solid $ui-menu-active;
+	padding: 0;
+	height: 30px;
+
+	&.kubio-streched-radio-group {
+		border: none;
+
+		> .components-button {
+			&:hover {
+				box-shadow: none !important;
+			}
+		}
+	}
+
+	> .components-button {
+		border: 1px solid $ui-menu-item-light;
+		border-right: 0;
+		padding: 2px 12px;
+
+		//&:first-child {
+		//	border-left: none;
+		//}
+
+		&:last-child {
+			border-right: 1px solid $ui-menu-item-light;
+		}
+
+		border-radius: 0;
+		margin-right: 0;
+
+		height: 100%;
+
+		> svg {
+			fill: black;
+			//padding: 3px;
+		}
+
+		&.kubio-streched-radio--disabled {
+			> svg {
+				fill: #cccccc;
+			}
+		}
+
+		&:hover {
+			//background-color: rgba(0, 124, 186, 0.1);
+
+			> svg {
+				fill: #007cba;
+			}
+		}
+	}
+
+	.components-button.is-primary {
+		background-color: rgba(0, 124, 186, 0.1);
+
+		> .components-button {
+			border: none;
+		}
+
+		border: 1px solid $ui-menu-active;
+
+		> svg {
+			fill: #007cba;
+		}
+
+		&:hover {
+			background-color: rgba(0, 124, 186, 0.1);
+			border: 1px solid $ui-menu-active;
+		}
+	}
+}
+
+.components-button.kubio-button-100.is-primary.has-text.has-icon {
+	display: flex;
+	justify-content: center;
+}
+
+.kubio-button-100 {
+	> svg {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.kubio-advanced-background-video-help-container {
+	//display: flex;
+	//justify-content: center;
+
+	margin-top: 10px;
+
+	> p {
+		margin-left: 10px;
+	}
+
+	.kubio-advanced-background-video-help-icon {
+		fill: #f0b849;
+	}
+}
+
+.kubio-slideshow-image-text {
+	color: $ui-medium-gray;
+	margin: 0;
+}
+
+.kubio-background-image-settings-item-container {
+	> .kubio-inlined-label-control__control {
+		display: flex;
+		justify-content: flex-end;
+
+		.components-flex.components-select-control {
+			width: 112px;
+		}
+	}
+}
+
+.kubio-video-settings-select-container {
+	> .kubio-inlined-label-control__control {
+		display: flex;
+		justify-content: flex-end;
+		> .kubio-select-control-wrapper {
+			> .components-base-control__field
+				> .components-flex.components-select-control {
+				flex-direction: column;
+			}
+		}
+	}
+}
+
+.kubio-background-image-settings-container {
+	.components-base-control.kubio-select-control-wrapper {
+		> .components-base-control__field {
+			display: flex;
+
+			> .components-flex.components-select-control {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+
+				> .components-flex__item {
+					display: none;
+				}
+			}
+			> .components-button.kubio-popover-options-icon.kubio-color-indicator-popover-reset-icon.kubio-border-control-button.is-small.has-icon {
+				margin-left: 10px;
+			}
+		}
+	}
+}
+
+.kubio-custom-image-position-range-with-unit-container {
+	> .kubio-inlined-label-control__control {
+		width: 100%;
+	}
+}
+
+.kubio-background-overlay-opacity {
+	//margin-left: 8px;
+
+	.components-base-control__label {
+		margin-bottom: 0;
+	}
+}
+
+.kubio-background-overlay-toggle-group {
+	margin-top: 0;
+}
+
+.kubio-background-overlay-shape-light {
+	.components-base-control__label {
+		margin-bottom: 0;
+	}
+}
+
+.kubio-background-overlay-range-control {
+	> .kubio-range-with-unit-flex-container {
+		align-items: end;
+
+		.components-button.kubio-popover-options-icon.kubio-color-indicator-popover-reset-icon.kubio-border-control-button.is-small.has-icon {
+			margin-bottom: 4px;
+		}
+	}
+
+	.components-range-control__slider {
+		width: 100%;
+		margin-left: 0px;
+	}
+
+	.components-range-control__track {
+		box-shadow: 0px 0px;
+	}
+
+	&.kubio-range-control-tooltip-above {
+		.components-simple-tooltip {
+			transform: translate(-35%, -100%);
+			bottom: 0px;
+		}
+	}
+}
+
+.components-angle-picker-control__input-field {
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+}
+
+// .components-focal-point-picker-control {
+//   	margin-bottom: 0;
+
+//   	.components-focal-point-picker-wrapper {
+// 		padding-top: 72.25%;
+
+// 		.components-focal-point-picker {
+// 			overflow: hidden;
+// 		}
+
+// 		.components-focal-point-picker {
+// 			position: absolute;
+// 			top: 0;
+// 			right: 0;
+// 			bottom: 0;
+// 			left: 0;
+// 		}
+//   	}
+// }

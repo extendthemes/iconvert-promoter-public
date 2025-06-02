@@ -1,0 +1,22 @@
+@import "./kubio-editor";
+
+@import "./promopopup/editor";
+@import "./subscribe/editor";
+@import "./button/editor";
+@import "./button-group/editor";
+@import "./yes-no/editor.scss";
+@import "./reset";
+.editor-styles-wrapper {
+	[data-kubio="cspromo/promopopup"] {
+		& {
+			margin: unset;
+			font: unset;
+			font-family: "Open Sans";
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 1.6;
+			text-transform: none;
+			color: rgba(var(--kubio-color-6-variant-4), 1);
+		}
+	}
+}

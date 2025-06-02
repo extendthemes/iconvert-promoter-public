@@ -1,0 +1,33 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@kubio/*": [
+				"./*",
+				"./src/packages/*/src"
+			],
+			"~/*": [
+				"./node_modules"
+			]
+		},
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"target": "es2015",
+		"module": "esnext",
+		"checkJs": true,
+		"typeRoots": [
+			"./node_modules/@types",
+			"./src/types"
+		]
+	},
+	"exclude": [
+		"build",
+		"build-module",
+		"node_modules",
+		"packages/e2e-tests/plugins",
+		"vendor"
+	]
+}

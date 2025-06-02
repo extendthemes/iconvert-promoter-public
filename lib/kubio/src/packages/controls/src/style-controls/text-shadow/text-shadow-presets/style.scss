@@ -1,0 +1,59 @@
+.text-shadow-preset {
+	&__container {
+		background-color: #f9fafb;
+		width: 250px;
+		max-height: 300px;
+		overflow: auto;
+	}
+
+	&__scroll-area {
+		position: relative;
+		height: 475px;
+		max-height: 475px;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&__item {
+		flex-basis: 50%;
+		flex-grow: 0;
+		border: 1px solid transparent;
+		background-color: #f0f0f0;
+		height: 100px;
+
+		&:nth-child(odd) {
+			border-bottom: 1px solid #dddddd;
+		}
+
+		&:nth-child(even) {
+			border-bottom: 1px solid #dddddd;
+			border-left: 1px solid #dddddd;
+		}
+
+		&:hover,
+		&.active {
+			border: 1px solid $theme-controls-primary-color;
+			background: $theme-controls-primary-color-background;
+			color: $theme-controls-primary-color;
+		}
+
+		&__inner {
+			cursor: pointer;
+			color: white;
+			font-size: 60px;
+			font-weight: 400;
+
+			min-height: 100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			//&:hover,
+			//&.box-shadow-preset__item__inner--active {
+			//	background: $theme-controls-primary-color-background;
+			//	border-color: $theme-controls-primary-color;
+			//	color: $theme-controls-primary-color;
+			//}
+		}
+	}
+}
