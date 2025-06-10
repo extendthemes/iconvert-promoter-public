@@ -32,7 +32,7 @@ class PopupListService extends BasicCrud {
 
 			switch ( $sortBy ) {
 				case 'active':
-					$sql .= ' LEFT JOIN ' . $this->buildTableName( 'postmeta' ) . " pm ON p.id = pm.post_id AND pm.meta_key = '" . $sortBy . "'";
+					$sql .= ' LEFT JOIN ' . $this->buildTableName( 'postmeta' ) . " pm ON p.id = pm.post_id AND pm.meta_key = '" . esc_sql( $sortBy ) . "'";
 					$this->orderBy( 'pm.meta_value', $order );
 					break;
 				case 'view' || 'click' || 'subscriber' || 'first_view':
@@ -52,7 +52,10 @@ class PopupListService extends BasicCrud {
 			$this->orderBy( 'p.post_date', 'DESC' );
 		}
 
-		$sql .= " WHERE p.post_type = '" . $postType . "' AND p.post_title LIKE '%" . $filter['search'] . "%'";
+		$search = preg_replace( '/\s+/', '%', trim( $filter['search'] ) );
+
+		global $wpdb;
+		$sql .= " WHERE p.post_type = '" . esc_sql( $postType ) . "' AND p.post_title LIKE '%" . $wpdb->esc_like( $search ) . "%'";
 		$sql .= $this->getOrderBy() . ' ' . $this->getLimit();
 
 		$total = $this->countPostsByFilter( $postType, $filter );
@@ -74,8 +77,14 @@ class PopupListService extends BasicCrud {
 	 * @return int
 	 */
 	public function countPostsByFilter( $postType, $filter ) {
+
+		global $wpdb;
+
+		// replace spaces with mysql wildcard
+		$search = preg_replace( '/\s+/', '%', trim( $filter['search'] ) );
+
 		$sql = 'SELECT COUNT(p.id) FROM ' . $this->tablename . " p
-                WHERE p.post_type = '" . $postType . "' AND p.post_title LIKE '%" . $filter['search'] . "%'";
+                WHERE p.post_type = '" . esc_sql( $postType ) . "' AND p.post_title LIKE '%" . $wpdb->esc_like( $search ) . "%'";
 
 		return $this->totalFromQuery( $sql );
 	}

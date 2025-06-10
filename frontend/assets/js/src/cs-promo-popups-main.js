@@ -17,6 +17,26 @@ const loadHeadData = (headHTML) => {
 async function start($) {
   if (PromoHelpers.isPreviewPage()) {
     PromoActionButton.setup();
+
+    $(" a , button ").each((index, elem) => {
+      const container = $(elem).closest(".cs-popup-container");
+      if (container.length === 0) {
+        $(elem).on("click", function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+
+          PromoMessageBox.show(
+            "You cannot click links and buttons in preview mode.",
+            {}
+          );
+        });
+      }
+    });
+
+    $(window).on("iconvert-promo-box-message", function (event, data) {
+      PromoMessageBox.show(data.message, data.options || {});
+    });
+
     return;
   }
 
@@ -33,10 +53,8 @@ async function start($) {
 
   $("head").append(head);
 
-  if (!PromoHelpers.isPreviewPage()) {
-    LocalStorage.maybeCountSession();
-    startInteractivityMonitor();
-  }
+  LocalStorage.maybeCountSession();
+  startInteractivityMonitor();
 
   Object.entries(popups).forEach(([key, value]) => {
     if (value) {
@@ -58,31 +76,6 @@ async function start($) {
   PromoPopup.listenForExternalClose();
   PromoPopup.listenForExternalOpen();
   PromoPopup.listenForExternalAnalytics();
-
-  if (PromoHelpers.isPreviewPage()) {
-    // shouldn't be able to submit a form
-    $("form").on("submit", function (e) {
-      e.stopPropagation();
-      e.preventDefault();
-      PromoMessageBox.show("You cannot submit forms in preview mode.", {});
-    });
-
-    // or click a link/button
-    $(" a , button ").each((index, elem) => {
-      const container = $(elem).closest(".cs-popup-container");
-      if (container.length === 0) {
-        $(elem).on("click", function (e) {
-          e.stopPropagation();
-          e.preventDefault();
-
-          PromoMessageBox.show(
-            "You cannot click links and buttons in preview mode.",
-            {}
-          );
-        });
-      }
-    });
-  }
 }
 
 if (document.body.classList.contains("cs-promo-popups-loaded")) {

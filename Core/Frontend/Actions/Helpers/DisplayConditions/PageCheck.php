@@ -27,6 +27,11 @@ class PageCheck {
 			case 'all':
 				return true;
 
+			case 'all-no-homepage':
+				if (! is_front_page() ) {
+					return true;
+				}
+				break;
 			case 'homepage':
 				if ( is_front_page() ) {
 					return true;

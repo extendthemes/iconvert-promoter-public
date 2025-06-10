@@ -69,7 +69,7 @@ jQuery(document).ready(function ($) {
       let itemsToDisplay = items;
 
       if (category !== "*") {
-        itemsToDisplay = items.filter(`[data-category="${category}"]`);
+        itemsToDisplay = items.filter(`[data-category*="${category}"]`);
       }
 
       itemsToDisplay = itemsToDisplay.add(items.filter("[data-is-blank]"));
@@ -113,6 +113,11 @@ jQuery(document).ready(function ($) {
           let _selected = false;
           let _first = 0;
 
+          const previousCat =
+            templatesCategoriesNode
+              .find("button.ic-promo-button-primary.active")
+              .data("category") || "*";
+
           const { categories, templates } = response.data;
 
           renderCategories(templatesCategoriesNode, categories);
@@ -140,7 +145,20 @@ jQuery(document).ready(function ($) {
             templatesNode.append(createTemplateItemNode(item, _selected));
           });
 
-          $('.templates-categories-list [data-category="*"]').trigger("click");
+          const hasPrevCategory =
+            templatesCategoriesNode.find(
+              `button[data-category="${previousCat}"]`
+            ).length > 0;
+
+          if (!hasPrevCategory) {
+            templatesCategoriesNode
+              .find("button[data-category='*']")
+              .trigger("click");
+          } else {
+            templatesCategoriesNode
+              .find(`button[data-category="${previousCat}"]`)
+              .trigger("click");
+          }
         }
       }
     );
@@ -266,9 +284,9 @@ jQuery(document).ready(function ($) {
 
     const wrapperItem = document.createElement("div");
     wrapperItem.classList.add(
-      "col-xl-3",
+      "col-xl-4",
       "col-lg-6",
-      "col-md-6",
+      "col-md-12",
       "col-sm-12",
       "col-xs-12",
       "box-item"
@@ -360,7 +378,7 @@ jQuery(document).ready(function ($) {
     itemTemplateNode.appendChild(inputHidden);
     wrapperItem.appendChild(itemTemplateNode);
 
-    wrapperItem.setAttribute("data-category", item?.category?.slug || "*");
+    wrapperItem.setAttribute("data-category", item?.categories || "*");
     if (is_blank == 1) {
       wrapperItem.setAttribute("data-is-blank", true);
     }

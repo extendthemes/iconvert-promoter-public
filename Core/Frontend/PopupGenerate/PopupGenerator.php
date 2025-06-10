@@ -165,7 +165,9 @@ class PopupGenerator {
 		$to_load = array_diff( $posts, array_keys( $popups ) );
 
 		if ( ! empty( $to_load ) ) {
-			$ids = implode( ',', $to_load );
+			$to_load = array_map( 'intval', $to_load );
+			$to_load = array_filter( $to_load, 'is_numeric' );
+			$ids     = implode( ',', $to_load );
 
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$query = "SELECT post_id, meta_value FROM {$wpdb->postmeta} WHERE post_id IN ( {$ids} ) AND meta_key = '" . PopupGenerator::CACHE_META_KEY . "'";

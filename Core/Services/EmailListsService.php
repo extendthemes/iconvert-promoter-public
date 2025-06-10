@@ -89,8 +89,8 @@ class EmailListsService extends BasicCrud {
 		$sql     = 'SELECT subscribers.email
                 FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . ' cl
                 LEFT JOIN ' . $this->buildTableName( 'promo_subscribers' ) . ' subscribers ON subscribers.id = cl.subscriber_id
-                WHERE cl.list_id = ' . $list_id . "
-                AND subscribers.email = '" . $email . "'
+                WHERE cl.list_id = ' . esc_sql( $list_id ) . "
+                AND subscribers.email = '" . esc_sql( $email ) . "'
                 LIMIT 1
             ";
 		$records = $this->query( $sql );
@@ -148,7 +148,11 @@ class EmailListsService extends BasicCrud {
 		}
 
 		$integrations_provider = new IntegrationsProvider();
-		$integrations_provider->add_email_to_list( $provider, $provider_list, $sub->email, $sub->name );
+		$response              = $integrations_provider->add_email_to_list( $provider, $provider_list, $sub->email, $sub->name );
+
+		if ( ! $response || is_wp_error( $response ) ) {
+			return;
+		}
 
 		$this->wpdb->insert(
 			$this->buildTableName( 'promo_subscribers_provider_sync' ),

@@ -61,21 +61,60 @@ export const FormValidator = (() => {
           errorMessages.push(`${aField.attr("name")} is required.`);
         }
       } else if (aField.data("valid-selector")) {
-        if ($("#select_on_click").val() !== "advanced") {
-          if (!aField.val().match(/^-?[_a-zA-Z]+[_a-zA-Z0-9-]*$/)) {
-            formValid = false;
-            addValidationFailClass(aField);
-            const fieldErrorMessage = aField.data("valid-selector-message");
+        const selectorType = $(
+          `[name="${aField.data("valid-selector")}"]`
+        ).val();
+        const selectorValue = aField.val();
+        const fieldErrorMessage = aField.data("valid-selector-message");
+        switch (selectorType) {
+          case "class":
+            // regex to validate a single class name, allow starting with dot
+            const isSingleClassRegex = /^(\.?[_a-zA-Z]+[_a-zA-Z0-9-]*)$/;
+            if (!selectorValue.match(isSingleClassRegex)) {
+              formValid = false;
+              addValidationFailClass(aField);
 
-            if (
-              typeof fieldErrorMessage !== "undefined" &&
-              fieldErrorMessage.length > 0
-            ) {
-              errorMessages.push(fieldErrorMessage);
-            } else {
-              errorMessages.push(`${aField.attr("name")} is required.`);
+              if (fieldErrorMessage) {
+                errorMessages.push(fieldErrorMessage);
+              } else {
+                errorMessages.push(
+                  `${aField.attr("name")} must be a valid class name.`
+                );
+              }
             }
-          }
+            break;
+          case "id":
+            // regex to validate a single id name, allow starting with hash
+            const isSingleIdRegex = /^(\#?[_a-zA-Z]+[_a-zA-Z0-9-]*)$/;
+            if (!selectorValue.match(isSingleIdRegex)) {
+              formValid = false;
+              addValidationFailClass(aField);
+
+              if (fieldErrorMessage) {
+                errorMessages.push(fieldErrorMessage);
+              } else {
+                errorMessages.push(
+                  `${aField.attr("name")} must be a valid ID name.`
+                );
+              }
+            }
+            break;
+          default:
+            // check if selector is valid CSS selector
+            try {
+              document.querySelector(selectorValue);
+            } catch (e) {
+              formValid = false;
+              addValidationFailClass(aField);
+
+              if (fieldErrorMessage) {
+                errorMessages.push(fieldErrorMessage);
+              } else {
+                errorMessages.push(
+                  `${aField.attr("name")} must be a valid CSS selector.`
+                );
+              }
+            }
         }
       } else {
         removeValidationFailClass(aField);

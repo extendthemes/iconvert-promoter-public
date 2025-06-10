@@ -346,7 +346,7 @@ class EmailListActions {
 				wp_send_json_error( __( 'The list does not exist.', 'iconvert-promoter' ) );
 			}
 
-			$per_page = 1;
+			$per_page = 5;
 
 			$subs = $subscriber_service->getRecordsNotSynced(
 				$list_id,
@@ -368,7 +368,6 @@ class EmailListActions {
 			if ( $remaining_to_sync > 0 ) {
 				wp_send_json_success(
 					array(
-						'page'     => $page,
 						'finished' => false,
 						'message'  => sprintf(
 							// translators: %s is the number of subscribers remaining to sync

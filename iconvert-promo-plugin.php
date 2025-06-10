@@ -2,11 +2,12 @@
 
 /**
  * Plugin Name: @@plugin-name@@
- * Plugin URI: http://extendstudio.com/
- * Description: Create promo popups
+ * Description: A powerful and dynamic WordPress popup toolkit to grow your email list, retain customers, and boost conversions.
  * Version: @@buildversion@@
- * Author: Extend Studio
+ * Author: ExtendThemes
  * Text Domain: iconvert-promoter
+ * License: GPL-3.0+
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  * Requires PHP: 7.4
  * Requires at least: 6.5
  */
@@ -53,7 +54,7 @@ if ( defined( 'IC_PROMO_VERSION' ) ) {
 	return;
 }
 
-define('IC_PROMO_VERSION', '@@buildversion@@');
+define('IC_PROMO_VERSION', '1.0');
 
 
 $GLOBALS['ic_promo_autoloader'] = require_once __DIR__ . '/vendor/autoload.php';
@@ -61,8 +62,8 @@ $GLOBALS['ic_promo_autoloader'] = require_once __DIR__ . '/vendor/autoload.php';
 define('IC_PROMO_PATH', plugin_dir_path(__FILE__));
 define('IC_PROMO_URL', plugin_dir_url(__FILE__));
 define('IC_PROMO_PAGE_FILE', __FILE__);
-define('IC_PROMO_PLUGIN_NAME', '@@plugin-name@@');
-define( 'IC_PROMO_BUILD_NUMBER', '@@buildnumber@@' );
+define('IC_PROMO_PLUGIN_NAME', 'iConvert Promoter');
+define( 'IC_PROMO_BUILD_NUMBER', '7' );
 
 define('IC_PROMO_PAGE_ID', 'promoter');
 define('IC_PROMO_PAGE_SUBSCRIBERS', 'promoter-subscribers');

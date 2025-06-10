@@ -179,6 +179,7 @@
                 <exclude name="**\*webpack.config.js" />
                 <exclude name="**\*wp-cli.phar" />
                 <exclude name="pro\**" if:true="${env.OPTRIX_FREE}" />
+                <exclude name="**\*.sh" />
             </fileset>
         </copy>
     </target>

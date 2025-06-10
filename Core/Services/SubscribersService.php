@@ -3,6 +3,7 @@
 namespace CSPromo\Core\Services;
 
 use CSPromo\Core\DB\BasicCrud;
+use CSPromo\Core\Pro\Admin\Pages\IntegrationsProvider;
 
 class SubscribersService extends BasicCrud {
 
@@ -62,7 +63,7 @@ class SubscribersService extends BasicCrud {
 		$sql = 'SELECT contacts.*
                 FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . ' cl
                 LEFT JOIN ' . $this->tablename . ' contacts ON contacts.id = cl.subscriber_id
-                WHERE cl.list_id = ' . $list_id . '
+                WHERE cl.list_id = ' . esc_sql( $list_id ) . '
                 ' . $this->getWhere() . '
                 ' . $this->getOrderBy() . '
                 ' . $this->getLimit() . '
@@ -98,7 +99,7 @@ class SubscribersService extends BasicCrud {
 
 		$sql_filter = ' FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . ' cl
                 LEFT JOIN ' . $this->tablename . ' contacts ON contacts.id = cl.subscriber_id
-                WHERE cl.list_id = ' . $list_id . ' AND NOT EXISTS (' . $sub_query . ')
+                WHERE cl.list_id = ' . esc_sql( $list_id ) . ' AND NOT EXISTS (' . $sub_query . ')
                 ' . $this->getWhere();
 
 		$records_query = 'SELECT contacts.* ' . $sql_filter . ' ' . $this->getOrderBy() . ' ' . $this->getLimit();
@@ -119,10 +120,12 @@ class SubscribersService extends BasicCrud {
 		$this->orderBy( 'email', 'ASC' );
 		$this->limit( $numOfRecords, $paged );
 
+		global $wpdb;
+
 		$sql = 'SELECT contacts.*
                 FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . ' cl
                 LEFT JOIN ' . $this->tablename . ' contacts ON contacts.id = cl.subscriber_id
-                WHERE cl.list_id = ' . $list_id . " AND contacts.email LIKE '%" . $search . "%'
+                WHERE cl.list_id = ' . esc_sql( $list_id ) . " AND contacts.email LIKE '%" . $wpdb->esc_like( $search ) . "%'
                 " . $this->getWhere() . '
                 ' . $this->getOrderBy() . '
                 ' . $this->getLimit() . '
@@ -144,7 +147,7 @@ class SubscribersService extends BasicCrud {
 		$sql = 'SELECT lists.*
                 FROM ' . $this->buildTableName( 'icv_contact_list' ) . ' cl
                 LEFT JOIN ' . $this->buildTableName( 'icv_lists' ) . ' lists ON lists.id = cl.list_id
-                WHERE cl.contact_id = ' . $contactID . '
+                WHERE cl.contact_id = ' . esc_sql( $contactID ) . '
                 ORDER BY lists.name DESC
             ';
 
@@ -166,7 +169,7 @@ class SubscribersService extends BasicCrud {
 		$sqlCount = 'SELECT COUNT(contacts.id)
                 FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . ' cl
                 LEFT JOIN ' . $this->tablename . ' contacts ON contacts.id = cl.subscriber_id
-                WHERE cl.list_id = ' . $list_id . '
+                WHERE cl.list_id = ' . esc_sql( $list_id ) . '
                 ' . $this->getWhere();
 
 		return $this->totalFromQuery( $sqlCount );
@@ -179,10 +182,13 @@ class SubscribersService extends BasicCrud {
 	 * @return int
 	 */
 	public function countRecordsByListSearch( $list_id, $search ) {
+
+		global $wpdb;
+
 		$sqlCount = 'SELECT COUNT(contacts.id)
                 FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . ' cl
                 LEFT JOIN ' . $this->tablename . ' contacts ON contacts.id = cl.subscriber_id
-                WHERE cl.list_id = ' . $list_id . " AND contacts.email LIKE '%" . $search . "%'
+                WHERE cl.list_id = ' . esc_sql( $list_id ) . " AND contacts.email LIKE '%" . $wpdb->esc_like( $search ) . "%'
                 " . $this->getWhere();
 
 		return $this->totalFromQuery( $sqlCount );
@@ -249,7 +255,11 @@ class SubscribersService extends BasicCrud {
 		return false;
 	}
 
-	public function deleteFromAllLists( $post_id ) {
+	public function deleteFromAllLists( $post_id, $including_providers = false ) {
+		if ( $including_providers ) {
+			$this->deleteFromMarketingProviders( $post_id );
+		}
+
 		$this->where( array( 'id' => $post_id ) );
 		$del = $this->delete();
 
@@ -258,22 +268,26 @@ class SubscribersService extends BasicCrud {
 		return $del;
 	}
 
-	public function deleteFromList( $post_id, $list_id ) {
+	public function deleteFromList( $post_id, $list_id, $including_providers = false ) {
 
 		if ( ! is_numeric( $post_id ) || ! is_numeric( $list_id ) ) {
 			return false;
 		}
 
+		if ( $including_providers ) {
+			$this->deleteFromMarketingProviders( $post_id, $list_id );
+		}
+
 		$sql = 'DELETE 
                 FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . '                                
-                WHERE subscriber_id = ' . $post_id . ' AND list_id = ' . $list_id . '
+                WHERE subscriber_id = ' . esc_sql( $post_id ) . ' AND list_id = ' . esc_sql( $list_id ) . '
             ';
 
 		$this->query( $sql );
 		// check if this post id is still attached to any list
 		$sql = 'SELECT COUNT(cl.subscriber_id)
                 FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . ' cl                
-                WHERE cl.subscriber_id = ' . $post_id . '
+                WHERE cl.subscriber_id = ' . esc_sql( $post_id ) . '
                 GROUP BY cl.subscriber_id
                 ';
 
@@ -284,5 +298,54 @@ class SubscribersService extends BasicCrud {
 		}
 
 		return true;
+	}
+
+	public function deleteFromMarketingProviders( $id, $list_id = null ) {
+		global $wpdb;
+		// if list_id is null, delete from all providers.
+		$sql = 'SELECT id, provider, provider_list
+				FROM ' . $this->buildTableName( 'promo_lists' ) .
+				" WHERE `{$this->buildTableName( 'promo_lists' )}`.id IN (
+					SELECT list_id
+					FROM " . $this->buildTableName( 'promo_subscriber_list' ) . '
+					WHERE subscriber_id = %d
+				) AND provider IS NOT NULL AND provider_list IS NOT NULL';
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, $id );
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$lists_data = $wpdb->get_results( $sql );
+
+		if ( $list_id ) {
+			$lists_data = array_filter(
+				$lists_data,
+				function ( $list ) use ( $list_id ) {
+					return intval( $list->id ) === intval( $list_id );
+				}
+			);
+		}
+
+		$subscriber = $this->find( array( 'id' => $id ) );
+
+		$integrations_provider = new IntegrationsProvider();
+
+		foreach ( $lists_data as $list ) {
+			$integrations_provider->remove_email_from_list(
+				$list->provider,
+				$list->provider_list,
+				$subscriber->email
+			);
+
+			$sql = $wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				'DELETE FROM ' . $this->buildTableName( 'promo_subscribers_provider_sync' ) .
+				' WHERE subscriber_id = %d AND provider_name = %s AND provider_list = %s',
+				$id,
+				$list->provider,
+				$list->provider_list
+			);
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->query( $sql );
+		}
 	}
 }

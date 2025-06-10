@@ -6,9 +6,11 @@ import { addFilter } from '@wordpress/hooks';
 import { name as blockName } from './block.json';
 import { useToolbarState } from './toolbar';
 
-const StateSwitcher = ( { dataHelper, clientId } ) => {
+const StateSwitcher = ( { targetClientId } ) => {
+	const { dataHelper } = useKubioBlockContext();
+
 	const { sidebarDropdownComponent } = useToolbarState(
-		dataHelper.withClientId( clientId )
+		dataHelper.withClientId( targetClientId )
 	);
 
 	return (
@@ -22,50 +24,43 @@ const StateSwitcher = ( { dataHelper, clientId } ) => {
 	);
 };
 
-const ComponentWrapper = ( { BlockEdit, props } ) => {
-	const { dataHelper } = useKubioBlockContext();
-
-	const parentClientId = useSelect(
-		( select ) => {
-			if ( props.name === blockName ) {
-				return props.clientId;
-			}
-
-			const yesNoBlock = select( 'core/block-editor' )
-				.getBlockParents( props.clientId )
-				.map( ( c ) => select( 'core/block-editor' ).getBlock( c ) )
-				.find( ( b ) => b.name === blockName );
-
-			return yesNoBlock ? yesNoBlock.clientId : null;
-		},
-		[ props.clientId, props.name ]
-	);
-
-	if ( ! parentClientId ) {
-		return <BlockEdit { ...props } />;
-	}
-
-	return (
-		<>
-			<StateSwitcher
-				dataHelper={ dataHelper }
-				clientId={ parentClientId }
-			/>
-			<BlockEdit { ...props } />
-		</>
-	);
-};
-
 addFilter(
 	'editor.BlockEdit',
 	'cspromo/yes-no/inspector-controls-top',
-	createHigherOrderComponent( ( BlockEdit ) => {
+	createHigherOrderComponent( ( OriginalComponent ) => {
 		return ( props ) => {
-			if ( ! props.isSelected ) {
-				return <BlockEdit { ...props } />;
+			const parentClientId = useSelect(
+				( select ) => {
+					if ( props.name === blockName ) {
+						return props.clientId;
+					}
+
+					const targetBlock = select( 'core/block-editor' )
+						.getBlockParents( props.clientId )
+						.map( ( c ) =>
+							select( 'core/block-editor' ).getBlock( c )
+						)
+						.find( ( b ) => b.name === blockName );
+
+					return targetBlock ? targetBlock.clientId : null;
+				},
+				[ props.clientId, props.name ]
+			);
+
+			if ( ! parentClientId ) {
+				return <OriginalComponent { ...props } />;
 			}
 
-			return <ComponentWrapper BlockEdit={ BlockEdit } props={ props } />;
+			if ( ! props.isSelected ) {
+				return <OriginalComponent { ...props } />;
+			}
+
+			return (
+				<>
+					<StateSwitcher targetClientId={ parentClientId } />
+					<OriginalComponent { ...props } />
+				</>
+			);
 		};
 	}, 'withInspectorControlsYesNo' )
 );

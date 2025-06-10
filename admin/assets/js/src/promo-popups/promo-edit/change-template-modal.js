@@ -11,14 +11,14 @@ jQuery(document).ready(function ($) {
 
     const wrapperItem = document.createElement("div");
     wrapperItem.classList.add(
-      "col-xl-3",
+      "col-xl-4",
       "col-lg-6",
-      "col-md-6",
+      "col-md-12",
       "col-sm-12",
       "col-xs-12",
       "box-item"
     );
-    wrapperItem.setAttribute("data-category", item?.category?.slug || "*");
+    wrapperItem.setAttribute("data-category", item?.categories || "*");
 
     const itemTemplateNode = document.createElement("div");
     itemTemplateNode.classList.add("item", "d-flex", "flex-column");
@@ -151,7 +151,7 @@ jQuery(document).ready(function ($) {
       let itemsToDisplay = items;
 
       if (category !== "*") {
-        itemsToDisplay = items.filter(`[data-category="${category}"]`);
+        itemsToDisplay = items.filter(`[data-category*="${category}"]`);
       }
 
       itemsToDisplay = itemsToDisplay.add(items.filter("[data-is-blank]"));

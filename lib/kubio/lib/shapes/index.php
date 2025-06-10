@@ -22,7 +22,6 @@ function kubio_get_shapes_css() {
 		'right-tilted-strips',
 		'doodle',
 		'falling-stars',
-		'grain',
 		'poly1',
 		'poly2',
 		'wavy-lines',

@@ -38,9 +38,15 @@ export const PromoHelpers = (() => {
     const selectorCompose = (typeSelector, valueSelector) => {
         switch (typeSelector) {
             case 'class':
+                if (valueSelector.startsWith('.')) {
+                    return valueSelector;
+                }
                 return '.' + valueSelector;
 
             case 'id':
+                if (valueSelector.startsWith('#')) {
+                    return valueSelector;
+                }
                 return '#' + valueSelector;
 
             default:

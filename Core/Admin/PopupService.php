@@ -282,7 +282,7 @@ class PopupService {
 					'post_content' => $newPostContent,
 				);
 
-				wp_update_post( $postData );
+				wp_update_post( wp_slash( $postData ) );
 			}
 		}
 

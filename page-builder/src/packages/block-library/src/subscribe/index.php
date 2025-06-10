@@ -136,6 +136,8 @@ class SubscribeBlock extends BlockBase {
 
 		$terms_label = $this->getAttribute( 'termsLabel' );
 
+		$terms_description = $this->getAttribute( 'termsDescription' ) ? $this->getAttribute( 'termsDescription' ) : $this->getBlockInnerHtml();
+
 		return array(
 			self::OUTER               => array_merge(
 				array(
@@ -146,10 +148,11 @@ class SubscribeBlock extends BlockBase {
 			self::CONTAINER           => array_merge(
 				$onSuccessSettings,
 				array(
-					'className'    => $containerClass,
-					'autocomplete' => 'off',
-					'data-formId'  => (string) $formID,
-					'data-popupId' => (string) $this->getPopupId(),
+					'className'         => $containerClass,
+					'autocomplete'      => 'off',
+					'data-formId'       => (string) $formID,
+					'data-popupId'      => (string) $this->getPopupId(),
+					'data-form-preview' => cs_preview_page() ? '1' : null,
 				)
 			),
 			self::CONTAINERFIELDS     => array(),
@@ -203,9 +206,9 @@ class SubscribeBlock extends BlockBase {
 				//'for'   => "agree".$formUniqueId,
 			),
 			self::TERMSDESCRIPTION    => array(
-				'innerHTML' => $this->getBlockInnerHtml(),
+				'innerHTML' => $terms_description,
 				'style'     => array(
-					'display' => empty( trim( $this->getBlockInnerHtml() ) ) ? 'none' : '',
+					'display' => empty( $terms_description ) ? 'none' : '',
 				),
 				//'for'   => "agree".$formUniqueId,
 			),

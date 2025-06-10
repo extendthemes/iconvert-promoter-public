@@ -23,15 +23,7 @@ export const PromoOnClick = (() => {
         }
     }
 
-    const clickEvent = (e, popupID) => {
-        e.preventDefault();
-
-        if (listeners.includes(popupID)) {
-            if (PromoTriggers.shouldShowCampaign(popupID, true) === true) {
-                listeners.splice(listeners.indexOf(popupID), 1);
-            }
-        }
-    }
+   
 
     const clickEventWithoutRemovingListener = (e, popupID) => {
         e.preventDefault();

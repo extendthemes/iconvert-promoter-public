@@ -14,7 +14,7 @@ class ListPromos {
 	public function render() {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$searchTerm = isset( $_GET['search-campaign'] ) ? htmlspecialchars( $_GET['search-campaign'] ) : '';
+		$searchTerm = isset( $_GET['search-campaign'] ) ? sanitize_text_field( $_GET['search-campaign'] ) : '';
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$paged = isset( $_GET['paged'] ) ? intval( $_GET['paged'] ) : 1;
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized

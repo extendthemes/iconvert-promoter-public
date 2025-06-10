@@ -37,12 +37,12 @@ class Filters {
 		);
 
 		return array(
-			'homepage_url'      => 'https://iconvertpromoter.com',
-			'features_url'      => 'https://iconvertpromoter.com',
-			'upgrade_url'       => add_query_arg( $args, 'https://iconvertpromoter.com' ),
-			'try_starter_site'  => add_query_arg( $args, 'https://iconvertpromoter.com' ),
-			'documentation_url' => add_query_arg( $args, 'https://iconvertpromoter.com' ),
-			'contact_url'       => add_query_arg( $args, 'https://iconvertpromoter.com' ),
+			'homepage_url'      => 'https://iconvert-promoter.com',
+			'features_url'      => 'https://iconvert-promoter.com',
+			'upgrade_url'       => add_query_arg( $args, 'https://iconvert-promoter.com' ),
+			'try_starter_site'  => add_query_arg( $args, 'https://iconvert-promoter.com' ),
+			'documentation_url' => add_query_arg( $args, 'https://iconvert-promoter.com' ),
+			'contact_url'       => add_query_arg( $args, 'https://iconvert-promoter.com' ),
 		);
 	}
 

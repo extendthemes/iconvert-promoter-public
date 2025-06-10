@@ -44,22 +44,6 @@ class TemplatesService extends BasicCrud {
 			'image-video'          => __( 'Image / Video', 'iconvert-promoter' ),
 		);
 
-		foreach ( $records as $record ) {
-			if ( isset( $record['category'] ) && isset( $record['category']['slug'] ) && ! empty( $record['category']['slug'] ) ) {
-				$slug  = sanitize_title( $record['category']['slug'] );
-				$label = $record['category']['label'];
-
-				if ( isset( $default_categories[ $slug ] ) ) {
-					unset( $default_categories[ $slug ] );
-				}
-
-				$categories[ $slug ] = array(
-					'label' => $label,
-					'slug'  => $slug,
-				);
-			}
-		}
-
 		foreach ( $default_categories as $slug => $label ) {
 			$categories[ $slug ] = array(
 				'label' => $label,

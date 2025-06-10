@@ -34,10 +34,13 @@ class SubscriberActions {
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$where = isset( $_POST['where'] ) ? $_POST['where'] : 'list';
 
-			if ( $where === 'all' ) {
-				$destroy = $service->deleteFromAllLists( $post_id );
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$include_marketing_providers = isset( $_POST['include_marketing_providers'] ) ? intval( $_POST['include_marketing_providers'] ) : 0;
+
+			if ( $where === 'all_lists' ) {
+				$destroy = $service->deleteFromAllLists( $post_id, $include_marketing_providers );
 			} else {
-				$destroy = $service->deleteFromList( $post_id, $list_id );
+				$destroy = $service->deleteFromList( $post_id, $list_id, $include_marketing_providers );
 			}
 
 			if ( $destroy ) {

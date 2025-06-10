@@ -770,7 +770,7 @@ $primary-lightest: lighten($primary, 38%);
         .wrapper-types {
           margin-top: 22px;
           // max-height: 420px;
-          gap: 15px;
+          gap: 12px;
           overflow-x: auto;
 
           .item {
@@ -1029,33 +1029,17 @@ $primary-lightest: lighten($primary, 38%);
                 .wrapper-img {
                   background: rgba($primary, 0.05);
                   border-top: 1px solid $main-border;
-                  // border-bottom: 1px solid $main-border;
-                  padding-top: 25px;
-                  padding-bottom: 25px;
-                  min-height: 225px;
-                  max-height: 320px;
-                  height: 275px;
+                  border-bottom: 1px solid $main-border;
+                  padding-top: 80%;
                   position: relative;
 
-                  span.template-preview {
-                    width: 206px;
-                    height: 170px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background: $white;
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: $secondary;
-                    box-shadow: 0 2px 20px 0 rgba($black, 0.1);
-                    border-radius: 4px;
-                  }
-
-                  img {
-                    height: auto;
-                    width: auto;
-                    max-height: 225px;
+                  img.template-preview {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
                     max-width: 90%;
+                    max-height: 80%;
+                    transform: translate(-50%, -50%);
                   }
                 }
 
@@ -1755,6 +1739,10 @@ $primary-lightest: lighten($primary, 38%);
               }
             }
           }
+
+          .iconvert-promoter-feature-requires-plugin + .validation-wrapper {
+            display: none !important;
+          }
         }
       }
     }
@@ -1933,6 +1921,19 @@ $primary-lightest: lighten($primary, 38%);
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
     transform: translateX(18px);
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    .cs-active-slider {
+      background-color: $light;
+      cursor: not-allowed;
+
+      &:before {
+        background-color: $dark;
+      }
+    }
   }
 }
 

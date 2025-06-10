@@ -10,7 +10,7 @@ import {
 	DataHelperContextFromClientId,
 } from '@kubio/inspectors';
 import { AddItemIcon } from '@kubio/icons';
-import { Button } from '@wordpress/components';
+import { Button, Notice } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import {
 	HorizontalTextAlignControlWithPath,
@@ -27,6 +27,8 @@ import { ElementsEnum } from '../../elements';
 import { ButtonSize } from './button-size/component';
 import NamesOfBlocks from '../../../blocks-list';
 import _ from 'lodash';
+
+import { getBackendData } from '@kubio/utils';
 
 const BlocksMap = getBlocksMap();
 const button = BlocksMap?.button;
@@ -127,12 +129,32 @@ const Panel = ( { computed } ) => {
 					path={ 'buttonType' }
 				/>
 				{ buttonType === 'coupon' && (
-					<SelectControlWithPath
-						label={ __( 'Select Coupon', 'iconvert-promoter' ) }
-						options={ coupons }
-						type={ WithDataPathTypes.ATTRIBUTE }
-						path={ 'coupon' }
-					/>
+					<>
+						{ ! getBackendData( 'wooIsActive' ) && (
+							<Notice
+								spokenMessage={ null }
+								status="warning"
+								isDismissible={ false }
+								className="cspromo-sidebar-button-notice-warning"
+							>
+								{ __(
+									'This option requires WooCommerce plugin.',
+									'iconvert-promoter'
+								) }
+							</Notice>
+						) }
+						{ !! getBackendData( 'wooIsActive' ) && (
+							<SelectControlWithPath
+								label={ __(
+									'Select Coupon',
+									'iconvert-promoter'
+								) }
+								options={ coupons }
+								type={ WithDataPathTypes.ATTRIBUTE }
+								path={ 'coupon' }
+							/>
+						) }
+					</>
 				) }
 				{ buttonType === 'copy' && (
 					<>
