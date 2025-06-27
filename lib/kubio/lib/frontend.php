@@ -21,9 +21,9 @@ function kubio_enqueue_frontend_assets( $with_page_css = true ) {
 	if ( ! Arr::has( $_REQUEST, Utils::getKubioUrlWithRestPrefix( '__kubio-rendered-styles' ) ) ) {
 		$style = array(
 			// shapes
-			defined( 'IC_PROMO_AJAX_LOAD' ) ? '' : kubio_get_shapes_css(),
+			defined( 'ICONVERTPR_AJAX_LOAD' ) ? '' : kubio_get_shapes_css(),
 			// colors
-			defined( 'IC_PROMO_AJAX_LOAD' ) ? '' : kubio_render_global_colors(),
+			defined( 'ICONVERTPR_AJAX_LOAD' ) ? '' : kubio_render_global_colors(),
 			// global
 			kubio_get_global_data( 'additional_css' ),
 		);
@@ -49,16 +49,6 @@ function kubio_enqueue_frontend_assets_action() {
 
 function kubio_get_page_css() {
 	return StyleManager::getInstance()->render();
-}
-
-function kubio_render_page_css() {
-	if ( wp_doing_ajax() || defined( 'REST_REQUEST' ) ) {
-		return;
-	}
-
-	$content = '<style type="text/css" data-name="kubio-style">' . kubio_get_page_css() . '</style>';
-
-	return $content;
 }
 
 add_filter(

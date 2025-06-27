@@ -93,7 +93,7 @@ class PopupsListGenerator {
 	public function kubio_get_changeset_by_uuid( $uuid ) {
 		if ( ! empty( $uuid ) ) {
 
-			$cached = wp_cache_get( "{$uuid}-data", call_user_func( CSKubio . '\Core\Utils::getStringWithNamespacePrefix', 'kubio/preview' ) );
+			$cached = wp_cache_get( "{$uuid}-data", call_user_func( ICONVERTPR_KUBIO_NS . '\Core\Utils::getStringWithNamespacePrefix', 'kubio/preview' ) );
 			if ( $cached ) {
 				return $cached;
 			}
@@ -111,7 +111,7 @@ class PopupsListGenerator {
 				$changeset = $posts[0];
 
 				$content = json_decode( $changeset->post_content, true );
-				wp_cache_set( "{$uuid}-data", $content, call_user_func( CSKubio . '\Core\Utils::getStringWithNamespacePrefix', 'kubio/preview' ) );
+				wp_cache_set( "{$uuid}-data", $content, call_user_func( ICONVERTPR_KUBIO_NS . '\Core\Utils::getStringWithNamespacePrefix', 'kubio/preview' ) );
 
 				return $content;
 			}

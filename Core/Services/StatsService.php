@@ -58,6 +58,7 @@ class StatsService extends BasicCrud {
 		global $wpdb;
 
 		$query = $wpdb->prepare(
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			"SELECT event, SUM(hits) as hits FROM {$this->tablename} WHERE post_id = %d GROUP BY event",
 			$popupID
 		);
@@ -85,13 +86,16 @@ class StatsService extends BasicCrud {
 		$identifier = trim( $identifier . '' );
 
 		$query = $this->wpdb->prepare(
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			"INSERT INTO {$this->tablename} (post_id,day,event,identifier,hits) VALUES (%d, %s, %s, %s, 1) ON DUPLICATE KEY UPDATE hits = hits + 1",
 			$post_id,
 			gmdate( 'Y-m-d' ),
 			$event,
-			$identifier
+			substr( $identifier, 0, 150 ) // Ensure identifier is not too long
 		);
 
+		// the query is actually prepared previously, so we can run it directly
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$update = $this->wpdb->query( $query );
 
 		return $update;

@@ -2,11 +2,16 @@
 
 use CSPromo\Core\PostTypes\PromoPopups;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 if ( ! isset( $_GET['route'] ) || $_GET['route'] == 'list.popups' ) : ?>
 	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 <?php else : ?>
-	<a href="<?php echo esc_url( cs_generate_page_url( 'list.popups' ) ); ?>" class="text-decoration-none">
+	<a href="<?php echo esc_url( iconvertpr_generate_page_url( 'list.popups' ) ); ?>" class="text-decoration-none">
 		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 	</a>
 	<?php if ( isset( $breadcrumbsArgs['level1'] ) ) : ?>

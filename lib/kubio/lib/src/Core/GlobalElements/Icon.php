@@ -20,6 +20,8 @@ class Icon extends Element {
 
 			$svg_file = ( \KPromo\KUBIO_ROOT_DIR . 'static/icons/' . sanitize_file_name( $library ) . '/' . $icon_name . '.svg' );
 			if ( file_exists( $svg_file ) ) {
+				// the $svg_file is a path to the SVG file, not a URL
+				// so it is safe to use file_get_contents to read the file content
 				$svg = file_get_contents( $svg_file );
 			}
 		}

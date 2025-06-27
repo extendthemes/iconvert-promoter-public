@@ -1,5 +1,9 @@
 import { SnackBarAlert } from "../snack-bar-alert";
-import { eventIsFromUIUpdate, triggerUIUpdateChange, updateUIValue } from "../utils";
+import {
+  eventIsFromUIUpdate,
+  triggerUIUpdateChange,
+  updateUIValue,
+} from "../utils";
 import { FormValidator } from "./form-validator";
 import { ICPromoTypesSettings } from "./ICPromoTypesSettings";
 import "./promo-edit/change-template-modal";
@@ -53,7 +57,7 @@ jQuery(document).ready(function ($) {
   });
 
   $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-bs-toggle="tooltip"]').tooltip();
   });
 
   const enforceMinMax = (e) => {
@@ -172,6 +176,7 @@ jQuery(document).ready(function ($) {
   saveButtons.on("click", function (e) {
     e.preventDefault();
     const _button = $(this);
+    const saveAndActivateURL = _button.data("save-activate-redirect");
     const isSaveAndActivate = _button.is(
       'button[name="save-and-activate-popup"]'
     );
@@ -190,7 +195,7 @@ jQuery(document).ready(function ($) {
     payload.settings = ICPromoTypesSettings.buildPromoTypeSettings();
 
     let reqBody = {
-      action: "cs_update_popup",
+      action: "iconvertpr_update_popup",
       payload: payload,
       post_id: $('[name="post_id"]').val(),
       _wpnonce: $('input[name="_wpnonce"]').val(),
@@ -209,6 +214,9 @@ jQuery(document).ready(function ($) {
         setSaveButtonsState("disabled");
         if (isSaveAndActivate) {
           updateUIValue(".cs-switch.cs-toggle-status input", true);
+          if (saveAndActivateURL) {
+            window.location.href = saveAndActivateURL;
+          }
         }
         return;
       }
@@ -304,8 +312,8 @@ jQuery(document).ready(function ($) {
             return {
               search: params.term,
               post_type: postType,
-              action: "cs_posts_search",
-              _wpnonce_search: $('input[name="_wpnonce_search"]').val(),
+              action: "iconvertpr_posts_search",
+              _wpnonce_iconvertpr_search: $('input[name="_wpnonce_iconvertpr_search"]').val(),
             };
           }
         },
@@ -329,8 +337,8 @@ jQuery(document).ready(function ($) {
       url: cs_promo_settings.ajax_url,
       data: {
         post_type: postType,
-        action: "cs_posts_search",
-        _wpnonce_search: $('input[name="_wpnonce_search"]').val(),
+        action: "iconvertpr_posts_search",
+        _wpnonce_iconvertpr_search: $('input[name="_wpnonce_iconvertpr_search"]').val(),
         ids: aWhichSpecificElem.data("selected") || 0,
       },
     }).then(function (data) {
@@ -671,7 +679,7 @@ jQuery(document).ready(function ($) {
     $(this).removeAttr("title");
   });
 
-  $("body").on("change keypress", "#promo-edit-form :input", function (e) {
+  $("body").on("change keypress", "#promo-edit-form :input:not([readonly])", function (e) {
     if (eventIsFromUIUpdate(e)) {
       return;
     }

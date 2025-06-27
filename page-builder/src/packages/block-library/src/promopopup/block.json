@@ -179,7 +179,7 @@
 					"selector": "> .position-relative:not(:last-child)"
 				},
 				"contentWidth": {
-					"selector": "> *:not(.wp-block-cspromo-promopopupclose__outer)"
+					"selector": "> *:not(.wp-block-cspromo-promopopupclose__outer):not(.background-wrapper)"
 				},
 				"wrapperContainer": {},
 				"container": {

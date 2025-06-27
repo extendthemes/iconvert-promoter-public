@@ -16,7 +16,9 @@ class CampaignsAPI {
 					array(
 						'methods'             => 'GET',
 						'callback'            => array( $this, 'campaigns' ),
-						'permission_callback' => '__return_true',
+						'permission_callback' => function () {
+							return current_user_can( 'manage_options' );
+						},
 					)
 				);
 
@@ -29,7 +31,9 @@ class CampaignsAPI {
 						'args'                => array(
 							'id' => array( $this, 'validateNumeric' ),
 						),
-						'permission_callback' => '__return_true',
+						'permission_callback' => function () {
+							return current_user_can( 'manage_options' );
+						},
 					)
 				);
 			}

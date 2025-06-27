@@ -74,8 +74,8 @@ class SubscribeBlock extends BlockBase {
 	private function getFormId() {
 		$formID = $this->getAttribute( 'formId' );
 
-		if ( $formID == 1 && function_exists( 'cs_promo_get_default_email_list' ) ) {
-			$formID = \cs_promo_get_default_email_list();
+		if ( $formID == 1 && function_exists( 'iconvertpr_get_default_email_list' ) ) {
+			$formID = iconvertpr_get_default_email_list();
 		}
 
 		return $formID;
@@ -152,7 +152,7 @@ class SubscribeBlock extends BlockBase {
 					'autocomplete'      => 'off',
 					'data-formId'       => (string) $formID,
 					'data-popupId'      => (string) $this->getPopupId(),
-					'data-form-preview' => cs_preview_page() ? '1' : null,
+					'data-form-preview' => iconvertpr_preview_page() ? '1' : null,
 				)
 			),
 			self::CONTAINERFIELDS     => array(),
@@ -185,7 +185,7 @@ class SubscribeBlock extends BlockBase {
 			),
 			self::EMAILFIELD          => array(
 				'autocomplete' => 'off',
-				'type'         => 'text',
+				'type'         => 'email',
 				'placeholder'  => $this->getAttribute( 'emailFieldPlaceholder' ),
 				'id'           => 'email',
 				'name'         => 'email',

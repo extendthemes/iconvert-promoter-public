@@ -821,6 +821,3 @@ The exceptions to this license are as follows:
 
 *   masonry-layout - https://github.com/desandro/masonry
     Licensed under the MIT license (https://github.com/desandro/masonry)
-
-*   swiper - https://github.com/nolimits4web/Swiper
-    Licensed under the MIT license (https://github.com/nolimits4web/Swiper/raw/master/LICENSE)

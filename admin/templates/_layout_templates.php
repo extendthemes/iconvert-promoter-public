@@ -1,4 +1,9 @@
-<div class="icpm-wrapper pt-3 ps-3">
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+?><div class="icpm-wrapper pt-3 ps-3">
 	<div class="container-fluid">
 		<header class="icpm-header d-flex flex-row justify-content-between align-items-center">
 			<div class="icpm-plugin-title col-lg-8 d-flex flex-row align-items-center">

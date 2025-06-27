@@ -9,8 +9,8 @@ class PostsSearchAjaxActions {
 	use HasAction;
 
 	public function __construct() {
-		add_action( 'wp_ajax_cs_posts_search', array( $this, 'searchPostPages' ) );
-		add_action( 'wp_ajax_cs_products_search', array( $this, 'searchProducts' ) );
+		add_action( 'wp_ajax_iconvertpr_posts_search', array( $this, 'searchPostPages' ) );
+		add_action( 'wp_ajax_iconvertpr_products_search', array( $this, 'searchProducts' ) );
 	}
 
 	/**
@@ -19,7 +19,7 @@ class PostsSearchAjaxActions {
 	 * @return void
 	 */
 	public function searchPostPages() {
-		if ( $this->checkNonce( 'icp_posts-search', true, '_wpnonce_search' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_posts-search', true, '_wpnonce_iconvertpr_search' ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$search = isset( $_GET['search'] ) ? sanitize_text_field( $_GET['search'] ) : '';
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -63,11 +63,12 @@ class PostsSearchAjaxActions {
 	 * @return void
 	 */
 	public function searchProducts() {
-		if ( $this->checkNonce( 'icp_product-search', true, '_wpnonce_product_search' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_product-search', true, '_wpnonce_iconvertpr_product_search' ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$search = isset( $_GET['search'] ) ? sanitize_text_field( $_GET['search'] ) : '';
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$ids = isset( $_GET['ids'] ) ? explode( ',', $_GET['ids'] ) : array();
+			$ids = isset( $_GET['ids'] ) ? explode( ',', $_GET['ids'] ) : array(); // - this is mapped later to integers
+			$ids = array_map( 'intval', $ids );
 
 			if ( $search ) {
 				// phpcs:ignore WordPress.WP.DiscouragedFunctions.query_posts_query_posts

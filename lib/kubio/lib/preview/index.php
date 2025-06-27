@@ -207,6 +207,7 @@ require_once __DIR__ . '/site-data-preview.php';
 
 
 function kubio_is_page_preview() {
+	// no need to sanitize here, as this only checks if the request has a specific key, not its value
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$value = Arr::has( $_REQUEST, Utils::getKubioUrlWithRestPrefix( 'kubio-preview' ), false );
 	return $value;

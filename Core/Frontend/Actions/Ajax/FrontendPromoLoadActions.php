@@ -12,7 +12,8 @@ class FrontendPromoLoadActions {
 
 	public function __construct() {
 
-		if ( isset( $_REQUEST['cs_promo_load_popups'] ) ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_REQUEST['iconvertpr_promo_load_popups'] ) ) {
 			add_action( 'wp', array( $this, 'promo_load' ), 10 );
 		}
 	}
@@ -168,15 +169,17 @@ class FrontendPromoLoadActions {
 			}
 		);
 
+		// we add the popup styles inline, because they are loaded from an ajax action,
+		// when the popup is required to be displayed, and we load only the popup specific styles
 		$head = $head_enqueued . "<style>{$popup_styles}</style>";
 
 		$popup_data = apply_filters(
-			'cs_promo_ajax_load_popup_data',
+			'iconvertpr_ajax_load_popup_data',
 			array(
 				'popups'           => $active_popups,
 				'head'             => $head,
 				'triggers'         => $triggers,
-				'analytics_nonce'  => $visitor_id ? wp_create_nonce( 'cs_promo_analytics' ) : '',
+				'analytics_nonce'  => $visitor_id ? wp_create_nonce( 'iconvertpr_promo_analytics' ) : '',
 				'subscribe_nonces' => $subscribe_nonces,
 				'data'             => array(
 					'page_id' => get_the_ID(),
@@ -197,7 +200,7 @@ class FrontendPromoLoadActions {
 
 	private function enqueue( $options = array() ) {
 		global $wp_styles, $wp_scripts, $wp_filter;
-		define( 'IC_PROMO_AJAX_LOAD', true );
+		define( 'ICONVERTPR_AJAX_LOAD', true );
 
 		if ( isset( $wp_filter['wp_enqueue_scripts'] ) ) {
 			$wp_filter['wp_enqueue_scripts'] = new \WP_Hook();
@@ -216,7 +219,7 @@ class FrontendPromoLoadActions {
 				}
 			}
 
-			if ( str_starts_with( $lower_handle, 'kpromo' ) || str_starts_with( $lower_handle, 'cspromo' ) ) {
+			if ( str_starts_with( $lower_handle, 'kpromo' ) || str_starts_with( $lower_handle, 'cspromo' ) | str_starts_with( $lower_handle, 'iconvert' ) ) {
 				continue;
 			}
 
@@ -228,6 +231,7 @@ class FrontendPromoLoadActions {
 			$wp_styles->registered['cspromo-block-library']->deps
 		);
 
+		// we enqueue the styles and scripts so we can server the correct styles and scripts for the popup
 		do_action( 'wp_enqueue_scripts' );
 		do_action( 'wp_print_head_scripts' );
 		do_action( 'wp_print_footer_scripts' );
@@ -266,6 +270,23 @@ class FrontendPromoLoadActions {
 			);
 		}
 
+		$state         = $this->get_state();
+		$inline_popups = isset( $state['inline_popups'] ) ? $state['inline_popups'] : array();
+
+		if ( in_array( $popup->id, $inline_popups, true ) ) {
+			$applied_triggers = array_merge(
+				$applied_triggers,
+				array(
+					'inline'    => array(
+						0 => 1,
+					),
+					'page-load' => array(
+						0 => 0,
+					),
+				)
+			);
+		}
+
 		return (object) $applied_triggers;
 	}
 
@@ -288,6 +309,6 @@ class FrontendPromoLoadActions {
 		);
 
 		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-		wp_enqueue_style( 'kpromo-promoter-google-fonts', $fonts_url, array(), null );
+		wp_enqueue_style( 'kpromo-promoter-google-fonts', $fonts_url, array(), ICONVERTPR_VERSION );
 	}
 }

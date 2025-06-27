@@ -2,6 +2,9 @@
 
 use function KPromo\kubio_get_site_urls;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 ?>
 
 <div class="ic-promo-wrapper d-flex flex-column ic-email-lists-layout">
@@ -9,7 +12,7 @@ use function KPromo\kubio_get_site_urls;
 		<div class="box-logo d-flex">
 			<div class="logo align-self-center">
 				<div class="d-flex">
-					<?php echo file_get_contents( IC_PROMO_PATH . '/admin/assets/images/iconvert-promoter-logo.svg' ); ?>
+					<?php echo file_get_contents( ICONVERTPR_PATH . '/admin/assets/images/iconvert-promoter-logo.svg' ); ?>
 				</div>
 			</div>
 		</div>
@@ -30,7 +33,7 @@ use function KPromo\kubio_get_site_urls;
 										<ul>
 											<?php foreach ( $emailLists as $emailList ) : ?>
 												<li>
-													<a href="<?php echo esc_url( cs_generate_page_url( 'subscribers.lists.emails', array( 'post_id' => $emailList->id ), IC_PROMO_PAGE_SUBSCRIBERS ) ); ?>" class="js-disable-middle-click ic-promo-button w-100 text-left <?php echo ( $listID == $emailList->id ) ? ' ic-promo-button-primary active' : 'ic-promo-button-secondary '; ?>"><?php echo esc_html( wp_unslash( $emailList->name ) ); ?> <span>(<?php echo esc_html( $emailList->subscribers ); ?>)</span></a>
+													<a href="<?php echo esc_url( iconvertpr_generate_page_url( 'subscribers.lists.emails', array( 'post_id' => $emailList->id ), ICONVERTPR_PAGE_SUBSCRIBERS ) ); ?>" class="js-disable-middle-click ic-promo-button w-100 text-left <?php echo ( $listID == $emailList->id ) ? ' ic-promo-button-primary active' : 'ic-promo-button-secondary '; ?>"><?php echo esc_html( wp_unslash( $emailList->name ) ); ?> <span>(<?php echo esc_html( $emailList->subscribers ); ?>)</span></a>
 												</li>
 											<?php endforeach; ?>
 										</ul>
@@ -58,8 +61,8 @@ use function KPromo\kubio_get_site_urls;
 								<?php
 									$list_dld_url = add_query_arg(
 										array(
-											'_wpnonce' => wp_create_nonce( 'icp_download_email_list' ),
-											'action'   => 'icp_download_email_list',
+											'_wpnonce' => wp_create_nonce( 'iconvertpr_download_email_list' ),
+											'action'   => 'iconvertpr_download_email_list',
 											'post_id'  => $list->id,
 										),
 										admin_url( 'admin-post.php' )
@@ -100,7 +103,7 @@ use function KPromo\kubio_get_site_urls;
 		</div>
 	</div>
 </div>
-<?php wp_nonce_field( 'icp_list_management' ); ?>
+<?php wp_nonce_field( 'iconvertpr_list_management' ); ?>
 <template id="ic-lists-create">
 	<?php
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -123,5 +126,5 @@ use function KPromo\kubio_get_site_urls;
 </template>
 
 <div class="hidden" id="ic-flash-messages">
-	<?php cs_flash_messages_show(); ?>
+	<?php iconvert_flash_messages_show(); ?>
 </div>

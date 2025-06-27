@@ -17,7 +17,7 @@ class DeviceCheck {
 		}
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$useragent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : '';
+		$useragent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_textarea_field( $_SERVER['HTTP_USER_AGENT'] ) : '';
 		if ( stripos( $useragent, 'mobile' ) === false && stripos( $useragent, 'tablet' ) === false && stripos( $useragent, 'ipad' ) === false ) { //is desktop
 			if ( ! in_array( 'desktop', $this->data, true ) ) {
 				return 0;

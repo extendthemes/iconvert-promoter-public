@@ -6,8 +6,6 @@
   border-top-right-radius: 4px;
 
   .ic-title {
-    display: flex;
-
     &.ic-has-description {
       padding-top: 0;
     }
@@ -19,11 +17,10 @@
       font-size: 13px;
       font-weight: 400;
       color: #454545;
-      margin-left: 20px;
     }
 
     .ic-edit-list {
-      color:  $primary;
+      color: $primary;
       font-size: 14px;
       font-weight: 400;
       text-decoration: underline;

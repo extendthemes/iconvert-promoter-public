@@ -2,7 +2,6 @@
 
 namespace CSPromo\Core\PostTypes;
 
-use CSPromo\Core\Admin\Structure\DisplayConditions\DisplayConditionsFactory;
 use CSPromo\Core\Services\StatsService;
 
 class PromoPopups {
@@ -131,21 +130,21 @@ class PromoPopups {
 	public static function formatSingle( $post ) {
 		setup_postdata( $post );
 
-		$url             = cs_registry_get( 'settings_page_url', '' );
-		$editURL         = cs_registry_get( 'popup_page_edit_url', '' );
+		$url             = iconvertpr_registry_get( 'settings_page_url', '' );
+		$editURL         = iconvertpr_registry_get( 'popup_page_edit_url', '' );
 		$postURL         = admin_url( 'admin-post.php' );
 		$hasPromoContent = self::getSetting( '_has_promo_content', get_the_ID() );
 
 		$editorUrl = add_query_arg(
 			array(
 				'postId'   => get_the_ID(),
-				'page'     => 'cspromo',
+				'page'     => 'iconvertpr-editor',
 				'postType' => 'cs-promo-popups',
 			),
 			admin_url( 'admin.php' )
 		);
 
-		$editorTemplateUrl = cs_generate_page_url( 'templates', array( 'post_id' => get_the_ID() ) );
+		$editorTemplateUrl = iconvertpr_generate_page_url( 'templates', array( 'post_id' => get_the_ID() ) );
 
 		if ( $hasPromoContent === 'yes' ) {
 			$edit = $editorUrl;
@@ -209,8 +208,8 @@ class PromoPopups {
 			'__iconvert-promoter-preview' => $post->ID,
 		);
 
-		$kubioPreviewUrl    = call_user_func( CSKubio . '\Core\Utils::getKubioUrlWithRestPrefix', 'kubio-preview' );
-		$kubioPreviewRandom = call_user_func( CSKubio . '\Core\Utils::getKubioUrlWithRestPrefix', 'kubio-random' );
+		$kubioPreviewUrl    = call_user_func( ICONVERTPR_KUBIO_NS . '\Core\Utils::getKubioUrlWithRestPrefix', 'kubio-preview' );
+		$kubioPreviewRandom = call_user_func( ICONVERTPR_KUBIO_NS . '\Core\Utils::getKubioUrlWithRestPrefix', 'kubio-random' );
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$query['iconvert-promoter-preview'] = isset( $_GET[ $kubioPreviewUrl ] ) ? trim( $_GET[ $kubioPreviewUrl ] ) : '';
@@ -308,43 +307,5 @@ class PromoPopups {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Saves a new store
-	 *
-	 * @return object Newly created popup
-	 */
-	public static function store() {
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		$post_type = isset( $_POST['popup_type'] ) ? $_POST['popup_type'] : '';
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		$post_title = isset( $_POST['post_title'] ) ? $_POST['post_title'] : '';
-
-		if ( ! $post_type || ! $post_title ) {
-			return false;
-		}
-
-		$displayConditions = new DisplayConditionsFactory( $post_type );
-
-		$newPost = array(
-			'post_title'  => esc_html( $post_title ),
-			'post_status' => 'publish',
-			'post_type'   => self::getSlug(),
-			'meta_input'  => array(
-				'popup_type'         => sanitize_text_field( $post_type ),
-				'triggers'           => array(),
-				'display_conditions' => $displayConditions->make()->defaults(),
-			),
-		);
-
-		$postID = \wp_insert_post( $newPost );
-
-		if ( $postID ) {
-			$stats = new StatsService();
-			$stats->store( $postID );
-		}
-
-		return $postID;
 	}
 }

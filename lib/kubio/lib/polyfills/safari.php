@@ -21,6 +21,8 @@ function kubio_safari_gap_fallback() {
 	}
 
 	if ( $is_safari_without_gap_support ) {
+		// we add this script without enqueuing it, because we want to run it as early as possible
+		// to avoid any layout shifts caused by the gap fallback
 		add_action(
 			'wp_head',
 			function () {

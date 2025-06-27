@@ -70,6 +70,11 @@ class StyleManager {
 		return $style;
 	}
 
+	/**
+	 * Get the singleton instance of StyleManager.
+	 *
+	 * @return StyleManager
+	 */
 	static function getInstance() {
 		if ( ! self::$instance ) {
 			self::$instance = new self();

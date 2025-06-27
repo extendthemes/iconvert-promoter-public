@@ -272,7 +272,7 @@ $primary-lightest: lighten($primary, 38%);
   }
 }
 
-.toplevel_page_cspromo {
+[class*="toplevel_page_iconvertpr"] {
   .notice {
     display: none !important;
   }
@@ -567,9 +567,7 @@ $primary-lightest: lighten($primary, 38%);
       }
 
       .table-body {
-        overflow-y: auto;
         min-height: 200px;
-        // max-height: calc(100vh - 380px);
 
         .table-row {
           background-color: $white;
@@ -2094,7 +2092,7 @@ $primary-lightest: lighten($primary, 38%);
   height: 38px !important;
 }
 
-.toplevel_page_promoter {
+[class*="toplevel_page_iconvertpr"] {
   .modal {
     z-index: 9999 !important;
   }
@@ -2139,7 +2137,7 @@ $primary-lightest: lighten($primary, 38%);
   padding-bottom: 20px !important;
 }
 
-#adminmenu li.menu-top.toplevel_page_promoter {
+#adminmenu li.menu-top.toplevel_page_iconvertpr-promoter {
   .wp-menu-image {
     img {
       width: 100%;

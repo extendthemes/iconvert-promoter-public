@@ -183,6 +183,8 @@ class BasicCrud {
 	 * @return int
 	 */
 	public function total() {
+		// the getWhere method returns an already escaped WHERE clause, so we can use it directly in the SQL statement
+		// without having to escape it again
 		$sql = sprintf( 'SELECT COUNT(*) FROM %s %s', $this->tablename, $this->getWhere() );
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
@@ -192,11 +194,10 @@ class BasicCrud {
 	/**
 	 * Total number of rows from a query
 	 *
-	 * @param  mixed $sql
+	 * @param  mixed $sql - the SQL query should be already prepared and escaped at this point
 	 * @return void
 	 */
 	public function totalFromQuery( $sql ) {
-
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		return $this->wpdb->get_var( $sql );
 	}
@@ -287,10 +288,11 @@ class BasicCrud {
 	}
 
 	/**
-	 * getResults
+	 * Get results from a SQL statement
 	 *
-	 * @param  string $sql
-	 * @return void
+	 * @param  string $sql the sql query should be already prepared and escaped at this point
+	 * @param  bool $affectedRows if true, return the number of affected rows,
+	 * @return mixed
 	 */
 	public function getResults( $sql, $affectedRows = false ) {
 		$this->lastSQL = $sql;
@@ -312,6 +314,8 @@ class BasicCrud {
 	/**
 	 * Get WHERE clause
 	 *
+	 * This method combines the where and whereIn clauses into a single WHERE statement.
+	 * The where and whereIn clauses are escaped and sanitized when where and whereIn methods are called.
 	 * @return string
 	 */
 	public function getWhere() {
@@ -400,10 +404,18 @@ class BasicCrud {
 	public function condition( $fields, $condition ) {
 		$clause = array();
 		foreach ( $fields as $fieldname => $fieldvalue ) {
-			$clause[] = $fieldname . ' ' . $this->operator( $fieldvalue ) . ' ' . $this->returnSQL( $fieldvalue );
+			$clause[] = $fieldname . ' ' . $this->operator( $fieldvalue ) . ' ' . $this->escapeForQuery( $fieldvalue );
 		}
 
 		return implode( ' ' . $condition . ' ', $clause );
+	}
+
+	private function escapeForQuery( $value ) {
+		if ( is_numeric( $value ) ) {
+			return $this->wpdb->prepare( '%d', $value );
+		}
+
+		return $this->wpdb->prepare( '%s', $value );
 	}
 
 	public function operator( $value ) {
@@ -412,14 +424,6 @@ class BasicCrud {
 		}
 
 		return '=';
-	}
-
-	public function returnSQL( $value ) {
-		if ( is_numeric( $value ) ) {
-			return $value;
-		}
-
-		return "'" . ( $value ) . "'";
 	}
 
 	/**
@@ -483,6 +487,8 @@ class BasicCrud {
 				return 'LIMIT ' . $this->limit;
 			}
 		}
+
+		return '';
 	}
 
 	/**

@@ -40,7 +40,7 @@ class TemplatesService extends BasicCrud {
 			'announcement'         => __( 'Announcement', 'iconvert-promoter' ),
 			'age-consent'          => __( 'Age consent', 'iconvert-promoter' ),
 			'feedback'             => __( 'Feedback', 'iconvert-promoter' ),
-			'refer-a-friend'       => __( 'Refer a friend', 'iconvert-promoter' ),
+			'refer-a-friend'       => __( 'Social sharing', 'iconvert-promoter' ),
 			'image-video'          => __( 'Image / Video', 'iconvert-promoter' ),
 		);
 
@@ -100,7 +100,7 @@ class TemplatesService extends BasicCrud {
 
 	public function importContent( $content, $postID, $setSettings = true ) {
 
-		if ( ! function_exists( CSKubio . '\kubio_serialize_blocks' ) ) {
+		if ( ! function_exists( ICONVERTPR_KUBIO_NS . '\kubio_serialize_blocks' ) ) {
 			return $content;
 		}
 
@@ -115,14 +115,14 @@ class TemplatesService extends BasicCrud {
 		$blocks = $this->resetBlockDefaults( $blocks );
 		$blocks = $this->resetStyleRef( $blocks, $postID );
 
-		$blocks = call_user_func( CSKubio . '\kubio_serialize_blocks', $blocks );
+		$blocks = call_user_func( ICONVERTPR_KUBIO_NS . '\kubio_serialize_blocks', $blocks );
 
 		return $blocks;
 	}
 
 	public function getBlocksFromContent( $content ) {
 		$blocks = parse_blocks( $this->sanitizeContent( $content ) );
-		return call_user_func( CSKubio . '\Core\Importer::maybeImportBlockAssets', $blocks );
+		return call_user_func( ICONVERTPR_KUBIO_NS . '\Core\Importer::maybeImportBlockAssets', $blocks );
 	}
 
 	public function settingsBlockPopup( $blocks ) {
@@ -150,6 +150,7 @@ class TemplatesService extends BasicCrud {
 				break;
 
 			case 'inline-promotion-bar':
+				$attrs = $this->parseGenericBlockSettings( $attrs );
 				break;
 			default:
 				$attrs = $this->parseGenericBlockSettings( $attrs );
@@ -230,7 +231,7 @@ class TemplatesService extends BasicCrud {
 		$mapping     = array();
 
 		call_user_func_array(
-			CSKubio . '\Core\Utils::walkBlocks',
+			ICONVERTPR_KUBIO_NS . '\Core\Utils::walkBlocks',
 			array(
 				&$blocks,
 				function ( &$block ) use ( $post_id, &$block_index, &$mapping ) {
@@ -315,7 +316,7 @@ class TemplatesService extends BasicCrud {
 
 
 	public function hasListID( $content, $listID ) {
-		if ( ! function_exists( CSKubio . '\kubio_serialize_blocks' ) ) {
+		if ( ! function_exists( ICONVERTPR_KUBIO_NS . '\kubio_serialize_blocks' ) ) {
 			return $content;
 		}
 		$this->hasListID = false;

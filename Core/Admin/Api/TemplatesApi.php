@@ -13,7 +13,7 @@ class TemplatesApi extends BaseSyncApi {
 	 * @return array
 	 */
 	public function getTemplates( $promoType = false ) {
-		$apiPath = apply_filters( 'cspromo/api/templates/list', 'templates/list/' . $promoType, $promoType );
+		$apiPath = apply_filters( 'iconvert/api/templates/list', 'templates/list/' . $promoType, $promoType );
 
 		$apiUrl = $this->getApiUrl( $apiPath );
 
@@ -67,7 +67,7 @@ class TemplatesApi extends BaseSyncApi {
 	 */
 	public function getTemplate( $templateId ) {
 
-		$transient_key = 'cspromo_template_cache_' . $templateId;
+		$transient_key = 'iconvertpr_template_cache_' . $templateId;
 
 		$cached_template = get_transient( $transient_key );
 
@@ -75,7 +75,7 @@ class TemplatesApi extends BaseSyncApi {
 			return $cached_template;
 		}
 
-		$apiPath = apply_filters( 'cspromo/api/templates/get', 'templates/get/' . $templateId, $templateId );
+		$apiPath = apply_filters( 'iconvertpr/api/templates/get', 'templates/get/' . $templateId, $templateId );
 		$apiUrl  = $this->getApiUrl( $apiPath );
 
 		$options = array(

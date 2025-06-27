@@ -6,7 +6,7 @@ use CSPromo\Core\PostTypes\PromoPopupsSetup;
 class Activation {
 
 	public function __construct() {
-		register_activation_hook( IC_PROMO_PAGE_FILE, array( $this, 'onActivate' ) );
+		register_activation_hook( ICONVERTPR_PAGE_FILE, array( $this, 'onActivate' ) );
 	}
 
 	public function onActivate() {

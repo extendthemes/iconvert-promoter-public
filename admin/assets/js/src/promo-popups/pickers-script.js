@@ -86,14 +86,14 @@ jQuery(function ($) {
 
     switch (type) {
       case "delete":
-        postParams.action = "cs_delete_campaign";
+        postParams.action = "iconvertpr_delete_campaign";
         break;
       case "duplicate":
-        postParams.action = "cs_duplicate_campaign";
+        postParams.action = "iconvertpr_duplicate_campaign";
         settingExtraParams.className = "ic-dialog js-duplicate-dialog";
         break;
       case "reset-stats":
-        postParams.action = "cs_reset_stats_campaign";
+        postParams.action = "iconvertpr_reset_stats_campaign";
         break;
       default:
         break;

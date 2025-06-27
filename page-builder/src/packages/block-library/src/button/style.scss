@@ -20,13 +20,9 @@
 	}
 
 	&__icon {
-		svg{
+		svg {
 			transform: unset;
 		}
 		flex-shrink: 0;
-	}
-
-	&__text {
-		pointer-events: none;
 	}
 }

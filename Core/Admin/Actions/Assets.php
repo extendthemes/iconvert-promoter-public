@@ -7,13 +7,13 @@ class Assets {
 	public function __construct() {
 
 		$allowed_pages = array(
-			IC_PROMO_PAGE_ID,
-			IC_PROMO_PAGE_SUBSCRIBERS,
-			IC_PROMO_PAGE_INTEGRATIONS,
-			IC_PROMO_PAGE_UPGRADE,
+			ICONVERTPR_PAGE_ID,
+			ICONVERTPR_PAGE_SUBSCRIBERS,
+			ICONVERTPR_PAGE_INTEGRATIONS,
+			ICONVERTPR_PAGE_UPGRADE,
 		);
 
-		$allowed_pages = apply_filters( 'cs_promo_allowed_pages_for_assets', $allowed_pages );
+		$allowed_pages = apply_filters( 'iconvertpr_allowed_pages_for_assets', $allowed_pages );
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['page'] ) && in_array( $_GET['page'], $allowed_pages, true ) ) {
@@ -33,7 +33,7 @@ class Assets {
 
 	public function loadGlobal() {
 		// need to load the css globally
-		wp_enqueue_style( 'style', $this->assets_url( 'css/dist/style.min.css' ), array(), IC_PROMO_VERSION );
+		wp_enqueue_style( 'iconvertpr-style', $this->assets_url( 'css/dist/style.min.css' ), array(), ICONVERTPR_VERSION );
 	}
 
 	/**
@@ -50,12 +50,12 @@ class Assets {
 		wp_enqueue_style( 'cs-snackbar-style', $this->assets_url( 'js/snackbar/js-snackbar.css' ), array(), '0.1' );
 
 		//main style + js
-		wp_enqueue_style( 'style', $this->assets_url( 'css/dist/style.min.css' ), array(), IC_PROMO_VERSION );
+		wp_enqueue_style( 'iconvertpr-style', $this->assets_url( 'css/dist/style.min.css' ), array(), ICONVERTPR_VERSION );
 
-		wp_enqueue_script( 'cs-promo-popups', $this->assets_url( 'js/dist/index.js' ), array( 'jquery', 'select2', 'cs-snackbar' ), IC_PROMO_VERSION, true );
+		wp_enqueue_script( 'iconvertpr-popups', $this->assets_url( 'js/dist/index.js' ), array( 'jquery', 'select2', 'cs-snackbar' ), ICONVERTPR_VERSION, true );
 
 		wp_localize_script(
-			'cs-promo-popups',
+			'iconvertpr-popups',
 			'cs_promo_settings',
 			array(
 				'ajax_url'    => admin_url( 'admin-ajax.php' ),
@@ -70,37 +70,37 @@ class Assets {
 
 	public function bootstrap_init() {
 		// JS popper
-		wp_register_script( 'cs-promo-popper-js', $this->assets_url( 'js/popper/popper.min.js' ), IC_PROMO_VERSION, true );
+		wp_register_script( 'cs-promo-popper-js', $this->assets_url( 'js/popper/popper.min.js' ), array(), ICONVERTPR_VERSION, true );
 		wp_enqueue_script( 'cs-promo-popper-js' );
 
 		// JS bootstrap
-		wp_register_script( 'cs-promo-bootstrap-js', $this->assets_url( 'js/bootstrap/bootstrap.bundle.min.js' ), IC_PROMO_VERSION, true );
+		wp_register_script( 'cs-promo-bootstrap-js', $this->assets_url( 'js/bootstrap/bootstrap.bundle.min.js' ), array(), ICONVERTPR_VERSION, true );
 		wp_enqueue_script( 'cs-promo-bootstrap-js' );
 
 		// JS bootstrap
-		wp_register_script( 'cs-promo-bootbox-js', $this->assets_url( 'js/bootstrap/bootbox.min.js' ), IC_PROMO_VERSION, true );
+		wp_register_script( 'cs-promo-bootbox-js', $this->assets_url( 'js/bootstrap/bootbox.min.js' ), array(), ICONVERTPR_VERSION, true );
 		wp_enqueue_script( 'cs-promo-bootbox-js' );
 
 		// styles
-		wp_register_style( 'cs-promo-bootstrap-css', $this->assets_url( 'js/bootstrap/css/bootstrap.min.css' ), array(), IC_PROMO_VERSION );
+		wp_register_style( 'cs-promo-bootstrap-css', $this->assets_url( 'js/bootstrap/css/bootstrap.min.css' ), array(), ICONVERTPR_VERSION );
 		wp_enqueue_style( 'cs-promo-bootstrap-css' );
 
 		// Icons
-		wp_register_style( 'cs-promo-bootstrap-icons', $this->assets_url( 'js/bootstrap/css/bootstrap-icons.css' ), array(), IC_PROMO_VERSION );
+		wp_register_style( 'cs-promo-bootstrap-icons', $this->assets_url( 'js/bootstrap/css/bootstrap-icons.css' ), array(), ICONVERTPR_VERSION );
 		wp_enqueue_style( 'cs-promo-bootstrap-icons' );
 	}
 
 	public function autocomplete_init() {
 
 		// js
-		wp_register_script( 'cs-promo-autocomplete', $this->assets_url( 'js/bundles/autocomplete-bundle.min.js' ), array( 'jquery' ), IC_PROMO_VERSION, true );
-		wp_enqueue_script( 'cs-promo-autocomplete' );
+		wp_register_script( 'iconvertpr-autocomplete', $this->assets_url( 'js/bundles/autocomplete-bundle.min.js' ), array( 'jquery' ), ICONVERTPR_VERSION, true );
+		wp_enqueue_script( 'iconvertpr-autocomplete' );
 
-		$countries = apply_filters( 'cs_promo_countries', array() );
-		$states    = apply_filters( 'cs_promo_states', array() );
+		$countries = apply_filters( 'iconvertpr_countries', array() );
+		$states    = apply_filters( 'iconvertpr_states', array() );
 
 		wp_localize_script(
-			'cs-promo-autocomplete',
+			'iconvertpr-autocomplete',
 			'cs_promo_autocomplete',
 			array(
 				'countries' => array_merge( array( '' => __( 'Select a country', 'iconvert-promoter' ) ), $countries ),
@@ -111,11 +111,11 @@ class Assets {
 
 	public function datetimepicker_init() {
 		// CSS datetimepicker
-		wp_register_style( 'cs-promo-datetimepicker-local-css', $this->assets_url( 'js/datetimepicker/jquery.datetimepicker.min.css' ), array(), IC_PROMO_VERSION );
+		wp_register_style( 'cs-promo-datetimepicker-local-css', $this->assets_url( 'js/datetimepicker/jquery.datetimepicker.min.css' ), array(), ICONVERTPR_VERSION );
 		wp_enqueue_style( 'cs-promo-datetimepicker-local-css' );
 
 		// JS datetimepicker
-		wp_register_script( 'cs-promo-datetimepicker-local-js', $this->assets_url( 'js/datetimepicker/jquery.datetimepicker.full.min.js' ), array( 'jquery' ), IC_PROMO_VERSION, true );
+		wp_register_script( 'cs-promo-datetimepicker-local-js', $this->assets_url( 'js/datetimepicker/jquery.datetimepicker.full.min.js' ), array( 'jquery' ), ICONVERTPR_VERSION, true );
 		wp_enqueue_script( 'cs-promo-datetimepicker-local-js' );
 	}
 	/**
@@ -126,7 +126,7 @@ class Assets {
 	 * @return string
 	 */
 	public function assets_url( $filename ) {
-		return IC_PROMO_URL . 'admin/assets/' . $filename;
+		return ICONVERTPR_URL . 'admin/assets/' . $filename;
 	}
 
 	// function bodyClass

@@ -15,15 +15,18 @@ use CSPromo\Core\Frontend\Actions\ShortcodeGenerator;
 
 use function KPromo\kubio_get_site_urls;
 
-$selected_attr = 'selected="selected"';
-$checked_attr  = 'checked="checked"';
 
-function iconvert_promoter_display_feature_requires_pro( $key = 'data-pro', $value = 'required' ) {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+
+function iconvertpr_display_feature_requires_pro( $key = 'data-pro', $value = 'required' ) {
 
 	static $feature_available_only_in_pro = null;
 
 	if ( null === $feature_available_only_in_pro ) {
-		$feature_available_only_in_pro = apply_filters( 'iconvert_promoter_feature_available_only_in_pro', true );
+		$feature_available_only_in_pro = apply_filters( 'iconvertpr_feature_available_only_in_pro', true );
 	}
 
 	if ( $feature_available_only_in_pro ) {
@@ -52,8 +55,8 @@ $specificTrafficSource = isset( $displayConditions['specific-traffic-source'] ) 
 $specificUTMSource     = isset( $displayConditions['specific-utm'] ) ? $displayConditions['specific-utm'] : '';
 $popup_type            = isset( $metadata['popup_type'][0] ) ? $metadata['popup_type'][0] : '';
 
-global $recurring_conditions;
-$recurring_conditions = isset( $displayConditions['recurring'] ) ? $displayConditions['recurring'] : array(
+global $iconvertpr_recurring_conditions;
+$iconvertpr_recurring_conditions = isset( $displayConditions['recurring'] ) ? $displayConditions['recurring'] : array(
 	'converted' => array(
 		'when'  => 'never',
 		'delay' => 1,
@@ -66,8 +69,8 @@ $recurring_conditions = isset( $displayConditions['recurring'] ) ? $displayCondi
 	),
 );
 
-function iconvert_print_recurring_when_options( $type ) {
-	global $recurring_conditions;
+function iconvertpr_print_recurring_when_options( $type ) {
+	global $iconvertpr_recurring_conditions;
 	$options = array(
 		'never'      => esc_html__( 'Never', 'iconvert-promoter' ),
 		'always'     => esc_html__( 'All the time', 'iconvert-promoter' ),
@@ -77,10 +80,11 @@ function iconvert_print_recurring_when_options( $type ) {
 
 	echo '<select name="recurring-when">';
 
-	$selected = isset( $recurring_conditions[ $type ]['when'] ) ? $recurring_conditions[ $type ]['when'] : 'never';
+	$selected = isset( $iconvertpr_recurring_conditions[ $type ]['when'] ) ? $iconvertpr_recurring_conditions[ $type ]['when'] : 'never';
 
 	foreach ( $options as $key => $value ) {
 		$selected_attr = ( $key === $selected ) ? 'selected="selected"' : '';
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo '<option value="' . esc_attr( $key ) . '" ' . $selected_attr . '>' . esc_html( $value ) . '</option>';
 	}
 
@@ -88,10 +92,10 @@ function iconvert_print_recurring_when_options( $type ) {
 }
 
 
-function iconvert_print_recurring_after_time_options( $type ) {
-	global $recurring_conditions, $selected_attr;
-	$value = isset( $recurring_conditions[ $type ]['delay'] ) ? $recurring_conditions[ $type ]['delay'] : 1;
-	$unit  = isset( $recurring_conditions[ $type ]['unit'] ) ? $recurring_conditions[ $type ]['unit'] : 's';
+function iconvertpr_print_recurring_after_time_options( $type ) {
+	global $iconvertpr_recurring_conditions;
+	$value = isset( $iconvertpr_recurring_conditions[ $type ]['delay'] ) ? $iconvertpr_recurring_conditions[ $type ]['delay'] : 1;
+	$unit  = isset( $iconvertpr_recurring_conditions[ $type ]['unit'] ) ? $iconvertpr_recurring_conditions[ $type ]['unit'] : 's';
 
 	$input_validation_message = $type === 'converted' ? __( 'Time for display after conversion is required.', 'iconvert-promoter' ) : __( 'Time for display after closing is required.', 'iconvert-promoter' );
 	?>
@@ -101,16 +105,16 @@ function iconvert_print_recurring_after_time_options( $type ) {
 		</label>
 		<span class="input-group-append w-25">
 			<select name="recurring-unit">
-				<option value="m" <?php echo ( $unit === 'm' ) ? $selected_attr : ''; ?>><?php esc_html_e( 'minutes', 'iconvert-promoter' ); ?></option>
-				<option value="h" <?php echo ( $unit === 'h' ) ? $selected_attr : ''; ?>><?php esc_html_e( 'hours', 'iconvert-promoter' ); ?></option>
-				<option value="d" <?php echo ( $unit === 'd' ) ? $selected_attr : ''; ?>><?php esc_html_e( 'days', 'iconvert-promoter' ); ?></option>
+				<option value="m" <?php echo ( $unit === 'm' ) ? 'selected="selected"' : ''; ?>><?php esc_html_e( 'minutes', 'iconvert-promoter' ); ?></option>
+				<option value="h" <?php echo ( $unit === 'h' ) ? 'selected="selected"' : ''; ?>><?php esc_html_e( 'hours', 'iconvert-promoter' ); ?></option>
+				<option value="d" <?php echo ( $unit === 'd' ) ? 'selected="selected"' : ''; ?>><?php esc_html_e( 'days', 'iconvert-promoter' ); ?></option>
 			</select>
 		</span>
 	</div>
 	<?php
 }
 
-function iconvert_promoter_promo_option_is_true( $val ) {
+function iconvertpr_promo_option_is_true( $val ) {
 	if ( isset( $val ) && isset( $val['checkbox'] ) && filter_var( $val['checkbox'], FILTER_VALIDATE_BOOLEAN ) ) {
 		return true;
 	}
@@ -128,19 +132,19 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 					<div class="action-status d-flex flex-row justify-content-between ">
 						<div class="label-action"><?php esc_html_e( 'Status', 'iconvert-promoter' ); ?></div>
 						<label class="cs-switch cs-toggle-status cs-list-popup-switch d-inline-block" data-no-content="<?php esc_attr_e( 'Popup without content.', 'iconvert-promoter' ); ?>">
-							<input type="checkbox" <?php echo $post->active ? 'checked' : ''; ?> data-id="<?php echo esc_attr( $post->ID ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'status_popup_' . $post->ID ) ); ?>">
+							<input type="checkbox" <?php echo $post->active ? 'checked' : ''; ?> data-id="<?php echo esc_attr( $post->ID ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'iconvertpr_status_popup_' . $post->ID ) ); ?>">
 							<span class="cs-active-slider"></span>
 						</label>
 					</div>
 					<div class="action-preview d-flex flex-row justify-content-between">
 						<div class="label-action"><?php esc_html_e( 'Preview', 'iconvert-promoter' ); ?></div>
-						<a class="popup-preview modal-preview-popup d-inline-block js-disable-middle-click" data-toggle="tooltip" href="#" data-placement="top" data-href="<?php echo esc_url( $popup['urls']['previewUrl'] ); ?>" data-title="<?php echo esc_attr( $post->post_title ); ?>">
+						<a class="popup-preview modal-preview-popup d-inline-block js-disable-middle-click" data-bs-toggle="tooltip" href="#" data-placement="top" data-href="<?php echo esc_url( $popup['urls']['previewUrl'] ); ?>" data-title="<?php echo esc_attr( $post->post_title ); ?>">
 							<i class="dashicons-before dashicons-visibility js-disable-middle-click"></i>
 						</a>
 					</div>
 					<div class="action-edit-template align-content-center justify-content-center d-none d-lg-flex">
 						<a class="ic-promo-button ic-promo-button-primary" href="<?php echo esc_url( $popup['urls']['editor'] ); ?>"><?php esc_html_e( 'Edit content', 'iconvert-promoter' ); ?></a>
-						<a class="modal-change-template-popup ic-promo-button ic-promo-button-link" data-id="<?php echo esc_attr( $post->ID ); ?>" data-promo-type="<?php echo esc_attr( $popup_type ); ?>" href="#" <?php iconvert_promoter_display_feature_requires_pro( 'data-template-pro-preview', 'true' ); ?>><?php esc_html_e( 'Change template', 'iconvert-promoter' ); ?></a>
+						<a class="modal-change-template-popup ic-promo-button ic-promo-button-link" data-id="<?php echo esc_attr( $post->ID ); ?>" data-promo-type="<?php echo esc_attr( $popup_type ); ?>" href="#" <?php iconvertpr_display_feature_requires_pro( 'data-template-pro-preview', 'true' ); ?>><?php esc_html_e( 'Change template', 'iconvert-promoter' ); ?></a>
 					</div>
 
 					<div class="promo-type-options">
@@ -222,15 +226,15 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 					</div>
 
 					<div class="action-edit-template align-content-center justify-content-center d-none d-lg-flex">
-						<?php wp_nonce_field( 'cs_promo_get_template_by_type', '_wpnonce_get_template' ); ?>
-						<?php wp_nonce_field( 'cs_change_popup_template', '_wpnonce_cs_change_popup_template' ); ?>
+						<?php wp_nonce_field( 'iconvertpr_promo_get_template_by_type', '_wpnonce_get_template' ); ?>
+						<?php wp_nonce_field( 'iconvertpr_change_popup_template', '_wpnonce_iconvertpr_change_popup_template' ); ?>
 					</div>
 
 
 				</div>
 				<div>
 					<div class="action-delete d-flex align-content-center justify-content-center">
-						<a class="delete js-disable-middle-click" data-placement="top" data-type="delete" title="<?php esc_attr_e( 'Delete campaign', 'iconvert-promoter' ); ?>" data-scope="confirm-dialog" href="#" data-post-id="<?php echo esc_attr( $post->ID ); ?>" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'icp_delete_campaign' ) ); ?>" data-confirm-message="<p><?php esc_html_e( 'Are you sure you want to delete this campaign?', 'iconvert-promoter' ); ?></p>">
+						<a class="delete js-disable-middle-click" data-placement="top" data-type="delete" title="<?php esc_attr_e( 'Delete campaign', 'iconvert-promoter' ); ?>" data-scope="confirm-dialog" href="#" data-post-id="<?php echo esc_attr( $post->ID ); ?>" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'iconvertpr_delete_campaign' ) ); ?>" data-confirm-message="<p><?php esc_html_e( 'Are you sure you want to delete this campaign?', 'iconvert-promoter' ); ?></p>">
 							<?php esc_html_e( 'Delete campaign', 'iconvert-promoter' ); ?>
 						</a>
 					</div>
@@ -280,7 +284,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 					<div class="scrollable-content">
 						<?php if ( $type !== 'inline-promotion-bar' ) : ?>
 							<div class="col-12 no-gutters accordion section" data-row-order="1">
-								<div class="d-flex flex-row justify-content-between px-2 accordion-head" id="accordion-head-site-content" data-toggle="collapse" data-target="#accordion-body-site-content" aria-expanded="true" aria-controls="accordion-body-site-content">
+								<div class="d-flex flex-row justify-content-between px-2 accordion-head" id="accordion-head-site-content" data-bs-toggle="collapse" data-bs-target="#accordion-body-site-content" aria-expanded="true" aria-controls="accordion-body-site-content">
 									<div class="group-name">
 										<?php esc_html_e( 'Where do you want to show this campaign?', 'iconvert-promoter' ); ?>
 										<span class="js-count-active count-active hidden"></span>
@@ -303,7 +307,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<option value="all"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'all' ) ? $selected_attr : '' );
+																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'all' ) ? 'selected="selected"' : '' );
 																			?>
 																			>
 																			<?php esc_html_e( 'Entire website', 'iconvert-promoter' ); ?>
@@ -311,7 +315,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<option value="all-no-homepage"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'all-no-homepage' ) ? $selected_attr : '' );
+																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'all-no-homepage' ) ? 'selected="selected"' : '' );
 																			?>
 																			>
 																			<?php esc_html_e( 'Entire website except homepage', 'iconvert-promoter' ); ?>
@@ -319,7 +323,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<option value="homepage"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'homepage' ) ? $selected_attr : '' );
+																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'homepage' ) ? 'selected="selected"' : '' );
 																			?>
 																			>
 																			<?php esc_html_e( 'Only on homepage', 'iconvert-promoter' ); ?>
@@ -327,7 +331,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<option value="posts"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'posts' ) ? $selected_attr : '' );
+																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'posts' ) ? 'selected="selected"' : '' );
 																			?>
 																			>
 																			<?php esc_html_e( 'All single posts', 'iconvert-promoter' ); ?>
@@ -335,7 +339,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<option value="pages"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'pages' ) ? $selected_attr : '' );
+																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'pages' ) ? 'selected="selected"' : '' );
 																			?>
 																			>
 																			<?php esc_html_e( 'All pages ( except single posts )', 'iconvert-promoter' ); ?>
@@ -343,7 +347,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<option value="specific_pages"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'specific_pages' ) ? $selected_attr : '' );
+																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'specific_pages' ) ? 'selected="selected"' : '' );
 																			?>
 																			>
 																			<?php esc_html_e( 'Specific pages', 'iconvert-promoter' ); ?>
@@ -352,7 +356,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<option value="specific_posts"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'specific_posts' ) ? $selected_attr : '' );
+																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'specific_posts' ) ? 'selected="selected"' : '' );
 																			?>
 																			>
 																			<?php esc_html_e( 'Specific posts', 'iconvert-promoter' ); ?>
@@ -360,7 +364,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<option value="specific_products" <?php echo ( ! function_exists( 'WC' ) ? 'disabled' : '' ); ?>
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'specific_products' ) ? $selected_attr : '' );
+																			echo ( ( isset( $displayConditions['pages'] ) && $displayConditions['pages'][0] === 'specific_products' ) ? 'selected="selected"' : '' );
 																			?>
 																			>
 																			<?php
@@ -408,7 +412,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 						<?php endif; ?>
 						<?php if ( $type !== 'inline-promotion-bar' ) : ?>
 							<div class="col-12 no-gutters accordion section" data-row-order="2">
-								<div class="d-flex flex-row justify-content-between align-items-center px-2 accordion-head" id="accordion-head-by-action" data-toggle="collapse" data-target="#accordion-body-by-action" aria-expanded="true" aria-controls="accordion-body-by-action">
+								<div class="d-flex flex-row justify-content-between align-items-center px-2 accordion-head" id="accordion-head-by-action" data-bs-toggle="collapse" data-bs-target="#accordion-body-by-action" aria-expanded="true" aria-controls="accordion-body-by-action">
 									<div class="group-name">
 										<?php esc_html_e( 'When do you  want to show this campaign?', 'iconvert-promoter' ); ?>
 										<span class="js-count-active count-active hidden"></span>
@@ -438,7 +442,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																			<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_on_click" id="switch_on_click"
 																				<?php
 																				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																				echo ( iconvert_promoter_promo_option_is_true( $triggers['on-click'] ) ? $checked_attr : '' );
+																				echo ( iconvertpr_promo_option_is_true( $triggers['on-click'] ) ? 'checked="checked"': '' );
 																				?>
 																				/>
 																			<span class="cs-active-slider"></span>
@@ -452,22 +456,20 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																<div class="input-group-prepend w-50">
 																	<label class="input-group wrapper-select2">
 																		<select class="select2-dropdown" name="select_on_click" id="select_on_click">
-																			<option value="class" <?php echo ( ( isset( $triggers['on-click'] ) && $triggers['on-click'][0] === 'class' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'class name', 'iconvert-promoter' ); ?>
+																			<option value="class" <?php echo ( ( isset( $triggers['on-click'] ) && $triggers['on-click'][0] === 'class' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'class name', 'iconvert-promoter' ); ?>
 																			</option>
-																			<option value="id" <?php echo ( ( isset( $triggers['on-click'] ) && $triggers['on-click'][0] === 'id' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'id', 'iconvert-promoter' ); ?>
+																			<option value="id" <?php echo ( ( isset( $triggers['on-click'] ) && $triggers['on-click'][0] === 'id' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'id', 'iconvert-promoter' ); ?>
 																			</option>
-																			<option value="advanced" <?php echo ( ( isset( $triggers['on-click'] ) && $triggers['on-click'][0] === 'advanced' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'custom selector', 'iconvert-promoter' ); ?>
+																			<option value="advanced" <?php echo ( ( isset( $triggers['on-click'] ) && $triggers['on-click'][0] === 'advanced' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'custom selector', 'iconvert-promoter' ); ?>
 																			</option>
 																		</select>
 																	</label>
 																</div>
-
 																<input type="text" required data-text-validation="<?php esc_attr_e( 'On click field is empty.', 'iconvert-promoter' ); ?>" data-valid-selector="select_on_click" data-valid-selector-message="<?php esc_attr_e( 'On click selector is not valid.', 'iconvert-promoter' ); ?>" name="value_on_click" id="value_on_click" value="<?php echo esc_attr( isset( $triggers['on-click'], $triggers['on-click'][1] ) ? $triggers['on-click'][1] : '' ); ?>" />
-
 															</div>
 														</div>
 													</div>
-													<div class="trigger element" data-trigger="exit intent" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="on exit intent">
+													<div class="trigger element" data-trigger="exit intent" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="on exit intent">
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between">
 																<div class="d-flex flex-wrap align-items-center">
@@ -478,7 +480,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_page_exit" id="switch_page_exit"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( iconvert_promoter_promo_option_is_true( $triggers['exit-intent'] ) ? $checked_attr : '' );
+																			echo ( iconvertpr_promo_option_is_true( $triggers['exit-intent'] ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -487,7 +489,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 															</div>
 														</div>
 													</div>
-													<div class="trigger element" data-trigger="on scroll percent" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="on scroll percent">
+													<div class="trigger element" data-trigger="on scroll percent" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="on scroll percent">
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -498,7 +500,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_scroll_percent" id="switch_scroll_percent"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( iconvert_promoter_promo_option_is_true( $triggers['scroll-percent'] ) ? $checked_attr : '' );
+																			echo ( iconvertpr_promo_option_is_true( $triggers['scroll-percent'] ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -521,7 +523,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 															</div>
 														</div>
 													</div>
-													<div class="trigger element" data-trigger="on scroll element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="scroll to element">
+													<div class="trigger element" data-trigger="on scroll element" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="scroll to element">
 														<div class="wrapper-trigger-switch 33">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -534,7 +536,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_scroll_to_element" id="switch_scroll_to_element"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( iconvert_promoter_promo_option_is_true( $triggers['scroll-to-element'] ) ? $checked_attr : '' );
+																			echo ( iconvertpr_promo_option_is_true( $triggers['scroll-to-element'] ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -547,11 +549,11 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																<div class="input-group-prepend w-50">
 																	<label class="input-group wrapper-select2">
 																		<select class="select2-dropdown" name="select_scroll_to_element">
-																			<option value="class" <?php echo ( ( isset( $triggers['scroll-to-element'] ) && $triggers['scroll-to-element'][0] === 'class' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'class name', 'iconvert-promoter' ); ?>
+																			<option value="class" <?php echo ( ( isset( $triggers['scroll-to-element'] ) && $triggers['scroll-to-element'][0] === 'class' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'class name', 'iconvert-promoter' ); ?>
 																			</option>
-																			<option value="id" <?php echo ( ( isset( $triggers['scroll-to-element'] ) && $triggers['scroll-to-element'][0] === 'id' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'id', 'iconvert-promoter' ); ?>
+																			<option value="id" <?php echo ( ( isset( $triggers['scroll-to-element'] ) && $triggers['scroll-to-element'][0] === 'id' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'id', 'iconvert-promoter' ); ?>
 																			</option>
-																			<option value="advanced" <?php echo ( ( isset( $triggers['scroll-to-element'] ) && $triggers['scroll-to-element'][0] === 'advanced' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'custom selector', 'iconvert-promoter' ); ?>
+																			<option value="advanced" <?php echo ( ( isset( $triggers['scroll-to-element'] ) && $triggers['scroll-to-element'][0] === 'advanced' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'custom selector', 'iconvert-promoter' ); ?>
 																			</option>
 																		</select>
 																	</label>
@@ -567,7 +569,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																<div class="d-flex flex-wrap align-items-center">
 																	<span class="switch_label item-label">
 																		<?php esc_html_e( 'Open from another campaign', 'iconvert-promoter' ); ?>
-																		<i class="dashicons-before dashicons-editor-help" data-toggle="tooltip" data-placement="top" title="Open this from another campaign. The other triggers will be ignored if you activate this."></i>
+																		<i class="dashicons-before dashicons-editor-help" data-bs-toggle="tooltip" data-placement="top" title="Open this from another campaign. The other triggers will be ignored if you activate this."></i>
 																	</span>
 																</div>
 																<div class="d-flex align-items-center">
@@ -575,7 +577,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_manually_open" id="switch_manually_open"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( iconvert_promoter_promo_option_is_true( $open_manually ) ? $checked_attr : '' );
+																			echo ( iconvertpr_promo_option_is_true( $open_manually ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -600,7 +602,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_page_load" id="switch_page_load"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( iconvert_promoter_promo_option_is_true( $triggers['page-load'] ) ? $checked_attr : '' );
+																			echo ( iconvertpr_promo_option_is_true( $triggers['page-load'] ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -613,7 +615,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																<div class="col-12">
 																	<div class="input-group group-append validation-wrapper">
 																		<label class="input-group">
-																			<input type="number" required data-text-validation="<?php esc_attr_e( 'Page load value less than 0 seconds.', 'iconvert-promoter' ); ?>" step="1" class="icp-integer-only" name="page_load_seconds" id="page_load_seconds" min="0" value="<?php echo ( isset( $triggers['page-load'] ) ? $triggers['page-load'][0] : '' ); ?>" />
+																			<input type="number" required data-text-validation="<?php esc_attr_e( 'Page load value less than 0 seconds.', 'iconvert-promoter' ); ?>" step="1" class="icp-integer-only" name="page_load_seconds" id="page_load_seconds" min="0" value="<?php echo ( isset( $triggers['page-load'] ) ? esc_attr( $triggers['page-load'][0] ) : '' ); ?>" />
 																		</label>
 																		<span class="input-group-append">
 																			<span class="input-group-text"><?php esc_html_e( 'seconds', 'iconvert-promoter' ); ?></span>
@@ -634,7 +636,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_after_inactivity" id="switch_after_inactivity"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo iconvert_promoter_promo_option_is_true( $triggers['after-inactivity'] ) ? $checked_attr : '';
+																			echo iconvertpr_promo_option_is_true( $triggers['after-inactivity'] ) ? 'checked="checked"': '';
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -652,7 +654,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 															</div>
 														</div>
 													</div>
-													<div class="trigger element" data-trigger="time spent on a single page" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="spend on page">
+													<div class="trigger element" data-trigger="time spent on a single page" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="spend on page">
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -663,7 +665,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_time_spend_single_page" id="switch_time_spend_single_page"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( iconvert_promoter_promo_option_is_true( $triggers['time-spent-on-page'] ) ? $checked_attr : '' );
+																			echo ( iconvertpr_promo_option_is_true( $triggers['time-spent-on-page'] ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -686,7 +688,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 															</div>
 														</div>
 													</div>
-													<div class="trigger element" data-trigger="time spent on site" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="spend on site">
+													<div class="trigger element" data-trigger="time spent on site" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="spend on site">
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -699,7 +701,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_time_spend_on_site" id="switch_time_spend_on_site"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo iconvert_promoter_promo_option_is_true( $triggers['time-spent-on-site'] ) ? $checked_attr : '';
+																			echo iconvertpr_promo_option_is_true( $triggers['time-spent-on-site'] ) ? 'checked="checked"': '';
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -712,7 +714,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																<div class="col-12">
 																	<div class="input-group group-append validation-wrapper">
 																		<label class="input-group">
-																			<input type="number" required data-text-validation="<?php esc_attr_e( 'Time spent on site is required.', 'iconvert-promoter' ); ?>" name="time_spend_on_site" id="time_spend_on_site" min="0" value="<?php echo ( isset( $triggers['time-spent-on-site'][0] ) ? $triggers['time-spent-on-site'][0] : '' ); ?>" />
+																			<input type="number" required data-text-validation="<?php esc_attr_e( 'Time spent on site is required.', 'iconvert-promoter' ); ?>" name="time_spend_on_site" id="time_spend_on_site" min="0" value="<?php echo ( isset( $triggers['time-spent-on-site'][0] ) ? esc_attr( $triggers['time-spent-on-site'][0] ) : '' ); ?>" />
 																		</label>
 																		<span class="input-group-append">
 																			<span class="input-group-text"><?php esc_html_e( 'seconds', 'iconvert-promoter' ); ?></span>
@@ -725,7 +727,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 												</div>
 												<div class="col-lg-6 col-xl-4 subsection">
 													<div class="title-subsection"><?php esc_html_e( 'By number of views', 'iconvert-promoter' ); ?></div>
-													<div class="trigger element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="Target new or returning visitors">
+													<div class="trigger element" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="Target new or returning visitors">
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -739,9 +741,9 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<label class="input-group wrapper-select2">
 																		<select class="select2-dropdown" name="new-returning">
 																			<?php $visitor_type = isset( $triggers['new-returning'][0] ) ? $triggers['new-returning'][0] : 'all'; ?>
-																			<option value="all" <?php echo $visitor_type === 'all' ? $selected_attr : ''; ?>><?php esc_html_e( 'All visitors', 'iconvert-promoter' ); ?></option>
-																			<option value="new" <?php echo $visitor_type === 'new' ? $selected_attr : ''; ?>><?php esc_html_e( 'New visitors', 'iconvert-promoter' ); ?></option>
-																			<option value="returning" <?php echo $visitor_type === 'returning' ? $selected_attr : ''; ?>><?php esc_html_e( 'Returning visitors', 'iconvert-promoter' ); ?></option>
+																			<option value="all" <?php echo $visitor_type === 'all' ? 'selected="selected"' : ''; ?>><?php esc_html_e( 'All visitors', 'iconvert-promoter' ); ?></option>
+																			<option value="new" <?php echo $visitor_type === 'new' ? 'selected="selected"' : ''; ?>><?php esc_html_e( 'New visitors', 'iconvert-promoter' ); ?></option>
+																			<option value="returning" <?php echo $visitor_type === 'returning' ? 'selected="selected"' : ''; ?>><?php esc_html_e( 'Returning visitors', 'iconvert-promoter' ); ?></option>
 																		</select>
 																	</label>
 																</div>
@@ -749,7 +751,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 														</div>
 													</div>
 
-													<div class="trigger element" data-row="sessions-number" data-trigger="After number of site visits" <?php iconvert_promoter_display_feature_requires_pro(); ?>>
+													<div class="trigger element" data-row="sessions-number" data-trigger="After number of site visits" <?php iconvertpr_display_feature_requires_pro(); ?>>
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -760,7 +762,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_after_sessions" id="switch_after_sessions"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( iconvert_promoter_promo_option_is_true( $triggers['x-sessions'] ) ? $checked_attr : '' );
+																			echo ( iconvertpr_promo_option_is_true( $triggers['x-sessions'] ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -773,7 +775,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																<div class="col-12">
 																	<div class="input-group group-append validation-wrapper">
 																		<label class="input-group">
-																			<input type="number" required data-text-validation="<?php esc_attr_e( 'After number of site visits is required.', 'iconvert-promoter' ); ?>" name="after_sessions" id="after_sessions" min="1" value="<?php echo ( isset( $triggers['x-sessions'][0] ) ? $triggers['x-sessions'][0] : '' ); ?>" />
+																			<input type="number" required data-text-validation="<?php esc_attr_e( 'After number of site visits is required.', 'iconvert-promoter' ); ?>" name="after_sessions" id="after_sessions" min="1" value="<?php echo ( isset( $triggers['x-sessions'][0] ) ? esc_attr( $triggers['x-sessions'][0] ) : '' ); ?>" />
 																		</label>
 																		<span class="input-group-append">
 																			<span class="input-group-text"><?php esc_html_e( 'sessions', 'iconvert-promoter' ); ?></span>
@@ -785,7 +787,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 													</div>
 
 
-													<div class="trigger element" data-trigger="After seeing any target page repeatedly" <?php iconvert_promoter_display_feature_requires_pro(); ?>>
+													<div class="trigger element" data-trigger="After seeing any target page repeatedly" <?php iconvertpr_display_feature_requires_pro(); ?>>
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -796,7 +798,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_same_page_views" id="switch_same_page_views"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( isset( $triggers['same-page-views'] ) && ( iconvert_promoter_promo_option_is_true( $triggers['same-page-views'] ) ) ? $checked_attr : '' );
+																			echo ( isset( $triggers['same-page-views'] ) && ( iconvertpr_promo_option_is_true( $triggers['same-page-views'] ) ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -809,7 +811,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																<div class="col-12">
 																	<div class="input-group group-append validation-wrapper">
 																		<label class="input-group">
-																			<input type="number" required data-text-validation="<?php esc_attr_e( 'After seeing any target page repeatedly is required.', 'iconvert-promoter' ); ?>" name="same_page_views" id="same_page_views" min="0" value="<?php echo ( isset( $triggers['same-page-views'] ) ? $triggers['same-page-views'][0] : '' ); ?>" />
+																			<input type="number" required data-text-validation="<?php esc_attr_e( 'After seeing any target page repeatedly is required.', 'iconvert-promoter' ); ?>" name="same_page_views" id="same_page_views" min="0" value="<?php echo ( isset( $triggers['same-page-views'] ) ? esc_attr( $triggers['same-page-views'][0] ) : '' ); ?>" />
 																		</label>
 																		<span class="input-group-append">
 																			<span class="input-group-text"><?php esc_html_e( 'times', 'iconvert-promoter' ); ?></span>
@@ -819,7 +821,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 															</div>
 														</div>
 													</div>
-													<div class="trigger element" data-trigger="After number of page views" <?php iconvert_promoter_display_feature_requires_pro(); ?>>
+													<div class="trigger element" data-trigger="After number of page views" <?php iconvertpr_display_feature_requires_pro(); ?>>
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -830,7 +832,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_page_views" id="switch_page_views"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( iconvert_promoter_promo_option_is_true( $triggers['page-views'] ) ? $checked_attr : '' );
+																			echo ( iconvertpr_promo_option_is_true( $triggers['page-views'] ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -843,7 +845,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																<div class="col-12">
 																	<div class="input-group group-append validation-wrapper">
 																		<label class="input-group">
-																			<input type="number" required data-text-validation="<?php esc_attr_e( 'After number of page views.', 'iconvert-promoter' ); ?>" name="page_views" id="page_views" min="0" value="<?php echo ( isset( $triggers['page-views'][0] ) ? $triggers['page-views'][0] : '' ); ?>" />
+																			<input type="number" required data-text-validation="<?php esc_attr_e( 'After number of page views.', 'iconvert-promoter' ); ?>" name="page_views" id="page_views" min="0" value="<?php echo ( isset( $triggers['page-views'][0] ) ? esc_attr( $triggers['page-views'][0] ) : '' ); ?>" />
 																		</label>
 																		<span class="input-group-append">
 																			<span class="input-group-text"><?php esc_html_e( 'views', 'iconvert-promoter' ); ?></span>
@@ -854,7 +856,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 														</div>
 													</div>
 
-													<div class="trigger element" data-trigger="After seeing several products" <?php iconvert_promoter_display_feature_requires_pro(); ?>>
+													<div class="trigger element" data-trigger="After seeing several products" <?php iconvertpr_display_feature_requires_pro(); ?>>
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between align-items-stretch">
 																<div class="d-flex flex-wrap align-items-center">
@@ -865,7 +867,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																		<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_after_products" id="switch_after_products"
 																			<?php
 																			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																			echo ( ( isset( $triggers['x-products'] ) && iconvert_promoter_promo_option_is_true( $triggers['x-products'] ) ) ? $checked_attr : '' );
+																			echo ( ( isset( $triggers['x-products'] ) && iconvertpr_promo_option_is_true( $triggers['x-products'] ) ) ? 'checked="checked"': '' );
 																			?>
 																			/>
 																		<span class="cs-active-slider"></span>
@@ -883,7 +885,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<?php endif; ?>
 																	<div class="input-group group-append validation-wrapper">
 																		<label class="input-group">
-																			<input type="number" required data-text-validation="<?php esc_attr_e( 'After seeing several products is required.', 'iconvert-promoter' ); ?>" name="after_products" id="after_products" min="0" value="<?php echo ( isset( $triggers['x-products'][0] ) ? $triggers['x-products'][0] : '' ); ?>" />
+																			<input type="number" required data-text-validation="<?php esc_attr_e( 'After seeing several products is required.', 'iconvert-promoter' ); ?>" name="after_products" id="after_products" min="0" value="<?php echo ( isset( $triggers['x-products'][0] ) ? esc_attr( $triggers['x-products'][0] ) : '' ); ?>" />
 																		</label>
 																		<span class="input-group-append">
 																			<span class="input-group-text"><?php esc_html_e( 'products', 'iconvert-promoter' ); ?></span>
@@ -901,7 +903,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 							</div>
 						<?php endif; ?>
 						<div class="col-12 no-gutters accordion section" data-row-order="3">
-							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-recurrence" data-toggle="collapse" data-target="#accordion-body-recurrence" aria-expanded="true" aria-controls="accordion-body-recurrence">
+							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-recurrence" data-bs-toggle="collapse" data-bs-target="#accordion-body-recurrence" aria-expanded="true" aria-controls="accordion-body-recurrence">
 								<div class="group-name">
 									<?php esc_html_e( 'How often do you want visitors to see this campaign?', 'iconvert-promoter' ); ?>
 									<span class="count-active"><?php esc_attr_e( '2 active', 'iconvert-promoter' ); ?></span>
@@ -917,7 +919,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 													<div class="subsection-title item-label"><?php esc_html_e( 'If user converted', 'iconvert-promoter' ); ?></div>
 													<div class="wrapper-display-condition-value">
 														<label class="input-group mb-0 wrapper-select2">
-															<?php iconvert_print_recurring_when_options( 'converted' ); ?>
+															<?php iconvertpr_print_recurring_when_options( 'converted' ); ?>
 														</label>
 													</div>
 												</div>
@@ -926,7 +928,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 												<div class="condition element">
 													<div class="subsection-title item-label"><?php esc_html_e( 'After time', 'iconvert-promoter' ); ?></div>
 													<div class="wrapper-display-condition-value">
-														<?php iconvert_print_recurring_after_time_options( 'converted' ); ?>
+														<?php iconvertpr_print_recurring_after_time_options( 'converted' ); ?>
 													</div>
 												</div>
 											</div>
@@ -939,7 +941,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 													<div class="subsection-title item-label"><?php esc_html_e( 'If closed without converting', 'iconvert-promoter' ); ?></div>
 													<div class="wrapper-display-condition-value">
 														<label class="input-group mb-0 wrapper-select2">
-															<?php iconvert_print_recurring_when_options( 'closed' ); ?>
+															<?php iconvertpr_print_recurring_when_options( 'closed' ); ?>
 														</label>
 													</div>
 												</div>
@@ -948,7 +950,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 												<div class="condition element">
 													<div class="subsection-title item-label"><?php esc_html_e( 'After time', 'iconvert-promoter' ); ?></div>
 													<div class="wrapper-display-condition-value">
-														<?php iconvert_print_recurring_after_time_options( 'closed' ); ?>
+														<?php iconvertpr_print_recurring_after_time_options( 'closed' ); ?>
 													</div>
 												</div>
 											</div>
@@ -958,7 +960,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 							</div>
 						</div>
 						<div class="col-12 no-gutters accordion section" data-row-order="4">
-							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-date-interval" data-toggle="collapse" data-target="#accordion-body-date-interval" aria-expanded="true" aria-controls="accordion-body-date-interval">
+							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-date-interval" data-bs-toggle="collapse" data-bs-target="#accordion-body-date-interval" aria-expanded="true" aria-controls="accordion-body-date-interval">
 								<div class="group-name">
 									<?php esc_html_e( 'Is your campaign time limited?', 'iconvert-promoter' ); ?>
 									<span class="js-count-active count-active hidden"></span>
@@ -970,7 +972,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 									<div class="container-fluid">
 										<div class="row">
 											<div class="col-lg-6 col-xl-4 subsection ">
-												<div class="col-lg-12 condition element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="When to start" data-row="when start">
+												<div class="col-lg-12 condition element" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="When to start" data-row="when start">
 													<div class="wrapper-display-condition-switch">
 														<div class="d-flex flex-row justify-content-between align-items-stretch">
 															<div class="d-flex flex-wrap align-items-center">
@@ -981,7 +983,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<input type="checkbox" class="switch-input" name="switch_when_start" id="switch_when_start"
 																		<?php
 																		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																		echo ( iconvert_promoter_promo_option_is_true( $displayConditions['start-time'] ) ? $checked_attr : '' );
+																		echo ( iconvertpr_promo_option_is_true( $displayConditions['start-time'] ) ? 'checked="checked"': '' );
 																		?>
 																		/>
 																	<span class="cs-active-slider"></span>
@@ -992,7 +994,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 													<div class="wrapper-display-condition-value pt-2 wrapper-trigger-value">
 														<div class="input-group group-append">
 															<label class="input-group validation-wrapper">
-																<input type="text" required disabled="disabled" data-text-validation="<?php esc_attr_e( 'The start time is required.', 'iconvert-promoter' ); ?>" <?php iconvert_promoter_display_feature_requires_pro(); ?> class="form-control" name="when-start" value="<?php echo isset( $displayConditions['start-time'][0] ) ? $displayConditions['start-time'][0] : ''; ?>" />
+																<input type="text" required disabled="disabled" data-text-validation="<?php esc_attr_e( 'The start time is required.', 'iconvert-promoter' ); ?>" <?php iconvertpr_display_feature_requires_pro(); ?> class="form-control" name="when-start" value="<?php echo isset( $displayConditions['start-time'][0] ) ? esc_attr( $displayConditions['start-time'][0] ) : ''; ?>" />
 															</label>
 															<span class="input-group-append append-calendar-icon">
 																<span class="input-group-text">
@@ -1004,7 +1006,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 												</div>
 											</div>
 											<div class="col-lg-6 col-xl-4 subsection">
-												<div class="col-lg-12 condition element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-row="when end">
+												<div class="col-lg-12 condition element" <?php iconvertpr_display_feature_requires_pro(); ?> data-row="when end">
 													<div class="wrapper-display-condition-switch">
 														<div class="d-flex flex-row justify-content-between align-items-stretch">
 															<div class="d-flex flex-wrap align-items-center">
@@ -1015,7 +1017,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<input type="checkbox" class="switch-input" name="switch_when_end" id="switch_when_end"
 																		<?php
 																		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																		echo ( iconvert_promoter_promo_option_is_true( $displayConditions['end-time'] ) ? $checked_attr : '' );
+																		echo ( iconvertpr_promo_option_is_true( $displayConditions['end-time'] ) ? 'checked="checked"': '' );
 																		?>
 																		/>
 																	<span class="cs-active-slider"></span>
@@ -1026,7 +1028,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 													<div class="wrapper-display-condition-value pt-2 wrapper-trigger-value">
 														<div class="input-group group-append">
 															<label class="input-group mb-0 validation-wrapper">
-																<input type="text" required disabled="disabled" data-text-validation="<?php esc_attr_e( 'The end time is required.', 'iconvert-promoter' ); ?>" class="form-control" name="when-end" value="<?php echo isset( $displayConditions['end-time'][0] ) ? $displayConditions['end-time'][0] : ''; ?>" />
+																<input type="text" required disabled="disabled" data-text-validation="<?php esc_attr_e( 'The end time is required.', 'iconvert-promoter' ); ?>" class="form-control" name="when-end" value="<?php echo isset( $displayConditions['end-time'][0] ) ? esc_attr( $displayConditions['end-time'][0] ) : ''; ?>" />
 															</label>
 															<span class="input-group-append append-calendar-icon">
 																<span class="input-group-text">
@@ -1043,7 +1045,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 							</div>
 						</div>
 						<div class="col-12 accordion section" data-row-order="5">
-							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-location" data-toggle="collapse" data-target="#accordion-body-location" aria-expanded="true" aria-controls="accordion-body-location">
+							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-location" data-bs-toggle="collapse" data-bs-target="#accordion-body-location" aria-expanded="true" aria-controls="accordion-body-location">
 								<div class="group-name">
 									<?php esc_html_e( 'Show campaign only to visitors from a specific location.', 'iconvert-promoter' ); ?>
 									<span class="js-count-active count-active hidden"></span>
@@ -1055,7 +1057,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 									<div class="container-fluid  wrapper-trigger-switch">
 										<div class="row">
 											<div class="col-lg-6 col-xl-4 subsection">
-												<div class="col-lg-12 condition element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-row="location">
+												<div class="col-lg-12 condition element" <?php iconvertpr_display_feature_requires_pro(); ?> data-row="location">
 
 													<div class="wrapper-display-condition-switch">
 														<div class="d-flex flex-row justify-content-between align-items-stretch">
@@ -1067,7 +1069,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<input type="checkbox" class="switch-input" name="switch_location" id="switch_location"
 																		<?php
 																		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																		echo ( iconvert_promoter_promo_option_is_true( $triggers['location'] ) ? $checked_attr : '' );
+																		echo ( iconvertpr_promo_option_is_true( $triggers['location'] ) ? 'checked="checked"': '' );
 																		?>
 																		/>
 																	<span class="cs-active-slider"></span>
@@ -1081,17 +1083,17 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 										</div>
 										<div class="row wrapper-trigger-value mt-3">
 											<div class="col-lg-6 col-xl-4 subsection">
-												<div class="col-lg-12 condition element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-row="specific country">
+												<div class="col-lg-12 condition element" <?php iconvertpr_display_feature_requires_pro(); ?> data-row="specific country">
 													<div class="subsection-title item-label"><?php esc_html_e( 'Show on specific country', 'iconvert-promoter' ); ?></div>
 													<div class="wrapper-display-condition-value">
 														<label class="input-group mb-0 wrapper-select2">
-															<select class="select2-dropdown" name="countries-autocomplete" data-selected="<?php echo ( isset( $triggers['location'][0] ) ? $triggers['location'][0] : '' ); ?>"></select>
+															<select class="select2-dropdown" name="countries-autocomplete" data-selected="<?php echo ( isset( $triggers['location'][0] ) ? esc_attr( $triggers['location'][0] ) : '' ); ?>"></select>
 														</label>
 													</div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-xl-4 subsection">
-												<div class="col-lg-12 condition element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-row="specific city">
+												<div class="col-lg-12 condition element" <?php iconvertpr_display_feature_requires_pro(); ?> data-row="specific city">
 													<div class="subsection-title item-label"><?php esc_html_e( 'Show on specific city/state', 'iconvert-promoter' ); ?></div>
 													<div class="wrapper-display-condition-value">
 														<label class="input-group mb-0 wrapper-select2">
@@ -1099,28 +1101,28 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																class="select2-dropdown" name="cities-autocomplete"
 																<?php echo ( ! isset( $triggers['location'][0] ) || $triggers['location'][0] === '' ) ? 'disabled="disabled" ' : ''; ?>
 																multiple="multiple"
-																data-selected="<?php echo ( isset( $triggers['location'][1] ) && ! empty( $triggers['location'][1] ) ? implode( ',', $triggers['location'][1] ) : '' ); ?>">
+																data-selected="<?php echo ( isset( $triggers['location'][1] ) && ! empty( $triggers['location'][1] ) ? esc_attr( implode( ',', $triggers['location'][1] ) ) : '' ); ?>">
 															</select>
 														</label>
 													</div>
 												</div>
 											</div>
 											<div class="col-lg-6 col-xl-4 subsection">
-												<div class="col-lg-12 condition element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-row="specific city">
+												<div class="col-lg-12 condition element" <?php iconvertpr_display_feature_requires_pro(); ?> data-row="specific city">
 													<div class="subsection-title item-label"><?php esc_html_e( 'Location Service', 'iconvert-promoter' ); ?></div>
 													<div class="wrapper-display-condition-value">
 														<label class="input-group mb-0 wrapper-select2">
 															<?php $location_service = isset( $triggers['location'][2] ) ? $triggers['location'][2] : 'iconvert'; ?>
 															<select class="select2-dropdown" name="location-service">
-																<option value="browser" <?php echo ( $location_service === 'browser' ? $selected_attr : '' ); ?>>
+																<option value="browser" <?php echo ( $location_service === 'browser' ? 'selected="selected"' : '' ); ?>>
 																	<?php esc_html_e( 'Browser Geolocation - Requires user permission', 'iconvert-promoter' ); ?>
 																</option>
-																<?php if ( defined( 'IC_PROMO_ENABLE_BEACONDB' ) && IC_PROMO_ENABLE_BEACONDB ) : ?>
-																	<option value="beacondb" <?php echo ( $location_service === 'beacondb' ? $selected_attr : '' ); ?>>
+																<?php if ( defined( 'ICONVERTPR_ENABLE_BEACONDB' ) && ICONVERTPR_ENABLE_BEACONDB ) : ?>
+																	<option value="beacondb" <?php echo ( $location_service === 'beacondb' ? 'selected="selected"' : '' ); ?>>
 																		<?php esc_html_e( 'Beacondb.net - Public domain geolocation database', 'iconvert-promoter' ); ?>
 																	</option>
 																<?php endif; ?>
-																<option value="iconvert" <?php echo ( $location_service === 'iconvert' ? $selected_attr : '' ); ?>>
+																<option value="iconvert" <?php echo ( $location_service === 'iconvert' ? 'selected="selected"' : '' ); ?>>
 																	<?php esc_html_e( 'iConvert Geolocation Service', 'iconvert-promoter' ); ?>
 																</option>
 															</select>
@@ -1134,7 +1136,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 							</div>
 						</div>
 						<div class="col-12 no-gutters accordion section" data-row-order="6">
-							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-by-arriving-from" data-toggle="collapse" data-target="#accordion-body-by-arriving-from" aria-expanded="true" aria-controls="accordion-body-by-arriving-from">
+							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-by-arriving-from" data-bs-toggle="collapse" data-bs-target="#accordion-body-by-arriving-from" aria-expanded="true" aria-controls="accordion-body-by-arriving-from">
 								<div class="group-name">
 									<?php esc_html_e( 'Show campaign only to visitors from a specific traffic source.', 'iconvert-promoter' ); ?>
 									<span class="js-count-active count-active hidden"></span>
@@ -1146,7 +1148,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 									<div class="container-fluid">
 										<div class="row">
 											<div class="col-lg-8 col-xl-4 subsection">
-												<div class="trigger element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="When arriving from a specific traffic source">
+												<div class="trigger element" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="When arriving from a specific traffic source">
 													<div class="wrapper-trigger-switch">
 														<div class="d-flex flex-row justify-content-between align-items-stretch">
 															<div class="d-flex flex-wrap align-items-center">
@@ -1157,7 +1159,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<input type="checkbox" class="switch-input" name="switch_arriving_from_source" id="switch_arriving_from_source"
 																		<?php
 																		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																		echo ( iconvert_promoter_promo_option_is_true( $specificTrafficSource ) ? $checked_attr : '' );
+																		echo ( iconvertpr_promo_option_is_true( $specificTrafficSource ) ? 'checked="checked"': '' );
 																		?>
 																		/>
 																	<span class="cs-active-slider"></span>
@@ -1170,25 +1172,25 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 															<div class="col-12">
 																<label class="input-group mb-3 wrapper-select2">
 																	<select class="select2-dropdown" name="select_arriving_from_source">
-																		<option value="direct" <?php echo ( $check_sts_direct ? $selected_attr : '' ); ?>><?php esc_html_e( 'Direct', 'iconvert-promoter' ); ?>
+																		<option value="direct" <?php echo ( $check_sts_direct ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'Direct', 'iconvert-promoter' ); ?>
 																		</option>
-																		<option value="google_organic" <?php echo ( $check_sts_google_organic ? $selected_attr : '' ); ?>><?php esc_html_e( 'Google (organic)', 'iconvert-promoter' ); ?>
+																		<option value="google_organic" <?php echo ( $check_sts_google_organic ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'Google (organic)', 'iconvert-promoter' ); ?>
 																		</option>
-																		<option value="google_paid" <?php echo ( $check_sts_google_paid ? $selected_attr : '' ); ?>><?php esc_html_e( 'Google (paid)', 'iconvert-promoter' ); ?>
+																		<option value="google_paid" <?php echo ( $check_sts_google_paid ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'Google (paid)', 'iconvert-promoter' ); ?>
 																		</option>
-																		<option value="facebook_organic" <?php echo ( $check_sts_fb_organic ? $selected_attr : '' ); ?>><?php esc_html_e( 'Facebook (organic)', 'iconvert-promoter' ); ?>
+																		<option value="facebook_organic" <?php echo ( $check_sts_fb_organic ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'Facebook (organic)', 'iconvert-promoter' ); ?>
 																		</option>
-																		<option value="facebook_paid" <?php echo ( $check_sts_fb_paied ? $selected_attr : '' ); ?>><?php esc_html_e( 'Facebook (paid)', 'iconvert-promoter' ); ?>
+																		<option value="facebook_paid" <?php echo ( $check_sts_fb_paied ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'Facebook (paid)', 'iconvert-promoter' ); ?>
 																		</option>
-																		<option value="referrer" <?php echo ( $check_sts_referal ? $selected_attr : '' ); ?>><?php esc_html_e( 'Referrer', 'iconvert-promoter' ); ?>
+																		<option value="referrer" <?php echo ( $check_sts_referal ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'Referrer', 'iconvert-promoter' ); ?>
 																		</option>
 																	</select>
 																</label>
 															</div>
 															<div class="box-referrer-value col-12" style="<?php echo ( ( ( isset( $displayConditions['specific-traffic-source'] ) && $displayConditions['specific-traffic-source'][0] === 'referrer' ) || ! $check_sts_referal ) ? 'display: none' : '' ); ?>">
 																<label class="align-items-center d-flex input-group mb-3 validation-wrapper">
-																	<input type="text" class="" required disabled="disabled" data-text-validation="<?php esc_attr_e( 'When arriving from a specific traffic source referrer is required.', 'iconvert-promoter' ); ?>" name="referrer_value" id="referrer_value" value="<?php echo ( isset( $displayConditions['specific-traffic-source'][1] ) ? $displayConditions['specific-traffic-source'][1] : '' ); ?>" />
-																	<i class="dashicons-before dashicons-editor-help ml-2" data-toggle="tooltip" data-placement="top" title="<?php esc_html_e( "If caching is detected, the script will compare only the domain part. In all instances, we strongly recommend that you thoroughly test your campaign's functionality when configuring referrer detection", 'iconvert-promoter' ); ?>"></i>
+																	<input type="text" class="" required disabled="disabled" data-text-validation="<?php esc_attr_e( 'When arriving from a specific traffic source referrer is required.', 'iconvert-promoter' ); ?>" name="referrer_value" id="referrer_value" value="<?php echo ( isset( $displayConditions['specific-traffic-source'][1] ) ? esc_attr( $displayConditions['specific-traffic-source'][1] ) : '' ); ?>" />
+																	<i class="dashicons-before dashicons-editor-help ml-2" data-bs-toggle="tooltip" data-placement="top" title="<?php esc_html_e( "If caching is detected, the script will compare only the domain part. In all instances, we strongly recommend that you thoroughly test your campaign's functionality when configuring referrer detection", 'iconvert-promoter' ); ?>"></i>
 
 																</label>
 															</div>
@@ -1201,7 +1203,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 
 										<div class="row mt-2">
 											<div class="col-12 subsection">
-												<div class="trigger element validate-at-least-one" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="When arriving with specific UTMs" data-text-validation="When arriving  with specific UTMs requires at least one field configured">
+												<div class="trigger element validate-at-least-one" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="When arriving with specific UTMs" data-text-validation="When arriving  with specific UTMs requires at least one field configured">
 													<div class="wrapper-trigger-switch">
 														<div class="row">
 															<div class="col-lg-6 col-xl-4">
@@ -1214,7 +1216,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																			<input type="checkbox" class="switch-input" name="switch_arriving_from_utm" id="switch_arriving_from_utm"
 																				<?php
 																				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																				echo ( iconvert_promoter_promo_option_is_true( $specificUTMSource ) ? $checked_attr : '' );
+																				echo ( iconvertpr_promo_option_is_true( $specificUTMSource ) ? 'checked="checked"': '' );
 																				?>
 																				/>
 																			<span class="cs-active-slider"></span>
@@ -1317,7 +1319,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 							</div>
 						</div>
 						<div class="col-12 no-gutters accordion section" data-row-order="7">
-							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-by-cart-attr" data-toggle="collapse" data-target="#accordion-body-by-cart-attr" aria-expanded="true" aria-controls="accordion-body-by-cart-attr">
+							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-by-cart-attr" data-bs-toggle="collapse" data-bs-target="#accordion-body-by-cart-attr" aria-expanded="true" aria-controls="accordion-body-by-cart-attr">
 								<div class="group-name">
 									<?php esc_html_e( 'Show campaign based on the visitor\'s cart content.', 'iconvert-promoter' ); ?>
 									<span class="js-count-active count-active hidden"></span>
@@ -1334,7 +1336,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 														<?php esc_html_e( 'These options require WooCommerce plugin.', 'iconvert-promoter' ); ?>
 													</div>
 												<?php endif; ?>
-												<div class="trigger element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="Number of items in Cart">
+												<div class="trigger element" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="Number of items in Cart">
 													<div class="wrapper-trigger-switch">
 														<div class="d-flex flex-row justify-content-between align-items-stretch">
 															<div class="d-flex flex-wrap align-items-center">
@@ -1345,7 +1347,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_total_number_in_cart" id="switch_total_number_in_cart"
 																		<?php
 																		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																		echo ( iconvert_promoter_promo_option_is_true( $triggers['total-number-in-cart'] ) ? $checked_attr : '' );
+																		echo ( iconvertpr_promo_option_is_true( $triggers['total-number-in-cart'] ) ? 'checked="checked"': '' );
 																		?>
 																		/>
 																	<span class="cs-active-slider"></span>
@@ -1359,14 +1361,14 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 
 																<div class="input-group group-append validation-wrapper">
 																	<label class="input-group">
-																		<input type="number" required data-text-validation="<?php esc_attr_e( 'Number of items in Cart is required.', 'iconvert-promoter' ); ?>" name="total_number_in_cart" id="total_number_in_cart" min="0" value="<?php echo ( isset( $triggers['total-number-in-cart'][1] ) ? $triggers['total-number-in-cart'][1] : '' ); ?>" />
+																		<input type="number" required data-text-validation="<?php esc_attr_e( 'Number of items in Cart is required.', 'iconvert-promoter' ); ?>" name="total_number_in_cart" id="total_number_in_cart" min="0" value="<?php echo ( isset( $triggers['total-number-in-cart'][1] ) ? esc_attr( $triggers['total-number-in-cart'][1] ) : '' ); ?>" />
 																	</label>
 																	<div class="input-group-append">
 																		<label class="input-group wrapper-select2">
 																			<select class="select2-dropdown" name="select_items_in_cart">
-																				<option value="less" <?php echo ( ( isset( $triggers['total-number-in-cart'][0] ) && $triggers['total-number-in-cart'][0] === 'more' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'less than', 'iconvert-promoter' ); ?></option>
-																				<option value="more" <?php echo ( ( isset( $triggers['total-number-in-cart'][0] ) && $triggers['total-number-in-cart'][0] === 'less' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'more than', 'iconvert-promoter' ); ?></option>
-																				<option value="equal" <?php echo ( ( isset( $triggers['total-number-in-cart'][0] ) && $triggers['total-number-in-cart'][0] === 'equal' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'equal', 'iconvert-promoter' ); ?></option>
+																				<option value="less" <?php echo ( ( isset( $triggers['total-number-in-cart'][0] ) && $triggers['total-number-in-cart'][0] === 'more' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'less than', 'iconvert-promoter' ); ?></option>
+																				<option value="more" <?php echo ( ( isset( $triggers['total-number-in-cart'][0] ) && $triggers['total-number-in-cart'][0] === 'less' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'more than', 'iconvert-promoter' ); ?></option>
+																				<option value="equal" <?php echo ( ( isset( $triggers['total-number-in-cart'][0] ) && $triggers['total-number-in-cart'][0] === 'equal' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'equal', 'iconvert-promoter' ); ?></option>
 																			</select>
 																		</label>
 																	</div>
@@ -1375,7 +1377,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 														</div>
 													</div>
 												</div>
-												<div class="trigger element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="Cart Total">
+												<div class="trigger element" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="Cart Total">
 													<div class="wrapper-trigger-switch">
 														<div class="d-flex flex-row justify-content-between align-items-stretch">
 															<div class="d-flex flex-wrap align-items-center">
@@ -1386,7 +1388,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_total_amount_cart" id="switch_total_amount_cart"
 																		<?php
 																		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																		echo ( isset( $triggers['total-amount-cart'] ) && iconvert_promoter_promo_option_is_true( $triggers['total-amount-cart'] ) ? $checked_attr : '' );
+																		echo ( isset( $triggers['total-amount-cart'] ) && iconvertpr_promo_option_is_true( $triggers['total-amount-cart'] ) ? 'checked="checked"': '' );
 																		?>
 																		/>
 																	<span class="cs-active-slider"></span>
@@ -1397,14 +1399,14 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 													<div class="wrapper-trigger-value pt-2">
 														<div class="input-group group-append validation-wrapper">
 															<label class="input-group">
-																<input type="number" required data-text-validation="<?php esc_attr_e( 'Cart Total Amount is required.', 'iconvert-promoter' ); ?>" name="total_amount_cart" id="total_amount_cart" min="0" value="<?php echo ( isset( $triggers['total-amount-cart'][1] ) ? $triggers['total-amount-cart'][1] : '' ); ?>" />
+																<input type="number" required data-text-validation="<?php esc_attr_e( 'Cart Total Amount is required.', 'iconvert-promoter' ); ?>" name="total_amount_cart" id="total_amount_cart" min="0" value="<?php echo ( isset( $triggers['total-amount-cart'][1] ) ? esc_attr( $triggers['total-amount-cart'][1] ) : '' ); ?>" />
 															</label>
 															<div class="input-group-append">
 																<label class="input-group wrapper-select2">
 																	<select class="select2-dropdown" name="select_total_amount_cart">
-																		<option value="less" <?php echo ( ( isset( $triggers['total-amount-cart'][0] ) && $triggers['total-amount-cart'][0] === 'less' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'less than', 'iconvert-promoter' ); ?>
+																		<option value="less" <?php echo ( ( isset( $triggers['total-amount-cart'][0] ) && $triggers['total-amount-cart'][0] === 'less' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'less than', 'iconvert-promoter' ); ?>
 																		</option>
-																		<option value="more" <?php echo ( ( isset( $triggers['total-amount-cart'][0] ) && $triggers['total-amount-cart'][0] === 'more' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'more than', 'iconvert-promoter' ); ?>
+																		<option value="more" <?php echo ( ( isset( $triggers['total-amount-cart'][0] ) && $triggers['total-amount-cart'][0] === 'more' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'more than', 'iconvert-promoter' ); ?>
 																		</option>
 																	</select>
 																</label>
@@ -1412,7 +1414,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 														</div>
 													</div>
 												</div>
-												<div class="trigger element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="Cart Contains">
+												<div class="trigger element" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="Cart Contains">
 													<div class="wrapper-trigger-switch">
 														<div class="d-flex flex-row justify-content-between align-items-stretch">
 															<div class="d-flex flex-wrap align-items-center">
@@ -1423,7 +1425,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_product_in_cart" id="switch_product_in_cart"
 																		<?php
 																		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																		echo ( iconvert_promoter_promo_option_is_true( $triggers['product-in-cart'] ) ? $checked_attr : '' );
+																		echo ( iconvertpr_promo_option_is_true( $triggers['product-in-cart'] ) ? 'checked="checked"': '' );
 																		?>
 																		/>
 																	<span class="cs-active-slider"></span>
@@ -1434,14 +1436,14 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 													<div class="wrapper-trigger-value pt-2">
 														<div class="input-group group-append validation-wrapper">
 															<label class="input-group wrapper-select2 validation-wrapper" for="product_in_cart">
-																<select class="select2-dropdown" required data-text-validation="<?php esc_attr_e( 'Cart Contains is required.', 'iconvert-promoter' ); ?>" name="product_in_cart" id="product_in_cart" multiple="multiple" data-selected="<?php echo ( isset( $triggers['product-in-cart'][1] ) ? implode( ',', $triggers['product-in-cart'][1] ) : '' ); ?>"></select>
+																<select class="select2-dropdown" required data-text-validation="<?php esc_attr_e( 'Cart Contains is required.', 'iconvert-promoter' ); ?>" name="product_in_cart" id="product_in_cart" multiple="multiple" data-selected="<?php echo ( isset( $triggers['product-in-cart'][1] ) ? esc_attr( implode( ',', $triggers['product-in-cart'][1] ) ) : '' ); ?>"></select>
 															</label>
 															<div class="input-group-append">
 																<label class="input-group wrapper-select2">
 																	<select class="select2-dropdown" name="select_product_in_cart">
-																		<option value="all" <?php echo ( ( isset( $triggers['product-in-cart'][0] ) && $triggers['product-in-cart'][0] === 'all' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'must all', 'iconvert-promoter' ); ?>
+																		<option value="all" <?php echo ( ( isset( $triggers['product-in-cart'][0] ) && $triggers['product-in-cart'][0] === 'all' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'must all', 'iconvert-promoter' ); ?>
 																		</option>
-																		<option value="one" <?php echo ( ( isset( $triggers['product-in-cart'][0] ) && $triggers['product-in-cart'][0] === 'one' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'at least one', 'iconvert-promoter' ); ?>
+																		<option value="one" <?php echo ( ( isset( $triggers['product-in-cart'][0] ) && $triggers['product-in-cart'][0] === 'one' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'at least one', 'iconvert-promoter' ); ?>
 																		</option>
 																	</select>
 																</label>
@@ -1449,7 +1451,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 														</div>
 													</div>
 												</div>
-												<div class="trigger element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-trigger="Cart Does Not Contain">
+												<div class="trigger element" <?php iconvertpr_display_feature_requires_pro(); ?> data-trigger="Cart Does Not Contain">
 													<div class="wrapper-trigger-switch">
 														<div class="d-flex flex-row justify-content-between align-items-stretch">
 															<div class="d-flex flex-wrap align-items-center">
@@ -1460,7 +1462,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 																	<input type="checkbox" class="switch-input optrix-at-least-one" name="switch_product_not_in_cart" id="switch_product_not_in_cart"
 																		<?php
 																		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-																		echo ( ( isset( $triggers['product-not-in-cart'] ) && iconvert_promoter_promo_option_is_true( $triggers['product-not-in-cart'] ) ) ? $checked_attr : '' );
+																		echo ( ( isset( $triggers['product-not-in-cart'] ) && iconvertpr_promo_option_is_true( $triggers['product-not-in-cart'] ) ) ? 'checked="checked"': '' );
 																		?>
 																		/>
 																	<span class="cs-active-slider"></span>
@@ -1471,14 +1473,14 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 													<div class="wrapper-trigger-value pt-2">
 														<div class="input-group group-append validation-wrapper">
 															<label class="input-group wrapper-select2 validation-wrapper" for="product_not_in_cart">
-																<select class="select2-dropdown" required data-text-validation="<?php esc_attr_e( 'Cart Does Not Contain is required.', 'iconvert-promoter' ); ?>" name="product_not_in_cart" id="product_not_in_cart" multiple="multiple" data-selected="<?php echo ( isset( $triggers['product-not-in-cart'][1] ) ? implode( ',', $triggers['product-not-in-cart'][1] ) : '' ); ?>"></select>
+																<select class="select2-dropdown" required data-text-validation="<?php esc_attr_e( 'Cart Does Not Contain is required.', 'iconvert-promoter' ); ?>" name="product_not_in_cart" id="product_not_in_cart" multiple="multiple" data-selected="<?php echo ( isset( $triggers['product-not-in-cart'][1] ) ? esc_attr( implode( ',', $triggers['product-not-in-cart'][1] ) ) : '' ); ?>"></select>
 															</label>
 															<div class="input-group-append">
 																<label class="input-group wrapper-select2">
 																	<select class="select2-dropdown" name="select_product_not_in_cart">
-																		<option value="all" <?php echo ( ( isset( $triggers['product-not-in-cart'][0] ) && $triggers['product-not-in-cart'][0] === 'all' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'must all', 'iconvert-promoter' ); ?>
+																		<option value="all" <?php echo ( ( isset( $triggers['product-not-in-cart'][0] ) && $triggers['product-not-in-cart'][0] === 'all' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'must all', 'iconvert-promoter' ); ?>
 																		</option>
-																		<option value="one" <?php echo ( ( isset( $triggers['product-not-in-cart'][0] ) && $triggers['product-not-in-cart'][0] === 'one' ) ? $selected_attr : '' ); ?>><?php esc_html_e( 'at least one', 'iconvert-promoter' ); ?>
+																		<option value="one" <?php echo ( ( isset( $triggers['product-not-in-cart'][0] ) && $triggers['product-not-in-cart'][0] === 'one' ) ? 'selected="selected"' : '' ); ?>><?php esc_html_e( 'at least one', 'iconvert-promoter' ); ?>
 																		</option>
 																	</select>
 																</label>
@@ -1493,7 +1495,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 							</div>
 						</div>
 						<div class="col-12 no-gutters accordion section" data-row-order="8">
-							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-device" data-toggle="collapse" data-target="#accordion-body-device" aria-expanded="true" aria-controls="accordion-body-device">
+							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-device" data-bs-toggle="collapse" data-bs-target="#accordion-body-device" aria-expanded="true" aria-controls="accordion-body-device">
 								<div class="group-name">
 									<?php esc_html_e( 'Show only on specific devices.', 'iconvert-promoter' ); ?>
 									<span class="js-count-active count-active hidden"></span>
@@ -1505,26 +1507,26 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 									<div class="container-fluid">
 										<div class="row">
 											<div class="col-lg-6 col-xl-4 subsection">
-												<div class="col-lg-12 condition element" <?php iconvert_promoter_display_feature_requires_pro(); ?> data-row="specific display">
+												<div class="col-lg-12 condition element" <?php iconvertpr_display_feature_requires_pro(); ?> data-row="specific display">
 													<div class="d-flex flex-row justify-content-between">
 														<div class="subsection-title py-2 item-label specific-devices"><?php esc_html_e( 'Enable on', 'iconvert-promoter' ); ?></div>
 														<div class="d-flex justify-content-around validate-at-least-one" data-text-validation="<?php esc_attr_e( 'At least one device must be selected.', 'iconvert-promoter' ); ?>">
 															<div class="container-specific-device <?php echo $has_desktop_active ? 'active' : ''; ?>">
 																<label class="d-block">
 																	<span class="cs-device-icon"><i class="bi bi-laptop primary"></i></span>
-																	<input type="checkbox" class="switch-input" name="switch_device_desktop" id="switch_device_desktop" <?php echo $has_desktop_active ? $checked_attr : ''; ?> />
+																	<input type="checkbox" class="switch-input" name="switch_device_desktop" id="switch_device_desktop" <?php echo $has_desktop_active ? 'checked="checked"': ''; ?> />
 																</label>
 															</div>
 															<div class="container-specific-device <?php echo $has_tablet_active ? 'active' : ''; ?>">
 																<label class="d-block">
 																	<span class="cs-device-icon"><i class="bi bi-tablet primary"></i></span>
-																	<input type="checkbox" class="switch-input" name="switch_device_tablet" id="switch_device_tablet" <?php echo $has_tablet_active ? $checked_attr : ''; ?> />
+																	<input type="checkbox" class="switch-input" name="switch_device_tablet" id="switch_device_tablet" <?php echo $has_tablet_active ? 'checked="checked"': ''; ?> />
 																</label>
 															</div>
 															<div class="container-specific-device <?php echo $has_mobile_active ? 'active' : ''; ?>">
 																<label class="d-block">
 																	<span class="cs-device-icon"><i class="bi bi-phone primary"></i></span>
-																	<input type="checkbox" class="switch-input" name="switch_device_mobile" id="switch_device_mobile" <?php echo $has_mobile_active ? $checked_attr : ''; ?> />
+																	<input type="checkbox" class="switch-input" name="switch_device_mobile" id="switch_device_mobile" <?php echo $has_mobile_active ? 'checked="checked"': ''; ?> />
 																</label>
 															</div>
 														</div>
@@ -1537,7 +1539,7 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 							</div>
 						</div>
 						<div class="col-12 no-gutters accordion section" data-row-order="9">
-							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-user-type" data-toggle="collapse" data-target="#accordion-body-user-type" aria-expanded="true" aria-controls="accordion-body-user-type">
+							<div class="d-flex flex-row justify-content-between px-2 accordion-head collapsed" id="accordion-head-user-type" data-bs-toggle="collapse" data-bs-target="#accordion-body-user-type" aria-expanded="true" aria-controls="accordion-body-user-type">
 								<div class="group-name">
 									<?php esc_html_e( 'Hide campaign for logged users.', 'iconvert-promoter' ); ?>
 									<span class="js-count-active count-active hidden"></span>
@@ -1551,22 +1553,22 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 											<div class="col-lg-8 col-xl-4 subsection">
 												<?php foreach ( $hcLoggedUsers as $hcLoggedUser ) : ?>
 													<div class="trigger element"
-														data-trigger="<?php echo $hcLoggedUser['label']; ?>"
-														data-trigger="on <?php echo $hcLoggedUser['label']; ?>"
+														data-trigger="<?php echo esc_attr( $hcLoggedUser['label'] ); ?>"
+														data-trigger="on <?php echo esc_attr( $hcLoggedUser['label'] ); ?>"
 														<?php
 														if ( $hcLoggedUser['isPro'] ) {
-															iconvert_promoter_display_feature_requires_pro();
+															iconvertpr_display_feature_requires_pro();
 														}
 														?>
 														>
 														<div class="wrapper-trigger-switch">
 															<div class="d-flex flex-row justify-content-between">
 																<div class="d-flex flex-wrap align-items-center">
-																	<span class="switch_label item-label"><?php echo $hcLoggedUser['label']; ?></span>
+																	<span class="switch_label item-label"><?php echo esc_html( $hcLoggedUser['label'] ); ?></span>
 																</div>
 																<div class="d-flex align-items-center">
 																	<label class="cs-switch-small cs-toggle-status">
-																		<input type="checkbox" class="switch-input" data-checkbox-group="hide-user" value="<?php echo esc_attr( $hcLoggedUser['role'] ); ?>" name="<?php echo $hcLoggedUser['input_name']; ?>" id="<?php echo $hcLoggedUser['input_name']; ?>" <?php echo ( isset( $displayConditions['cs-roles'] ) && in_array( $hcLoggedUser['role'], $displayConditions['cs-roles'] ) ) ? $checked_attr : ''; ?> />
+																		<input type="checkbox" class="switch-input" data-checkbox-group="hide-user" value="<?php echo esc_attr( $hcLoggedUser['role'] ); ?>" name="<?php echo esc_attr( $hcLoggedUser['input_name'] ); ?>" id="<?php echo esc_attr( $hcLoggedUser['input_name'] ); ?>" <?php echo ( isset( $displayConditions['cs-roles'] ) && in_array( $hcLoggedUser['role'], $displayConditions['cs-roles'] ) ) ? 'checked="checked"': ''; ?> />
 																		<span class="cs-active-slider"></span>
 																	</label>
 																</div>
@@ -1588,8 +1590,8 @@ function iconvert_promoter_promo_option_is_true( $val ) {
 	</div>
 
 </form>
-<?php wp_nonce_field( 'icp_posts-search', '_wpnonce_search' ); ?>
-<?php wp_nonce_field( 'icp_product-search', '_wpnonce_product_search' ); ?>
+<?php wp_nonce_field( 'iconvertpr_posts-search', '_wpnonce_iconvertpr_search' ); ?>
+<?php wp_nonce_field( 'iconvertpr_product-search', '_wpnonce_iconvertpr_product_search' ); ?>
 <div class="modal fade" id="modal_promo_preview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

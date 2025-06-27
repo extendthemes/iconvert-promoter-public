@@ -7,6 +7,8 @@ use CSPromo\Core\PostTypes\PromoPopups;
 use CSPromo\Core\Traits\HasTemplate;
 use CSPromo\Core\Frontend\PopupGenerate\PopupsListGenerator;
 use CSPromo\Core\Services\TemplatesService;
+use KPromo\Core\Registry;
+use KPromo\Core\StyleManager\StyleManager;
 use stdClass;
 
 class PromoPreviewPage {
@@ -32,9 +34,9 @@ class PromoPreviewPage {
 			wp_dequeue_style( 'admin-bar' );
 
 			if ( $popup['popup_type'] === 'inline-promotion-bar' ) {
-				return IC_PROMO_PATH . '/frontend/templates/preview-inline-promotion-bar.php';
+				return ICONVERTPR_PATH . '/frontend/templates/preview-inline-promotion-bar.php';
 			} else {
-				return IC_PROMO_PATH . '/frontend/templates/preview-real.php';
+				return ICONVERTPR_PATH . '/frontend/templates/preview-real.php';
 			}
 		}
 
@@ -68,7 +70,8 @@ class PromoPreviewPage {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$aligns = isset( $_GET['position'] ) ? sanitize_text_field( urldecode( $_GET['position'] ) ) : 'center#center';
 			$inline = false;
-
+			
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$template_id = isset( $_GET['template_id'] ) ? sanitize_text_field( $_GET['template_id'] ) : 0;
 
 			if ( strpos( $aligns, $this->separator ) === false ) {
@@ -105,7 +108,7 @@ class PromoPreviewPage {
 				'animationInClass'  => Promos::normalize_animation_class( $animation_in )['effect'],
 				'animationOutClass' => Promos::normalize_animation_class( $animation_out )['effect'],
 					// phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				'animationDuration' => isset($_GET['animationDuration'] ) ? floatval( $_GET['animationDuration'] ) : 1,
+				'animationDuration' => isset( $_GET['animationDuration'] ) ? floatval( $_GET['animationDuration'] ) : 1,
 			);
 
 			$output = $this->wrapper( $args );
@@ -134,16 +137,25 @@ class PromoPreviewPage {
 		}
 	}
 
+	public static function registerInlineFonts( $content ) {
+		preg_match_all( '/style=["\'][^"\']*font-family:\s*([^;]*)[^"\']*["\']/', $content, $style_matches );
+		foreach ( $style_matches[1] as $family ) {
+			$family = trim( $family );
+			if ( $family ) {
+				StyleManager::getInstance()->registerFonts( $family );
+				$weights = StyleManager::getInstance()->getFonts()[ $family ] ?? array();
+				foreach ( $weights as $weight ) {
+					// Register the font with the registry
+					Registry::getInstance()->registerFonts( $family, $weight );
+				}
+			}
+		}
+	}
+
 	public function wrapper( $args ) {
 		$idPromo = 0;
 
-		$promoType       = $args['promoType'];
-		$image           = $args['image'];
-		$verticalAlign   = $args['verticalAlign'];
-		$horizontalAlign = $args['horizontalAlign'];
-		$contentPosition = $args['contentPosition'];
-		$animation_in    = $args['animationInClass'];
-		$animation_out   = $args['animationOutClass'];
+		$promoType = $args['promoType'];
 
 		$template_content = null;
 
@@ -167,67 +179,40 @@ class PromoPreviewPage {
 		$template = $templateService->getTemplate( $args['template_id'] );
 
 		if ( $template ) {
-			call_user_func( CSPromoBuilder . '\\FrontendAssets::loadKubioAssets' );
+			call_user_func( ICONVERTPR_BUILDER_NS . '\\FrontendAssets::loadKubioAssets' );
 			$template_content = $templateService->importContent( $template->content, 'preview-' . $args['template_id'] );
 
-			$script = sprintf(
-				'<script type="text/javascript">window.promoTriggersSettings = %s;</script>',
-				wp_json_encode(
-					array(
-						'params' => new stdClass(),
-						'popups' => array(
-							$idPromo => array(
-								'preview' => array(),
-							),
+			add_action(
+				'wp_enqueue_scripts',
+				function () use ( $idPromo ) {
+
+					wp_add_inline_script(
+						'iconvertpr-popups-main',
+						sprintf(
+							'window.promoTriggersSettings = %s;',
+							wp_json_encode(
+								array(
+									'params' => new stdClass(),
+									'popups' => array(
+										$idPromo => array(
+											'preview' => array(),
+										),
+									),
+								)
+							)
 						),
-					)
-				)
+						'before'
+					);
+				}
 			);
 
 			$content = apply_filters( 'the_content', $template_content );
 
-			return "$script $content";
+			self::registerInlineFonts( $content );
+
+			return $content;
 		}
 
-		ob_start(); ?>
-		<div id="cs-popup-container-<?php echo esc_attr( $idPromo ); ?>" class="cs-popup-container-type-<?php echo esc_attr( $promoType ); ?> cs-popup-container-preview cs-fb-position-<?php echo esc_attr( $contentPosition ); ?> cs-v-pos-<?php echo esc_attr( $verticalAlign ); ?> cs-popup-container" data-cs-promoid="<?php echo esc_attr( $idPromo ); ?>">
-			<div class="lcs-popup-content">
-				<style>
-					.cs-popup-image {
-						display: block;
-						opacity: 0;
-					}
-
-					.cs-popup-image.animate__animated {
-						opacity: 1;
-					}
-				</style>
-				<script>
-					window.addAnimationClasses = function() {
-						var img = document.querySelector('.cs-popup-image');
-						const animation =  img.getAttribute('data-animation-in');
-						if(animation){
-							img.classList.add('animate__animated', img.getAttribute('data-animation-in'));
-						}
-					}
-				</script>
-				<div class="wp-block wp-block-cspromo-promopopup  position-relative wp-block-cspromo-promopopup__outer cs-popup align-items-<?php echo esc_attr( $verticalAlign ); ?> justify-content-<?php echo esc_attr( $horizontalAlign ); ?>">
-				
-			
-				<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>	
-				<img 
-					class="cs-popup-image" 
-					src="<?php echo esc_url( urldecode( $image ) ); ?>" 
-					onload="addAnimationClasses()" 
-					data-animation-in="<?php echo esc_attr( $animation_in ); ?>"
-					data-animation-out="<?php echo esc_attr( $animation_out ); ?>"
-					data-cs-promoid="<?php echo esc_attr( $idPromo ); ?>" />
-				</div>
-			</div>
-		</div>
-		<?php
-		$str = ob_get_clean();
-
-		return $str;
+		return '';
 	}
 }

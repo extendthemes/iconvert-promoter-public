@@ -5,7 +5,6 @@ use CSPromo\Core\Admin\Actions\Assets;
 use CSPromo\Core\Admin\Structure\Menus;
 use CSPromo\Core\Admin\Actions\EmailListActions;
 use CSPromo\Core\Admin\Actions\Plugin\Integrate;
-use CSPromo\Core\Admin\Actions\PromoPopupActions;
 use CSPromo\Core\Admin\Actions\SubscriberActions;
 use CSPromo\Core\Admin\Actions\Ajax\PromoAjaxActions;
 use CSPromo\Core\Admin\Actions\Ajax\TemplatesAjaxActions;
@@ -20,8 +19,8 @@ use CSPromo\Core\PostTypes\PromoPopups;
 class Application {
 
 	public static function boot() {
-		cs_registry_set( 'settings_page_url', add_query_arg( array( 'page' => IC_PROMO_PAGE_ID ), admin_url( 'admin.php' ) ) );
-		cs_registry_set( 'popup_page_edit_url', add_query_arg( array( 'page' => IC_PROMO_PAGE_ID . '-richtext' ), admin_url( 'admin.php' ) ) );
+		iconvertpr_registry_set( 'settings_page_url', add_query_arg( array( 'page' => ICONVERTPR_PAGE_ID ), admin_url( 'admin.php' ) ) );
+		iconvertpr_registry_set( 'popup_page_edit_url', add_query_arg( array( 'page' => ICONVERTPR_PAGE_ID . '-richtext' ), admin_url( 'admin.php' ) ) );
 
 		add_filter( 'plugin_row_meta', __CLASS__ . '::plugin_row_meta', 10, 4 );
 
@@ -41,12 +40,11 @@ class Application {
 		new TriggersAjaxActions();
 
 		Template::load();
-		new PromoPopupActions();
 		//load the assets
 		new Assets();
 
 		add_filter(
-			'CsPromoKubio.kubioUtilsData',
+			'iconvertpr.kubioUtilsData',
 			function ( $data ) {
 
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -62,10 +60,9 @@ class Application {
 	}
 
 	public static function plugin_row_meta( $plugin_meta, $plugin_file ) {
-		$plugins_dir = trailingslashit( wp_normalize_path( WP_CONTENT_DIR . '/plugins/' ) );
-		$entry_file  = str_replace( $plugins_dir, '', wp_normalize_path( IC_PROMO_PAGE_FILE ) );
+		$entry_file = plugin_basename( ICONVERTPR_PAGE_FILE );
 		if ( $plugin_file === $entry_file ) {
-			$plugin_meta[0] = "{$plugin_meta[0]} (build: " . IC_PROMO_BUILD_NUMBER . ')';
+			$plugin_meta[0] = "{$plugin_meta[0]} (build: " . ICONVERTPR_BUILD_NUMBER . ')';
 		}
 
 		return $plugin_meta;

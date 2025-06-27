@@ -21,12 +21,3 @@ add_action(
 	},
 	PHP_INT_MAX
 );
-
-
-// force display gallery ( no script required )
-function kubio_editor_rendered_styles_woocommerce_extra_style( $content ) {
-	$content .= '<style>.woocommerce-product-gallery {opacity: 1 !important;}</style>';
-	return $content;
-}
-
-add_filter( Utils::getStringWithNamespacePrefix( 'kubio/editor-rendered-styles' ), __NAMESPACE__ . '\\kubio_editor_rendered_styles_woocommerce_extra_style' );

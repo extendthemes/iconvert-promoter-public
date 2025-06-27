@@ -35,7 +35,7 @@ class Pagination {
 
 		$links = paginate_links(
 			array(
-				'base'         => str_replace( $big, '%#%', ( cs_generate_page_url( $route, array( 'paged' => $big ), $ns ) ) ),
+				'base'         => str_replace( $big, '%#%', ( iconvertpr_generate_page_url( $route, array( 'paged' => $big ), $ns ) ) ),
 				'total'        => $this->totalPages,
 				'current'      => self::getPageNumber(),
 				'format'       => '&paged=%#%',

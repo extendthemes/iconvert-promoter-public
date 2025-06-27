@@ -76,7 +76,7 @@ class Migrations {
 				if ( ! function_exists( $callback ) ) {
 					if ( CoreUtils::isDebug() ) {
 						// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
-						wp_die( "Migrations functon kubio_{$callback} does not exists" );
+						wp_die( esc_html( "Migrations functon kubio_{$callback} does not exists" ) );
 					}
 					return; // leave migration process
 				}
@@ -89,8 +89,7 @@ class Migrations {
 				call_user_func( $callback );
 			} catch ( \Exception $e ) {
 				if ( CoreUtils::isDebug() ) {
-					// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
-					wp_die( "Migrations {$callback} error" );
+					wp_die( esc_html( "Migrations {$callback} error" ) );
 				}
 			}
 			$executed_migrations [ $slug ] = true;

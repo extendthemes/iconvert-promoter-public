@@ -80,20 +80,20 @@ class Router {
 	 * @return array
 	 */
 	public function loadRoute( $route = false ) {
-		$routes = cs_registry_get( 'admin.routes.web', array() );
+		$routes = iconvertpr_registry_get( 'admin.routes.web', array() );
 		$found  = false;
 
 		if ( array_key_exists( $this->namespace, $routes ) ) {
 			if ( $route === false ) {
 				// we show the first record from the routes array. this is the default route
 				$default = array_key_first( $routes[ $this->namespace ] );
-				cs_registry_set( 'admin.routes.current', $default );
+				iconvertpr_registry_set( 'admin.routes.current', $default );
 
 				$found = array( new $routes[ $this->namespace ][ $default ][0](), $routes[ $this->namespace ][ $default ][1] );
 			} elseif ( array_key_exists( $route, $routes[ $this->namespace ] ) ) {
 				// we show the corresponding route
 				$found = array( new $routes[ $this->namespace ][ $route ][0](), $routes[ $this->namespace ][ $route ][1] );
-				cs_registry_set( 'admin.routes.current', $route );
+				iconvertpr_registry_set( 'admin.routes.current', $route );
 			} else {
 				// we found no corresponding route so we return a 404 template
 				$found = array( $this, 'notFound' );

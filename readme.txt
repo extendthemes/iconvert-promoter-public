@@ -1,8 +1,8 @@
 === iConvert Promoter ===
 
 Contributors: ExtendThemes  
-Tags: marketing, popup, popups, ecommerce, lead-generation, personalization  
-Requires at least: 6.0  
+Tags: marketing, popup, ecommerce, lead-generation  
+Requires at least: 6.5  
 Tested up to: 6.8  
 Requires PHP: 7.4  
 Stable tag: @@buildversion@@  
@@ -106,6 +106,12 @@ Yes, all popup templates are responsive and optimized for mobile devices.
 == Source Files ==
 
 📂 [GitHub Repository](https://github.com/extendthemes/iconvert-promoter-public)
+
+
+== External services ==
+This plugin connects to the following services if configured:
+- https://geo.iconvert.pro/ - it's need to detect the location of the visitor based om their ips. The data is not preserved in any way.
+- MailChimp, MailerLite, and other email marketing services for managing contacts and sending campaigns. The connection is established through the plugin settings, and user data is handled according to the privacy policies of those services.
 
 == Changelog ==
 

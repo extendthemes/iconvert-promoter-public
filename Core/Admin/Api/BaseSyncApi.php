@@ -20,6 +20,6 @@ class BaseSyncApi {
 	 * @return void
 	 */
 	private function getBaseUrl() {
-		return apply_filters( 'cs_get_base_url', self::API_URL );
+		return apply_filters( 'iconvertpr_get_base_url', self::API_URL );
 	}
 }

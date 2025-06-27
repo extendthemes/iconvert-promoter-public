@@ -16,10 +16,10 @@ function kubio_clean_cache_plugins( $post_id, $post, $update ) {
 		// WP Super Cache
 		if ( Utils::hasEnoughRemainingTime( 15 ) ) {
 			if ( function_exists( 'wp_cache_clean_cache' ) ) {
-				global $file_prefix;
+				global $kubio_cache_file_prefix;
 				$prefix = '';
-				if ( $file_prefix ) {
-					$prefix = $file_prefix;
+				if ( $kubio_cache_file_prefix ) {
+					$prefix = $kubio_cache_file_prefix;
 				}
 				wp_cache_clean_cache( $prefix, true );
 			}

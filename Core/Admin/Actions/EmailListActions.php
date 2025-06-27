@@ -9,18 +9,18 @@ class EmailListActions {
 	use HasAction;
 
 	public function __construct() {
-		add_action( 'admin_post_icp_create_email_list', array( $this, 'store' ) );
-		add_action( 'admin_post_icp_update_email_list', array( $this, 'update' ) );
-		add_action( 'admin_post_icp_delete_email_list', array( $this, 'destroy' ) );
-		add_action( 'admin_post_icp_unsubscribe_contact', array( $this, 'unsubscribe' ) );
-		add_action( 'admin_post_icp_download_email_list', array( $this, 'download' ) );
+		add_action( 'admin_post_iconvertpr_create_email_list', array( $this, 'store' ) );
+		add_action( 'admin_post_iconvertpr_update_email_list', array( $this, 'update' ) );
+		add_action( 'admin_post_iconvertpr_delete_email_list', array( $this, 'destroy' ) );
+		add_action( 'admin_post_iconvertpr_unsubscribe_contact', array( $this, 'unsubscribe' ) );
+		add_action( 'admin_post_iconvertpr_download_email_list', array( $this, 'download' ) );
 
-		add_action( 'wp_ajax_icp_email_lists_delete', array( $this, 'ajaxDestroy' ) );
-		add_action( 'wp_ajax_icp_email_lists_create', array( $this, 'ajaxStore' ) );
-		add_action( 'wp_ajax_icp_email_lists_sync', array( $this, 'ajaxSyncList' ) );
-		add_action( 'wp_ajax_icp_email_lists_edit', array( $this, 'ajaxEdit' ) );
-		add_action( 'wp_ajax_icp_email_lists_provider_lists', array( $this, 'getProviderLists' ) );
-		add_action( 'wp_ajax_icp_email_lists_update', array( $this, 'ajaxUpdate' ) );
+		add_action( 'wp_ajax_iconvertpr_email_lists_delete', array( $this, 'ajaxDestroy' ) );
+		add_action( 'wp_ajax_iconvertpr_email_lists_create', array( $this, 'ajaxStore' ) );
+		add_action( 'wp_ajax_iconvertpr_email_lists_sync', array( $this, 'ajaxSyncList' ) );
+		add_action( 'wp_ajax_iconvertpr_email_lists_edit', array( $this, 'ajaxEdit' ) );
+		add_action( 'wp_ajax_iconvertpr_email_lists_provider_lists', array( $this, 'getProviderLists' ) );
+		add_action( 'wp_ajax_iconvertpr_email_lists_update', array( $this, 'ajaxUpdate' ) );
 	}
 
 	/**
@@ -29,7 +29,7 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function ajaxEdit() {
-		if ( $this->checkNonce( 'icp_list_management', true ) ) {
+		if ( $this->checkNonce( 'iconvertpr_list_management', true ) ) {
 			$service = new EmailListsService();
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$post_id   = isset( $_GET['post_id'] ) ? intval( $_GET['post_id'] ) : 0;
@@ -46,7 +46,7 @@ class EmailListActions {
 						'providerList' => ( wp_unslash( $emailList->provider_list ) ),
 					),
 				);
-				cs_flash_message_add( __( 'The list was updated!', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The list was updated!', 'iconvert-promoter' ) );
 				wp_send_json_success( $body, 200 );
 			} else {
 				wp_send_json_error(
@@ -64,7 +64,7 @@ class EmailListActions {
 
 	public function getProviderLists() {
 
-		$lists = apply_filters( 'icp_get_provider_lists', array() );
+		$lists = apply_filters( 'iconvertpr_get_provider_lists', array() );
 
 		return $lists;
 	}
@@ -75,7 +75,7 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function ajaxUpdate() {
-		if ( $this->checkNonce( 'icp_list_management' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_list_management' ) ) {
 			$service = new EmailListsService();
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -107,7 +107,7 @@ class EmailListActions {
 				$update = $service->update( $data, array( 'id' => $postID ) );
 
 				if ( $update ) {
-					cs_flash_message_add( __( 'The list was updated!', 'iconvert-promoter' ) );
+					iconvertpr_flash_message_add( __( 'The list was updated!', 'iconvert-promoter' ) );
 					wp_send_json_success(
 						array(
 							'body' => $data,
@@ -141,13 +141,13 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function store() {
-		if ( $this->checkNonce( 'icp_create_email_list' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_create_email_list' ) ) {
 			$service = new EmailListsService();
 
 			if ( $service->store() ) {
-				cs_flash_message_add( __( 'The email list was created.', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The email list was created.', 'iconvert-promoter' ) );
 			} else {
-				cs_flash_message_add( __( 'There was a problem creating your email list. The record was not saved', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'There was a problem creating your email list. The record was not saved', 'iconvert-promoter' ), 'error' );
 			}
 		} else {
 			$this->nonceInvalidMessage();
@@ -162,13 +162,13 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function update() {
-		if ( $this->checkNonce( 'icp_update_email_list' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_update_email_list' ) ) {
 			$service = new EmailListsService();
 
 			if ( $service->edit() ) {
-				cs_flash_message_add( __( 'The email list was saved.', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The email list was saved.', 'iconvert-promoter' ) );
 			} else {
-				cs_flash_message_add( __( 'There was a problem saving your email list.', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'There was a problem saving your email list.', 'iconvert-promoter' ), 'error' );
 			}
 		} else {
 			$this->nonceInvalidMessage();
@@ -183,19 +183,19 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function destroy() {
-		if ( $this->checkNonce( 'icp_delete_email_list', true ) ) {
+		if ( $this->checkNonce( 'iconvertpr_delete_email_list', true ) ) {
 			$service = new EmailListsService();
 
 			if ( $service->destroy() ) {
-				cs_flash_message_add( __( 'The email list was deleted.', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The email list was deleted.', 'iconvert-promoter' ) );
 			} else {
-				cs_flash_message_add( __( 'There was a problem deleting your email list.', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'There was a problem deleting your email list.', 'iconvert-promoter' ), 'error' );
 			}
 		} else {
 			$this->nonceInvalidMessage();
 		}
 
-		$this->redirectToSettingsPage( 'subscribers.lists', array(), IC_PROMO_PAGE_SUBSCRIBERS );
+		$this->redirectToSettingsPage( 'subscribers.lists', array(), ICONVERTPR_PAGE_SUBSCRIBERS );
 	}
 
 	/**
@@ -204,7 +204,7 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function unsubscribe() {
-		if ( $this->checkNonce( 'icp_unsubscribe_contact', true ) ) {
+		if ( $this->checkNonce( 'iconvertpr_unsubscribe_contact', true ) ) {
 			$service = new EmailListsService();
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -213,15 +213,15 @@ class EmailListActions {
 			$list_id = isset( $_GET['list_id'] ) ? intval( $_GET['list_id'] ) : 0;
 
 			if ( $service->unsubscribeContact( $contact_id, $list_id ) ) {
-				cs_flash_message_add( __( 'The contact was unsubscribed.', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The contact was unsubscribed.', 'iconvert-promoter' ) );
 			} else {
-				cs_flash_message_add( __( 'There was a problem unsubscribing your contact.', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'There was a problem unsubscribing your contact.', 'iconvert-promoter' ), 'error' );
 			}
 		} else {
 			$this->nonceInvalidMessage();
 		}
 
-		$this->redirectToSettingsPage( 'subscribers.lists.emails', array( 'post_id' => $list_id ), IC_PROMO_PAGE_SUBSCRIBERS );
+		$this->redirectToSettingsPage( 'subscribers.lists.emails', array( 'post_id' => $list_id ), ICONVERTPR_PAGE_SUBSCRIBERS );
 	}
 
 	/**
@@ -230,22 +230,22 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function download() {
-		if ( $this->checkNonce( 'icp_download_email_list', true ) ) {
+		if ( $this->checkNonce( 'iconvertpr_download_email_list', true ) ) {
 			$service = new EmailListsService();
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$list_id = isset( $_GET['post_id'] ) ? intval( $_GET['post_id'] ) : 0;
 
 			if ( $service->download( $list_id ) ) {
-				cs_flash_message_add( __( 'The email list was downloaded.', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The email list was downloaded.', 'iconvert-promoter' ) );
 			} else {
-				cs_flash_message_add( __( 'There was a problem downloading your email list.', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'There was a problem downloading your email list.', 'iconvert-promoter' ), 'error' );
 			}
 		} else {
 			$this->nonceInvalidMessage();
 		}
 
-		// $this->redirectToSettingsPage('subscribers.lists.emails', ['post_id' => $list_id], IC_PROMO_PAGE_SUBSCRIBERS);
+		// $this->redirectToSettingsPage('subscribers.lists.emails', ['post_id' => $list_id], ICONVERTPR_PAGE_SUBSCRIBERS);
 	}
 
 	/**
@@ -254,7 +254,7 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function ajaxDestroy() {
-		if ( $this->checkNonce( 'icp_list_management' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_list_management' ) ) {
 			$service = new EmailListsService();
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$post_id       = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
@@ -262,7 +262,7 @@ class EmailListActions {
 
 			if ( $popupWithForm === false && $post_id ) {
 				if ( $service->destroy( $post_id ) ) {
-					cs_flash_message_add( __( 'The email list was deleted!', 'iconvert-promoter' ) );
+					iconvertpr_flash_message_add( __( 'The email list was deleted!', 'iconvert-promoter' ) );
 					wp_send_json_success(
 						array(
 							'body' => 1,
@@ -308,15 +308,15 @@ class EmailListActions {
 	 * @return void
 	 */
 	public function ajaxStore() {
-		if ( $this->checkNonce( 'icp_list_management' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_list_management' ) ) {
 			$service = new EmailListsService();
 			$listID  = $service->store();
 
 			if ( $listID ) {
-				cs_flash_message_add( __( 'The email list was created!', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The email list was created!', 'iconvert-promoter' ) );
 				wp_send_json_success(
 					array(
-						'body' => cs_generate_page_url( 'subscribers.lists.emails', array( 'post_id' => $listID ), IC_PROMO_PAGE_SUBSCRIBERS ),
+						'body' => iconvertpr_generate_page_url( 'subscribers.lists.emails', array( 'post_id' => $listID ), ICONVERTPR_PAGE_SUBSCRIBERS ),
 					),
 					200
 				);
@@ -335,7 +335,7 @@ class EmailListActions {
 	}
 
 	public function ajaxSyncList() {
-		if ( $this->checkNonce( 'icp_list_management' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_list_management' ) ) {
 			$list_service       = new EmailListsService();
 			$subscriber_service = new SubscribersService();
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing

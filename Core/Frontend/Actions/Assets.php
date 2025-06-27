@@ -18,17 +18,17 @@ class Assets {
 	 */
 	public function load() {
 
-		if ( defined( 'IC_PROMO_AJAX_LOAD' ) ) {
+		if ( defined( 'ICONVERTPR_AJAX_LOAD' ) ) {
 			return;
 		}
 
 		//main style + js
-		wp_enqueue_style( 'cs-promo-popups-main', $this->assets_url( 'css/dist/style.min.css' ), array(), IC_PROMO_VERSION );
+		wp_enqueue_style( 'iconvertpr-popups-main', $this->assets_url( 'css/dist/style.min.css' ), array(), ICONVERTPR_VERSION );
 		wp_enqueue_script(
-			'cs-promo-popups-main',
+			'iconvertpr-popups-main',
 			$this->assets_url( 'js/dist/index.js' ),
 			array( 'jquery' ),
-			IC_PROMO_VERSION,
+			ICONVERTPR_VERSION,
 			array(
 				'strategy'  => 'defer',
 				'in_footer' => true,
@@ -36,10 +36,10 @@ class Assets {
 		);
 
 		// animate
-		wp_enqueue_style( 'cs-promo-popups-animations', $this->assets_url( 'css/animate.min.css' ), array(), IC_PROMO_VERSION );
+		wp_enqueue_style( 'iconvertpr-animations', $this->assets_url( 'css/animate.min.css' ), array(), ICONVERTPR_VERSION );
 
-		if ( cs_preview_page() ) {
-			wp_enqueue_style( 'cs-promo-skeleton-css', $this->assets_url( 'css/skeleton-css/style.css' ) );
+		if ( iconvertpr_preview_page() ) {
+			wp_enqueue_style( 'iconvertpr-skeleton', $this->assets_url( 'css/skeleton-css/style.css' ), array(), ICONVERTPR_VERSION );
 		}
 		/**
 		 * load the JS variables here
@@ -47,32 +47,32 @@ class Assets {
 
 		$storage_key = 'icp';
 
-		if ( defined( 'IC_USE_UNIQUE_STORAGE_KEY' ) && IC_USE_UNIQUE_STORAGE_KEY ) {
-			$storage_key = get_option( 'cs_promo_storage_key' );
+		if ( defined( 'ICONVERTPR_USE_UNIQUE_STORAGE_KEY' ) && ICONVERTPR_USE_UNIQUE_STORAGE_KEY ) {
+			$storage_key = get_option( 'iconvertpr_promo_storage_key' );
 			if ( empty( $storage_key ) ) {
 				$storage_key = 'icp_' . wp_generate_uuid4() . '-' . get_current_blog_id();
-				update_option( 'cs_promo_storage_key', $storage_key, true );
+				update_option( 'iconvertpr_promo_storage_key', $storage_key, true );
 			}
 		}
 
 		global $wp;
 		wp_localize_script(
-			'cs-promo-popups-main',
+			'iconvertpr-popups-main',
 			'cs_promo_settings',
 			array(
 				'ajax_url'         => admin_url( 'admin-ajax.php' ),
 				'query_vars_keys'  => $wp->public_query_vars,
 				'site_url'         => site_url(),
 				'page_no'          => get_the_ID(),
-				'session_duration' => IC_PROMO_SESSION_DURATION,
-				'referrer'         => isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '',
+				'session_duration' => ICONVERTPR_SESSION_DURATION,
+				'referrer'         => esc_url_raw( isset( $_SERVER['HTTP_REFERER'] ) ? wp_unslash( $_SERVER['HTTP_REFERER'] ) : '' ),
 				'server_time'      => time(),
 				'storage_key'      => $storage_key,
 			)
 		);
 
 		wp_add_inline_script(
-			'cs-promo-popups-main',
+			'iconvertpr-popups-main',
 			$this->add_loader_script(),
 			'before'
 		);
@@ -80,7 +80,12 @@ class Assets {
 
 
 	public function add_loader_script() {
-		return file_get_contents( IC_PROMO_PATH . 'frontend/assets/loader.js' );
+
+		if ( isset( $_GET['__iconvert-promoter-preview-remote-template'] ) ) {
+			return '';
+		}
+
+		return file_get_contents( ICONVERTPR_PATH . 'frontend/assets/loader.js' );
 	}
 
 
@@ -91,6 +96,6 @@ class Assets {
 	 * @return void
 	 */
 	public function assets_url( $filename ) {
-		return IC_PROMO_URL . 'frontend/assets/' . $filename;
+		return ICONVERTPR_URL . 'frontend/assets/' . $filename;
 	}
 }

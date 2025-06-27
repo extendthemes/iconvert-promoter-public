@@ -10,9 +10,9 @@ class EmailListsAPI {
 	use HasRateLimit;
 
 	public function __construct() {
-		add_action( 'wp_ajax_cs_get_email_lists', array( $this, 'index' ) );
-		add_action( 'wp_ajax_cs_subscribe_email_to_list', array( $this, 'subscribe' ) );
-		add_action( 'wp_ajax_nopriv_cs_subscribe_email_to_list', array( $this, 'subscribe' ) );
+		add_action( 'wp_ajax_iconvertpr_get_email_lists', array( $this, 'index' ) );
+		add_action( 'wp_ajax_iconvertpr_subscribe_email_to_list', array( $this, 'subscribe' ) );
+		add_action( 'wp_ajax_nopriv_iconvertpr_subscribe_email_to_list', array( $this, 'subscribe' ) );
 
 		add_action(
 			'rest_api_init',
@@ -23,7 +23,9 @@ class EmailListsAPI {
 					array(
 						'methods'             => 'GET',
 						'callback'            => array( $this, 'lists' ),
-						'permission_callback' => '__return_true',
+						'permission_callback' => function () {
+							return current_user_can( 'manage_options' );
+						},
 					)
 				);
 			}
@@ -69,7 +71,7 @@ class EmailListsAPI {
 	 */
 	public function subscribe() {
 
-		if ( $this->is_rate_limit_exceeded( 'subscribe', IC_PROMO_SUBSCRIBE_RATE_LIMIT_REQUEST ) ) {
+		if ( $this->is_rate_limit_exceeded( 'subscribe', ICONVERTPR_SUBSCRIBE_RATE_LIMIT_REQUEST ) ) {
 			wp_send_json_error(
 				array(
 					'message' => __( 'Rate limit exceeded', 'iconvert-promoter' ),
@@ -165,6 +167,7 @@ class EmailListsAPI {
 	}
 
 	public static function nonceUserLoggedOut( $uid ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$visitor_id = isset( $_REQUEST['visitor_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['visitor_id'] ) ) : '';
 
 		if ( ! $uid && $visitor_id ) {
@@ -196,7 +199,7 @@ class EmailListsAPI {
 		);
 
 		$valid = false;
-		if ( wp_verify_nonce( $current_nonce, 'submit_form_' . $popupID . '_' . $listID ) ) {
+		if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $current_nonce ) ), 'submit_form_' . $popupID . '_' . $listID ) ) {
 			$valid = true;
 		}
 
@@ -211,11 +214,17 @@ class EmailListsAPI {
 
 	public function validateRequestSubscribe( $listID, $popupID ) {
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		$first_name    = isset( $_POST['fields']['first_name'] ) ? sanitize_text_field( $_POST['fields']['first_name'] ) : '';
-		$current_nonce = isset( $_POST['cspromo_wpnonce'] ) ? sanitize_text_field( $_POST['cspromo_wpnonce'] ) : '';
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		if ( $this->verifyNonce( $current_nonce, $popupID, $listID ) && $first_name === '' ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$current_nonce = isset( $_POST['cspromo_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['cspromo_wpnonce'] ) ) : '';
+		if ( $this->verifyNonce( $current_nonce, $popupID, $listID ) ) {
+			return;
+		}
+
+		// in this case first_name is used as honeypot to prevent spam bots
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$first_name = isset( $_POST['fields']['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['fields']['first_name'] ) ) : '';
+
+		if ( ! $first_name ) {
 			return;
 		}
 

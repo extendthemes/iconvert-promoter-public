@@ -31,7 +31,7 @@ function NavigationToggle( { isOpen } ) {
 				className="edit-site-navigation-toggle__button has-icon"
 				label={ __( 'My Popups', 'iconvert-promoter' ) }
 				//onClick={() => setIsNavigationPanelOpened(!isOpen)}
-				href="admin.php?page=promoter"
+				href="admin.php?page=iconvertpr-promoter"
 				showTooltip
 			>
 				<Icon size="56px" icon="arrow-left-alt" />

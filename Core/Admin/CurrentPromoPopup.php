@@ -56,7 +56,7 @@ class CurrentPromoPopup {
 		$this->post = PromoPopups::get( $post_id );
 
 		if ( ! $this->found() ) {
-			cs_flash_message_add( __( 'The selected popup was not found!', 'iconvert-promoter' ), 'error' );
+			iconvertpr_flash_message_add( __( 'The selected popup was not found!', 'iconvert-promoter' ), 'error' );
 		}
 	}
 

@@ -307,9 +307,13 @@ function kubio_extend_block_editor_styles_html() {
 	$style  = kubio_get_editor_style();
 	$script = "<template id='kubio-scripts-template'>{$script}</template>";
 
-	printf(
-		'<script>window.__kubioEditorStyles = %s</script>',
-		wp_json_encode( array( 'html' => $style . $script ) )
+	wp_add_inline_script(
+		Utils::getPrefixedScriptName( 'editor' ),
+		sprintf(
+			'window.__kubioEditorStyles = %s;',
+			wp_json_encode( array( 'html' => $style . $script ) )
+		),
+		'before'
 	);
 }
 
@@ -737,6 +741,8 @@ add_action(
  */
 function kubio_edit_site_render_block_editor( $props = array() ) {
 	$editor_entry_point_class = apply_filters( Utils::getStringWithNamespacePrefix( 'kubio/kubio_edit_site_render_block_editor/editor_entry_point_class' ), 'kubio-editor' );
+
+	// Add a loader style. loaded it inline so it will be displayed before the editor or other styles are loaded.
 	?>
 	<style>
 		div#wpcontent,
@@ -787,135 +793,13 @@ function kubio_edit_site_render_block_editor( $props = array() ) {
 			margin: 0px auto 0px auto;
 		}
 	</style>
-	<div id="kubio-editor" class="kubio <?php echo $editor_entry_point_class; ?>">
+	<div id="kubio-editor" class="kubio <?php echo esc_attr( $editor_entry_point_class ); ?>">
 		<div class="kubio-loading-editor">
 			<?php echo kubio_get_iframe_loader( array_merge( array( 'size' => '120px' ), $props ) ); ?>
 		</div>
 	</div>
 	<?php
 }
-
-function kubio_admin_menu_style() {
-	?>
-	<style>
-		#adminmenu .toplevel_page_kubio .wp-menu-image {
-			display: none;
-		}
-
-		.wp-admin.folded #adminmenu .toplevel_page_kubio .wp-menu-image {
-			display: block;
-			background-size: 16px auto;
-		}
-
-		#adminmenu .kubio-menu-item {
-			display: flex;
-			align-items: center;
-		}
-
-		#adminmenu .kubio-menu-item>span {
-			display: block;
-			line-height: 1;
-		}
-
-		#adminmenu .kubio-menu-item--icon {
-			color: rgba(240, 246, 252, .6);
-		}
-
-		#adminmenu .wp-menu-name:hover .kubio-menu-item--icon {
-			color: inherit;
-		}
-
-		#adminmenu .kubio-menu-item--icon svg {
-			fill: currentColor;
-			height: 15px;
-			margin-right: 11px;
-		}
-
-		#adminmenu .wp-menu-open .kubio-menu-item--icon svg {
-			fill: #fff;
-		}
-
-		#adminmenu .toplevel_page_kubio div.wp-menu-name {
-			padding: 8px 8px 8px 10px;
-		}
-
-		#adminmenu .wp-submenu .kubio-menu-item--icon {
-			display: none;
-		}
-	</style>
-	<?php
-}
-
-add_action( 'admin_head', __NAMESPACE__ . '\\kubio_admin_menu_style' );
-
-/**
- * Register a core site setting for front page information.
- */
-function kubio_register_site_editor_homepage_settings() {
-	global $wp_registered_settings;
-
-	if ( ! isset( $wp_registered_settings['show_on_front'] ) ) {
-		register_setting(
-			'reading',
-			'show_on_front',
-			array(
-				'show_in_rest' => true,
-				'type'         => 'string',
-				'description'  => __( 'What to show on the front page', 'iconvert-promoter' ),
-			)
-		);
-	}
-
-	if ( ! isset( $wp_registered_settings['page_on_front'] ) ) {
-		register_setting(
-			'reading',
-			'page_on_front',
-			array(
-				'show_in_rest' => true,
-				'type'         => 'number',
-				'description'  => __(
-					'The ID of the page that should be displayed on the front page',
-					'iconvert-promoter'
-				),
-			)
-		);
-	}
-	if ( ! isset( $wp_registered_settings['page_for_posts'] ) ) {
-		register_setting(
-			'reading',
-			'page_for_posts',
-			array(
-				'show_in_rest' => true,
-				'type'         => 'number',
-				'description'  => __(
-					'The ID of the page that displays the posts',
-					'iconvert-promoter'
-				),
-			)
-		);
-	}
-
-	if ( ! isset( $wp_registered_settings['site_icon'] ) ) {
-		register_setting(
-			'general',
-			'site_icon',
-			array(
-				'show_in_rest' => array(
-					'name' => 'site_icon',
-				),
-				'type'         => 'integer',
-				'description'  => __( 'Site icon.', 'iconvert-promoter' ),
-			)
-		);
-	}
-
-	if ( class_exists( 'Jetpack_Notifications' ) ) {
-		remove_action( 'wp_head', array( Jetpack_Notifications::init(), 'styles_and_scripts' ), 120 );
-		remove_action( 'admin_head', array( Jetpack_Notifications::init(), 'styles_and_scripts' ) );
-	}
-}
-
-add_action( 'init', __NAMESPACE__ . '\\kubio_register_site_editor_homepage_settings', 100 );
 
 function kubio_editor_add_default_template_types( $template_types ) {
 	if ( kubio_is_kubio_editor_page() && is_user_logged_in() ) {

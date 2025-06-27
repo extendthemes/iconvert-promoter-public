@@ -1,3 +1,8 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+?>
 <div class="cs-form-options">
 	<h4><?php echo esc_html( $label ); ?></h4>
 	

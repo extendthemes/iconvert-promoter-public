@@ -12,10 +12,10 @@ class SubscriberActions {
 	use HasTemplate;
 
 	public function __construct() {
-		add_action( 'admin_post_icp_delete_subscriber', array( $this, 'destroy' ) );
-		add_action( 'wp_ajax_icp_subscribers_delete', array( $this, 'ajaxDestroy' ) );
-		add_action( 'wp_ajax_icp_subscribers_edit', array( $this, 'ajaxEdit' ) );
-		add_action( 'wp_ajax_icp_subscribers_update', array( $this, 'ajaxUpdate' ) );
+		add_action( 'admin_post_iconvertpr_delete_subscriber', array( $this, 'destroy' ) );
+		add_action( 'wp_ajax_iconvertpr_subscribers_delete', array( $this, 'ajaxDestroy' ) );
+		add_action( 'wp_ajax_iconvertpr_subscribers_edit', array( $this, 'ajaxEdit' ) );
+		add_action( 'wp_ajax_iconvertpr_subscribers_update', array( $this, 'ajaxUpdate' ) );
 	}
 
 	/**
@@ -24,7 +24,7 @@ class SubscriberActions {
 	 * @return void
 	 */
 	public function ajaxDestroy() {
-		if ( $this->checkNonce( 'icp_list_management' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_list_management' ) ) {
 			$service = new SubscribersService();
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$list_id = isset( $_POST['list_id'] ) ? intval( $_POST['list_id'] ) : 0;
@@ -44,7 +44,7 @@ class SubscriberActions {
 			}
 
 			if ( $destroy ) {
-				cs_flash_message_add( __( 'The subscriber was deleted!', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The subscriber was deleted!', 'iconvert-promoter' ) );
 				wp_send_json_success(
 					array(
 						'body' => 1,
@@ -71,7 +71,7 @@ class SubscriberActions {
 	 * @return void
 	 */
 	public function ajaxEdit() {
-		if ( $this->checkNonce( 'icp_list_management', true ) ) {
+		if ( $this->checkNonce( 'iconvertpr_list_management', true ) ) {
 			$service = new SubscribersService();
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.NonceVerification.Recommended
@@ -80,7 +80,7 @@ class SubscriberActions {
 			$subscriber = $service->find( array( 'id' => $post_id ) );
 
 			if ( $subscriber ) {
-				cs_flash_message_add( __( 'The subscriber was updated!', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The subscriber was updated!', 'iconvert-promoter' ) );
 				wp_send_json_success(
 					array(
 						'body' => self::template( 'pages/email-lists/edit-subscriber', array( 'subscriber' => $subscriber ), false ),
@@ -107,7 +107,7 @@ class SubscriberActions {
 	 * @return void
 	 */
 	public function ajaxUpdate() {
-		if ( $this->checkNonce( 'icp_list_management' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_list_management' ) ) {
 			$service = new SubscribersService();
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized,WordPress.Security.NonceVerification.Recommended
 			$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
@@ -136,7 +136,7 @@ class SubscriberActions {
 				$update = $service->update( $data, array( 'id' => $post_id ) );
 
 				if ( $update ) {
-					cs_flash_message_add( __( 'The subscriber was updated!', 'iconvert-promoter' ) );
+					iconvertpr_flash_message_add( __( 'The subscriber was updated!', 'iconvert-promoter' ) );
 					wp_send_json_success(
 						array(
 							'body' => $data,
@@ -170,23 +170,23 @@ class SubscriberActions {
 	 * @return void
 	 */
 	public function store() {
-		if ( $this->checkNonce( 'icp_create_contact' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_create_contact' ) ) {
 			$service = new SubscribersService();
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$email = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
 
 			if ( $service->find( array( 'email' => $email ) ) ) {
-				cs_flash_message_add( __( 'This email address already exists in the database.', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'This email address already exists in the database.', 'iconvert-promoter' ), 'error' );
 			} else {
 				if ( is_email( $email ) ) {
 					if ( $service->store( $email ) ) {
-						cs_flash_message_add( __( 'The contact was created.', 'iconvert-promoter' ) );
+						iconvertpr_flash_message_add( __( 'The contact was created.', 'iconvert-promoter' ) );
 					} else {
-						cs_flash_message_add( __( 'There was a problem creating your contact. The record was not saved', 'iconvert-promoter' ), 'error' );
+						iconvertpr_flash_message_add( __( 'There was a problem creating your contact. The record was not saved', 'iconvert-promoter' ), 'error' );
 					}
 				} else {
-					cs_flash_message_add( __( 'The email address is not valid. The record was not saved', 'iconvert-promoter' ), 'error' );
+					iconvertpr_flash_message_add( __( 'The email address is not valid. The record was not saved', 'iconvert-promoter' ), 'error' );
 				}
 			}
 		} else {
@@ -215,20 +215,20 @@ class SubscriberActions {
 			if ( $current ) {
 				//if the email address is other than the one used for the current record
 				if ( intval( $current->id ) !== $contact_id ) {
-					cs_flash_message_add( __( 'This email address already exists in the database.', 'iconvert-promoter' ), 'error' );
+					iconvertpr_flash_message_add( __( 'This email address already exists in the database.', 'iconvert-promoter' ), 'error' );
 				} else {
 					if ( is_email( $email ) ) {
 						if ( $service->edit( $email, '', $contact_id ) ) {
-							cs_flash_message_add( __( 'The contact was updated.', 'iconvert-promoter' ) );
+							iconvertpr_flash_message_add( __( 'The contact was updated.', 'iconvert-promoter' ) );
 						} else {
-							cs_flash_message_add( __( 'There was a problem updating your contact. The record was not saved', 'iconvert-promoter' ), 'error' );
+							iconvertpr_flash_message_add( __( 'There was a problem updating your contact. The record was not saved', 'iconvert-promoter' ), 'error' );
 						}
 					} else {
-						cs_flash_message_add( __( 'The email address is not valid. The record was not saved', 'iconvert-promoter' ), 'error' );
+						iconvertpr_flash_message_add( __( 'The email address is not valid. The record was not saved', 'iconvert-promoter' ), 'error' );
 					}
 				}
 			} else {
-				cs_flash_message_add( __( 'There was a problem updating your contact. The record was not saved', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'There was a problem updating your contact. The record was not saved', 'iconvert-promoter' ), 'error' );
 			}
 		} else {
 			$this->nonceInvalidMessage();
@@ -246,14 +246,17 @@ class SubscriberActions {
 		if ( $this->checkNonce( 'iwpa_bulk_delete_contacts' ) ) {
 			$service = new SubscribersService();
 
-			if ( $service->bulkDeleteRecords() ) {
-				cs_flash_message_add( __( 'The contacts were deleted.', 'iconvert-promoter' ) );
+			// phpcs:ignore WordPress.Security.NonceVerification
+			$ids = isset( $_POST['ids'] ) ? array_map( 'intval', $_POST['ids'] ) : array();
+
+			if ( $service->bulkDeleteRecords( $ids ) ) {
+				iconvertpr_flash_message_add( __( 'The contacts were deleted.', 'iconvert-promoter' ) );
 			} else {
-				cs_flash_message_add( __( 'There was a problem deleting your contacts.', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'There was a problem deleting your contacts.', 'iconvert-promoter' ), 'error' );
 
 				// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				if ( ! isset( $_POST['ids'] ) || empty( $_POST['ids'] ) ) {
-					cs_flash_message_add( __( 'You need to select at least a record.', 'iconvert-promoter' ), 'error' );
+					iconvertpr_flash_message_add( __( 'You need to select at least a record.', 'iconvert-promoter' ), 'error' );
 				}
 			}
 		} else {
@@ -269,15 +272,15 @@ class SubscriberActions {
 	 * @return void
 	 */
 	public function destroy() {
-		if ( $this->checkNonce( 'icp_delete_subscriber', true ) ) {
+		if ( $this->checkNonce( 'iconvertpr_delete_subscriber', true ) ) {
 			$service = new SubscribersService();
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.NonceVerification.Recommended
 			$list_id = isset( $_GET['list_id'] ) ? intval( $_GET['list_id'] ) : 0;
 
 			if ( $service->destroy() ) {
-				cs_flash_message_add( __( 'The subscriber was deleted from the database.', 'iconvert-promoter' ) );
+				iconvertpr_flash_message_add( __( 'The subscriber was deleted from the database.', 'iconvert-promoter' ) );
 			} else {
-				cs_flash_message_add( __( 'There was a problem deleting your subscriber.', 'iconvert-promoter' ), 'error' );
+				iconvertpr_flash_message_add( __( 'There was a problem deleting your subscriber.', 'iconvert-promoter' ), 'error' );
 			}
 		} else {
 			$this->nonceInvalidMessage();
@@ -285,7 +288,7 @@ class SubscriberActions {
 
 		// do we need to redirect to a list page or to the contacts list page
 		if ( $list_id ) {
-			$this->redirectToSettingsPage( 'subscribers.lists.emails', array( 'post_id' => $list_id ), IC_PROMO_PAGE_SUBSCRIBERS );
+			$this->redirectToSettingsPage( 'subscribers.lists.emails', array( 'post_id' => $list_id ), ICONVERTPR_PAGE_SUBSCRIBERS );
 		} else {
 			$this->redirectToSettingsPage( 'subscribers.lists' );
 		}

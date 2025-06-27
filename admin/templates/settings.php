@@ -1,3 +1,9 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+?>
 <div class="ic-promo-card">
 	<div class="ic-promo-content">
 		<?php if ( $selectedPopup ) : ?>
@@ -6,7 +12,7 @@
 				<span class="cs-selected-header-actions">
 
 					<label class="cs-switch cs-toggle-status">
-						<input type="checkbox" <?php echo $selectedPopup['active'] ? 'checked' : ''; ?> data-id="<?php echo esc_attr( $selectedPopup['id'] ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'status_popup_' . $selectedPopup['id'] ) ); ?>">
+						<input type="checkbox" <?php echo $selectedPopup['active'] ? 'checked' : ''; ?> data-id="<?php echo esc_attr( $selectedPopup['id'] ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'iconvertpr_status_popup_' . $selectedPopup['id'] ) ); ?>">
 						<span class="cs-active-slider"><em>Active</em></span>
 					</label>
 
@@ -41,6 +47,8 @@
 					<div id="ic-tab-<?php echo esc_attr( $key ); ?>" class="ic-tab-content <?php echo $key === 0 ? 'active' : ''; ?>">
 						<div class="ic-tab-content-inner">
 							<?php
+							// Render the content of the tab.
+							// The render method is expected to return the tab computed HTML content.
 							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							echo ! empty( $tab['content'] ) ? $tab['content']->render() : '';
 							?>

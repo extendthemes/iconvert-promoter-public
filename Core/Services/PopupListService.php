@@ -37,6 +37,7 @@ class PopupListService extends BasicCrud {
 					break;
 				case 'view' || 'click' || 'subscriber' || 'first_view':
 					$stats_query = $wpdb->prepare(
+						// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared 
 						"SELECT post_id, SUM(hits) as hits FROM {$this->buildTableName( 'promo_stats' )} WHERE event = %s GROUP BY post_id",
 						$sortBy
 					);

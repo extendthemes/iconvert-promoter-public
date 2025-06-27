@@ -36,7 +36,7 @@ export class PromoTriggerSetup {
     $.post(
       cs_promo_settings.ajax_url,
       {
-        action: "cs_promo_get_cart_details",
+        action: "iconvertpr_promo_get_cart_details",
         cart: "cart_details",
       },
       (response) => {
@@ -137,7 +137,11 @@ export class PromoTriggerSetup {
         break;
 
       case PromoPageLoad.name:
-        PromoPageLoad.setup(this.triggers[popupID][triggerName], popupID);
+        PromoPageLoad.setup(
+          this.triggers[popupID][triggerName],
+          popupID,
+          this.triggers[popupID]
+        );
         break;
 
       case PromoManuallyOpen.name:

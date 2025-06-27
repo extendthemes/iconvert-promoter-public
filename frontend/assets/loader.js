@@ -84,7 +84,7 @@
   window.icPromoPopupsData = null;
 
   const formData = new FormData();
-  formData.append("cs_promo_load_popups", "1");
+  formData.append("iconvertpr_promo_load_popups", "1");
   formData.append(
     "payload",
     JSON.stringify({

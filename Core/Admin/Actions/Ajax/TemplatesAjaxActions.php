@@ -11,8 +11,8 @@ class TemplatesAjaxActions {
 	use HasAction;
 
 	public function __construct() {
-		add_action( 'wp_ajax_cs_promo_set_template', array( $this, 'setTemplate' ) );
-		add_action( 'wp_ajax_cs_promo_get_template_by_type', array( $this, 'getTemplateByType' ) );
+		add_action( 'wp_ajax_iconvertpr_promo_set_template', array( $this, 'setTemplate' ) );
+		add_action( 'wp_ajax_iconvertpr_promo_get_template_by_type', array( $this, 'getTemplateByType' ) );
 	}
 
 	/**
@@ -21,7 +21,7 @@ class TemplatesAjaxActions {
 	 * @return void
 	 */
 	public function setTemplate() {
-		if ( $this->checkNonce( 'cs_promo_set_template', false, '_wpnonce_set_template' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_promo_set_template', false, '_wpnonce_set_template' ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$popupID = isset( $_POST['popup'] ) ? intval( $_POST['popup'] ) : 0;
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -69,7 +69,7 @@ class TemplatesAjaxActions {
 	}
 
 	public function getTemplateByType() {
-		if ( $this->checkNonce( 'cs_promo_get_template_by_type', false, '_wpnonce_get_template' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_promo_get_template_by_type', false, '_wpnonce_get_template' ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$promoType       = isset( $_POST['promo_type'] ) ? sanitize_text_field( wp_unslash( $_POST['promo_type'] ) ) : '';
 			$templateService = new TemplatesService();

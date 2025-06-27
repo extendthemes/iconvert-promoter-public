@@ -44,6 +44,14 @@ class PromoPopupBlock extends BlockContainerBase {
 					)
 				);
 
+				foreach ( $next_settings as $key => $value ) {
+					if ( is_array( $value ) ) {
+						$next_settings[ $key ] = array_map( 'sanitize_text_field', $value );
+					} else {
+						$next_settings[ $key ] = sanitize_text_field( $value );
+					}
+				}
+
 				if ( ! empty( $next_settings ) ) {
 
 					$promo_service = new TemplatesService(

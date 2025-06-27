@@ -5,7 +5,7 @@
  *
  */
 
-if ( ! function_exists( 'cs_registry_get' ) ) {
+if ( ! function_exists( 'iconvertpr_registry_get' ) ) {
 	/**
 	 * cs_registry_get Helper function to get a variable from the registry
 	 *
@@ -14,13 +14,13 @@ if ( ! function_exists( 'cs_registry_get' ) ) {
 	 * @return mixed value
 	 */
 
-	function cs_registry_get( $name, $default = null ) {
+	function iconvertpr_registry_get( $name, $default = null ) {
 		$registry = \CSPromo\Core\Admin\Registry::getInstance();
 		return $registry->get( $name, $default );
 	}
 }
 
-if ( ! function_exists( 'cs_registry_set' ) ) {
+if ( ! function_exists( 'iconvertpr_registry_set' ) ) {
 	/**
 	 * cs_registry_set Helper function to set a variable into the registry
 	 *
@@ -29,13 +29,13 @@ if ( ! function_exists( 'cs_registry_set' ) ) {
 	 * @return void
 	 */
 
-	function cs_registry_set( $name, $value ) {
+	function iconvertpr_registry_set( $name, $value ) {
 		$registry = \CSPromo\Core\Admin\Registry::getInstance();
 		$registry->set( $name, $value );
 	}
 }
 
-if ( ! function_exists( 'cs_registry_delete' ) ) {
+if ( ! function_exists( 'iconvertpr_registry_delete' ) ) {
 	/**
 	 * cs_registry_delete Helper function to delete a variable fromt the registry
 	 *
@@ -43,7 +43,7 @@ if ( ! function_exists( 'cs_registry_delete' ) ) {
 	 * @return void
 	 */
 
-	function cs_registry_delete( $name ) {
+	function iconvertpr_registry_delete( $name ) {
 		$registry = \CSPromo\Core\Admin\Registry::getInstance();
 		$registry->delete( $name );
 	}

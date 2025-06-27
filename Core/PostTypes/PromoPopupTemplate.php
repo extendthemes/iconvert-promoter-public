@@ -9,12 +9,12 @@ class PromoPopupTemplate {
 		$this->templateSlug = 'single-' . PromoPopups::getSlug();
 		$this->addFilters();
 
-		do_action( 'iconvert_promoter_loaded', $this->templateSlug );
+		do_action( 'iconvertpr_loaded', $this->templateSlug );
 	}
 
 	public function addFilters() {
-		add_filter( call_user_func( CSKubio . '\Core\Utils::getStringWithNamespacePrefix', 'kubio/importer/available_templates' ), array( $this, 'getPromoPopupTemplate' ), 11 );
-		add_filter( call_user_func( CSKubio . '\Core\Utils::getStringWithNamespacePrefix', 'kubio/importer/content' ), array( $this, 'getPromoTemplateContent' ), 10, 3 );
+		add_filter( call_user_func( ICONVERTPR_KUBIO_NS . '\Core\Utils::getStringWithNamespacePrefix', 'kubio/importer/available_templates' ), array( $this, 'getPromoPopupTemplate' ), 11 );
+		add_filter( call_user_func( ICONVERTPR_KUBIO_NS . '\Core\Utils::getStringWithNamespacePrefix', 'kubio/importer/content' ), array( $this, 'getPromoTemplateContent' ), 10, 3 );
 	}
 
 	public function getPromoPopupTemplate( $current_templates = array() ) {
@@ -28,7 +28,7 @@ class PromoPopupTemplate {
 			return $content;
 		}
 
-		$templateContent = cs_import_template_contents( 'custom-post-type-template' );
+		$templateContent = iconvertpr_import_template_contents( 'custom-post-type-template' );
 
 		return $templateContent;
 	}

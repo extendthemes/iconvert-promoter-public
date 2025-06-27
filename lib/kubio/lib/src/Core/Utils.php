@@ -161,7 +161,7 @@ class Utils {
 
 	public static function kubioCacheGet( $name, $fallback = null ) {
 
-		$kubio_cache = isset( $GLOBALS['__kubio_plugin_cache__'] ) ? $GLOBALS['__kubio_plugin_cache__'] : array();
+		$kubio_cache = isset( $GLOBALS['kubio_plugin_cache__'] ) ? $GLOBALS['kubio_plugin_cache__'] : array();
 		$value       = $fallback;
 
 		if ( self::kubioCacheHas( $name ) ) {
@@ -172,16 +172,16 @@ class Utils {
 	}
 
 	public static function kubioCacheHas( $name ) {
-		$kubio_cache = isset( $GLOBALS['__kubio_plugin_cache__'] ) ? $GLOBALS['__kubio_plugin_cache__'] : array();
+		$kubio_cache = isset( $GLOBALS['kubio_plugin_cache__'] ) ? $GLOBALS['kubio_plugin_cache__'] : array();
 
 		return array_key_exists( $name, $kubio_cache );
 	}
 
 	public static function kubioCacheSet( $name, $value ) {
-		$kubio_cache          = isset( $GLOBALS['__kubio_plugin_cache__'] ) ? $GLOBALS['__kubio_plugin_cache__'] : array();
+		$kubio_cache          = isset( $GLOBALS['kubio_plugin_cache__'] ) ? $GLOBALS['kubio_plugin_cache__'] : array();
 		$kubio_cache[ $name ] = $value;
 
-		$GLOBALS['__kubio_plugin_cache__'] = $kubio_cache;
+		$GLOBALS['kubio_plugin_cache__'] = $kubio_cache;
 	}
 
 	/**

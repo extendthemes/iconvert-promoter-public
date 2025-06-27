@@ -239,11 +239,7 @@ class SubscribersService extends BasicCrud {
 	 *
 	 * @return mixed
 	 */
-	public function bulkDeleteRecords() {
-
-		// phpcs:ignore WordPress.Security.NonceVerification
-		$ids = isset( $_POST['ids'] ) ? array_map( 'intval', $_POST['ids'] ) : array();
-
+	public function bulkDeleteRecords( $ids = array() ) {
 		if ( ! empty( $ids ) ) {
 			$del = $this->bulkDelete( 'id', $ids );
 

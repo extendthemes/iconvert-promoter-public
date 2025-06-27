@@ -45,10 +45,10 @@ class EditorAssets {
 		//this tells the block library to load the blocks using a hook that is runned after the editor is initialized
 		//This gives time to the code from both block library packes from kubio and kubio child to load and to add its filters
 		if ( Utils::isKubioChildEditorPage() ) {
-			$dataArray                            = apply_filters( 'CsPromoKubio.kubioUtilsData', $dataArray );
+			$dataArray                            = apply_filters( 'iconvertpr.kubioUtilsData', $dataArray );
 			$dataArray['kubioLoadBlocksWithHook'] = true;
-			$dataArray['optrixBlinkingLogoHtml']  = file_get_contents( IC_PROMO_URL . 'page-builder/static/optrix-iframe-loader.html' );
-			$dataArray['previewBlinkingLogoHtml'] = file_get_contents( IC_PROMO_URL . 'page-builder/static/optrix-iframe-loader.html' );
+			$dataArray['optrixBlinkingLogoHtml']  = file_get_contents( ICONVERTPR_URL . 'page-builder/static/optrix-iframe-loader.html' );
+			$dataArray['previewBlinkingLogoHtml'] = file_get_contents( ICONVERTPR_URL . 'page-builder/static/optrix-iframe-loader.html' );
 			$dataArray['enable_try_online']       = false;
 		}
 

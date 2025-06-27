@@ -12,7 +12,7 @@ jQuery(document).ready(function ($) {
 
     const elem = $(this);
     const payload = {
-      action: "cs_promo_set_template",
+      action: "iconvertpr_promo_set_template",
       template: elem.data("template"),
       popup: elem.data("popup"),
       _wpnonce_set_template: $("#_wpnonce_set_template").val(),
@@ -31,7 +31,7 @@ jQuery(document).ready(function ($) {
     const elem = $(this);
     const inputStatus = $(this).is(":checked") ? 1 : 0;
     const payload = {
-      action: "ic_promo_status",
+      action: "iconvertpr_promo_status",
       post_id: $(this).data("id"),
       nonce: $(this).data("nonce"),
       status: inputStatus,
@@ -182,9 +182,9 @@ jQuery(document).ready(function ($) {
           {
             return {
               search: params.term,
-              action: "cs_products_search",
-              _wpnonce_product_search: $(
-                'input[name="_wpnonce_product_search"]'
+              action: "iconvertpr_products_search",
+              _wpnonce_iconvertpr_product_search: $(
+                'input[name="_wpnonce_iconvertpr_product_search"]'
               ).val(),
             };
           }
@@ -208,9 +208,9 @@ jQuery(document).ready(function ($) {
       type: "GET",
       url: cs_promo_settings.ajax_url,
       data: {
-        action: "cs_products_search",
-        _wpnonce_product_search: $(
-          'input[name="_wpnonce_product_search"]'
+        action: "iconvertpr_products_search",
+        _wpnonce_iconvertpr_product_search: $(
+          'input[name="_wpnonce_iconvertpr_product_search"]'
         ).val(),
         ids: prodSelectorElem.data("selected") || 0,
       },
@@ -240,9 +240,9 @@ jQuery(document).ready(function ($) {
           {
             return {
               search: params.term,
-              action: "cs_products_search",
-              _wpnonce_product_search: $(
-                'input[name="_wpnonce_product_search"]'
+              action: "iconvertpr_products_search",
+              _wpnonce_iconvertpr_product_search: $(
+                'input[name="_wpnonce_iconvertpr_product_search"]'
               ).val(),
             };
           }
@@ -265,9 +265,9 @@ jQuery(document).ready(function ($) {
       type: "GET",
       url: cs_promo_settings.ajax_url,
       data: {
-        action: "cs_products_search",
-        _wpnonce_product_search: $(
-          'input[name="_wpnonce_product_search"]'
+        action: "iconvertpr_products_search",
+        _wpnonce_iconvertpr_product_search: $(
+          'input[name="_wpnonce_iconvertpr_product_search"]'
         ).val(),
         ids: prodNotInCartSelectorElem.data("selected") || 0,
       },
@@ -372,7 +372,7 @@ jQuery(document).ready(function ($) {
     $.post(
       cs_promo_settings.ajax_url,
       {
-        action: "cs_create_popup",
+        action: "iconvertpr_create_popup",
         payload: payload,
         _wpnonce: $('input[name="_wpnonce"]').val(),
       },

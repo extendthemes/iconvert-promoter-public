@@ -29,7 +29,7 @@ class DisplayConditionsCheck {
 			new UserCheck( $this->id, isset( $display_conditions['cs-roles'] ) ? $display_conditions['cs-roles'] : array(), $this->state ),
 		);
 
-		$conditions_arr = apply_filters( 'iconvert_promoter_display_conditions', $conditions_arr, $this->id, $display_conditions, $this->state );
+		$conditions_arr = apply_filters( 'iconvertpr_display_conditions', $conditions_arr, $this->id, $display_conditions, $this->state );
 
 		$show = true;
 

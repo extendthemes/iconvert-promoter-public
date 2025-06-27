@@ -17,14 +17,10 @@ class Activator {
 		add_action( 'wp', array( $this, 'shouldLoadKubioAssets' ) );
 		add_action( 'wp_footer', array( $this, 'loadPromoSkeletonPage' ) );
 		add_filter( 'request', array( $this, 'previewQueryVars' ) );
-
-		add_action( 'wp_footer', array( $this, 'popupHtml' ) );
 	}
 
 	public function shouldLoadKubioAssets() {
-		// if ( cs_preview_page() ) {
-			call_user_func( CSPromoBuilder . '\\FrontendAssets::loadKubioAssets' );
-		// }
+			call_user_func( ICONVERTPR_BUILDER_NS . '\\FrontendAssets::loadKubioAssets' );
 	}
 
 	public function loadPromoSkeletonPage() {
@@ -33,21 +29,11 @@ class Activator {
 		}
 	}
 
-	/**
-	 * Echo the popup html
-	 *
-	 * @return void
-	 */
-	public function popupHtml() {
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo self::$popups_html;
-	}
-
 	public function previewQueryVars( $vars ) {
 
-		if ( cs_preview_page() ) {
+		if ( iconvertpr_preview_page() ) {
 			$vars = array(
-				'p'         => cs_preview_page_id(),
+				'p'         => iconvertpr_preview_page_id(),
 				'post_type' => PromoPopups::getSlug(),
 			);
 		}

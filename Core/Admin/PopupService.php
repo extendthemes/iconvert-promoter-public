@@ -53,7 +53,7 @@ class PopupService {
 
 		if ( $postID ) {
 			$postContentTemplate  = '';
-			$default_content_file = IC_PROMO_PATH . "/defaults/popup-templates/{$data['type']}.html";
+			$default_content_file = ICONVERTPR_PATH . "/defaults/popup-templates/{$data['type']}.html";
 
 			if ( file_exists( $default_content_file ) ) {
 				$postContentTemplate = file_get_contents( $default_content_file );
@@ -214,10 +214,10 @@ class PopupService {
 			$template_service = new TemplatesService( $settings );
 			$content          = $template_service->importContent( wp_slash( $content ), $postId, true );
 
-			$postData['post_content'] = $content;
+			$postData['post_content'] = wp_slash( $content );
 		}
 
-		return wp_update_post( wp_slash( $postData ) );
+		return wp_update_post( $postData );
 	}
 
 	/**
@@ -226,14 +226,13 @@ class PopupService {
 	 *
 	 * @return int $newPostId|WP_Error
 	 */
-	public static function duplicate( $postId, $campaignName ) {
+	public static function duplicate( $postId, $campaignName, $duplicate_as = null ) {
 		$post          = get_post( $postId );
 		$currentUser   = wp_get_current_user();
 		$newPostAuthor = $currentUser->ID;
 
 		$original_type = PromoPopups::getSetting( 'popup_type', $postId );
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$duplicate_as = isset( $_POST['duplicate_as'] ) ? sanitize_text_field( $_POST['duplicate_as'] ) : $original_type;
+		$duplicate_as  = $duplicate_as ? $duplicate_as : $original_type;
 
 		if ( ! in_array( $duplicate_as, array_keys( PromoPopupsSettings::getTypes() ) ) ) {
 			$duplicate_as = $original_type;

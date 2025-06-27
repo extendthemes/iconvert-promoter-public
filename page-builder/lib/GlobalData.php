@@ -19,7 +19,6 @@ class GlobalData {
 
 	public static function loadKubioGlobalData() {
 		add_action( 'wp_enqueue_scripts', 'KPromo\\kubio_enqueue_google_fonts' );
-		add_action( 'wp_head', 'KPromo\\kubio_enqueue_typekit_fonts' );
 		add_action( 'wp_head', 'KPromo\\kubio_register_global_style', 0 );
 	}
 

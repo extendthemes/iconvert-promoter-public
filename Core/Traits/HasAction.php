@@ -2,18 +2,22 @@
 namespace CSPromo\Core\Traits;
 
 trait HasAction {
+
 	/**
-	 * Check action nonce
+	 * Check nonce
 	 *
-	 * @return boolean
+	 * @param  string $action
+	 * @param  bool   $is_get_method
+	 * @param  string $name
+	 * @return bool
 	 */
-	public function checkNonce( $action, $get = false, $name = '_wpnonce' ) {
-		if ( $get ) {
+	public function checkNonce( $action, $is_get_method = false, $name = '_wpnonce' ) {
+		if ( $is_get_method ) {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-			return isset( $_GET[ $name ] ) && wp_verify_nonce( sanitize_text_field( $_GET[ $name ] ), $action );
+			return isset( $_GET[ $name ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET[ $name ] ) ), $action );
 		} else {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-			return isset( $_POST[ $name ] ) && wp_verify_nonce( sanitize_text_field( $_POST[ $name ] ), $action );
+			return isset( $_POST[ $name ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ $name ] ) ), $action );
 		}
 	}
 
@@ -26,9 +30,9 @@ trait HasAction {
 	 */
 	public function nonceInvalidMessage( string $message = null, $status = 'error' ) {
 		if ( $message != null ) {
-			cs_flash_message_add( $message, $status );
+			iconvertpr_flash_message_add( $message, $status );
 		} else {
-			cs_flash_message_add( __( 'There was a problem with your request. Nonce seems invalid.', 'iconvert-promoter' ), 'error' );
+			iconvertpr_flash_message_add( __( 'There was a problem with your request. Nonce seems invalid.', 'iconvert-promoter' ), 'error' );
 		}
 	}
 
@@ -40,7 +44,7 @@ trait HasAction {
 	 */
 	public function redirectToSettingsPage( string $url = null, $args = array(), $ns = false ) {
 		if ( $url !== null ) {
-			wp_safe_redirect( cs_generate_page_url( $url, $args, $ns ) );
+			wp_safe_redirect( iconvertpr_generate_page_url( $url, $args, $ns ) );
 		} else {
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			wp_safe_redirect( $_POST['_wp_http_referer'] );

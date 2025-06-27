@@ -86,13 +86,18 @@ class EmailListsService extends BasicCrud {
 	 * @return boolean
 	 */
 	public function isSubscribedToList( $email, $list_id ) {
-		$sql     = 'SELECT subscribers.email
-                FROM ' . $this->buildTableName( 'promo_subscriber_list' ) . ' cl
-                LEFT JOIN ' . $this->buildTableName( 'promo_subscribers' ) . ' subscribers ON subscribers.id = cl.subscriber_id
-                WHERE cl.list_id = ' . esc_sql( $list_id ) . "
-                AND subscribers.email = '" . esc_sql( $email ) . "'
-                LIMIT 1
-            ";
+		$sql = $this->wpdb->prepare(
+			'SELECT subscribers.email			 FROM ' .
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$this->buildTableName( 'promo_subscriber_list' ) . ' cl  LEFT JOIN ' .
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$this->buildTableName( 'promo_subscribers' ) .
+			' subscribers ON subscribers.id = cl.subscriber_id ' .
+			' WHERE cl.list_id = %d AND subscribers.email = %s ' .
+			' LIMIT 1',
+			$list_id,
+			$email
+		);
 		$records = $this->query( $sql );
 
 		$this->flush();
@@ -123,7 +128,7 @@ class EmailListsService extends BasicCrud {
 		$emailList = $this->find( array( 'id' => $listID ) );
 
 		if ( $emailList ) {
-			do_action( 'iconvert_promo_popup_subscribe_user', $email, $name, $emailList, $contact_id );
+			do_action( 'iconvertpr_popup_subscribe_user', $email, $name, $emailList, $contact_id );
 		}
 
 		$this->maybeAddToProvider(
@@ -177,13 +182,17 @@ class EmailListsService extends BasicCrud {
 		$this->limit( $numOfRecords, $paged );
 
 		$sql = 'SELECT lists.*, COUNT(sl.list_id) AS subscribers
-                FROM ' . $this->tablename . ' lists
-                LEFT JOIN ' . $this->buildTableName( 'promo_subscriber_list' ) . ' sl ON lists.id = sl.list_id
-                GROUP BY lists.id
-                ORDER BY lists.name ASC
-                ' . $this->getLimit() . '
-            ';
+				FROM ' .
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				$this->tablename
+				. ' lists LEFT JOIN ' .
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				$this->buildTableName( 'promo_subscriber_list' ) .
+				' sl ON lists.id = sl.list_id GROUP BY lists.id ORDER BY lists.name ASC ' .
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				$this->getLimit();
 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$records = $this->query( $sql );
 
 		return array(
@@ -197,18 +206,10 @@ class EmailListsService extends BasicCrud {
 	 *
 	 * @return mixed
 	 */
-	public function bulkDeleteRecords() {
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		if ( isset( $POST['ids'] ) && ! empty( $_POST['ids'] ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$del = $this->bulkDelete( 'id', array_map( 'intval', $_POST['ids'] ) );
-
+	public function bulkDeleteRecords( $ids = array() ) {
+			$del = $this->bulkDelete( 'id', $ids );
 			$this->flush();
-
 			return $del;
-		}
-
-		return false;
 	}
 
 	/**

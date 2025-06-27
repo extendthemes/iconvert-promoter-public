@@ -12,7 +12,7 @@ class FlashMessages {
 	 *
 	 * @var string
 	 */
-	private $optionName = 'cs_flash_messages';
+	private $optionName = 'iconvertpr_flash_messages';
 
 	/**
 	 * Adds a Flash Message

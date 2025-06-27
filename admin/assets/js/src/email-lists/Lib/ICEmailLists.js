@@ -9,7 +9,7 @@ const getProviderLists = (provider) => {
       type: "POST",
       url: ajaxURL,
       data: {
-        action: "icp_email_lists_provider_lists",
+        action: "iconvertpr_email_lists_provider_lists",
         provider: provider,
       },
     })
@@ -155,7 +155,7 @@ export const ICEmailLists = (() => {
         e.preventDefault();
 
         getListFromServer({
-          action: "icp_email_lists_edit",
+          action: "iconvertpr_email_lists_edit",
           post_id: listID,
           _wpnonce: __nonce,
         });
@@ -171,7 +171,7 @@ export const ICEmailLists = (() => {
         $.post(
           cs_promo_settings.ajax_url,
           {
-            action: "icp_email_lists_sync",
+            action: "iconvertpr_email_lists_sync",
             list_id: listID,
             _wpnonce: __nonce,
           },
@@ -230,7 +230,7 @@ export const ICEmailLists = (() => {
             callback: () => {
               setTimeout(() => {
                 getListFromServer({
-                  action: "icp_email_lists_edit",
+                  action: "iconvertpr_email_lists_edit",
                   post_id: listID,
                   _wpnonce: __nonce,
                 });
@@ -313,7 +313,7 @@ export const ICEmailLists = (() => {
       $.post(
         cs_promo_settings.ajax_url,
         {
-          action: "icp_email_lists_create",
+          action: "iconvertpr_email_lists_create",
           name: name?.value,
           description: description?.value,
           subject: subject?.value,
@@ -424,7 +424,7 @@ export const ICEmailLists = (() => {
       $.post(
         ajaxURL,
         {
-          action: "icp_email_lists_update",
+          action: "iconvertpr_email_lists_update",
           post_id: id,
           name: name.value,
           template: template ? template.selectedOptions[0].value : 0,
@@ -458,7 +458,7 @@ export const ICEmailLists = (() => {
     $.post(
       cs_promo_settings.ajax_url,
       {
-        action: "icp_email_lists_delete",
+        action: "iconvertpr_email_lists_delete",
         post_id: listID,
         _wpnonce: __nonce,
       },

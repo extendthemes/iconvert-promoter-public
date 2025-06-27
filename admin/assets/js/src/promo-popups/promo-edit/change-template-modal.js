@@ -176,7 +176,7 @@ jQuery(document).ready(function ($) {
       $.post(
         cs_promo_settings.ajax_url,
         {
-          action: "cs_promo_get_template_by_type",
+          action: "iconvertpr_promo_get_template_by_type",
           promo_type: promoTypeVal,
           _wpnonce_get_template: $('input[name="_wpnonce_get_template"]').val(),
         },
@@ -254,10 +254,10 @@ jQuery(document).ready(function ($) {
       $.post(
         cs_promo_settings.ajax_url,
         {
-          action: "cs_change_popup_template",
+          action: "iconvertpr_change_popup_template",
           post_id: promoId,
           template_id: newPromoTemplate.id,
-          _wpnonce: $('input[name="_wpnonce_cs_change_popup_template"]').val(),
+          _wpnonce: $('input[name="_wpnonce_iconvertpr_change_popup_template"]').val(),
         },
         (response) => {
           if (response.success) {

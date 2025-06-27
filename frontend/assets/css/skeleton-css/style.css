@@ -20,7 +20,7 @@
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
   z-index: 1;
-  
+
   background: linear-gradient(
     90deg,
     transparent,
@@ -224,6 +224,11 @@
 
 .search-skeleton {
   margin: 0 auto;
+}
+
+.wp-site-blocks {
+  position: relative;
+  z-index: 100;
 }
 
 /*# sourceMappingURL=/index.css.map */

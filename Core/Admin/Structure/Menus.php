@@ -11,68 +11,68 @@ class Menus {
 	}
 
 	public function add_plugin_pages() {
-		$router = new Router( IC_PROMO_PAGE_ID );
+		$router = new Router( ICONVERTPR_PAGE_ID );
 
 		$hook = \add_menu_page(
 			__( 'iConvert Promoter', 'iconvert-promoter' ),
 			__( 'iConvert Promoter', 'iconvert-promoter' ),
 			'manage_options',
-			IC_PROMO_PAGE_ID,
+			ICONVERTPR_PAGE_ID,
 			$router->display(),
-			IC_PROMO_URL . '/admin/assets/images/main-menu-icon.png',
+			ICONVERTPR_URL . '/admin/assets/images/main-menu-icon.png',
 			20
 		);
 
-		cs_registry_set( 'settings_page_hook', $hook );
+		iconvertpr_registry_set( 'settings_page_hook', $hook );
 
 		$hook = \add_submenu_page(
-			IC_PROMO_PAGE_ID,
+			ICONVERTPR_PAGE_ID,
 			__( 'Campaigns', 'iconvert-promoter' ),
 			__( 'Campaigns', 'iconvert-promoter' ),
 			'manage_options',
-			IC_PROMO_PAGE_ID,
+			ICONVERTPR_PAGE_ID,
 			$router->display()
 		);
 
-		$router = new Router( IC_PROMO_PAGE_SUBSCRIBERS );
+		$router = new Router( ICONVERTPR_PAGE_SUBSCRIBERS );
 
 		$hookSubpage = \add_submenu_page(
-			IC_PROMO_PAGE_ID,
+			ICONVERTPR_PAGE_ID,
 			__( 'Email lists', 'iconvert-promoter' ),
 			__( 'Email lists', 'iconvert-promoter' ),
 			'manage_options',
-			IC_PROMO_PAGE_ID . '-subscribers',
+			ICONVERTPR_PAGE_SUBSCRIBERS,
 			$router->display()
 		);
 
-		cs_registry_set( 'popup_page_edit_hook', $hookSubpage );
+		iconvertpr_registry_set( 'popup_page_edit_hook', $hookSubpage );
 
-		$router = new Router( IC_PROMO_PAGE_INTEGRATIONS );
+		$router = new Router( ICONVERTPR_PAGE_INTEGRATIONS );
 
 		$integrations_page = \add_submenu_page(
-			IC_PROMO_PAGE_ID,
+			ICONVERTPR_PAGE_ID,
 			__( 'Integrations', 'iconvert-promoter' ),
 			__( 'Integrations', 'iconvert-promoter' ),
 			'manage_options',
-			IC_PROMO_PAGE_ID . '-integrations',
+			ICONVERTPR_PAGE_INTEGRATIONS,
 			$router->display()
 		);
 
-		cs_registry_set( 'popup_page_integrations_hook', $integrations_page );
+		iconvertpr_registry_set( 'popup_page_integrations_hook', $integrations_page );
 
-		if ( apply_filters( 'iconvert_promoter_feature_available_only_in_pro', true ) ) {
-			$router = new Router( IC_PROMO_PAGE_UPGRADE );
+		if ( apply_filters( 'iconvertpr_feature_available_only_in_pro', true ) ) {
+			$router = new Router( ICONVERTPR_PAGE_UPGRADE );
 
 			$license_page = \add_submenu_page(
-				IC_PROMO_PAGE_ID,
+				ICONVERTPR_PAGE_ID,
 				__( 'Upgrade to PRO', 'iconvert-promoter' ),
 				__( 'Upgrade to PRO', 'iconvert-promoter' ),
 				'manage_options',
-				IC_PROMO_PAGE_ID . '-upgrade',
+				ICONVERTPR_PAGE_UPGRADE,
 				$router->display()
 			);
 
-			cs_registry_set( 'popup_page_upgrade_hook', $license_page );
+			iconvertpr_registry_set( 'popup_page_upgrade_hook', $license_page );
 		}
 	}
 }

@@ -98,7 +98,7 @@ class Utils {
 	}
 
 	public static function getKubioBlockJsonPath( $block_folder ) {
-		return CSPROMO_KUBIO_ROOT_DIR . "/build/block-library/blocks/$block_folder/block.json";
+		return ICONVERTPR_KUBIO_ROOT_DIR . "/build/block-library/blocks/$block_folder/block.json";
 	}
 
 	public static function removeKubioDependency( array $registered, array $deps_to_remove ): array {

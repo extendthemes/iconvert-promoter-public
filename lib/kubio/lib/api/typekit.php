@@ -2,7 +2,6 @@
 namespace KPromo;
 
 
-use KPromo\Core\Utils;
 
 function kubio_typekit_query( \WP_REST_Request $data ) {
 
@@ -29,24 +28,3 @@ function kubio_typekit_query( \WP_REST_Request $data ) {
 
 	return new \WP_Error( 'Unable to decode' );
 }
-
-
-add_action(
-	'rest_api_init',
-	function () {
-		$namespace = Utils::getKubioUrlWithRestPrefix( 'kubio/v1' );
-
-		register_rest_route(
-			$namespace,
-			'/typekit-query',
-			array(
-				'methods'             => 'GET',
-				'callback'            => __NAMESPACE__ . '\\kubio_typekit_query',
-				'permission_callback' => function () {
-					return current_user_can( 'edit_theme_options' );
-				},
-
-			)
-		);
-	}
-);

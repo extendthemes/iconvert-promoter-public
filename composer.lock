@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fbbe26fde9f85e6266917fca00d130af",
+    "content-hash": "dcddde190bcab91fb0e9c08a758fe823",
     "packages": [
         {
             "name": "lodash-php/lodash-php",
@@ -1219,16 +1219,16 @@
         },
         {
             "name": "wolfcast/browser-detection",
-            "version": "2.9.7",
+            "version": "2.9.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Wolfcast/BrowserDetection.git",
-                "reference": "77fad169776d6c4fc61fa740fb16495cafc505eb"
+                "reference": "f863a616536850a9713249de70ee60a18ffb9a13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Wolfcast/BrowserDetection/zipball/77fad169776d6c4fc61fa740fb16495cafc505eb",
-                "reference": "77fad169776d6c4fc61fa740fb16495cafc505eb",
+                "url": "https://api.github.com/repos/Wolfcast/BrowserDetection/zipball/f863a616536850a9713249de70ee60a18ffb9a13",
+                "reference": "f863a616536850a9713249de70ee60a18ffb9a13",
                 "shasum": ""
             },
             "require": {
@@ -1263,9 +1263,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Wolfcast/BrowserDetection/issues",
-                "source": "https://github.com/Wolfcast/BrowserDetection/tree/2.9.7"
+                "source": "https://github.com/Wolfcast/BrowserDetection/tree/2.9.9"
             },
-            "time": "2022-09-21T04:06:27+00:00"
+            "time": "2025-03-23T16:23:10+00:00"
         }
     ],
     "packages-dev": [

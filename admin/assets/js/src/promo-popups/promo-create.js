@@ -102,7 +102,7 @@ jQuery(document).ready(function ($) {
     $.post(
       cs_promo_settings.ajax_url,
       {
-        action: "cs_promo_get_template_by_type",
+        action: "iconvertpr_promo_get_template_by_type",
         promo_type: promoTypeVal,
         _wpnonce_get_template: $('input[name="_wpnonce_get_template"]').val(),
       },
@@ -220,7 +220,7 @@ jQuery(document).ready(function ($) {
     $.post(
       cs_promo_settings.ajax_url,
       {
-        action: "cs_create_popup",
+        action: "iconvertpr_create_popup",
         payload,
         promoSettings,
         _wpnonce: $('input[name="_wpnonce"]').val(),

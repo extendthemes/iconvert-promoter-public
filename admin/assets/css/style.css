@@ -548,7 +548,7 @@ input[name=value_on_click] {
 .ic-promo-wrapper .ic-promo-inner .ic-promo-content .promo-page-edit .section-display-condition .section-conditions .condition[data-row=recurring] .wrapper-display-condition-value .input-group {
   margin-bottom: 0;
 }
-.ic-promo-wrapper .ic-promo-inner .ic-promo-content .promo-page-edit .section-display-condition .section-conditions .condition [data-target=specific-pages] {
+.ic-promo-wrapper .ic-promo-inner .ic-promo-content .promo-page-edit .section-display-condition .section-conditions .condition [data-bs-target=specific-pages] {
   margin-top: 10px;
 }
 .ic-promo-wrapper .ic-promo-inner .ic-promo-content .promo-page-edit .section-display-condition .section-conditions .condition .item-label {

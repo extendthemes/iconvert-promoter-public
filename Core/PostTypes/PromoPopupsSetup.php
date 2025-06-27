@@ -9,6 +9,30 @@ class PromoPopupsSetup {
 	public function __construct() {
 		add_action( 'init', array( __CLASS__, 'register' ) );
 		add_filter( 'wp_link_query_args', array( $this, 'removeFromLinkQuery' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'iconvertPromoTemplatePreviewLoaded' ), 50 );
+	}
+
+	public function iconvertPromoTemplatePreviewLoaded() {
+
+		if ( ! iconvertpr_preview_page() ) {
+			return;
+		}
+
+			$js = "jQuery(function($) {
+						const popup = $('[data-cs-promoid]');
+						const popupID = popup.data('cs-promoid');
+						window.iconvertPromoPopup.promoRemovePopupEvent(popupID,{
+							disableEsc: popup.is('.cs-popup-container-type-inline-promotion-bar'),
+						});
+						setTimeout(function(){
+							window.iconvertPromoPopup.promoShow(popupID);
+						},500);
+					});";
+
+			wp_add_inline_script(
+				'iconvertpr-popups-main',
+				$js
+			);
 	}
 
 	/**
@@ -44,7 +68,7 @@ class PromoPopupsSetup {
 
 		$public = false;
 
-		if ( cs_preview_page() ) {
+		if ( iconvertpr_preview_page() ) {
 			$public = true;
 		}
 

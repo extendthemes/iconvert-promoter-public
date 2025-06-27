@@ -91,20 +91,6 @@ function kubio_url_import_cdn_files( $url ) {
 add_filter( Utils::getStringWithNamespacePrefix( 'kubio/importer/kubio-source-url' ), __NAMESPACE__ . '\\kubio_url_import_cdn_files' );
 
 
-function kubio_change_customize_link_to_open_kubio_editor() {
-	$kubio_url = add_query_arg( array( 'page' => 'kubio' ), admin_url( 'admin.php' ) );
-	?>
-	<script>
-		(function() {
-			var button = document.querySelector('.button.load-customize');
-
-			if (button) {
-				button.href = "<?php echo esc_url( $kubio_url ); ?>";
-			}
-		})();
-	</script>
-	<?php
-}
 
 add_filter(
 	Utils::getStringWithNamespacePrefix( 'kubio/importer/kubio-url-placeholder-replacement' ),

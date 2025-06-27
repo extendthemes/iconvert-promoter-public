@@ -1,9 +1,15 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+?>
 <div class="ic-promo-wrapper d-flex flex-column">
 	<div class="header d-flex justify-content-between align-items-center">
 		<div class="box-logo d-flex">
 			<div class="logo align-self-center">
 				<div class="d-flex">
-					<?php echo file_get_contents( IC_PROMO_PATH . '/admin/assets/images/iconvert-promoter-logo.svg' ); ?>
+					<?php echo file_get_contents( ICONVERTPR_PATH . '/admin/assets/images/iconvert-promoter-logo.svg' ); ?>
 				</div>
 			</div>
 		</div>
@@ -101,7 +107,18 @@
 						
 			</div>
 			<div class="ic-upgrade-page-footer">
-				<p><?php echo sprintf( esc_html( __( 'Any questions or problems with your license? %1$sContact us%2$s!', 'iconvert-promoter' ) ), '<a href="' . esc_url( $contact_url ) . '">', '</a>' ); ?></p>
+				<p>
+				<?php
+				echo sprintf(
+					esc_html(
+					// translators: %1$s and %2$s are opening and closing anchor tags respectively.
+						__( 'Any questions or problems with your license? %1$sContact us%2$s!', 'iconvert-promoter' )
+					),
+					'<a href="' . esc_url( $contact_url ) . '">',
+					'</a>'
+				);
+				?>
+					</p>
 			</div>
 		</div>
 	</div>

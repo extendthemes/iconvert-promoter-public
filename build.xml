@@ -71,7 +71,8 @@
         <echo message="Change new lines to unix style" />
         <delete quiet="false" failonerror="false" dir="${zip_dir}" />
         <delete quiet="false" failonerror="false" dir="${compose_dir}" />
-        <!-- <delete quiet="false" failonerror="false" dir="${build_dir}/page-builder/node_modules" /> -->
+        <!-- <delete quiet="false" failonerror="false" dir="${build_dir}/page-builder/node_modules"
+        /> -->
 
         <delete quiet="false" failonerror="false">
             <fileset dir="${build_dir}">
@@ -136,7 +137,7 @@
         <quite_file_replace file="${build_dir}/iconvert-promo-plugin.php" token="@@build_type@@"
             value="${is_pro_build}" />
 
-               <quite_file_replace file="${build_dir}/readme.txt" token="@@buildversion@@"
+        <quite_file_replace file="${build_dir}/readme.txt" token="@@buildversion@@"
             value="${build_version}" />
     </target>
 
@@ -180,6 +181,14 @@
                 <exclude name="**\*wp-cli.phar" />
                 <exclude name="pro\**" if:true="${env.OPTRIX_FREE}" />
                 <exclude name="**\*.sh" />
+                <exclude name="**\*.deepsource.toml" />
+                <exclude name="**\*.php-version" />
+                <exclude name="**\*.node-version" />
+                <!-- ignore all dot files -->
+                <exclude name="**\.*" />
+                 <!-- ignore .git folder -->
+                <exclude name="**\*.svn" />
+                <exclude name="**\*.git" />
             </fileset>
         </copy>
     </target>

@@ -70,7 +70,7 @@ jQuery(function ($) {
         placement,
         template,
         trigger: "click",
-        offset,
+        offset:[0, offset],
       };
 
       if (selfBoundary) {

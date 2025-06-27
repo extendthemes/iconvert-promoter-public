@@ -5,10 +5,15 @@
  * @var array|null $popups
  * @var array|null $sortByParams
  */
+
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 ?>
 <div class="promo-page-list-search-campaign">
-	<form action="<?php echo esc_url( cs_generate_page_url( 'promos.list', array(), IC_PROMO_PAGE_ID ) ); ?>">
-		<input type="hidden" name="page" value="<?php echo esc_attr( IC_PROMO_PAGE_ID ); ?>" />
+	<form action="<?php echo esc_url( iconvertpr_generate_page_url( 'promos.list', array(), ICONVERTPR_PAGE_ID ) ); ?>">
+		<input type="hidden" name="page" value="<?php echo esc_attr( ICONVERTPR_PAGE_ID ); ?>" />
 		<input type="hidden" name="route" value="promos.list" />
 		<label>
 			<input type="text" name="search-campaign" value="<?php echo esc_attr( $searchTerm ); ?>" id="cs-search-campaign" placeholder="<?php esc_attr_e( 'Search campaign…', 'iconvert-promoter' ); ?>">
@@ -30,7 +35,7 @@
 				<div class="no-popups no-popups-created d-flex justify-content-center">
 					<div class="no-popups-img">
 						<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
-						<img src="<?php echo esc_url( IC_PROMO_URL ); ?>/admin/assets/images/no-campaigns.png" >
+						<img src="<?php echo esc_url( ICONVERTPR_URL ); ?>/admin/assets/images/no-campaigns.png" >
 						<?php esc_html_e( 'No campaigns found.', 'iconvert-promoter' ); ?>
 					</div>
 				</div>
@@ -48,7 +53,7 @@
 									<div class="d-flex h-100 justify-content-center align-items-center">
 										<?php esc_html_e( 'Status', 'iconvert-promoter' ); ?>
 										<div class="sort">
-											<a class="sort-action" data-placement="top" title="<?php esc_attr_e( 'Sort by status', 'iconvert-promoter' ); ?>" href="<?php echo esc_url( cs_generate_page_url( 'promos.list', $sortByParams['active'] ) ); ?>">
+											<a class="sort-action" data-placement="top" title="<?php esc_attr_e( 'Sort by status', 'iconvert-promoter' ); ?>" href="<?php echo esc_url( iconvertpr_generate_page_url( 'promos.list', $sortByParams['active'] ) ); ?>">
 												<i class="dashicons-before dashicons-arrow-up <?php echo ( isset( $sortBy ) && $sortBy === 'active' && isset( $sortOrder ) && $sortOrder === 'ascending' ? ' active' : '' ); ?>"></i>
 												<i class="dashicons-before dashicons-arrow-down <?php echo isset( $sortBy ) && $sortBy === 'active' && isset( $sortOrder ) && $sortOrder === 'descending' ? ' active' : ''; ?>"></i>
 											</a>
@@ -59,7 +64,7 @@
 									<div class="d-flex h-100 justify-content-center align-items-center">
 										<?php esc_html_e( 'Views', 'iconvert-promoter' ); ?>
 										<div class="sort">
-											<a class="sort-action" data-placement="top" title="<?php esc_attr_e( 'Sort by views', 'iconvert-promoter' ); ?>" href="<?php echo esc_url( cs_generate_page_url( 'promos.list', $sortByParams['view'] ) ); ?>">
+											<a class="sort-action" data-placement="top" title="<?php esc_attr_e( 'Sort by views', 'iconvert-promoter' ); ?>" href="<?php echo esc_url( iconvertpr_generate_page_url( 'promos.list', $sortByParams['view'] ) ); ?>">
 												<i class="dashicons-before dashicons-arrow-up <?php echo ( isset( $sortBy ) && $sortBy === 'view' && isset( $sortOrder ) && $sortOrder === 'ascending' ? ' active' : '' ); ?>"></i>
 												<i class="dashicons-before dashicons-arrow-down <?php echo isset( $sortBy ) && $sortBy === 'view' && isset( $sortOrder ) && $sortOrder === 'descending' ? ' active' : ''; ?>"></i>
 											</a>
@@ -70,7 +75,7 @@
 									<div class="d-flex h-100 justify-content-center align-items-center">
 										<?php esc_html_e( 'Clicks', 'iconvert-promoter' ); ?>
 										<div class="sort">
-											<a class="sort-action" data-placement="top" title="<?php esc_attr_e( 'Sort by clicks', 'iconvert-promoter' ); ?>" href="<?php echo esc_attr( cs_generate_page_url( 'promos.list', $sortByParams['click'] ) ); ?>">
+											<a class="sort-action" data-placement="top" title="<?php esc_attr_e( 'Sort by clicks', 'iconvert-promoter' ); ?>" href="<?php echo esc_attr( iconvertpr_generate_page_url( 'promos.list', $sortByParams['click'] ) ); ?>">
 												<i class="dashicons-before dashicons-arrow-up <?php echo ( isset( $sortBy ) && $sortBy === 'click' && isset( $sortOrder ) && $sortOrder === 'ascending' ? ' active' : '' ); ?>"></i>
 												<i class="dashicons-before dashicons-arrow-down <?php echo isset( $sortBy ) && $sortBy === 'click' && isset( $sortOrder ) && $sortOrder === 'descending' ? ' active' : ''; ?>"></i>
 											</a>
@@ -81,7 +86,7 @@
 									<div class="d-flex h-100 justify-content-center align-items-center">
 										<?php esc_html_e( 'Subscribers', 'iconvert-promoter' ); ?>
 										<div class="sort">
-											<a class="sort-action" data-placement="top" title="<?php esc_attr_e( 'Sort by subscribers', 'iconvert-promoter' ); ?>" href="<?php echo esc_url( cs_generate_page_url( 'promos.list', $sortByParams['subscribe'] ) ); ?>">
+											<a class="sort-action" data-placement="top" title="<?php esc_attr_e( 'Sort by subscribers', 'iconvert-promoter' ); ?>" href="<?php echo esc_url( iconvertpr_generate_page_url( 'promos.list', $sortByParams['subscribe'] ) ); ?>">
 												<i class="dashicons-before dashicons-arrow-up <?php echo ( isset( $sortBy ) && $sortBy === 'subscribe' && isset( $sortOrder ) && $sortOrder === 'ascending' ? ' active' : '' ); ?>"></i>
 												<i class="dashicons-before dashicons-arrow-down <?php echo isset( $sortBy ) && $sortBy === 'subscribe' && isset( $sortOrder ) && $sortOrder === 'descending' ? ' active' : ''; ?>"></i>
 											</a>
@@ -130,7 +135,7 @@
 										<div class="col-3 col-xl-3 separator-right text-center" data-col-type="status">
 											<div class="d-flex h-100 justify-content-center align-items-center">
 												<label class="cs-switch cs-toggle-status cs-list-popup-switch" data-no-content=<?php esc_attr_e( 'Popup without content.', 'iconvert-promoter' ); ?>">
-													<input type="checkbox" <?php echo $post['active'] ? 'checked' : ''; ?> data-id="<?php echo esc_attr( $post['id'] ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'status_popup_' . $post['id'] ) ); ?>">
+													<input type="checkbox" <?php echo $post['active'] ? 'checked' : ''; ?> data-id="<?php echo esc_attr( $post['id'] ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'iconvertpr_status_popup_' . $post['id'] ) ); ?>">
 													<span class="cs-active-slider"></span>
 												</label>
 											</div>
@@ -166,7 +171,7 @@
 								<div class="col-4 wrapper-actions" data-col-group="actions">
 									<div class="row no-gutters h-100 align-content-center">
 										<div class="col-4 col-lg-3 h-100 d-flex justify-content-center action" data-col-type="settings">
-											<a class="settings" data-placement="top" title="<?php esc_attr_e( 'Settings', 'iconvert-promoter' ); ?>" href="<?php echo esc_html( cs_generate_page_url( 'promo.edit', array( 'post_id' => $post['id'] ) ) ); ?>">
+											<a class="settings" data-placement="top" title="<?php esc_attr_e( 'Settings', 'iconvert-promoter' ); ?>" href="<?php echo esc_html( iconvertpr_generate_page_url( 'promo.edit', array( 'post_id' => $post['id'] ) ) ); ?>">
 												<i class="dashicons-before dashicons-admin-generic"></i>
 											</a>
 										</div>
@@ -182,23 +187,22 @@
 										</div>
 										<div class="col-4 col-lg-3 h-100 d-flex justify-content-center action" data-col-type="more">
 											<div class="dropdown">
-												<a class="js-disable-middle-click" href="#" role="button" id="moreActionsButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<a class="js-disable-middle-click" href="#" role="button" id="iconvertpr-more-actions" data-bs-toggle="dropdown" data-bs-reference="parent" aria-haspopup="true" aria-expanded="false">
 													<i class="dashicons-before dashicons-ellipsis js-disable-middle-click"></i>
 												</a>
-												<div class="dropdown-menu dropdown-menu-right" aria-labelledby="moreActionsButton">
-													<a class="dropdown-item js-disable-middle-click" data-placement="top" data-type="delete" title="<?php esc_attr_e( 'Delete', 'iconvert-promoter' ); ?>" data-scope="confirm-dialog" href="#" data-post-id="<?php echo esc_attr( $post['id'] ); ?>" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'icp_delete_campaign' ) ); ?>" data-confirm-message="<p><?php esc_html_e( 'Are you sure you want to delete this campaign?', 'iconvert-promoter' ); ?></p>">
+												<div class="dropdown-menu dropdown-menu-right" aria-labelledby="iconvertpr-more-actions">
+													<a class="dropdown-item js-disable-middle-click" data-placement="top" data-type="delete" title="<?php esc_attr_e( 'Delete', 'iconvert-promoter' ); ?>" data-scope="confirm-dialog" href="#" data-post-id="<?php echo esc_attr( $post['id'] ); ?>" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'iconvertpr_delete_campaign' ) ); ?>" data-confirm-message="<p><?php esc_html_e( 'Are you sure you want to delete this campaign?', 'iconvert-promoter' ); ?></p>">
 														<i class="dashicons-before dashicons-trash js-disable-middle-click"></i> <?php esc_html_e( 'Delete', 'iconvert-promoter' ); ?>
 													</a>
-													<a class="dropdown-item js-disable-middle-click" data-placement="top" data-type="duplicate" data-promo-type="<?php echo esc_attr( $post['popup_type'] ); ?>" title="<?php esc_attr_e( 'Duplicate', 'iconvert-promoter' ); ?>" data-scope="confirm-dialog" href="#" data-post-id="<?php echo esc_attr( $post['id'] ); ?>" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'icp_duplicate_campaign' ) ); ?>" data-confirm-message="<?php echo esc_html( self::template( 'pages/campaigns/duplicate', array(), false ) ); ?>">
+													<a class="dropdown-item js-disable-middle-click" data-placement="top" data-type="duplicate" data-promo-type="<?php echo esc_attr( $post['popup_type'] ); ?>" title="<?php esc_attr_e( 'Duplicate', 'iconvert-promoter' ); ?>" data-scope="confirm-dialog" href="#" data-post-id="<?php echo esc_attr( $post['id'] ); ?>" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'iconvertpr_duplicate_campaign' ) ); ?>" data-confirm-message="<?php echo esc_html( self::template( 'pages/campaigns/duplicate', array(), false ) ); ?>">
 														<i class="dashicons-before dashicons-admin-page js-disable-middle-click"></i><?php esc_html_e( 'Duplicate', 'iconvert-promoter' ); ?>
 													</a>
-													<a class="dropdown-item js-disable-middle-click" data-placement="top" data-type="reset-stats" title="<?php esc_attr_e( 'Reset stats', 'iconvert-promoter' ); ?>" data-scope="confirm-dialog" href="#" data-post-id="<?php echo esc_attr( $post['id'] ); ?>" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'icp_reset_stats_campaign' ) ); ?>" data-confirm-message="<p><?php esc_html_e( 'Are you sure you want to reset statistics for this campaign?', 'iconvert-promoter' ); ?></p>">
+													<a class="dropdown-item js-disable-middle-click" data-placement="top" data-type="reset-stats" title="<?php esc_attr_e( 'Reset stats', 'iconvert-promoter' ); ?>" data-scope="confirm-dialog" href="#" data-post-id="<?php echo esc_attr( $post['id'] ); ?>" data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'iconvertpr_reset_stats_campaign' ) ); ?>" data-confirm-message="<p><?php esc_html_e( 'Are you sure you want to reset statistics for this campaign?', 'iconvert-promoter' ); ?></p>">
 														<i class="dashicons-before dashicons-update js-disable-middle-click"></i><?php esc_html_e( 'Reset stats', 'iconvert-promoter' ); ?>
 													</a>
 												</div>
 											</div>
 										</div>
-										<?php do_action( 'iconvert_promo_popup_actions', $post['id'] ); ?>
 									</div>
 								</div>
 							</div>
@@ -208,6 +212,7 @@
 			<?php endif; ?>
 			<div>
 				<?php
+				// the pagination contains computed HTML, so we don't need to escape it here
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo $pagination;
 				?>

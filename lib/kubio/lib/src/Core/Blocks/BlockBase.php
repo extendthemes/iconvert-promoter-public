@@ -45,7 +45,7 @@ class BlockBase extends DataHelper {
 		if ( ! $this->defaultElement ) {
 			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 			throw new Exception(
-				"KPromo \"{$block['name']}\" has no default element defined"
+				esc_html( "KPromo \"{$block['name']}\" has no default element defined" )
 			);
 		}
 
@@ -309,7 +309,7 @@ class BlockBase extends DataHelper {
 
 	public function canRegisterStyle() {
 		$is_rest_call = defined( 'REST_REQUEST' ) && REST_REQUEST;
-		
+
 		$can_register_style = apply_filters( 'kubio/can_register_style', ! $is_rest_call, $this );
 		return $can_register_style;
 	}

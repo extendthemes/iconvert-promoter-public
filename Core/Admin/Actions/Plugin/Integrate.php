@@ -7,12 +7,12 @@ class Integrate {
 		 * The code that runs during plugin activation.
 		 * This action is documented in includes/Activator.php
 		 */
-		register_activation_hook( IC_PROMO_PAGE_FILE, array( Activator::class, 'install' ) );
+		register_activation_hook( ICONVERTPR_PAGE_FILE, array( Activator::class, 'install' ) );
 
 		/**
 		 * The code that runs during plugin deactivation.
 		 * This action is documented in includes/class-iconvert-wordpress-integration-deactivator.php
 		 */
-		register_deactivation_hook( IC_PROMO_PAGE_FILE, array( Deactivator::class, 'uninstall' ) );
+		register_deactivation_hook( ICONVERTPR_PAGE_FILE, array( Deactivator::class, 'uninstall' ) );
 	}
 }

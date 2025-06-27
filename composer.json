@@ -5,7 +5,7 @@
     "pragmarx/ia-arr": "^7.3",
     "lodash-php/lodash-php": "0.1.0",
     "pragmarx/ia-str": "^7.3",
-    "wolfcast/browser-detection": "2.9.7",
+    "wolfcast/browser-detection": "2.9.9",
     "symfony/property-access": "5.4.45"
   },
   "autoload": {

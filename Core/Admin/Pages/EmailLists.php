@@ -33,7 +33,7 @@ class EmailLists {
 				'createFormTemplate' => $createFormTemplate,
 				'list'               => false,
 				'listID'             => 0,
-				'pagination'         => $pagination->render( 'subscribers.lists', IC_PROMO_PAGE_SUBSCRIBERS ),
+				'pagination'         => $pagination->render( 'subscribers.lists', ICONVERTPR_PAGE_SUBSCRIBERS ),
 			)
 		);
 	}

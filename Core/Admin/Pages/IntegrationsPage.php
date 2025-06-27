@@ -24,7 +24,7 @@ class IntegrationsPage {
 		return array(
 			self::MAILCHIMP        => array(
 				'title'  => 'MailChimp',
-				'icon'   => IC_PROMO_URL . '/admin/assets/integrations/mailchimp.png',
+				'icon'   => ICONVERTPR_URL . '/admin/assets/integrations/mailchimp.png',
 				'fields' => array(
 					'api_key' => array(
 						'type'        => 'text',
@@ -47,7 +47,7 @@ class IntegrationsPage {
 
 			self::CAMPAIGN_MONITOR => array(
 				'title'  => 'Campaign Monitor',
-				'icon'   => IC_PROMO_URL . '/admin/assets/integrations/campaign-monitor.png',
+				'icon'   => ICONVERTPR_URL . '/admin/assets/integrations/campaign-monitor.png',
 				'fields' => array(
 					'api_key'   => array(
 						'type'        => 'text',
@@ -70,7 +70,7 @@ class IntegrationsPage {
 
 			self::SEND_IN_BLUE     => array(
 				'title'  => 'Brevo (SendinBlue)',
-				'icon'   => IC_PROMO_URL . '/admin/assets/integrations/brevo.png',
+				'icon'   => ICONVERTPR_URL . '/admin/assets/integrations/brevo.png',
 				'fields' => array(
 					'api_key' => array(
 						'type'        => 'text',
@@ -85,7 +85,7 @@ class IntegrationsPage {
 
 			self::MAIL_JET         => array(
 				'title'  => 'MailJet',
-				'icon'   => IC_PROMO_URL . '/admin/assets/integrations/mailjet.png',
+				'icon'   => ICONVERTPR_URL . '/admin/assets/integrations/mailjet.png',
 				'fields' => array(
 					'api_key'   => array(
 						'type'        => 'text',
@@ -108,7 +108,7 @@ class IntegrationsPage {
 
 			self::MAILER_LITE      => array(
 				'title'  => 'MailerLite',
-				'icon'   => IC_PROMO_URL . '/admin/assets/integrations/mailer-lite.png',
+				'icon'   => ICONVERTPR_URL . '/admin/assets/integrations/mailer-lite.png',
 				'fields' => array(
 					'api_key' => array(
 						'type'        => 'text',
@@ -123,7 +123,7 @@ class IntegrationsPage {
 
 			self::MOO_SEND         => array(
 				'title'  => 'MooSend',
-				'icon'   => IC_PROMO_URL . '/admin/assets/integrations/moosend.png',
+				'icon'   => ICONVERTPR_URL . '/admin/assets/integrations/moosend.png',
 				'fields' => array(
 					'api_key' => array(
 						'type'        => 'text',
@@ -138,7 +138,7 @@ class IntegrationsPage {
 
 			self::GET_RESPONSE     => array(
 				'title'  => 'GetResponse',
-				'icon'   => IC_PROMO_URL . '/admin/assets/integrations/get-response.png',
+				'icon'   => ICONVERTPR_URL . '/admin/assets/integrations/get-response.png',
 				'fields' => array(
 					'api_key' => array(
 						'type'        => 'text',

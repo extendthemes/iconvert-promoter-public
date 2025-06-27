@@ -29,11 +29,11 @@ class BackgroundDefaults {
 			Config::value( "{$background_url}.video.default" ),
 			array(
 				'internal' => array(
-					'url'  => 'https://static-assets.kubiobuilder.com/defaults/demo-video.mp4',
+					'url'  => '',
 					'mime' => 'video/mp4',
 				),
 				'poster'   => array(
-					'url' => 'https://static-assets.kubiobuilder.com/defaults/demo-video-cover.jpg',
+					'url' => '',
 				),
 			)
 		);

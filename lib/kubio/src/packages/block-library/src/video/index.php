@@ -72,7 +72,7 @@ class VideoBlock extends BlockBase {
 		foreach ( $paramList as $paramName ) {
 			$params[ $paramName ] = $this->getAttribute( $paramName );
 			if ( $paramName === 'internalUrl' && empty( $params[ $paramName ] ) ) {
-				$params[ $paramName ] = 'https://static-assets.kubiobuilder.com/defaults/kubio-intro-video.mp4';
+				$params[ $paramName ] = '';
 			}
 		}
 

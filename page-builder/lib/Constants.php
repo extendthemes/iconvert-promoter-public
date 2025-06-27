@@ -20,7 +20,7 @@ class Constants {
 		static::$builderDir = plugin_dir_path( static::$builderEntryFile );
 		//there is a circular dependency between this class and config we must load it here for the app to work
 		Config::load();
-		static::$adminPageName      = Config::$prefix;
+		static::$adminPageName      = 'iconvertpr-editor';
 		static::$kubioRootNamespace = static::getKubioRootNamespace();
 	}
 

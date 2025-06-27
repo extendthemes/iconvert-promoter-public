@@ -16,8 +16,8 @@ class AnalyticsAjaxActions {
 	);
 
 	public function __construct() {
-		add_action( 'wp_ajax_cs_promo_analytics', array( $this, 'promo_analytics' ) );
-		add_action( 'wp_ajax_nopriv_cs_promo_analytics', array( $this, 'promo_analytics' ) );
+		add_action( 'wp_ajax_iconvertpr_promo_analytics', array( $this, 'promo_analytics' ) );
+		add_action( 'wp_ajax_nopriv_iconvertpr_promo_analytics', array( $this, 'promo_analytics' ) );
 	}
 
 	/**
@@ -27,6 +27,8 @@ class AnalyticsAjaxActions {
 	 */
 	public function promo_analytics() {
 
+		// we use the visitor_id to validate the nonce for logged out users
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$visitor_id = isset( $_REQUEST['visitor_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['visitor_id'] ) ) : '';
 		add_filter(
 			'nonce_user_logged_out',
@@ -39,7 +41,7 @@ class AnalyticsAjaxActions {
 			}
 		);
 
-		if ( $this->checkNonce( 'cs_promo_analytics' ) ) {
+		if ( $this->checkNonce( 'iconvertpr_promo_analytics' ) ) {
 
 			if ( $this->is_rate_limit_exceeded() ) {
 				wp_send_json_error(
@@ -55,7 +57,8 @@ class AnalyticsAjaxActions {
 			$event = isset( $_POST['event'] ) ? sanitize_text_field( $_POST['event'] ) : '';
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$popup = isset( $_POST['popup'] ) ? intval( $_POST['popup'] ) : 0;
-
+			
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$identifier = isset( $_POST['identifier'] ) ? sanitize_text_field( wp_unslash( $_POST['identifier'] ) ) : '';
 
 			$ids = get_posts(

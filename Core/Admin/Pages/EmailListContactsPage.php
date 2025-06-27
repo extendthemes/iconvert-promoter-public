@@ -55,7 +55,7 @@ class EmailListContactsPage {
 				'isSearchResultsPage' => isset( $_GET['search-email'] ),
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				'searchTerm'          => isset( $_GET['search-email'] ) ? sanitize_text_field( $_GET['search-email'] ) : '',
-				'pagination'          => $pagination->render( 'subscribers.lists.emails', IC_PROMO_PAGE_SUBSCRIBERS ),
+				'pagination'          => $pagination->render( 'subscribers.lists.emails', ICONVERTPR_PAGE_SUBSCRIBERS ),
 			);
 
 			self::templateWithLayout( 'pages/email-lists/subscribers', $innerContent );

@@ -17,10 +17,12 @@ trait HasTemplate {
 		// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 		extract( $args );
 
-		$template = apply_filters( 'iconvert_promoter_view_template', IC_PROMO_PATH . '/' . $folder . '/templates/' . $template . '.php', $template, $args );
+		$template_file = apply_filters( 'iconvertpr_view_template', ICONVERTPR_PATH . '/' . $folder . '/templates/' . $template . '.php', $template, $args );
 		ob_start();
-		require $template;
+		require $template_file;
 		$str = ob_get_clean();
+
+		do_action( 'iconvertpr_template_loaded', $template, $args, $str );
 
 		if ( ! $display ) {
 			return $str;

@@ -6,6 +6,10 @@ use function KPromo\kubio_get_site_urls;
 
 $mail_provider_fields       = isset( $mail_provider_fields ) ? $mail_provider_fields : array();
 $fully_configured_providers = array();
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 ?>
 
 <div class="ic-promo-wrapper d-flex flex-column">
@@ -13,7 +17,7 @@ $fully_configured_providers = array();
 		<div class="box-logo d-flex">
 			<div class="logo align-self-center">
 				<div class="d-flex">
-					<?php echo file_get_contents( IC_PROMO_PATH . '/admin/assets/images/iconvert-promoter-logo.svg' ); ?>
+					<?php echo file_get_contents( ICONVERTPR_PATH . '/admin/assets/images/iconvert-promoter-logo.svg' ); ?>
 				</div>
 			</div>
 		</div>
@@ -28,7 +32,7 @@ $fully_configured_providers = array();
 				<div class="ic-integrations-list">
 				<?php foreach ( $mail_provider_fields as $provider => $provider_config ) : ?>
 					<div class="accordion section" data-mail-provider="<?php echo esc_attr( $provider ); ?>">
-						<div class="d-flex flex-row justify-content-between accordion-head collapsed" id="accordion-head-date-interval" data-toggle="collapse" data-target="#accordion-integration-<?php echo esc_attr( $provider ); ?>">
+						<div class="d-flex flex-row justify-content-between accordion-head collapsed" id="accordion-head-date-interval" data-bs-toggle="collapse" data-bs-target="#accordion-integration-<?php echo esc_attr( $provider ); ?>">
 							<div class="group-name">
 									<div class="ic-integration-provider-icon">
 										<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
@@ -43,7 +47,7 @@ $fully_configured_providers = array();
 								<div class="container-fluid">
 									<div class="row">
 										<div class="col">
-											<div data-name="integration-form" method="POST" action="<?php echo esc_url( cs_generate_page_url( 'integrations.update', array(), IC_PROMO_PAGE_INTEGRATIONS ) ); ?>">
+											<div data-name="integration-form" method="POST" action="<?php echo esc_url( iconvertpr_generate_page_url( 'integrations.update', array(), ICONVERTPR_PAGE_INTEGRATIONS ) ); ?>">
 												<input type="hidden" name="provider" value="<?php echo esc_attr( $provider ); ?>" />
 												<div class="row">
 													<div class="col">
@@ -93,7 +97,7 @@ $fully_configured_providers = array();
 													</div>
 												
 													<div class="col col-auto iconvert-provider-actions" data-pro="required">
-														<button disabled type="button" class="ic-promo-button ic-promo-button-secondary inactive" data-action="test-connection" data-action-url="<?php echo esc_url( add_query_arg( 'provider', $provider, cs_generate_page_url( 'integrations.test_connection', array(), IC_PROMO_PAGE_INTEGRATIONS ) ) ); ?>">
+														<button disabled type="button" class="ic-promo-button ic-promo-button-secondary inactive" data-action="test-connection" data-action-url="<?php echo esc_url( add_query_arg( 'provider', $provider, iconvertpr_generate_page_url( 'integrations.test_connection', array(), ICONVERTPR_PAGE_INTEGRATIONS ) ) ); ?>">
 																<span class="spinner"></span>
 																<?php esc_html_e( 'Test Connection', 'iconvert-promoter' ); ?>
 														</button>

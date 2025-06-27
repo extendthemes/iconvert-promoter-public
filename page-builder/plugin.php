@@ -2,7 +2,7 @@
 
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
-define( 'CSKubio', __NAMESPACE__ . '\\KPromo' );
-define( 'CSPromoBuilder', __NAMESPACE__ . '\\CsPromoKubio' );
+define( 'ICONVERTPR_KUBIO_NS', __NAMESPACE__ . '\\KPromo' );
+define( 'ICONVERTPR_BUILDER_NS', __NAMESPACE__ . '\\CsPromoKubio' );
 
 \CsPromoKubio\Init::load( __FILE__ );

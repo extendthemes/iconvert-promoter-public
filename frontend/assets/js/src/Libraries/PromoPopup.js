@@ -288,7 +288,7 @@ export const PromoPopup = (() => {
     }
 
     const payload = {
-      action: "cs_promo_analytics",
+      action: "iconvertpr_promo_analytics",
       event: gaEvent,
       popup: popupId,
       identifier: identifier,
@@ -489,6 +489,9 @@ export const PromoPopup = (() => {
           ) ||
           mainPopupContainer.hasClass(
             "cs-popup-container-type-slidein-popup"
+          ) ||
+          mainPopupContainer.hasClass(
+            "cs-popup-container-type-floating-bar"
           ) ||
           mainPopupContainer.hasClass("cs-popup-container-type-simple-popup");
 

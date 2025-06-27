@@ -29,7 +29,7 @@ import { isPreviewPage } from '../promopopup/helpers';
 						url: cs_promo_settings.ajax_url,
 						type: 'POST',
 						data: {
-							action: 'cs_apply_coupon',
+							action: 'iconvertpr_apply_coupon',
 							coupon_code: code,
 						},
 						success( response ) {

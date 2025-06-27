@@ -4,7 +4,6 @@ namespace KPromo;
 
 
 use KPromo\GoogleFontsLocalLoader;
-use KPromo\NotificationsManager;
 
 
 require_once __DIR__ . '/env.php';
@@ -46,7 +45,5 @@ function kubio_get_iframe_loader( $props = array() ) {
 	return sprintf( '<iframe style="border:none;pointer-events:none;user-select:none;display:block" allowtransparency="true" width="%2$s" height="%2$s" src="%1$s"></iframe>', $url, $params['size'] );
 }
 
-
-NotificationsManager::load();
 
 GoogleFontsLocalLoader::registerFontResolver();

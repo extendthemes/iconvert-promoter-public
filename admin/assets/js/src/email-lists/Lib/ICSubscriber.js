@@ -28,7 +28,7 @@ export const ICSubscriber = (() => {
           const id = item.dataset.id;
 
           getSubscriberFromServer({
-            action: "icp_subscribers_edit",
+            action: "iconvertpr_subscribers_edit",
             post_id: id,
             _wpnonce: __nonce,
           });
@@ -60,7 +60,7 @@ export const ICSubscriber = (() => {
       $.post(
         ajaxURL,
         {
-          action: "icp_subscribers_update",
+          action: "iconvertpr_subscribers_update",
           post_id: id,
           name: name.value,
           email: email.value,
@@ -147,7 +147,7 @@ export const ICSubscriber = (() => {
     $.post(
       ajaxURL,
       {
-        action: "icp_subscribers_delete",
+        action: "iconvertpr_subscribers_delete",
         post_id: id,
         list_id: list_id,
         where: where,

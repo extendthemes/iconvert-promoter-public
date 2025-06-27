@@ -49,11 +49,7 @@ function kubio_register_kubio_scripts_scripts_dependencies( $version ) {
 			'deps'   => array( 'jquery' ),
 			'src'    => 'fancybox/jquery.fancybox.min.js',
 		),
-		array(
-			'handle' => 'swiper',
-			'deps'   => array( 'jquery' ),
-			'src'    => 'swiper/js/swiper.js',
-		),
+		
 	);
 
 	$script_handles = array();
@@ -275,10 +271,6 @@ function kubio_register_kubio_block_library__style_dependencies( $version ) {
 		array(
 			'handle' => 'fancybox',
 			'src'    => 'fancybox/jquery.fancybox.min.css',
-		),
-		array(
-			'handle' => 'swiper',
-			'src'    => 'swiper/css/swiper.min.css',
 		),
 	);
 

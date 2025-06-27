@@ -23,8 +23,8 @@ class InstallStatsTable extends InstallTable {
 		$sql = "CREATE TABLE {$this->tablename} (
 				`post_id` BIGINT NOT NULL,
 				`day` DATE NOT NULL,
-				`event` VARCHAR(250) NOT NULL DEFAULT '',
-				`identifier` VARCHAR(250) NOT NULL DEFAULT '',
+				`event` VARCHAR(50) NOT NULL DEFAULT '',
+				`identifier` VARCHAR(150) NOT NULL DEFAULT '',
 				`hits` BIGINT NULL DEFAULT 0,
 				PRIMARY KEY (`post_id`, `day`, `event`, `identifier`)
 			) {$this->wpdb->get_charset_collate()};";

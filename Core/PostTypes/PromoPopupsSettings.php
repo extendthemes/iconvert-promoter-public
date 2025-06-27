@@ -79,6 +79,6 @@ class PromoPopupsSettings {
 	}
 
 	public static function getImagePreview( $filename ) {
-		return IC_PROMO_URL . 'admin/assets/images/types/' . $filename;
+		return ICONVERTPR_URL . 'admin/assets/images/types/' . $filename;
 	}
 }

@@ -19,7 +19,7 @@ class FrontendAssets {
 	}
 
 	public static function loadKubioAssets() {
-		if ( cs_preview_page() ) {
+		if ( iconvertpr_preview_page() ) {
 			add_action( 'wp_enqueue_scripts', 'KPromo\\kubio_enqueue_google_fonts' );
 		}
 

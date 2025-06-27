@@ -57,11 +57,11 @@ export default function ContentNavigation( { onActivateMenu } ) {
 					>
 						<NavigationItem
 							title={ __( 'My Pop-ups', 'iconvert-promoter' ) }
-							href="admin.php?page=promoter"
+							href="admin.php?page=iconvertpr-promoter"
 						/>
 						<NavigationItem
 							title={ __( 'Email lists', 'iconvert-promoter' ) }
-							href="admin.php?page=promoter-subscribers"
+							href="admin.php?page=iconvertpr-promoter-integrations"
 						/>
 					</NavigationMenu>
 				</>

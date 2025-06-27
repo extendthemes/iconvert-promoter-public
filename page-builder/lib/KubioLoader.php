@@ -79,7 +79,7 @@ class KubioLoader {
 	}
 
 	public function getKubioEmbedPluginEntryPoint() {
-		return CSPROMO_KUBIO_ROOT_DIR . '/plugin.php';
+		return ICONVERTPR_KUBIO_ROOT_DIR . '/plugin.php';
 	}
 
 	public static function getInstance() {

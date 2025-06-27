@@ -55,7 +55,7 @@ class DateTimeCheck {
 				return 0;
 			case 'next_visit':
 				$passed_from_last_visit = time() - $this->getLastVisitTime();
-				return ( $passed_from_last_visit > IC_PROMO_SESSION_DURATION ) ? 1 : 0;
+				return ( $passed_from_last_visit > ICONVERTPR_SESSION_DURATION ) ? 1 : 0;
 			case 'after':
 				return $this->isDue( intval( $recurring_settings['delay'] ), $recurring_settings['unit'], $conversion_state_time );
 			default:

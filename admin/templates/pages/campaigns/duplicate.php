@@ -2,8 +2,11 @@
 
 use CSPromo\Core\PostTypes\PromoPopupsSettings;
 
-?>
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+?>
 <div class="icp-form-wrapper d-flex flex-column paper rounded">
 	<form id="ic-create-list-form">
 		<div class="icp-fields">
@@ -13,7 +16,7 @@ use CSPromo\Core\PostTypes\PromoPopupsSettings;
 				</label>
 				<input type="text" class="form-control" name="duplicate-campaign-name" size="30" value="" spellcheck="true" autocomplete="off" placeholder="<?php esc_html_e( 'Campaign Name', 'iconvert-promoter' ); ?>" required>
 			</div>
-			<?php if ( defined( 'IC_PROMO_DUPLICATE_AS' ) && IC_PROMO_DUPLICATE_AS ) : ?>
+			<?php if ( defined( 'ICONVERTPR_DUPLICATE_AS' ) && ICONVERTPR_DUPLICATE_AS ) : ?>
 				<div class="form-group form-group">
 					<label class="input-group">
 						<span><?php esc_html_e( 'Duplicate As', 'iconvert-promoter' ); ?></span>

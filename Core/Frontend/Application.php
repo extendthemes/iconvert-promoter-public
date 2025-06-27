@@ -33,7 +33,7 @@ class Application {
 				$referer = wp_get_referer();
 
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				if ( isset( $_REQUEST['_wp-find-template'] ) && str_contains( $referer, 'page=cspromo' ) ) {
+				if ( isset( $_REQUEST['_wp-find-template'] ) && str_contains( $referer, 'page=iconvertpr-editor' ) ) {
 
 					return true;
 				}
@@ -47,7 +47,7 @@ class Application {
 			function () {
 				$referer = wp_get_referer();
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				if ( isset( $_REQUEST['_wp-find-template'] ) && str_contains( $referer, 'page=cspromo' ) ) {
+				if ( isset( $_REQUEST['_wp-find-template'] ) && str_contains( $referer, 'page=iconvertpr-editor' ) ) {
 					$template_slug  = get_stylesheet() . '//single-cs-promo-popups';
 					$block_template = get_block_template( $template_slug );
 

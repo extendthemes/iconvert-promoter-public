@@ -1,3 +1,9 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+?>
 <div class="page create-email-lists-page">
 	<div class="icp-form-wrapper d-flex flex-column paper rounded">
 		<form id="ic-create-list-form" action="#" onsubmit="return false;">

@@ -29,15 +29,6 @@ import { subscribe } from '@wordpress/i18n';
 
 				subscribeForm.submit( function ( e ) {
 					e.preventDefault();
-					// if in the preview/single page don't allow submitting the form
-					if (
-						self.$element
-							.parents( 'body' )
-							.hasClass( 'single-cs-promo-popups' )
-					) {
-						return false;
-					}
-					//Use serialize for premium form, with unlimited fields
 
 					const onSuccessAction = subscribeForm.attr(
 						'data-success-action'
@@ -112,6 +103,15 @@ import { subscribe } from '@wordpress/i18n';
 							default:
 								self.showNotice( subscribeForm );
 								self.hideFormInputs( subscribeForm );
+
+								if ( isPreviewingThePopup ) {
+									$( window ).trigger(
+										'iconvert-promo-box-message',
+										{
+											message: `This popup is in preview mode, so the form will not submit.<br/>The success message is shown for demonstration purposes.`,
+										}
+									);
+								}
 								break;
 						}
 					};
@@ -143,7 +143,7 @@ import { subscribe } from '@wordpress/i18n';
 									popupID
 								]?.[ formID ] || '',
 							listID: formID,
-							action: 'cs_subscribe_email_to_list',
+							action: 'iconvertpr_subscribe_email_to_list',
 							visitor_id:
 								window.icPromoPopupsData?.visitorId || '',
 						},

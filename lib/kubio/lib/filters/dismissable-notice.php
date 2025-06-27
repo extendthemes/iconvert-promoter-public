@@ -26,23 +26,30 @@ function kubio_add_dismissable_notice( $name, $callback, $repeat_after = 0, $par
 		'admin_notices',
 		function () use ( $name, $params, $callback, $classes ) {
 			$id                    = 'kubio-notice-' . uniqid();
-			$data                  = array(
-				'id'   => $id,
-				'name' => $name,
-			);
 			$action_name           = Utils::getKubioUrlWithRestPrefix( 'kubio-dismissable-notice--dismiss' );
 			$kubio_notice_name_key = Utils::getKubioUrlWithRestPrefix( 'kubio_notice_name' );
+			wp_add_inline_script(
+				'jquery',
+				sprintf(
+					'jQuery(function($){
+					var data = %s;
+					$(document).on("click",`[data-kubio-notice-id=${data.id}] .notice-dismiss`,function(){
+						wp.ajax.post(data.action_name,{ [data.nonce_name_key]:data.name });
+					});
+				});',
+					wp_json_encode(
+						array(
+							'id'             => $id,
+							'action_name'    => $action_name,
+							'nonce_name_key' => $kubio_notice_name_key,
+							'name'           => $name,
+						)
+					)
+				)
+			);
 			?>
 				<div data-kubio-notice-id="<?php echo esc_attr( $id ); ?>" class="notice is-dismissible <?php echo esc_attr( $classes ); ?>">
 					<?php call_user_func( $callback, $params ); ?>
-					<script>
-						jQuery(function($){
-							var data =<?php	echo wp_json_encode( $data ); ?>;
-							$(document).on('click','[data-kubio-notice-id=' + data.id + '] .notice-dismiss',function(){
-								wp.ajax.post('<?php echo esc_html( $action_name ); ?>',{ ['<?php echo esc_html( $kubio_notice_name_key ); ?>']:data.name});
-							});
-						});
-					</script>
 				</div>
 
 				<?php

@@ -15,7 +15,6 @@ class KubioEditor {
 
 	public function addFilters() {
 		add_action( 'admin_menu', array( $this, 'addMenuPage' ) );
-		add_action( 'admin_head', array( $this, 'addMenuStyle' ) );
 		$this->addFiltersForEditor();
 	}
 
@@ -62,35 +61,22 @@ class KubioEditor {
 
 	public function renderBlockEditor() {
 		add_filter( KubioUtils::getStringWithNamespacePrefix( 'kubio/kubio_edit_site_render_block_editor/editor_entry_point_class' ), array( $this, 'getEditorEntryPointClass' ) );
-		\KPromo\kubio_edit_site_render_block_editor( array( 'url' => IC_PROMO_URL . 'page-builder/static/optrix-iframe-loader.html' ) );
+		\KPromo\kubio_edit_site_render_block_editor( array( 'url' => ICONVERTPR_URL . 'page-builder/static/optrix-iframe-loader.html' ) );
 	}
 
 	public function addMenuPage() {
-		\add_menu_page(
+		\add_submenu_page(
+			ICONVERTPR_PAGE_ID . '-editor',
 			Config::$builderLabel,
-			sprintf(
-				'<span class="kubio-menu-item"><span class="kubio-menu-item--icon">%s</span><span>%s</span></span>',
-				wp_kses_post( \KPromo\KUBIO_LOGO_SVG ),
-				Config::$builderLabel
-			),
+			Config::$builderLabel,
 			'edit_posts',
 			Constants::$adminPageName,
 			array( $this, 'renderBlockEditor' ),
-			'data:image/svg+xml;base64,' . base64_encode( str_replace( '<svg', '<svg fill="#5246F1" ', \KPromo\KUBIO_LOGO_SVG ) ),
 			70
 		);
 	}
 
-	public function addMenuStyle() {
-		$adminPageClass = sprintf( '.toplevel_page_%s', Constants::$adminPageName );
-		?>
-		<style>
-			#adminmenu <?php echo esc_html( $adminPageClass ); ?> {
-				display: none;
-			}
-		</style>
-		<?php
-	}
+
 	public static function getInstance() {
 		if ( ! self::$instance ) {
 

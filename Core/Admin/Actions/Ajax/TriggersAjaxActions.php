@@ -8,8 +8,8 @@ class TriggersAjaxActions {
 	use HasAction;
 
 	public function __construct() {
-		add_action( 'wp_ajax_cs_promo_get_cart_details', array( $this, 'getCartDetails' ) );
-		add_action( 'wp_ajax_nopriv_cs_promo_get_cart_details', array( $this, 'getCartDetails' ) );
+		add_action( 'wp_ajax_iconvertpr_promo_get_cart_details', array( $this, 'getCartDetails' ) );
+		add_action( 'wp_ajax_nopriv_iconvertpr_promo_get_cart_details', array( $this, 'getCartDetails' ) );
 	}
 
 	public function getCartDetails() {

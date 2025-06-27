@@ -1,9 +1,3 @@
-<style>
-    .wp-site-blocks{
-        position: relative;
-        z-index: 100;
-    }
-</style>
 <div class="search-skeleton">
     <div class="search-ssc-lg ssc">
         <div class="ssc-wrapper">
@@ -140,16 +134,3 @@
 
     </div>
 </div>
-<script>
-    jQuery(function($) {
-        const $popup = $('[data-cs-promoid]');
-        const popupID = $popup.data('cs-promoid');
-        window.iconvertPromoPopup.promoRemovePopupEvent(popupID,{
-            disableEsc: $popup.is('.cs-popup-container-type-inline-promotion-bar'),
-        });
-
-        setTimeout(()=>{
-            window.iconvertPromoPopup.promoShow(popupID);
-        },500);
-    });
-</script>

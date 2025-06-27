@@ -26,8 +26,7 @@ if ( ! defined( __NAMESPACE__ . '\\KUBIO_MINIMUM_WP_VERSION' ) ) {
 	define( __NAMESPACE__ . '\\KUBIO_MINIMUM_WP_VERSION', '5.9' );
 }
 
-
-define( __NAMESPACE__ . '\\KUBIO_SLUG', str_replace( wp_normalize_path( WP_PLUGIN_DIR ) . '/', '', wp_normalize_path( __DIR__ ) ) );
+define( __NAMESPACE__ . '\\KUBIO_SLUG', preg_replace( '#/(.*)#', '', plugin_basename( __FILE__ ) ) );
 
 if ( ! function_exists( __NAMESPACE__ . '\\kubio_url' ) ) {
 	function kubio_url( $path = '' ) {
@@ -40,6 +39,6 @@ if ( ! function_exists( __NAMESPACE__ . '\\kubio_url' ) ) {
  */
 
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
-\KPromo\Core\Utils::setAutoloader( $GLOBALS['ic_promo_autoloader'] );
+\KPromo\Core\Utils::setAutoloader( $GLOBALS['iconvertpr_autoloader'] );
 
 require_once 'lib/init.php';

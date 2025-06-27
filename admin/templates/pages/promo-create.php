@@ -11,8 +11,11 @@ use CSPromo\Core\Admin\Pages\Promos;
 
 use function KPromo\kubio_get_site_urls;
 
-$feature_available_only_in_pro = apply_filters( 'iconvert_promoter_feature_available_only_in_pro', true );
+$feature_available_only_in_pro = apply_filters( 'iconvertpr_feature_available_only_in_pro', true );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 ?>
 
 <template id="icp-promo-available-in-pro-template">
@@ -32,7 +35,7 @@ $feature_available_only_in_pro = apply_filters( 'iconvert_promoter_feature_avail
 						<span class="d-flex flex-row justify-content-center wrapper-title">
 							<span class="title"><?php echo esc_html( $valuePromoTypes['name'] ); ?></span>
 							<span class="radio">
-								<input type="radio" name="promo-type" value="<?php echo esc_attr( $keyPromoTypes ); ?>" <?php echo $keyPromoTypes === 'simple-popup' ? 'checked="checked"' : ''; ?> data-settings="<?php echo esc_attr( cs_promo_data_to_json( $valuePromoTypes['settings'] ) ); ?>" />
+								<input type="radio" name="promo-type" value="<?php echo esc_attr( $keyPromoTypes ); ?>" <?php echo $keyPromoTypes === 'simple-popup' ? 'checked="checked"' : ''; ?> data-settings="<?php echo esc_attr( iconvertpr_data_to_json( $valuePromoTypes['settings'] ) ); ?>" />
 							</span>
 						</span>
 					</label>
@@ -129,7 +132,7 @@ $feature_available_only_in_pro = apply_filters( 'iconvert_promoter_feature_avail
 		</div>
 	</div>
 </div>
-<?php wp_nonce_field( 'cs_promo_get_template_by_type', '_wpnonce_get_template' ); ?>
+<?php wp_nonce_field( 'iconvertpr_promo_get_template_by_type', '_wpnonce_get_template' ); ?>
 <div class="modal fade" id="template-preview-modal" tabindex="-1" role="dialog" aria-labelledby="preview-template" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">

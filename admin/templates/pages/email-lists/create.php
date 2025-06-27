@@ -2,7 +2,9 @@
 
 
 use function KPromo\kubio_get_site_urls;
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 ?>
 <div class="page create-email-lists-page">
 	<div class="icp-form-wrapper d-flex flex-column paper rounded">
@@ -26,7 +28,7 @@ use function KPromo\kubio_get_site_urls;
 					<p class="mb-1"><?php echo esc_html( 'In the PRO version, you can automatically sync the list with various services.' ); ?></p>
 					<a target="_blank" href="<?php echo esc_url( kubio_get_site_urls()['upgrade_url'] ); ?>"><?php esc_html_e( 'Upgrade to PRO', 'iconvert-promoter' ); ?></a>
 				</div>
-				<?php if ( cs_is_email_builder_active() ) : ?>
+				<?php if ( iconvertpr_is_email_builder_active() ) : ?>
 					<div class="form-group form-group">
 						<label class="input-group">
 							<span><?php esc_html_e( 'Choose template', 'iconvert-promoter' ); ?></span>

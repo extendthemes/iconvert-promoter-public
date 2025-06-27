@@ -19,8 +19,8 @@ class Woocommerce {
 					return $response;
 				}
 			);
-			add_action( 'wp_ajax_cs_apply_coupon', array( $this, 'apply_coupon' ) );
-			add_action( 'wp_ajax_nopriv_cs_apply_coupon', array( $this, 'apply_coupon' ) );
+			add_action( 'wp_ajax_iconvertpr_apply_coupon', array( $this, 'apply_coupon' ) );
+			add_action( 'wp_ajax_nopriv_iconvertpr_apply_coupon', array( $this, 'apply_coupon' ) );
 			add_action( 'woocommerce_before_cart', array( $this, 'apply_coupon' ) );
 
 		}

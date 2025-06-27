@@ -16,7 +16,7 @@ function kubio_enable_block_support() {
 function kubio_is_kubio_editor_page() {
 	global $pagenow;
 
-	$builder_page = 'cspromo';
+	$builder_page = 'iconvertpr-editor';
 
 	if ( substr( $pagenow, 0, -4 ) === 'admin' ) {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -35,12 +35,12 @@ add_filter(
 	function ( $is_kubio_page ) {
 		global $pagenow;
 
-		$builder_page = 'cspromo';
+		$builder_page = 'iconvertpr-editor';
 
 		if ( substr( $pagenow, 0, -4 ) === 'admin' ) {
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$page = Arr::get( $_REQUEST, 'page', false );
+			$page = sanitize_text_field( Arr::get( $_REQUEST, 'page', false ) );
 
 			if ( $page === $builder_page ) {
 				$is_kubio_page = false;

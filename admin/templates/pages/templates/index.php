@@ -1,3 +1,9 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+?>
 <div class="container-fluid page records-list-page">
 	<div class="section-title"><?php esc_html_e( 'Templates', 'iconvert-promoter' ); ?></div>
 	<div class="section-description"><?php esc_html_e( 'Choose from the template you want to start with', 'iconvert-promoter' ); ?></div>
@@ -16,7 +22,7 @@
 									<img class="card-img-top" src="<?php echo esc_url( $record->image ); ?>" alt="<?php echo esc_attr( $record->name ); ?>">
 									<?php else : ?>
 									<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
-									<img class="card-img-top" src="<?php echo esc_url( IC_PROMO_URL . 'admin/assets/images/popup-templates/no-image.png' ); ?>" alt="<?php echo esc_attr( $record->name ); ?>">
+									<img class="card-img-top" src="<?php echo esc_url( ICONVERTPR_URL . 'admin/assets/images/popup-templates/no-image.png' ); ?>" alt="<?php echo esc_attr( $record->name ); ?>">
 								<?php endif; ?>
 
 								<div class="card-body">
@@ -27,12 +33,13 @@
 						</div>
 					<?php endforeach; ?>
 
-					<?php wp_nonce_field( 'cs_promo_set_template' ); ?>
+					<?php wp_nonce_field( 'iconvertpr_promo_set_template' ); ?>
 					<input type="hidden" name="editorUrl" id="promoEditorUrl" value=" <?php echo esc_attr( $popup['urls']['editorUrl'] ); ?>">
 				</div>
 			<?php endif; ?>
 		</div>
 		<?php
+		// the pagination contains computed HTML, so we don't need to escape it here
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $pagination;
 		?>

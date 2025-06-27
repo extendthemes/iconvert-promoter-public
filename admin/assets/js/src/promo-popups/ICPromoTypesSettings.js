@@ -400,6 +400,12 @@ export const ICPromoTypesSettings = (() => {
       templateSettings["useAppropriateAnimations"] = true;
     }
 
+    if(animationsManuallyChanged){
+      delete templateSettings["useAppropriateAnimations"];
+      delete templateSettings["showEffect"];
+      delete templateSettings["hideEffect"];
+    }
+
     const settings = buildPromoTypeSettings(templateSettings);
 
     let preview = new URL($("#icp-preview-url").val());

@@ -6,11 +6,17 @@
  * @package WordPress
  */
 
+use CSPromo\Core\Frontend\Pages\PromoPreviewPage;
+use KPromo\Core\Registry;
+use KPromo\Core\StyleManager\StyleManager;
+
 /*
  * Get the template HTML.
  * This needs to run before <head> so that blocks can add scripts and styles in wp_head().
  */
 $template_html = get_the_block_template_html();
+PromoPreviewPage::registerInlineFonts($template_html);
+
 $template_html = str_replace('entry-content wp-block-post-content', 'entry-content-iconvert-promoter', $template_html);
 ?>
 <!DOCTYPE html>
