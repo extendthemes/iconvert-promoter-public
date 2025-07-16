@@ -1,0 +1,73 @@
+.recommended-theme {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  .theme-name {
+	background-color: #fff;
+	padding: 20px 30px;
+	font-weight: 600;
+	font-size: 18px;
+  }
+
+  .theme-description {
+	background-color: #fff;
+	padding: 20px 30px 0 30px;
+	gap: 10px 34px;
+	flex-wrap: wrap;
+
+	.left-side {
+	  justify-content: space-between;
+	  min-width: 190px;
+
+	  .box {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	  }
+
+	  .title {
+		font-weight: 600;
+		font-size: 24px;
+		line-height: 30px;
+	  }
+
+	  .text p {
+		margin: 0 0 20px 0;
+		font-size: 14px;
+		line-height: 19px;
+	  }
+
+	  .download-button {
+		line-height: 20px;
+		width: fit-content;
+		margin-bottom: 30px;
+		padding: 15px 40px;
+
+		a {
+		  text-decoration: none;
+		  color: #fff;
+		}
+	  }
+	}
+
+	.right-side {
+	  flex-basis: 490px;
+	  flex-direction: column;
+	  justify-content: flex-end;
+	  max-width: 489px;
+
+	  .image-container {
+		background-color: $main-bg-color;
+		padding: 18px 18px 0 18px;
+
+		img {
+		  width: 100%;
+		  display: flex;
+		  margin: 0;
+		  padding: 0;
+		}
+	  }
+	}
+  }
+}

@@ -1,0 +1,24 @@
+.kubio-components-inline-color-popover {
+	.block-editor-url-popover__row {
+		flex-direction: column;
+	}
+}
+
+.components-toolbar {
+	.format-library-text-color-button {
+		.format-library-text-color-button__indicator {
+			width: 32px;
+		}
+	}
+}
+
+span.kubio-format-library-text-color-button__indicator {
+	display: block;
+	height: 4px;
+	width: 15px;
+	margin-top: -4px;
+}
+
+.kubio-format-library-text-color-button {
+	flex-direction: column;
+}

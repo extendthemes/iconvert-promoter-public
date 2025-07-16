@@ -1,0 +1,455 @@
+.kubio-sidebar {
+	.section-icon-container svg,
+	.kubio-section-list-item button.has-icon svg {
+		height: 20px;
+	}
+
+	label.components-input-control__label,
+	.components-base-control__label {
+		text-transform: none !important;
+		font-weight: normal !important;
+		font-size: 13px !important;
+	}
+
+	.section-icon-container {
+		margin: 5px;
+
+		svg {
+			height: 20px;
+			width: 20px;
+		}
+	}
+
+	.section-icon-container:hover {
+		color: $theme-controls-primary-color;
+	}
+
+	.section-list-header-buttons-holder {
+		display: flex;
+
+		> button {
+			margin: 13px 5px 10px 10px;
+			width: 20px !important;
+			height: 20px !important;
+			min-width: unset;
+			padding: 0px !important;
+		}
+	}
+
+	.kubio-interface {
+		background-color: $interface-colors-gray;
+		padding: 0;
+		//TODO: Remove this after fixing
+		overflow: hidden;
+	}
+
+	.icon-container-svg {
+		background-color: #f5f6f7;
+		margin: 4px;
+		display: flex;
+		flex-flow: row;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.icon-container-svg:hover {
+		background-color: #d2d1d1;
+		cursor: pointer;
+
+		.section-icon-container {
+			color: $theme-controls-primary-color;
+		}
+	}
+
+	.input-name {
+		display: flex;
+		align-items: center;
+		font-size: 12px;
+		border: 0;
+		width: 100%;
+		padding: 5px 0;
+		background: transparent;
+		border-bottom: 1px solid transparent;
+		border: none !important;
+		border-color: transparent !important;
+		padding: 0;
+		color: $theme-descriptive-text;
+		text-overflow: ellipsis;
+
+		&:focus {
+			outline: none;
+			border-color: $theme-controls-primary-color;
+		}
+
+		&.input-id {
+			margin-left: 5px;
+		}
+	}
+
+	.kubio-section-list-item button {
+		padding: 0px !important;
+		margin-right: 0px;
+		width: 20px !important;
+		min-width: unset;
+
+		&:last-of-type {
+			margin-left: 6px;
+			margin-right: 0px;
+		}
+	}
+
+	.kubio-subsidebar-container {
+		border-left: 3px solid transparent;
+		border-bottom: 1px solid #e2e4e7;
+		background-color: #ffffff;
+
+		&:hover {
+			border-left: 3px solid $layout-color;
+
+			.section-icon-container {
+				//background-color: #d2d1d1;
+				color: $theme-controls-primary-color;
+			}
+
+			.kubio-subsidebar-title {
+				color: $layout-color;
+			}
+		}
+
+		.interface-complementary-area-header {
+			border-bottom: unset !important;
+		}
+	}
+
+	.h-control-notice {
+		.h-control-notice__content {
+			color: #454545;
+			font-weight: 400;
+		}
+	}
+
+	//.kubio-subsidebar-block {
+	//	background-color: red;
+	//}
+
+	.draggable-item {
+		margin-right: 10px;
+		width: 15px;
+		height: 15px;
+		padding-right: 0;
+		cursor: move;
+	}
+
+	.input-name-text {
+		text-transform: capitalize;
+		font-weight: 500;
+		color: $theme-descriptive-text;
+	}
+
+	.icon-close,
+	.icon-menu {
+		display: none;
+	}
+
+	.icon-menu.active {
+		display: inline-flex;
+	}
+
+	.icon-close {
+		color: $theme-controls-red;
+	}
+
+	.icon-menu {
+		color: $interface-menu-hover-color;
+		width: 14px;
+		height: 24px;
+	}
+
+	.page-section-item:hover,
+	.page-section-item.hovered {
+		border: solid 1px $theme-controls-primary-color;
+
+		.icon-close {
+			display: inline-flex;
+		}
+
+		.icon-menu {
+			display: inline-flex;
+		}
+
+		.icon-settings {
+			color: $theme-controls-primary-color;
+			width: 13px;
+			height: 24px;
+		}
+	}
+
+	.kubio-section-list-item {
+		//After Update
+		box-sizing: border-box;
+
+		padding-top: 12px;
+		padding-bottom: 13px;
+		padding-left: 10px;
+		padding-right: 10px;
+
+		background-color: white;
+		height: 40px;
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+
+		.input-drag-text {
+			display: flex;
+			align-items: center;
+		}
+
+		//drag icon
+		> *:first-child {
+			flex: 0 0 auto;
+		}
+
+		.input-container {
+			flex: 0 0 auto;
+			width: 110px;
+
+			> div {
+				margin-bottom: 3px;
+
+				&:last-child {
+					margin-bottom: 0px;
+				}
+			}
+		}
+
+		.page-section-item__select-area {
+			flex: 1;
+			cursor: pointer;
+			padding: 20px 0;
+			margin: -20px 0;
+		}
+
+		//setting buttons
+		> *:last-child {
+			flex: 0 0 auto;
+			display: flex;
+			justify-content: flex-end;
+		}
+	}
+
+	.kubio-section-list-item.list-item-full-height {
+		height: 100%;
+
+		.input-name {
+			box-shadow: 0px 0px 0px 0px;
+			min-height: auto;
+			border-radius: 0px;
+			border: 0px;
+			border-bottom: 1px solid #454545 !important;
+			padding: 2px 3px;
+
+			&:active,
+			&:focus {
+				border-radius: 4px;
+				border: 1px solid #0b8fbf !important;
+			}
+		}
+	}
+
+	.kubio-section-list-item:hover,
+	.kubio-section-list-item.hovered {
+		background: $theme-controls-primary-color-background;
+	}
+
+	.page-section-item {
+		border-radius: 2px;
+		min-height: 40px;
+		margin-left: 12px;
+		margin-right: 12px;
+		margin-top: 10px;
+		display: inline-block;
+		width: calc(100% - 24px);
+		border: 1px solid #cccccc;
+
+		* {
+			user-select: none;
+		}
+	}
+
+	//.input-name {
+	//}
+	//
+	//.input-name:focus {
+	//	outline: none;
+	//	border-bottom: $theme-controls-primary-color;
+	//}
+
+	.id-div {
+		display: flex;
+		flex-wrap: nowrap;
+		flex-direction: row;
+		align-items: center;
+
+		.kubio-section-list-item {
+			height: 100% !important;
+		}
+	}
+
+	.kubio-full-section {
+		margin-top: 8px;
+		background-color: $white;
+		box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.14);
+		position: relative;
+
+		.kubio-full-section-overlay {
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 9999999999;
+			cursor: pointer;
+			background: transparent;
+			transition: background-color 0.3s ease;
+
+			&--show-popup {
+				background: rgba(255, 255, 255, 0.6);
+			}
+		}
+
+		&.kubio-full-section--unlocked {
+			.kubio-full-section-overlay {
+				display: none;
+			}
+		}
+
+		&.kubio-full-section--locked {
+			.kubio-full-section-overlay {
+				display: block;
+			}
+		}
+
+		&--placeholder {
+			.h-control-notice {
+				margin: 10px;
+				text-transform: initial;
+			}
+		}
+	}
+}
+
+.align-items-center {
+	display: flex;
+
+	> button {
+		margin: 0 6px;
+
+		&:last-of-type {
+			margin: 0 0 0 5px;
+		}
+	}
+
+	//svg {
+	//	width: 20px;
+	//	height: 20px;
+	//}
+}
+
+.kubio-list-item-is-sorting {
+	z-index: 2;
+
+	.input-name {
+		font-size: 12px;
+		border: 0;
+		width: 70%;
+		padding: 5px 0;
+		margin-left: 5px;
+		background: transparent;
+		border-bottom: 1px solid transparent;
+		border: none !important;
+		border-color: transparent !important;
+		padding: 0;
+		color: $theme-descriptive-text;
+	}
+
+	.align-items-center:not(.drag-icon) {
+		display: none !important;
+	}
+
+	//padding-top: 5px;
+	padding-bottom: 5px;
+	//padding-left: 7px;
+	padding-right: 7px;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+	background-color: white;
+	height: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 500;
+}
+
+.accordion-section-title {
+	//margin-bottom: 16px;
+	height: 100%;
+	//margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	border: none;
+	padding: 5px;
+	background-color: $white;
+	justify-content: flex-start;
+	color: $interface-colors-dark-gray;
+}
+
+.preview-notice {
+	font-weight: 700;
+	font-size: 13px;
+	margin: 12px 0 5px 0;
+	display: block;
+}
+
+.panel-title {
+	margin-top: 5px;
+	font-size: 20px;
+	font-weight: 300;
+}
+
+.kubio-sidebar-title-text {
+	text-transform: capitalize;
+	font-size: 14px;
+}
+
+.kubio-subsidebar-title-header {
+	height: 57px;
+}
+
+.kubio-create-menu-popover {
+	.components-popover__content {
+		width: 400px;
+	}
+
+	.wp-block-navigation-placeholder__actions {
+		width: 100%;
+	}
+
+	.kubio-create-menu-popover-description * {
+		font-size: 85%;
+	}
+
+	.kubio-create-menu-popover-input-control {
+		margin-bottom: 1em;
+	}
+}
+
+.kubio-header-section-main-button {
+	text-transform: uppercase;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	font-weight: 500;
+}

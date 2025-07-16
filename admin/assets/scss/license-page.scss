@@ -1,0 +1,47 @@
+.ic-license-page {
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+
+  .ic-license-page-header {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .ic-license-page-title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .ic-license-content {
+    padding: 30px;
+    background-color: rgba(246, 247, 247, 1);
+  }
+
+  form {
+    max-width: 600px;
+  }
+
+  .ic-license-status {
+    font-size: 12px;
+    &.ic-license-status-active {
+      background: #{$success};
+      color: #fff;
+    }
+
+    &.ic-license-status-inactive {
+      background: $gray;
+      color: #fff;
+    }
+  }
+
+  .ic-license-page-footer {
+    border-top: 1px solid #dddddd;
+    padding: 20px 30px;
+    background: #fff;
+  }
+
+  .ic-license-page-footer p {
+    margin: 0;
+  }
+}

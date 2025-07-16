@@ -1,0 +1,87 @@
+.kubio-input-control-container.settings-on {
+	.components-base-control__field {
+		display: flex;
+		align-items: flex-end;
+	}
+
+	.components-input-control {
+		flex: 1;
+	}
+}
+
+.kubio-input-control-container {
+	.components-flex__item {
+		//margin-bottom: 10px;
+	}
+
+	.components-input-control__label {
+		pointer-events: none;
+		padding-bottom: 8px !important;
+		margin-bottom: 0 !important;
+		text-transform: initial !important;
+		font-size: 13px !important;
+		font-weight: 400 !important;
+	}
+
+	&.kubio-inline-input {
+		.components-input-control__container {
+			// margin-left: 8px;
+			// min-width: 50%;
+		}
+
+		.components-input-control__label {
+			padding-bottom: 0 !important;
+		}
+
+		> .components-base-control__field {
+			> .components-input-control {
+				align-items: center !important;
+				flex-direction: row !important;
+
+				> {
+					.components-flex-item {
+						flex: 1;
+					}
+				}
+			}
+		}
+
+		[data-wp-component="Flex"], [data-wp-component="InputBase"] {
+			flex-wrap: nowrap;
+			flex-direction: row;
+			align-items: center;
+			width: 100%;
+
+			> * {
+				&:not(.components-input-control__container) {
+					flex-grow: 1;
+				}
+			}
+		}
+		.components-input-control__container {
+			flex-grow: 0;
+			display: block;
+			flex-shrink: 0;
+			flex-basis: 100%;
+			min-width: unset;
+			max-width: 62px;
+		}
+	}
+}
+
+.components-button.kubio-input-control-button.is-small.has-icon {
+	border: 1px solid $ui-menu-item;
+	min-width: 30px;
+	height: 30px;
+	padding: 5px;
+	margin-left: 8px;
+
+	&:hover {
+		border: 1px solid $ui-menu-active;
+		background-color: rgba(0, 122, 184, 0.1);
+	}
+}
+
+.css-c3bpo-BackdropUI.css-c3bpo-BackdropUI.css-c3bpo-BackdropUI {
+	border-color: $ui-menu-item-light !important;
+}

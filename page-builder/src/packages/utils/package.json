@@ -1,0 +1,12 @@
+{
+    "name": "@cspromo/utils",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "dependencies": {},
+    "devDependencies": {
+        "@wordpress/hooks": "3.6.0"
+    }
+}

@@ -1,0 +1,54 @@
+.kubio-typography-popover {
+	padding: 15px;
+	width: 600px;
+	.components-tab-panel__tab-content {
+		width: 400px;
+		//height: 475px;
+		max-height: 475px;
+	}
+}
+.kubio-typography-control-container {
+	width: 100%;
+	> .components-base-control__field {
+		margin-bottom: 0;
+
+		> * {
+			margin-bottom: 10px !important;
+		}
+	}
+
+	.kubio-range-with-unit:last-of-type {
+		.components-base-control__field {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.kubio-font-family-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	margin-bottom: 10px;
+	gap: 8px;
+
+	& &__select {
+		min-width: 50%;
+	}
+
+	.kubio-font-family-label {
+		flex-grow: 1;
+		flex-basis: 0;
+		pointer-events: none;
+	}
+
+	.kubio-font-picker-container {
+		position: relative;
+		min-width: 0;
+	}
+
+	.components-flex-item {
+		flex: 1;
+		margin-left: 0;
+	}
+}

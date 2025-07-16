@@ -1,0 +1,12 @@
+{
+	"name": "extendthemes/kubio",
+	"autoload": {
+		"psr-4": {
+			"CsPromoKubio\\": "lib/"
+		}
+	},
+
+	"config": {
+		"autoloader-suffix": "PromoterBuilder"
+	}
+} 

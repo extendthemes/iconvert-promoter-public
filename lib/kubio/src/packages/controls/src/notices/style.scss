@@ -1,0 +1,11 @@
+.h-control-notice {
+  $primary-color: #007CBA;
+  border-left: 2px solid $primary-color;
+  padding-left: 10px;
+  &__label {
+	font-size: 14px;
+	color: $primary-color;
+	font-weight: 700;
+	margin-bottom: 5px;
+  }
+}

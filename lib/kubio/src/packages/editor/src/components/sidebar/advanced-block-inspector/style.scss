@@ -1,0 +1,21 @@
+.kubio-tab-panel {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		width: 20px;
+		height: auto;
+	}
+
+	.kubio-tab-panel-text {
+		text-transform: uppercase;
+		font-size: 11px;
+		margin-top: 8px;
+	}
+}
+
+.kubio-block-inspector-tab-content {
+	//overflow-x: hidden; // hide possible scrollbar
+}

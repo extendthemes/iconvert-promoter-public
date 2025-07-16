@@ -1,0 +1,14 @@
+{
+    "name": "@kubio/icons",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {},
+    "devDependencies": {
+        "@wordpress/primitives": "4.12.0",
+        "shortid": "^2.2.15"
+    }
+}

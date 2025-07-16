@@ -1,0 +1,199 @@
+@import 'states-control/style';
+
+.kubio-streched-tabs {
+	.components-tab-panel__tabs {
+		display: flex;
+
+		> * {
+			flex: 1 0 auto;
+		}
+	}
+}
+
+div#kubio-states-control {
+	display: flex;
+
+	> * {
+		flex: 1 0 auto;
+	}
+}
+
+.kubio-sidebar {
+	max-height: 100%;
+	overflow-x: hidden;
+	position: relative;
+	height: 100%;
+
+	.block-editor-block-inspector {
+		background: #f5f7fa;
+		padding-top: 0.1px;
+		padding-bottom: 10px;
+
+		> div:first-child,
+		> div:first-child + div {
+			margin-top: 8px;
+		}
+	}
+
+	.block-editor-block-card {
+		background: white;
+	}
+
+	.advanced-block-inspector {
+		height: 100%;
+
+		> .components-tab-panel__tab-content {
+			max-height: calc(100% - 50px);
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+	}
+
+	.interface-complementary-area {
+		color: $theme-descriptive-text !important;
+	}
+
+	.kubio-editing-header,
+	.components-tools-panel,
+	.components-panel__body,
+	.block-editor-block-card {
+		border-top: 1px solid #dddddd;
+		border-bottom: 1px solid #dddddd;
+	}
+
+	.kubio-advanced-panel-panelbody {
+		background-color: red;
+	}
+
+	//todo : this applies from theme.css -> prefix them with #colibri or .site to avoid interface overlaps
+	div:before,
+	ul:before,
+	article:before,
+	aside:before,
+	details:before,
+	figcaption:before,
+	figure:before,
+	footer:before,
+	header:before,
+	hgroup:before,
+	menu:before,
+	nav:before,
+	section:before,
+	div:after,
+	ul:after,
+	article:after,
+	aside:after,
+	details:after,
+	figcaption:after,
+	figure:after,
+	footer:after,
+	header:after,
+	hgroup:after,
+	menu:after,
+	nav:after,
+	section:after {
+		display: none;
+	}
+}
+
+.kubio-divider-list {
+	> .ps__rail-y {
+		display: none;
+	}
+}
+
+.components-panel {
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: #eff0f2;
+}
+
+.components-tools-panel,
+.components-panel__body {
+	border-top: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	background: white;
+	margin: 8px 0;
+	// overflow: hidden; - removed for wp5.9
+	width: 100%;
+	box-sizing: border-box;
+
+	&.is-opened {
+		padding: 15px 12px;
+
+		.components-panel__body-toggle {
+			color: $layout-color;
+			border-left: 7px solid $layout-color;
+		}
+
+		.components-panel__arrow {
+			size: 10px;
+			color: $layout-color;
+			right: 20px;
+		}
+	}
+
+	&.is-opened > .components-panel__body-title {
+		margin: -16px 0 10px -16px;
+		width: calc(100% + 28px);
+		max-width: unset;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&.is-opened .components-panel__body-toggle.components-button {
+		border-bottom: 1px solid #dddddd;
+		border-top: 1px solid #dddddd;
+	}
+
+	&:first-of-type {
+		//margin-top: 11px;
+	}
+
+	.components-panel__arrow {
+		right: 4px;
+	}
+
+	button:active {
+		color: $layout-color;
+	}
+
+	.components-range-control__wrapper {
+		margin-left: 0;
+	}
+
+	> *:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.components-tools-panel {
+	overflow: unset;
+}
+
+.components-panel__body-toggle {
+	font-weight: 700;
+	border-left: 3px solid transparent;
+}
+
+.components-panel__arrow {
+	width: 30px;
+	height: 30px;
+	padding: 5px;
+
+	.arrow_general_settings {
+		width: 22px;
+		height: 22px;
+		padding: 5px;
+		margin-right: 5px;
+	}
+}
+
+.components-panel__body-toggle.components-button {
+	padding: 12px 16px 13px 12px;
+	font-size: 14px;
+	border-left: 3px solid transparent;
+
+}

@@ -1,0 +1,59 @@
+.box-shadow-preset {
+	&__container {
+		background-color: #f0f0f0;
+		max-height: 300px;
+		//overflow: auto;
+	}
+
+	&__scroll-area {
+		position: relative;
+		height: 300px;
+		max-height: 300px;
+		display: flex;
+		flex-wrap: wrap;
+		min-width: 252px;
+	  	overflow-y: auto;
+
+	}
+
+	&__item {
+		flex-basis: 50%;
+		flex-grow: 0;
+		border: 1px solid transparent;
+		background-color: #f0f0f0;
+		margin: 0;
+		padding: 20px 0px;
+		max-width: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:nth-child(odd) {
+			border-bottom: 1px solid #dddddd;
+		}
+
+		&:nth-child(even) {
+			border-bottom: 1px solid #dddddd;
+			border-left: 1px solid #dddddd;
+		}
+
+		&:hover,
+		&.active {
+			border: 1px solid $theme-controls-primary-color;
+			background: $theme-controls-primary-color-background;
+			color: $theme-controls-primary-color;
+		}
+
+		&__inner {
+			cursor: pointer;
+			background-color: white;
+			padding: 10px;
+			height: 60px;
+			width: 60px;
+			display: flex;
+			align-items: center;
+
+			border-radius: 2px;
+		}
+	}
+}

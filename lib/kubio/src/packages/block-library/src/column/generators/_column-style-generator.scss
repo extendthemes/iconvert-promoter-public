@@ -1,0 +1,67 @@
+@mixin columnStyleGenerator($component) {
+	@include c($component) {
+		//this is needed for some components like slider for expand option
+		min-width: 0;
+		max-width: 100%;
+		//this prevents the inner div streching vertically
+		//flex-direction: column;
+
+		&.masonry-item {
+			transition-duration: 0s;
+		}
+
+		@include e(container) {
+			//text-align: center;
+		}
+		@include e(content) {
+			& > * {
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			.h-heading,
+			.h-text {
+				p,
+				h1,
+				h2,
+				h3,
+				h4,
+				h5,
+				h6 {
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+
+		@include e(inner) {
+			position: relative;
+			max-width: 100%;
+			flex-shrink: 1;
+		}
+
+		@include e(align) {
+			flex: 1 0 auto;
+			max-width: 100%;
+		}
+	}
+
+	@include o(y-container) {
+		.h-heading,
+		.h-text {
+			p,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}

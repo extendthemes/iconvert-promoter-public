@@ -1,0 +1,194 @@
+.position-relative {
+	position: relative;
+}
+
+.align-items-center {
+	align-items: center;
+}
+.align-items-left {
+	align-items: flex-start;
+}
+
+.align-items-right {
+	align-items: flex-end;
+}
+
+	.#{$library-prefix}global-transition:not(#extra-1),
+	.#{$library-prefix}global-transition-all:not(#extra-1) * {
+		transition-property: $theme-transition-properties;
+	}
+
+	.#{$library-prefix}global-transition-disable:not(#extra-1),
+	.#{$library-prefix}global-transition-disable:not(#extra-1) * {
+		transition-property: none !important;
+		transition: none !important;
+	}
+
+
+.white-space {
+	&-nowrap {
+		white-space: nowrap;
+	}
+}
+
+.w-100 {
+	width: 100%;
+}
+
+* {
+	word-wrap: break-word;
+}
+
+.#{$library-prefix} {
+	&hidden {
+		display: none !important;
+	}
+
+	&visible {
+		display: block !important;
+	}
+
+	&stop-animation {
+		animation-duration: 0s !important;
+	}
+
+	&word-wrap {
+		word-break: break-word;
+	}
+
+	&new-stacking-context {
+		position: relative;
+		z-index: 1;
+	}
+
+	&overflow-visible {
+		overflow: visible;
+	}
+
+	&overflow-hidden {
+		overflow: hidden;
+	}
+
+	&mw-100 {
+		max-width: 100%;
+	}
+
+	&mh-100 {
+		max-height: 100%;
+	}
+
+	&w-100 {
+		width: 100%;
+	}
+
+	&h-100 {
+		height: 100%;
+	}
+
+	&hide {
+		display: none;
+	}
+
+	&force-hide {
+		display: none !important;
+	}
+
+	&pointer-event-none {
+		pointer-events: none;
+	}
+
+	&display-none {
+		display: none;
+	}
+
+	&text-success {
+		color: #28a745 !important;
+	}
+
+	&text-danger {
+		color: #dc3545 !important;
+	}
+
+	&cursor-pointer {
+		cursor: pointer;
+	}
+	&pointer-event-none {
+		pointer-events: none;
+	}
+}
+
+.kubio-frontent-placeholder {
+	background-color: #e7eef4;
+	font-size: 1em;
+	font-family: Open Sans, Helvetica, Arial, Sans-Serif, serif;
+	padding: 20px 40px;
+	border: 1px solid #cedce9;
+	color: #555;
+	&,
+	* {
+		text-align: left;
+	}
+
+	&--info {
+		display: flex;
+		align-items: center;
+	}
+
+	&--logo {
+		flex-grow: 0;
+		flex-basis: 1.5em;
+
+		svg {
+			display: block;
+			fill: #09f;
+		}
+	}
+
+	&--title {
+		margin-left: 0.5em;
+		font-size: 1.3em;
+		color: #000;
+	}
+
+	&--small {
+		font-size: 80%;
+	}
+}
+
+// make non gutenberg blocks have the same margins inside .h-y-container
+.h-y-container > * {
+	margin-top: 0;
+}
+
+.h-y-container > *:last-child {
+	margin-bottom: 0;
+}
+
+.wp-block-cover:before {
+	width: 100% !important;
+	height: 100% !important;
+}
+.wp-block[data-align="full"] {
+  max-width: unset !important;
+}
+
+//all the kubio containers have the h-y-container classs. We add max width 100% to all non kubio blocks inside our components
+//This is needed for cases like where you add a paragraph or any block and you want it expand more than 840px or what the max
+//width of gutenberg is
+html .h-y-container .wp-block:not([data-kubio]) {
+  max-width: 100%;
+}
+
+.h-ignore-global-body-typography.wp-block[data-kubio],
+.h-ignore-global-body-typography.wp-block[data-kubio] [data-kubio]{
+  font-size: initial;
+  line-height: initial;
+  color: initial;
+  letter-spacing: initial;
+  font-style: initial;
+}
+
+@import './components/index';
+@import './background/index';
+@import './separators/style';
+@import './responsive';

@@ -1,0 +1,102 @@
+.icp-fields {
+  input[type="text"],
+  input[type="email"],
+  select {
+    display: block;
+    background-color: #f0f0f0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    height: auto;
+    padding: 10px 10px;
+    color: #1e1e1e;
+    border: 1px solid #dddddd;
+    max-width: unset;
+  }
+
+  .icp-field {
+    span {
+      display: block;
+    }
+
+    textarea {
+      background-color: #f0f0f0;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 16px;
+      min-height: 120px;
+      border: 1px solid #dddddd;
+      color: #454545;
+      padding: 10px 10px;
+    }
+
+    .icp-field-loading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      span.spinner.visible {
+        float: none;
+        display: inline-block;
+        margin: 0;
+      }
+    }
+
+    .icp-field-loading + .icp-field-control {
+      display: none;
+    }
+
+    &.loaded {
+      .icp-field-loading {
+        display: none;
+      }
+
+      .icp-field-loading + .icp-field-control {
+        display: block;
+      }
+    }
+  }
+}
+
+.cs-email-lists-search-subscribers {
+  position: relative;
+
+  label {
+    @include mediaQueryUpTo(700px) {
+      width: 100%;
+    }
+  }
+
+  #cs-search-email {
+    width: 350px;
+    position: relative;
+    z-index: 1;
+    border: 1px solid #dddddd;
+    color: #1e1e1e;
+    padding: 5px 10px;
+    padding-right: 28px;
+    font-size: 14px;
+
+    @include mediaQueryUpTo(700px) {
+      width: 100%;
+    }
+  }
+
+  button {
+    display: inline-block;
+    position: absolute;
+    margin-left: -35px;
+    width: 35px;
+    height: calc(100% - 8px);
+    z-index: 2;
+    padding: 0 10px;
+    color: #1e1e1e;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+
+    &:hover {
+      color:  $primary;
+    }
+  }
+}

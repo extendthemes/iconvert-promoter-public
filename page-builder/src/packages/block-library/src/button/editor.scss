@@ -1,0 +1,23 @@
+/*@include c(button) {
+}
+*/
+
+.wp-block-cspromo-buttonextended {
+	.block-editor-rich-text__editable {
+		display: inline-flex;
+		align-items: center;
+		margin: 0;
+		&:after {
+			display: none !important;
+		}
+	}
+}
+
+.cspromo-sidebar-button-notice-warning.components-notice {
+	margin: 10px 0px 20px 0px;
+	font-weight: normal !important;
+
+	.components-notice__content {
+		font-weight: normal;
+	}
+}

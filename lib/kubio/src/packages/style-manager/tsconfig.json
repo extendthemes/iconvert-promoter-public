@@ -1,0 +1,14 @@
+{
+	"extends": "../../../tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"declarationDir": "build-types",
+		"checkJs": false,
+		"esModuleInterop": true
+	},
+	"include": [
+		"src/**/*",
+		"src/types/types.json",
+		"src/props/separator/config.json"
+	]
+}

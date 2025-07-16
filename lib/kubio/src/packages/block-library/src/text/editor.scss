@@ -1,0 +1,11 @@
+.kubio-paragraph-placeholder {
+	opacity: 0.6;
+}
+
+.editor-styles-wrapper {
+	@include c(text) {
+		a {
+			text-decoration: underline;
+		}
+	}
+}

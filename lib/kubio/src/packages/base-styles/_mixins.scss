@@ -1,0 +1,100 @@
+@import "./dist/_block-prefix-variable";
+
+@mixin transparent-bg-grid() {
+	background-repeat: inherit;
+	background-image: linear-gradient(45deg, #ddd 25%, transparent 0),
+		linear-gradient(-45deg, #ddd 25%, transparent 0),
+		linear-gradient(45deg, transparent 75%, #ddd 0),
+		linear-gradient(-45deg, transparent 75%, #ddd 0);
+	background-size: 10px 10px;
+	background-position:
+		0 0,
+		0 5px,
+		5px -5px,
+		-5px 0;
+}
+
+@mixin kubio-resizable-section-start() {
+	#start-resizable-kubio-section {
+		display: none;
+	}
+}
+
+@mixin kubio-resizable-section-end() {
+	#end-resizable-kubio-section {
+		display: none;
+	}
+}
+
+@mixin transparent-bg-grid() {
+	background-repeat: inherit;
+	background-image: linear-gradient(45deg, #ddd 25%, transparent 0),
+		linear-gradient(-45deg, #ddd 25%, transparent 0),
+		linear-gradient(45deg, transparent 75%, #ddd 0),
+		linear-gradient(-45deg, transparent 75%, #ddd 0);
+	background-size: 10px 10px;
+	background-position:
+		0 0,
+		0 5px,
+		5px -5px,
+		-5px 0;
+}
+
+@mixin kubio-scrollbar() {
+	$track-color: rgba(0, 0, 0, 0.1);
+	$thumb-color: rgba(0, 0, 0, 0.3);
+
+	/* Firefox */
+	& {
+		scrollbar-width: thin;
+		scrollbar-color: $thumb-color $track-color;
+	}
+
+	/* Edge, and Safari */
+	&::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $track-color;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $thumb-color;
+	}
+}
+
+@mixin full-width-this-block-and-descendants {
+	&.wp-block,
+	[data-kubio]:not([class*="h-col-"]):not(.cspromo-content-container > *) {
+		max-width: unset !important;
+	}
+}
+
+@mixin when-inside-kubio-block {
+	[data-kubio] & {
+		@content;
+	}
+}
+
+@mixin inherit-typography {
+	color: inherit !important;
+	font-size: inherit !important;
+	font-family: inherit !important;
+	font-weight: inherit !important;
+	line-height: inherit !important;
+	letter-spacing: inherit !important;
+	text-transform: inherit !important;
+	font-style: inherit !important;
+	text-decoration: inherit !important;
+}
+
+@mixin kubio-add-prefix-to-general-css {
+	@if $kubio-general-prefix-selector != false {
+		#{$kubio-general-prefix-selector} {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}

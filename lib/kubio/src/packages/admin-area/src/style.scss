@@ -1,0 +1,406 @@
+@import './styles/common/variables';
+@import './styles/common/continouse-loader';
+@import './styles/common/base';
+@import './styles/get-started-page';
+
+#kubio-admin-page {
+	.limited-width {
+		max-width: 1000px;
+		margin: auto;
+		padding: 0 10px;
+	}
+
+	.tab-page {
+		padding: 0 0 60px 0;
+		margin: 0;
+		background-color: $main-bg-color;
+
+		* {
+			font-family: 'Open Sans', apple-system, BlinkMacSystemFont,
+				'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+				'Helvetica Neue', sans-serif;
+			//font-weight: 400;
+		}
+	}
+
+	.justify-content-between {
+		justify-content: space-between;
+	}
+
+	.justify-content-around {
+		justify-content: space-around;
+	}
+
+	.justify-content-end {
+		justify-content: end;
+	}
+
+	.no-gap {
+		gap: 0;
+	}
+
+	.image-round {
+		border-radius: 50%;
+	}
+
+	#upgrade_to_pro_wrapper {
+		background-color: #ffffff;
+		padding: 0px;
+		border-radius: 4px;
+	}
+
+	.kubio-admin-page-tabs {
+		ul {
+			li.tab_get_pro {
+				color: #eb7442;
+
+				&.active,
+				&:hover {
+					border-bottom-color: #eb7442;
+				}
+			}
+		}
+	}
+}
+
+#adminmenu {
+	li#toplevel_page_cspromo {
+		li.li-pro-upgrade {
+			a {
+				color: #eb7442;
+			}
+		}
+	}
+}
+
+// GET STARTED PAGES + UPGRADE TO PRO
+.kubio-page-builder-license-notice {
+	padding: 0px;
+
+	.notice_title {
+		margin: 0px;
+		padding: 20px 30px;
+		border-bottom: 1px solid rgba(23, 25, 39, 0.1);
+		color: rgb(23, 25, 39);
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1em;
+	}
+
+	.notice_sub_title {
+		margin: 0px;
+		padding: 20px 30px 0px;
+		line-height: 1em;
+	}
+
+	.activate-form {
+		display: inline-flex;
+	}
+
+	form {
+		.spinner-holder {
+			display: inline-flex;
+			align-items: center;
+
+			.spinner {
+				visibility: visible;
+				display: block;
+				margin-top: 0px;
+			}
+		}
+	}
+
+	form.disabled input,
+	form.disabled button {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	.hidden {
+		display: none !important;
+	}
+
+	.kubio-page-builder-activate-license-form_wrapper {
+		padding: 20px 30px 30px;
+	}
+
+	input[type='text'] {
+		float: left;
+		border: 1px solid rgba(23, 25, 39, 0.1);
+		border-right: 0px;
+		border-radius: 4px 0px 0px 4px;
+		font-size: 14px;
+		min-height: 44px;
+		line-height: 24px;
+		width: 388px;
+		padding: 10px;
+		height: 44px;
+
+		&::placeholder {
+			color: rgba(23, 25, 39, 0.4);
+		}
+	}
+
+	button[type='submit'] {
+		font-size: 14px;
+		min-height: 44px;
+		line-height: 42px;
+		height: 44px;
+		font-weight: 600;
+		border-radius: 0px 4px 4px 0px;
+	}
+
+	.message,
+	.description {
+		margin: 10px 0px 0px;
+		font-weight: 400;
+		font-size: 14px;
+		color: rgb(92, 94, 103);
+	}
+
+	.description {
+		font-style: italic;
+		padding: 0px;
+	}
+
+	.message {
+		color: rgb(214, 54, 56);
+	}
+
+	.plugin-installer-spinner {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		max-width: 565px;
+		background-color: #e9f0f7;
+		border-left: 4px solid #2271b1;
+		border-radius: 4px 0px 0px 4px;
+		padding: 12px 15px 13px;
+
+		.icon {
+			margin-right: 15px;
+			height: 19px;
+
+			.dashicons:before {
+				font-size: 19px;
+			}
+
+			.ok .dashicons:before {
+				color: #3d9f47;
+			}
+
+			> * {
+				display: none;
+			}
+
+			.loader {
+				display: inline;
+			}
+		}
+
+		&.ok {
+			background-color: #e6f5eb;
+			border-left-color: #3d9f47;
+
+			.icon {
+				.loader {
+					display: none;
+				}
+
+				.ok {
+					display: inline;
+				}
+			}
+		}
+
+		.message {
+			margin-top: 0px;
+			font-weight: 600;
+			font-size: 14px;
+			color: #171927;
+		}
+	}
+}
+
+.notice.kubio-activation-wrapper {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 15px 20px;
+	border-top: 1px solid rgb(195, 196, 199);
+	border-right: 1px solid rgb(195, 196, 199);
+	border-bottom: 1px solid rgb(195, 196, 199);
+
+	&.hidden {
+		display: none !important;
+	}
+
+	.notification-logo-wrapper {
+		display: block;
+		border-radius: 50%;
+		background-color: rgba(214, 54, 56, 0.1);
+		padding: 18px;
+
+		.notification-logo {
+			width: 20px;
+			height: 20px;
+
+			svg {
+				fill: #d63638;
+				width: 20px;
+				height: 20px;
+			}
+		}
+	}
+
+	.notice_title {
+		padding: 0px 20px 10px;
+		border: 0px;
+		font-size: 16px;
+		font-weight: 700;
+	}
+
+	.notice_sub_title {
+		font-size: 14px;
+		font-weight: 400;
+		padding: 0px 20px;
+	}
+
+	.kubio-page-builder-activate-license-form_wrapper {
+		padding: 20px 20px 0px;
+
+		input[type='text'] {
+			padding: 5px;
+			line-height: 20px;
+			min-height: 30px;
+			height: 30px;
+		}
+
+		button[type='submit'] {
+			font-size: 12px;
+			line-height: 28px;
+			min-height: 30px;
+			font-weight: 600;
+			height: 30px;
+		}
+	}
+
+	.description {
+		font-size: 12px;
+	}
+}
+
+// Remote notifications
+.kubio-remote-notification {
+	padding: 0;
+
+	&-info {
+		border-left-color: #5246f1;
+		.kubio-remote-notification-icon {
+			fill: #5246f1;
+		}
+	}
+
+	&-error .kubio-remote-notification-icon {
+		fill: #d63638;
+		background-color: rgba(214, 54, 56, 0.1);
+	}
+
+	&-warning .kubio-remote-notification-icon {
+		fill: #dba617;
+		background-color: rgba(219, 166, 23, 0.1);
+	}
+
+	&-success .kubio-remote-notification-icon {
+		fill: #00a32a;
+		background-color: rgba(0, 163, 42, 0.1);
+	}
+}
+
+.kubio-remote-notification-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
+.kubio-remote-notification-icon {
+	display: flex;
+	align-items: center;
+	width: 20px;
+	color: #5246f1;
+	fill: #5246f1;
+	padding: 16px;
+	background-color: rgba(82, 70, 241, 0.1);
+
+	svg {
+		height: 20px;
+		width: 20px;
+	}
+}
+
+.kubio-remote-notification-message {
+	width: 100%;
+	padding: 20px;
+	font-size: 16px;
+
+	a {
+		color: #5246f1;
+	}
+
+	p {
+		margin: 0;
+		padding: 0;
+		font-size: 1em;
+	}
+
+	& > :first-child {
+		margin-top: 0;
+	}
+}
+
+.kubio-remote-notification-buttons {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	padding: 13px 0;
+
+	.button-large {
+		min-height: 30px !important;
+		height: 30px;
+		border-width: 0;
+		border-radius: 2px;
+	}
+
+	.kubio-remote-notification-primary {
+		background-color: rgba(82, 70, 241, 1);
+		color: #ffffff;
+
+		&:hover {
+			background-color: #352d9b;
+			color: #ffffff;
+		}
+	}
+
+	.kubio-remote-notification-secondary {
+		color: #5246f1;
+
+		&:hover {
+			background-color: #ffffff;
+			color: #352d9b;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.kubio-remote-notification-buttons {
+		flex-direction: column;
+
+		.button-large {
+			width: unset;
+			line-height: 2.30769231 !important;
+		}
+	}
+}

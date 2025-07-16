@@ -1,0 +1,28 @@
+/*@include c(button) {
+}*/
+
+.wp-block-cspromo-buttonextended {
+	&__outer {
+		display: inline-flex;
+		// vertical-align: middle;
+	}
+
+	&__link {
+		display: inline-flex;
+		align-items: center;
+		cursor: pointer;
+		//justify-content: center;
+	}
+
+	&__inner {
+		cursor: pointer;
+		text-decoration: none;
+	}
+
+	&__icon {
+		svg {
+			transform: unset;
+		}
+		flex-shrink: 0;
+	}
+}

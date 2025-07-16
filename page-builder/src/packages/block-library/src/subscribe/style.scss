@@ -1,0 +1,238 @@
+@mixin resetPlaceholder {
+	opacity: 0.5;
+	color: inherit;
+}
+
+@mixin resetPlaceholderStates {
+	&::placeholder {
+		@include resetPlaceholder;
+	}
+	&:hover::placeholder {
+		@include resetPlaceholder;
+	}
+	&:focus::placeholder {
+		@include resetPlaceholder;
+		box-shadow: unset;
+		outline: unset;
+	}
+}
+
+.wp-block-cspromo-subscribe__termsField {
+	vertical-align: middle;
+}
+
+.wp-block-cspromo-subscribe__termsLabel{
+	align-self: center;
+}
+
+.wp-block-cspromo-subscribe__termsDescription {
+	display: block;
+}
+
+
+.wp-block-cspromo-subscribe__termsField {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+.wp-block-cspromo-subscribe__innerForm{
+	max-width: 100%;
+}
+
+.wp-block-cspromo-subscribe__innerForm::before,
+.wp-block-cspromo-subscribe__innerForm::after,
+.wp-block-cspromo-subscribe__containerFields::before,
+.wp-block-cspromo-subscribe__containerFields::after {
+	position: absolute;
+}
+
+.wp-block-cspromo-subscribe__containerFields {
+	align-items: flex-end;
+}
+
+.wp-block-cspromo-subscribefield__outer input::placeholder {
+	text-align: inherit;
+}
+.wp-block-cspromo-subscribefield__outer label {
+	display: block;
+	width: 100%;
+}
+.wp-block-cspromo-subscribefield__outer input {
+	display: block;
+	width: 100%;
+}
+.wp-block-cspromo-subscribefield__outer[data-kubio] input[type="text"],
+.wp-block-cspromo-subscribefield__outer[data-kubio] input[type="email"] {
+	margin-bottom: unset;
+}
+
+.wp-block-cspromo-subscribefield__input::placeholder {
+	color: inherit;
+	opacity: 0.8;
+}
+
+.wp-block-cspromo-subscribe .wp-block-cspromo-subscribe-hide {
+	display: none;
+}
+
+.wp-block-cspromo-subscribeterms__input {
+	font-size: 0 !important;
+	border: unset !important;
+	outline: 0 !important;
+	width: 0 !important;
+	min-width: unset !important;
+	margin-right: 23px;
+}
+.wp-block-cspromo-subscribeterms__input:focus {
+	outline: 0 !important;
+}
+.wp-block-cspromo-subscribeterms__input::before {
+	transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+	box-sizing: border-box;
+	color: #e76f3d;
+	content: "";
+	display: inline-block;
+	border: 2px solid #e76f3d;
+	transition-duration: 0.5s;
+	transition-property: background-color, border-color;
+	width: 20px;
+	height: 20px;
+}
+
+.wp-block-cspromo-subscribeterms__input:checked::before {
+	content: "" !important;
+	margin: 0 !important;
+	background-color: #e76f3d;
+}
+.wp-block-cspromo-subscribeterms__input:checked::after {
+	content: "";
+	box-sizing: border-box;
+	left: 5px;
+	top: 1px;
+	width: 6px;
+	height: 10px;
+	border: solid white;
+	border-width: 0px 3px 3px 0;
+	transform: rotate(45deg);
+	position: absolute;
+}
+
+.wp-block-cspromo-subscribe__outer {
+	&.subscribe-layout-horizontal {
+		.wp-block-cspromo-subscribe__containerFields {
+			// align-items: center !important;
+
+			> div {
+				flex-direction: column;
+				justify-content: flex-end;
+				display: flex !important;
+				align-items: stretch;
+
+				input,
+				button {
+					min-height: 0px;
+					min-block-size: 0px;
+					box-shadow: none;
+					display: inline-flex;
+					height: 100% !important;
+				}
+			}
+
+			button::-moz-focus-inner {
+				padding: 0 !important;
+				border: 0 none !important;
+			}
+		}
+	}
+
+	.wp-block-cspromo-subscribe__submitButton {
+		display: inline-flex;
+		align-items: center;
+		span {
+			color: inherit;
+			text-transform: inherit;
+			font-weight: inherit;
+			font-family: inherit;
+
+			// this was added to force some css recalculations for buttons - https://mantis.iconvert.pro/view.php?id=44405
+			margin: 0.5px 0px;
+
+			@supports (-webkit-touch-callout: none) {
+				margin: 1px 0px;
+			}
+
+			display: block;
+		}
+	}
+}
+
+.wp-block-cspromo-subscribe__submitButton span {
+	color: inherit;
+	text-transform: inherit;
+	font-weight: inherit;
+	font-family: inherit;
+	line-height: inherit;
+}
+
+.wp-block-cspromo-subscribe__submitIcon {
+	color: inherit;
+	vertical-align: middle;
+}
+
+.wp-block-cspromo-subscribe__submitText {
+	vertical-align: middle;
+}
+
+.wp-block-cspromo-subscribefield__outer input::placeholder {
+	text-align: inherit;
+}
+.wp-block-cspromo-subscribefield__outer {
+	flex-direction: column;
+}
+.wp-block-cspromo-subscribefield__outer[data-kubio] input[type="text"],
+.wp-block-cspromo-subscribefield__outer[data-kubio] input[type="email"] {
+	margin-bottom: unset !important;
+}
+
+.wp-block-cspromo-subscribe__nameField {
+	@include resetPlaceholderStates;
+	height: auto;
+}
+.wp-block-cspromo-subscribe__emailField {
+	@include resetPlaceholderStates;
+	height: auto;
+}
+
+.wp-block-cspromo-subscribe__nameField,
+.wp-block-cspromo-subscribe__emailField {
+	text-align: inherit;
+}
+
+@media (max-width: 760px) {
+	.subscribe-stack-on-mobile {
+		.wp-block-cspromo-subscribe__containerFields {
+			flex-direction: column;
+
+			> div {
+				margin-top: 5px;
+			}
+		}
+
+		.wp-block-cspromo-subscribe__submitContainer:not(#undefined) {
+			display: block !important;
+			width: 100%;
+		}
+
+		.wp-block-cspromo-subscribe__termsContainer{
+			display: inline-flex!important;
+		}
+	}
+}
+
+.wp-block-cspromo-subscribe__termsContainerAlign {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+}

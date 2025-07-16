@@ -1,0 +1,318 @@
+.body-preview {
+  overflow: hidden;
+}
+
+.popup-vertical-align-top {
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
+
+#kubio.cs-promo-popups-template-default .is-root-container:first-child {
+  display: flex;
+  height: 100%;
+}
+#kubio.cs-promo-popups-template-default .interface-interface-skeleton__body {
+  background-color: unset;
+}
+
+#kubio.cs-promo-popups-template-default :where(.editor-styles-wrapper) {
+  background: unset !important;
+}
+
+#kubio.cs-promo-popups-template-default :where(.wp-block) {
+  max-width: unset !important;
+}
+
+#kubio.cs-promo-popups-template-default div[data-kubio="cspromo/promopopup"] {
+  overflow-y: scroll;
+  max-width: unset;
+}
+
+#kubio.cs-promo-popups-template-default
+  div[data-kubio="cspromo/promopopup"]
+  div[data-kubio="cspromo/column"],
+#kubio.cs-promo-popups-template-default
+  div[data-kubio="cspromo/promopopup"]
+  div[data-kubio="cspromo/row"] {
+  max-width: 100% !important;
+}
+
+#kubio.cs-promo-popups-template-default .cs-popup:first-child,
+#kubio.cs-promo-popups-template-default .entry-content {
+  position: unset;
+  transform: unset;
+  margin: unset;
+  height: 100%;
+}
+
+/*Promo block corections*/
+.wp-block-cspromo-promopopup__outer {
+  display: flex;
+  min-height: 100%;
+  min-height: 100dvh;
+  height: auto;
+  width: 100%;
+  z-index: 999;
+  background-color: unset;
+
+  position: absolute !important;
+  overflow: initial !important;
+
+  &.cs-popup-outer-type-inline-promotion-bar {
+    position: relative !important;
+    min-height: unset !important;
+  }
+
+  @import "./animations-override";
+}
+
+.wp-block-cspromo-promopopup__container {
+  position: relative;
+}
+
+/*Promo corections end*/
+.cs-popup .cs-popup-content div:first-child {
+  overflow: hidden;
+}
+
+#kubio-site-edit-content-holder {
+  flex: 1 1 0%;
+  padding-bottom: 40vh;
+}
+
+#kubio-site-edit-content-holder div.h-section-global-spacing {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+body#kubio.kubio-iframe-holder--show #kubio-site-edit-content-holder {
+  flex: unset;
+  padding-bottom: unset;
+}
+
+/*Close popup icon*/
+.wp-block-cspromo-promopopupclose__outer {
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.wp-block-cspromo-promopopupclose__container {
+  width: 100%;
+}
+
+.wp-block-cspromo-promopopupclose__inner {
+  position: relative !important;
+  top: unset !important;
+  transform: translateY(0);
+  margin-top: 0px !important;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  z-index: 9999;
+  cursor: pointer;
+  left: 0;
+  margin: 0 !important;
+}
+
+.wp-block-cspromo-promopopupclose__inner {
+  text-align: center;
+  position: relative !important;
+  top: unset !important;
+  transform: translateY(0);
+  margin-top: 0px !important;
+  width: auto;
+  height: auto;
+  display: inline-block;
+  z-index: 200;
+  cursor: pointer;
+  left: 0;
+}
+
+.cs-popup-container {
+  visibility: hidden;
+  opacity: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 100%;
+  z-index: 9999999;
+  max-width: none;
+
+  &-type-simple-popup,
+  &-type-fullscreen-mat,
+  &-type-lightbox-popup,
+  &-type-slidein-popup {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+    max-height: 100dvh;
+  }
+
+  &-type-simple-popup,
+  &-type-slidein-popup {
+    &,
+    .wp-block-cspromo-promopopup__outer {
+      pointer-events: none;
+    }
+  }
+
+  &-type-simple-popup,
+  &-type-slidein-popup {
+    .wp-block-cspromo-promopopup__outer {
+      max-height: 100svh;
+    }
+
+    &.is-overflowed {
+      .wp-block-cspromo-promopopup__outer {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+      }
+    }
+  }
+
+  &-type-fullscreen-mat,
+  &-type-lightbox-popup {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  &-type-fullscreen-mat {
+    .wp-block-cspromo-promopopup__outer {
+      min-height: 100vh;
+    }
+  }
+
+  .wp-block-cspromo-promopopup__outer {
+    transition: background-color 0.2s ease-out;
+  }
+
+  &:not(.visible) .wp-block-cspromo-promopopup__outer {
+    background: transparent !important;
+  }
+
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+html.elevate-wp-theme .position-relative.cs-popup-container {
+  position: fixed;
+}
+.cs-popup-container-type-floating-bar {
+  height: 100%;
+
+  &:not(.cs-fb-position-above-content) {
+    max-height: 100dvh;
+  }
+}
+
+.lcs-popup-content {
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+
+  strong:not(#undefined) {
+    font-weight: 600;
+  }
+}
+
+.single-cs-promo-popups {
+  #wpadminbar {
+    display: none;
+  }
+}
+
+.body-preview {
+  background-color: #f6f6f6;
+  .search-skeleton {
+    max-width: 1200px;
+    margin: auto;
+    width: 100%;
+
+    .ssc-card {
+      background-color: #fcfcfc;
+      width: auto;
+    }
+
+    .ssc-square,
+    .ssc-line,
+    .ssc-head-line,
+    .ssc-hr,
+    .ssc-circle {
+      background-color: #ececec;
+    }
+  }
+}
+
+.optrix-success-message {
+  white-space: nowrap;
+  padding: 0.4em 0.5em;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  background-color: #fff;
+  color: #fff;
+  opacity: 0;
+  font-size: max(70%, 11px);
+  transform: translate(-50%, 50%);
+  pointer-events: none;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  overflow: hidden;
+
+  &.visible {
+    transform: translate(-50%, -0.25em);
+    opacity: 1;
+  }
+}
+
+.cs-popup-container-type-simple-popup,
+.cs-popup-container-type-fullscreen-mat,
+.cs-popup-container-type-lightbox-popup,
+.cs-popup-container-type-slidein-popup {
+  position: fixed !important;
+
+  height: 100vh;
+}
+
+body.cs-popup-open {
+  .fancybox-container {
+    z-index: 10000000 !important;
+  }
+}
+
+html.cs-popup-open__fullscreen-mat {
+  &,
+  body {
+    width: 100svw !important;
+    height: 100svh !important;
+    overflow: hidden !important;
+  }
+}
+
+.animate__None {
+  -webkit-animation-name: animationNone;
+  animation-name: animationNone;
+}
+
+@-webkit-keyframes animationNone {
+  0% {
+    opacity: 0.9999;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,38 @@
+@import "~@kubio/block-library/src/styles/style";
+@import "~@kubio/block-library/src/shortcode/style";
+@import "~@kubio/block-library/src/row/style";
+@import "~@kubio/block-library/src/column/style";
+@import "~@kubio/block-library/src/icon/style";
+@import "~@kubio/block-library/src/icon-list/style";
+@import "~@kubio/block-library/src/text/style";
+@import "~@kubio/block-library/src/heading/style";
+@import "~@kubio/block-library/src/image/style";
+@import "~@kubio/block-library/src/video/style";
+@import "~@kubio/block-library/src/spacer/style";
+@import "~@kubio/block-library/src/divider/style";
+@import "~@kubio/block-library/src/social-icons/style";
+
+html .cs-popup {
+	.wp-block-cspromo-image__frameImage {
+		position: absolute;
+	}
+
+	.wp-block-cspromo-image__overlay {
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		overflow: hidden;
+		pointer-events: none;
+		z-index: 1;
+	}
+}
+
+@include kubio-add-prefix-to-general-css() {
+	.h-separator.h-separator--display-flex-lg,
+	.kubio-divider-container .h-separator,
+	.kubio-divider-container .h-separator svg {
+		max-height: 100%;
+	}
+}

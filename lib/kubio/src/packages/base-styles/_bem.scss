@@ -1,0 +1,28 @@
+@import './dist/_block-prefix-variable';
+
+
+$bem: (
+	'debug': false,
+	'separator': (
+		'element': '__',
+		'modifier': '_',
+		'state': '-',
+	),
+	'namespace': (
+		'component': $block-prefix-variable,
+		'hack': '_',
+		'object': 'c',
+		'scope': 's',
+		'test': 'qa',
+		'theme': 't',
+		'utility': 'u',
+	),
+	'shortcodes': (
+		'ab': (
+			'before',
+			'after',
+		),
+	),
+);
+
+@import "~sass-bem";

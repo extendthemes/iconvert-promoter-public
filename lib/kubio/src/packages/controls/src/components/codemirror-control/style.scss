@@ -1,0 +1,14 @@
+.kubio-codemirror {
+	border: 1px solid #dddd;
+
+	.CodeMirror {
+		min-height: 300px;
+		height: calc(100vh - 350px);
+	}
+}
+
+.toplevel_page_cspromo {
+	.CodeMirror-hints {
+		z-index: 1000000 !important;
+	}
+}

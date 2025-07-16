@@ -1,0 +1,56 @@
+// The button element easily inherits styles that are meant for the editor style.
+// These rules enhance the specificity to reduce that inheritance.
+// This is duplicated in visual-editor.
+
+.block-editor-block-patterns-list__item__screenshot {
+	width: 100%;
+}
+
+.editor-styles-wrapper {
+	padding: 0;
+}
+
+.edit-site-block-editor__editor-styles-wrapper .components-button {
+	font-family: $default-font;
+	font-size: $default-font-size;
+	padding: 6px 12px;
+
+	&.is-tertiary,
+	&.has-icon {
+		padding: 6px;
+	}
+}
+
+.kubio_category_title {
+	background: #f0f0f0;
+	padding: 15px 10px;
+	margin: 10px 0;
+
+	&:first-of-type {
+		margin-top: 0;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 14px;
+		font-weight: 700;
+	}
+}
+
+.kubio-block-editor__block-list > .block-list-appender.wp-block {
+	display: none;
+}
+
+.kubio-block-tools {
+	// position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.toplevel_page_cspromo:not(.kubio-iframe-holder--show){
+	.block-editor-block-popover {
+		display: none;
+	}
+}

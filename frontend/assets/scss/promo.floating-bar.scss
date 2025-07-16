@@ -1,0 +1,37 @@
+.cs-popup-container-type-floating-bar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0; 
+    display: block;
+    bottom: auto;
+    height: auto;
+    pointer-events: none;
+
+    &.cs-fb-position-above-content.visible {
+        position: relative !important;    
+        height: auto;    
+    }
+
+    .wp-block-cspromo-promopopup__container {
+        pointer-events: all;
+    }
+
+    &.cs-v-pos-end {
+        bottom: 0;
+        top: auto;
+    }
+
+    &.cs-v-pos-center {
+        bottom: auto;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .wp-block-cspromo-promopopup__outer {
+        display: flex;
+        height: auto;
+        position: relative !important;
+        width: 100%;
+    }
+}

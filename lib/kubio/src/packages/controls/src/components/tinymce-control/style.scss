@@ -1,0 +1,56 @@
+.kubio-tinymce {
+	margin-top: 8px;
+	border: 1px solid #dddddd;
+
+	.block-library-classic__toolbar {
+		display: block;
+	}
+
+	.mce-content-body {
+		padding: 8px;
+		margin: 0;
+	}
+
+	.mce-toolbar-grp {
+		border-bottom-color: #dddddd !important;
+		background-color: #f5f7fa;
+		border-top: none !important;
+	}
+
+	.block-library-classic__toolbar > div {
+		border: none !important;
+	}
+
+	.block-library-classic__toolbar {
+		border: none;
+	}
+
+	.mce-btn {
+		button {
+			font-size: 13px;
+
+			i.mce-caret {
+				margin-top: 6px !important;
+			}
+		}
+
+		.mce-ico {
+			width: 14px !important;
+			height: 14px !important;
+			font-size: 14px !important;
+		}
+	}
+
+	.block-library-classic__toolbar > div {
+		display: block !important;
+	}
+}
+
+.toplevel_page_cspromo {
+	.wplink-autocomplete,
+	.mce-tooltip,
+	div.mce-inline-toolbar-grp,
+	.mce-floatpanel {
+		z-index: 1000000 !important;
+	}
+}

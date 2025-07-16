@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards for Gutenberg Plugin">
+	<description>
+		Sniffs for WordPress plugins, with minor modifications for Gutenberg
+	</description>
+	<!-- <rule ref="PHPCompatibility"/> -->
+	<!-- <config name="testVersion" value="5.6-"/> -->
+	<rule ref="WordPress-Core">
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid" />
+		<exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found" />
+		<!-- Ignore filename error since it requires WP core build process change -->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+		<exclude name="WordPress.NamingConventions.ValidHookName.UseUnderscores" />
+		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.Found" />
+	</rule>
+	<!-- <rule ref="WordPress-Docs"/> -->
+	<rule ref="WordPress.WP.I18n" />
+	<config name="text_domain" value="iconvert-promoter" />
+	<rule ref="VariableAnalysis.CodeAnalysis.VariableAnalysis">
+		<properties>
+			<property name="allowUnusedParametersBeforeUsed" value="true" />
+		</properties>
+	</rule>
+	<rule ref="WordPress.CodeAnalysis.EmptyStatement" />
+	<rule ref="WordPress.WP.I18n.MissingArgDomainDefault">
+		<exclude-pattern>
+			packages/block-library/src/*
+		</exclude-pattern>
+	</rule>
+	<arg value="ps" />
+	<arg name="extensions" value="php" />
+	<file>./lib</file>
+	<file>./src/packages/</file>
+	<file>./plugin.php</file>
+	<!-- Exclude generated files -->
+	<exclude-pattern>
+		./packages/block-serialization-spec-parser/parser.php
+	</exclude-pattern>
+	<!-- These special comments are markers for the build process -->
+	<exclude name="Squiz.Commenting.FunctionComment.Missing" />
+	<exclude name="Squiz.Commenting.FileComment.Missing" />
+	<exclude name="Squiz.Commenting.ClassComment.Missing" />
+	<exclude name="Squiz.Commenting.ClassComment.SpacingAfter" />
+	<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
+	<exclude name="Generic.Commenting.DocComment.Empty" />
+	<exclude name="Generic.Commenting.DocComment.MissingShort" />
+	<exclude name="Squiz.Commenting.VariableComment.Missing" />
+	<exclude name="Squiz.Commenting.FunctionCommentThrowTag.Missing" />
+	<exclude name="Squiz.Commenting.InlineComment.WrongStyle" />
+	<exclude name="Generic.Files.LineLength" />
+	<exclude name="PEAR.Functions.FunctionCallSignature" />
+</ruleset>

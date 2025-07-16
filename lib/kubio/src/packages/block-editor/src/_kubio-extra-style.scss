@@ -1,0 +1,23 @@
+.block-editor-block-patterns-list__item {
+	width: 100%;
+}
+.kubio-secondary-sidebar .components-tab-panel__tab-content > .block-editor-inserter__panel-content{
+	padding: 0 !important;
+}
+.block-editor-block-toolbar__block-controls {
+	.block-editor-block-switcher__no-switcher-icon {
+		opacity: 1 !important;
+	}
+}
+.block-editor__spacing-visualizer {
+	display: none !important;
+}
+.components-button.block-editor-block-types-list__item:disabled {
+	cursor: default;
+	opacity: .6
+}
+.block-editor-block-types-list__item--disabled:not(#extra-1) {
+	cursor: default;
+	opacity: .6;
+	pointer-events: none;
+}

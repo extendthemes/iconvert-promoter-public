@@ -1,0 +1,47 @@
+/** background wrapper layers START*/
+.background-layer-media-container-lg {
+	display: block;
+}
+
+.background-layer-media-container-md {
+	display: none;
+}
+
+.background-layer-media-container {
+	display: none;
+}
+
+//used for height control to compute the content height
+.height-auto-forced {
+	height: auto !important;
+	min-height: unset !important;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	.background-layer-media-container-md {
+		display: block;
+	}
+
+	.background-layer-media-container-lg {
+		display: none;
+	}
+	.background-layer-media-container {
+		display: none;
+	}
+}
+
+@media (max-width: 767px) {
+	.background-layer-media-container {
+		display: block;
+	}
+
+	.background-layer-media-container-lg {
+		display: none;
+	}
+
+	.background-layer-media-container-md {
+		display: none;
+	}
+}
+
+/** background wrapper layers END*/

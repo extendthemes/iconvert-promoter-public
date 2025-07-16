@@ -1,0 +1,333 @@
+@import "sections-list/style";
+@import "advanced-block-inspector/style";
+@import "areas/style";
+@import "settings-header/style";
+
+// $kubio-sidebar-transition: all 0.3s;
+$kubio-sidebar-transition: none;
+
+.kubio-sidebar {
+	width: $sidebar-width;
+	transition: $kubio-sidebar-transition;
+
+	&-hidden {
+		margin-right: -($sidebar-width + 30);
+	}
+
+	.kubio-subsidebar-title {
+		font-weight: 600;
+		color: $ui-menu-item;
+		height: 50px;
+		padding-right: 2px;
+		padding-left: 12px;
+
+		> button {
+			display: flex;
+			width: 100%;
+			text-align: left;
+
+			> span,
+			> strong {
+				flex-grow: 1;
+				font-size: 14px;
+			}
+		}
+
+		.components-panel__arrow {
+			width: 13px;
+			height: 13px;
+			padding: 5px 10px;
+			box-sizing: content-box;
+		}
+	}
+
+	.kubio-sidebar-header-block {
+		> div:nth-child(2) {
+			margin-bottom: 0;
+			border-bottom: none;
+		}
+
+		.components-panel__header.interface-complementary-area-header {
+			border-bottom: 1px solid #e2e4e7;
+			align-self: flex-start;
+			width: 100%;
+		}
+	}
+
+	.kubio-sidebar-header--has-back {
+		margin-left: -16px;
+		display: flex;
+		flex-direction: row;
+		align-items: center !important;
+		padding: 0 2px;
+	}
+
+	//on safari the panels gets stuck
+	&[data-sidebar-name="kubio/edit-site/sidebar/document/style-presets"] {
+		.interface-complementary-area {
+			&.components-animate__slide-in {
+				transform: translateX(0%);
+			}
+		}
+	}
+	.interface-complementary-area {
+		background-color: $interface-colors-gray;
+
+		@include break-medium() {
+			width: auto;
+		}
+
+		.kubio-sidebar-header.accordion-section-title {
+			cursor: default;
+		}
+	}
+
+	.interface-complementary-area-header {
+		height: auto;
+		border-bottom: 4px solid #007cba;
+		display: flex;
+
+		justify-content: space-between;
+
+		&.kubio-subsidebar-title {
+			> .components-button {
+				padding: 0px 0;
+			}
+		}
+	}
+
+	.kubio-subsidebar-container .interface-complementary-area-header {
+		margin-bottom: 0;
+		border: 0;
+		border-bottom: 1px solid $interface-colors-gray-border;
+	}
+
+	.btn-primary {
+		width: 92%;
+		margin: 10px 12px 15px 12px;
+		text-align: center;
+		justify-content: center;
+	}
+
+	//.kubio-subsidebar-container {
+	//display: flex;
+	//flex-direction: row;
+	//justify-content: space-between;
+	//}
+
+	.kubio-subsidebar-container + .kubio-subsidebar-container {
+		margin-top: 8px;
+	}
+
+	.kubio-subsidebar-container {
+		margin-top: 8px;
+	}
+
+	.kubio-subsidebar-container:first-child {
+		//margin-top: 0px;
+	}
+
+	.kubio-sidebar-header {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.components-panel {
+		border: none;
+	}
+
+	.interface-complementary-area-header
+		.kubio-sidebar-header
+		+ .components-button.has-icon {
+		display: none;
+	}
+
+	> .components-panel {
+		border-left: 0;
+		border-right: 0;
+		margin-bottom: -1px;
+		margin-top: -1px;
+
+		> .components-panel__header {
+			background: $gray-200;
+		}
+	}
+
+	.block-editor-block-inspector__card {
+		margin: 0;
+	}
+
+	.kubio-advanced-block-inspector {
+		.kubio-inspector-tabs {
+			height: 64px;
+			display: flex;
+			align-items: stretch;
+			border-bottom: 1px solid $interface-colors-light-gray-border;
+			border-left: 0;
+			border-right: 0;
+			top: 0;
+			position: sticky;
+			z-index: 100;
+
+			.components-tab-panel__tabs-item {
+				height: 64px;
+				justify-content: center;
+				flex: 1 0 33.33%;
+				box-shadow: unset;
+				border: 1px solid transparent;
+				border-bottom: 3px solid transparent;
+				height: unset !important; // more important than wordpress 🤭
+
+				&.is-active {
+					background-color: rgba(0, 124, 186, 0.1);
+					color: $theme-controls-primary-color;
+					border: 1px solid $theme-controls-primary-color;
+					border-bottom: 3px solid $theme-controls-primary-color;
+					box-shadow: unset;
+
+					&:focus {
+						box-shadow: unset;
+						border-bottom: 3px solid $theme-controls-primary-color;
+					}
+				}
+			}
+		}
+
+		.block-editor-block-card {
+			display: none;
+		}
+	}
+
+	.draggable-item {
+		width: 15px;
+		height: 15px;
+		padding-right: 0;
+		cursor: move;
+	}
+
+	.kubio-sidebar-header-arrow {
+		width: 22px;
+		height: 22px;
+	}
+
+	.kubio-sidebar-header-back-button {
+		margin-right: 16px;
+		width: 60px;
+		height: 70px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: $ui-light-gray;
+
+		strong {
+			margin-left: 15px;
+		}
+	}
+
+	.kubio-advanced-block-inspector {
+		display: flex;
+		flex-direction: column;
+		min-height: 100%;
+	}
+
+	.components-tab-panel__tab-content {
+		flex-grow: 1;
+		overflow: visible; // avoid scroll; fix for 41344
+		max-height: 100%;
+		min-height: 1px;
+		background: #f5f7fa;
+	}
+
+	.components-tab-panel__tabs.kubio-inspector-tabs {
+		flex-grow: 0;
+	}
+
+	.interface-complementary-area.kubio-sidebar-header-block {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		height: 100%;
+	}
+
+	.components-panel {
+		flex-grow: 1;
+		flex-direction: column;
+	}
+
+	.components-panel > div {
+		&:not(.kubio-subsidebar-container) {
+			height: 100%;
+		}
+	}
+
+	.kubio-subsidebar-content {
+		.components-panel {
+			//margin-top: 10px;
+			> div {
+				height: auto;
+				margin-top: 8px;
+			}
+		}
+	}
+
+	.page-section-item.kubio-list-item-is-sorting .input-container {
+		width: 220px;
+	}
+
+	.kubio-multiple-selection {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		p {
+			font-size: 1.25em;
+			opacity: 0.7;
+			max-width: 80%;
+			text-align: center;
+		}
+	}
+
+	.components-input-control__label {
+		width: 100%;
+		max-width: 100%;
+	}
+}
+.kubio-secondary-sidebar {
+	transition: $kubio-sidebar-transition;
+	border-right: 1px solid #dddddd;
+	height: 100%;
+
+	&-hidden {
+		margin-left: -($sidebar-width + 30);
+	}
+}
+.components-panel__header.interface-complementary-area-header {
+	border-top: none;
+
+	&.kubio-subsidebar-title {
+		height: 44px;
+		padding-right: 2px;
+		padding-left: 12px;
+	}
+}
+
+.interface-interface-skeleton__secondary-sidebar {
+	background: #eff0f2;
+	position: relative;
+	z-index: 10001;
+	border: none;
+}
+
+.kubio-create-menu-button {
+	padding: 10px;
+	margin-top: 0 !important;
+}
+
+// default blocks color picker
+
+.kubio-sidebar {
+	.color-block-support-panel__inner-wrapper {
+		width: 100%;
+		display: block !important;
+	}
+}

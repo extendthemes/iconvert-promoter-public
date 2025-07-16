@@ -1,0 +1,36 @@
+.kubio-sidebar-toggle-wrapper-optional-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.components-form-toggle {
+		margin: 0 10px;
+	}
+}
+
+.components-button.kubio-sidebar-toggle-wrapper-icon.is-small.has-icon {
+	border: 1px solid $ui-menu-item;
+	min-width: 30px;
+	height: 30px;
+	padding: 5px;
+	margin: 0 5px;
+
+	&:hover {
+		border: 1px solid $ui-menu-active;
+		background-color: rgba(0, 122, 184, 0.1);
+	}
+
+	&:nth-child(3) {
+		padding: 8px;
+	}
+}
+
+.components-button.kubio-sidebar-toggle-wrapper-icon.is-small.has-icon.disabled-icon {
+	&:hover {
+		border: 1px solid $ui-menu-item;
+		background-color: #ffffff;
+
+		svg {
+			color: $ui-menu-item;
+		}
+	}
+}

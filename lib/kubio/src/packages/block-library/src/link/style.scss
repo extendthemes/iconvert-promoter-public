@@ -1,0 +1,29 @@
+@include c(link) {
+	@include e(outer) {
+		display: inline-flex;
+		// vertical-align: middle;
+	}
+
+	@include e(link) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-color: transparent;
+		cursor: pointer;
+
+	  svg {
+		transform: translateY(1px);
+	  }
+	}
+
+	@include e(inner) {
+		cursor: pointer;
+		text-decoration: none;
+	}
+
+	@include e(icon) {
+	  flex-shrink: 0;
+	}
+
+	@include e(text) {}
+}

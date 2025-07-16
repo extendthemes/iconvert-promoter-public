@@ -1,0 +1,19 @@
+.kubio-inlined-label-control {
+  display: flex;
+  align-items: center;
+
+  .kubio-inlined-label-control__label {
+	flex-grow: 1;
+	padding-right: 8px;
+  }
+
+  .kubio-inlined-label-control__control {
+	flex-grow: 0;
+	margin-left: 2px;
+  }
+
+  .components-base-control,
+  .components-base-control__field {
+	margin-bottom: 0 !important;
+  }
+}

@@ -1,0 +1,30 @@
+@include c('iconlist') {
+
+  .block-editor-block-list__layout & .block-list-appender.wp-block {
+	display: none;
+  }
+
+
+  &.is-selected {
+
+	&.list-type-horizontal {
+	  display: flex;
+	  height: auto;
+	  margin-left: 1em;
+	}
+
+
+	li.block-list-appender.wp-block {
+	  display: list-item;
+	  height: 30px;
+	}
+  }
+
+  @include e('item') {
+	&:nth-last-child(2) {
+	  @include e('divider-wrapper') {
+		display: none;
+	  }
+	}
+  }
+}

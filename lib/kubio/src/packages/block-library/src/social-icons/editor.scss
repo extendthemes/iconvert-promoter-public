@@ -1,0 +1,27 @@
+@include c(social-icons) {
+  .block-list-appender {
+	display: inline-block;
+	transition: 0.3s all ease-in-out;
+	margin: 0 0 4px 1em !important;
+  }
+}
+
+
+.social-icons-sortable {
+  .accordion {
+	counter-reset: inst;
+
+	.accordion__item .kubio-sortable-accordion-title .kubio-sortable-accordion-title__text {
+	  &:after {
+		counter-increment: inst;
+		content: counter(inst);
+		display: inline-block;
+		margin-left: 2px;
+	  }
+	}
+
+	.kubio-sortable-accordion-icon {
+	  margin-right: 7px;
+	}
+  }
+}

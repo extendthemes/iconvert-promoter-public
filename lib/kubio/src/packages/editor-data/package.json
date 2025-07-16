@@ -1,0 +1,22 @@
+{
+    "name": "@kubio/editor-data",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "dependencies": {
+        "@kubio/constants": "file:../constants",
+        "@kubio/core-hooks": "file:../core-hooks"
+    },
+    "devDependencies": {
+        "@wordpress/compose": "7.8.3",
+        "@wordpress/data": "10.8.3",
+        "@wordpress/element": "6.8.1",
+        "@wordpress/i18n": "5.8.2",
+        "@wordpress/url": "4.8.1",
+        "lodash": "4.17.21",
+        "react-fast-compare": "3.2.0",
+        "shortid": "^2.2.15"
+    }
+}

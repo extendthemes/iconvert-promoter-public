@@ -1,0 +1,28 @@
+.kubio-inserter-section-tags {
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  .kubio-inserter-section-tag {
+	background-color: white;
+	cursor: pointer;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #324b72;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-radius: 50px;
+	min-width: 40px;
+	border: 1px solid #DCDCDE;
+	transition: 0.3s ease;
+
+	transition-property: background-color, color, border-color;
+	&:hover,
+	&--active {
+	  background-color: var(--wp-admin-theme-color);
+	  color: white;
+	  border-color: var(--wp-admin-theme-color);
+	}
+  }
+}

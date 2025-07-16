@@ -1,0 +1,18 @@
+@import './generators/column-editor-style-generator';
+
+@include columnEditorStyleGenerator(column);
+
+.column-depth-control {
+	.components-input-control__container {
+		max-width: 64px;
+	}
+}
+.dummy-column {
+	flex-basis: 0;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
+	height: 10px;
+	flex-grow: 1;
+	max-width: 100%;
+	min-width: 50px;
+}

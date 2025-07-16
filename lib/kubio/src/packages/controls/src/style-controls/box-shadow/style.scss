@@ -1,0 +1,135 @@
+@import 'box-shadow-presets/style';
+@import 'box-shadow-custom/style';
+
+.kubio-box-shadow-popover {
+	.kubio-streched-tabs {
+		width: 400px;
+
+		.components-tab-panel__tab-content {
+			max-height: 475px;
+		}
+	}
+
+	.components-popover__content {
+		overflow: hidden;
+		padding: 0;
+	}
+}
+
+.kubio-box-shadow-preview {
+	width: 60px;
+	height: 60px;
+	background-color: #ffffff;
+}
+
+.kubio-box-shadow-label .kubio-inlined-label-control__control{
+  display: flex;
+  align-items: center;
+  .kubio-color-indicator-popover-reset-icon{
+	margin-left: 10px;
+  }
+}
+.kubio-box-shadow-values-container {
+	display: flex;
+
+	> .kubio-box-shadow-inputs-container {
+		display: flex;
+	  	margin-bottom: 16px;
+
+		> .components-base-control {
+			flex: 1 0 0;
+		}
+
+		.components-input-control__container{
+			.components-input-control__backdrop{
+			  	border-width: 0;
+			}
+
+			input[type='number']{
+				border: 1px solid #ccc;
+				border-radius: 2px;
+			}
+		}
+
+	}
+
+	.components-number-control {
+	  display: flex;
+	  flex-direction: column !important;
+	  border-radius: 2px;
+	  margin-right: 8px !important;
+	  border-color: #cccccc;
+	  //width: 52px !important;
+	  //height: 30px !important;
+
+	  .components-input-control__container {
+		margin-left: 0 !important;
+	  }
+
+	  .components-flex__item {
+		width: 100%;
+	  }
+
+	  input {
+		width: 52px;
+		height: 30px;
+	  }
+
+	  &:last-child {
+		margin-right: 0 !important;
+		margin-top: 0;
+	  }
+	}
+
+	.components-base-control__field {
+		margin-right: 5px;
+	  	//max-width: 56px;
+
+		input {
+			font-size: 12px;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		.components-base-control__label {
+		  margin-bottom: 8px !important;
+		}
+
+		> .kubio-box-shadow-values-input {
+			display: flex;
+			flex-direction: column;
+			flex: 1 0;
+			margin-right: 10px;
+			width: 52px !important;
+			height: 30px !important;
+			font-size: 12px;
+			border-radius: 2px;
+			border-color: #cccccc;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	> .kubio-color-popover-wrapper {
+		margin-left: 20px;
+
+		button {
+			margin-right: 0;
+		}
+	}
+}
+
+.kubio-box-shadow-tab {
+	> .components-tab-panel__tabs {
+		display: none;
+	}
+}
+
+.components-text-control__input[type="number"]::-webkit-outer-spin-button,
+.components-text-control__input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance: textfield;
+}

@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		"forceConsistentCasingInFileNames": true,
+		"importHelpers": true,
+		"strict": true,
+		"paths": {
+			"@kubio/*": [
+				"./src/packages/*/src"
+			]
+		},
+		"typeRoots": [
+			"./node_modules/@types",
+			"./src/types"
+		],
+	},
+	"references": [
+		{
+			"path": "src/packages/block-library"
+		},
+		{
+			"path": "src/packages/controls"
+		},
+		{
+			"path": "src/packages/editor"
+		},
+		{
+			"path": "src/packages/filters"
+		},
+		{
+			"path": "src/packages/utils"
+		},
+	],
+	"files": [],
+	"exclude": [
+		"**/node_modules/**",
+		"**/build/**",
+		"**/build-module/**",
+	]
+}

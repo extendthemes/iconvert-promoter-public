@@ -1,0 +1,90 @@
+.sortable-collapse {
+	&__title {
+		flex: 1;
+	}
+	&__icons {
+		flex: 0 0 auto;
+	}
+}
+.d-flex {
+	display: flex;
+}
+
+.kubio-draggable-item {
+	width: 15px;
+	height: 15px;
+	padding-right: 0;
+	cursor: move;
+}
+
+.sortable-collapse-item--is-sorting {
+	.kubio-sortable-acordion-icon-container {
+		display: none;
+	}
+}
+
+.kubio-sortable-accordion-container.is-selected {
+	background-color: $ui-menu-active-low-opacity;
+	border: 1px solid $ui-menu-active;
+
+	.kubio-draggable-item {
+		fill: $ui-menu-active;
+	}
+
+	.kubio-sortable-accordion-text {
+		color: $ui-menu-active;
+	}
+
+	.kubio-sortable-acordion-icon {
+		svg {
+			fill: $ui-menu-active;
+		}
+	}
+}
+
+.kubio-sortable-accordion-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid $ui-menu-item;
+	margin: 10px 0;
+	cursor: pointer;
+
+	.kubio-sortable-accordion-text {
+		margin: 10px;
+	}
+	.kubio-sortable-accordion-info {
+		display: flex;
+		align-items: center;
+		margin-left: 3px;
+	}
+
+	.components-button.kubio-sortable-acordion-icon.is-small.has-icon {
+		padding: 0 5px;
+	}
+
+	.kubio-sortable-acordion-icon {
+		min-width: unset;
+		margin: 0 5px;
+
+		&:last-child {
+			margin-right: 10px;
+		}
+		svg {
+			width: 14px;
+			height: 14px;
+		}
+	}
+}
+
+.components-button.kubio-button-group-button.is-primary.has-text.has-icon {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	line-height: 20px;
+
+	svg {
+		width: 20px;
+		height: auto;
+	}
+}

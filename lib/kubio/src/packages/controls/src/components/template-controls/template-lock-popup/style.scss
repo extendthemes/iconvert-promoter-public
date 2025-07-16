@@ -1,0 +1,48 @@
+.kubio-template-lock-popup {
+	position: absolute;
+	top: max(10px, calc(50% - 150px));
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 10px;
+	height: 10px;
+
+	&__container {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+}
+.kubio-template-controls-popover {
+	.components-popover__content {
+		padding: 15px !important;
+		overflow: hidden;
+	}
+}
+.kubio-template-controls-canvas-popover {
+	.components-popover__content {
+		border: none !important;
+	}
+}
+.template-lock-modal__outer > * {
+	margin: -15px;
+	padding: 15px;
+	//border: 1px solid #dddddd;
+}
+.kubio-template-controls-canvas-popover {
+	opacity: 0 !important;
+	transition: opacity 0.4s ease;
+	pointer-events: none;
+	&--hovered {
+		pointer-events: initial;
+		opacity: 1 !important;
+	}
+}
+
+.kubio-template-controls-canvas-popover.components-popover[data-x-axis="center"] {
+	&.is-from-top .components-popover__content {
+		transform: translateX(-50%) translateY(calc(-50% - 10px));
+	}
+	&.is-from-bottom .components-popover__content {
+		transform: translateX(-50%) translateY(calc(50% + 10px));
+	}
+}

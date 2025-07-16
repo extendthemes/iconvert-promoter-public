@@ -1,0 +1,190 @@
+.kubio-control {
+	$components-custom-gradient-picker__padding: 2px; // 28px container, 24px handles inside, that leaves 4px padding, half of which is 2.
+
+	.components-custom-gradient-picker__color-picker-popover {
+		.components-popover__content {
+			overflow: hidden;
+		}
+
+		.kubio-color-picker-separator {
+			margin-bottom: 0;
+		}
+	}
+
+	.components-custom-gradient-picker__gradient-bar:not(.has-gradient) {
+		opacity: 0.4;
+	}
+
+	.components-custom-gradient-picker__gradient-bar {
+		width: auto;
+		height: $button-size - 8;
+		margin-top: $grid-unit-15;
+		border: solid 1px #ddd;
+		border-radius: $button-size;
+		margin-bottom: $grid-unit-15;
+		padding-left: $components-custom-gradient-picker__padding * 0.5;
+		padding-right: math.div($button-size * 3, 4) -
+			$components-custom-gradient-picker__padding;
+
+		.components-custom-gradient-picker__markers-container {
+			position: relative;
+		}
+
+		.components-custom-gradient-picker__insert-point {
+			border-radius: 50%;
+
+			background: $white;
+			padding: 2px;
+			top: $components-custom-gradient-picker__padding;
+			min-width: $button-size-small;
+			width: $button-size-small;
+			height: $button-size-small;
+			position: relative;
+			color: $gray-900;
+			box-shadow: 0 1px 4px $gray-600;
+			svg {
+				height: 100%;
+				width: 100%;
+			}
+		}
+
+		.components-custom-gradient-picker__control-point-button {
+			border: 1px solid #dddddd;
+			box-shadow: inset 0 0 0 $border-width-focus-fallback $white;
+			border-radius: 50%;
+			height: $button-size-small;
+			width: $button-size-small;
+			padding: 0;
+			position: absolute;
+			top: $components-custom-gradient-picker__padding * 0.5;
+
+			&:focus,
+			&.is-active {
+				box-shadow: 0 0 0 1px $white, 0 0 0 3px $gray-900;
+			}
+		}
+	}
+
+	.components-custom-gradient-picker__color-picker-popover
+		.components-custom-gradient-picker__remove-control-point {
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		margin-bottom: 8px;
+	}
+
+	.components-custom-gradient-picker__inserter {
+		width: 100%;
+	}
+
+	.components-custom-gradient-picker__liner-gradient-indicator {
+		display: inline-block;
+		flex: 0 auto;
+		width: 20px;
+		height: 20px;
+	}
+
+	.components-custom-gradient-picker
+		.components-custom-gradient-picker__ui-line {
+		margin-bottom: $grid-unit-20;
+
+		.kubio-gradient-picker-wrapper:last-child &,
+		.components-base-control.components-angle-picker,
+		.components-base-control.components-custom-gradient-picker__type-picker {
+			margin-bottom: 0;
+		}
+	}
+
+	.components-custom-gradient-picker
+		.components-custom-gradient-picker__toolbar {
+		border: none;
+
+		// Work-around to target the inner button containers rendered by <ToolbarGroup />
+		> div + div {
+			margin-left: 1px;
+		}
+
+		button {
+			&.is-pressed {
+				> svg {
+					background: $white;
+					border: 1px solid $gray-600;
+					border-radius: 2px;
+				}
+			}
+		}
+	}
+
+	.components-angle-picker-control {
+		margin-bottom: 0;
+	}
+
+	.kubio-custom-gradient-type-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		> .components-circular-option-picker {
+			min-width: unset;
+			margin-top: 0;
+		}
+
+		.kubio-custom-gradient-text {
+			margin-right: 10px;
+		}
+
+		.components-circular-option-picker__option-wrapper {
+			margin-bottom: 0 !important;
+		}
+
+		.components-circular-option-picker
+			.components-circular-option-picker__swatches {
+			grid-template-columns: repeat(2, 28px);
+			gap: 8px;
+		}
+
+		.components-input-control__container input[type="number"] {
+			width: 70px;
+		}
+
+		.components-input-control__backdrop {
+			border-color: #ccc !important;
+		}
+	}
+
+	.kubio-custom-angle-picker-container .components-base-control__field {
+		margin-bottom: 0;
+
+		.components-flex {
+			justify-content: flex-end !important;
+
+			.components-flex-block {
+				width: 70px;
+				flex: 1 1 0%;
+			}
+		}
+
+		.components-input-control__backdrop {
+			border-color: #ccc !important;
+		}
+
+		.components-popover__content & .components-flex-block,
+		.kubio-is-default-editor & .components-flex-block {
+			width: unset;
+		}
+	}
+
+	.components-custom-gradient-picker__external-opacity-container {
+		margin-top: 10px;
+	}
+
+	.components-circular-option-picker__option-wrapper button {
+		padding-bottom: 0;
+	}
+}
+
+.components-popover.components-custom-gradient-picker__color-picker-popover {
+	.components-popover__content {
+		padding: 8px;
+	}
+}

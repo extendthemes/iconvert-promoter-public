@@ -1,0 +1,89 @@
+
+.components-popover.block-editor-block-popover {
+	z-index: 10000000;
+	position: absolute;
+	// Shouldn't be needed but it looks
+	// like the popover is impacted by the block gap margin.
+	margin: 0 !important;
+
+	// Allow clicking through the toolbar holder.
+	pointer-events: none;
+
+	.components-popover__content {
+		margin: 0 !important;
+		min-width: auto;
+		width: max-content;
+		background: none;
+		border: none !important;
+		outline: none !important;
+		box-shadow: none !important;
+		overflow: visible !important;
+	}
+
+	.block-editor-inserter__popover {
+		.components-popover__content {
+			background: #fff !important;
+			border: 1px solid #e0e0e0 !important;
+		}
+	}
+
+	// Enable pointer events for the toolbar's content.
+	// &:not(.block-editor-block-popover__inbetween):not(.block-editor-block-list__block-side-inserter-popover)
+	// 	.components-popover__content {
+	// 	*:not(.components-resizable-box__container) {
+	// 		pointer-events: all;
+	// 	}
+	// }
+}
+
+.components-popover.block-editor-block-popover__inbetween {
+	// Disable pointer events for dragging and dropping.
+	// Without this the insertion point interferes with the
+	// drop zone.
+	pointer-events: none;
+
+	* {
+		pointer-events: none;
+	}
+
+	// Re-enable pointer events when the inbetween inserter has a '+' button.
+	// Needs specificity, do not simplify.
+	.is-with-inserter {
+		pointer-events: all;
+
+		* {
+			pointer-events: all;
+		}
+	}
+
+	.components-popover__content {
+		overflow: visible !important;
+	}
+}
+
+.kubio-editor-block-popover__inbetween {
+	&-top .components-popover__content {
+		transform: translateY(-16px);
+		padding: 10px 0px;
+	}
+
+	&-bottom .components-popover__content {
+		transform: translateY(-10px);
+		padding: 10px 0px;
+	}
+
+	&-top,
+	&-bottom {
+		height: 0;
+
+		.components-popover__content {
+			overflow: visible !important;
+		}
+
+		pointer-events: all !important;
+
+		* {
+			pointer-events: all !important;
+		}
+	}
+}

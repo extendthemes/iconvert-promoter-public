@@ -1,0 +1,71 @@
+.ic-header {
+  background-color: #fff;
+  width: 100%;
+  padding: 25px 30px;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 4px;
+
+  .ic-title {
+    &.ic-has-description {
+      padding-top: 0;
+    }
+
+    .ic-description {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 400;
+      color: #454545;
+    }
+
+    .ic-edit-list {
+      color: $primary;
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: underline;
+    }
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #1e1e1e;
+
+    a {
+      display: inline-block;
+      margin-left: 20px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
+  .ic-actions {
+    & {
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    @include mediaQueryUpTo(1200px) {
+      text-align: left;
+      margin-top: 15px;
+    }
+
+    .button {
+      margin-right: 20px;
+      font-size: 12px;
+      min-height: 27px;
+      font-weight: 600;
+    }
+    .button:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+    "name": "@kubio/global-data",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {
+        "@kubio/constants": "file:../constants",
+        "@kubio/core": "file:../core",
+        "@kubio/editor-data": "file:../editor-data",
+        "@kubio/style-manager": "file:../style-manager",
+        "@kubio/utils": "file:../utils"
+    },
+    "devDependencies": {
+        "@wordpress/api-fetch": "7.8.2",
+        "@wordpress/block-editor": "14.3.4",
+        "@wordpress/components": "28.8.4",
+        "@wordpress/compose": "7.8.3",
+        "@wordpress/data": "10.8.3",
+        "@wordpress/element": "6.8.1",
+        "@wordpress/hooks": "4.8.2",
+        "@wordpress/i18n": "5.8.2",
+        "@wordpress/url": "4.8.1",
+        "kashe": "^1.0.3",
+        "lodash": "4.17.21",
+        "react": "18.3.1",
+        "react-fast-compare": "3.2.0",
+        "tinycolor2": "^1.4.1"
+    },
+    "publishConfig": {
+        "access": "restricted"
+    }
+}

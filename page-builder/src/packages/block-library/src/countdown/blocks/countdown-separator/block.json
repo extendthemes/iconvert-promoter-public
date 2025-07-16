@@ -1,0 +1,55 @@
+{
+	"name": "cspromo/countdownseparator",
+	"parent": [
+		"cspromo/countdown"
+	],
+	"attributes": {
+		"kubio": {
+			"type": "object"
+		},
+		"itemName": {
+			"type": "string",
+			"default": ":"
+		},
+		"itemType": {
+			"type": "string",
+			"default":"d"
+		},
+		"separatorShow": {
+			"type": "boolean",
+			"value": true
+		}
+	},
+	"supports": {
+		"kubio": {
+			"default": {
+				"style": {
+					"descendants": {
+						"outer": {
+							
+						}
+					}
+				}
+			},
+			"elementsEnum": {
+				"OUTER": "outer"
+			},
+			"elementsByName": {
+				"outer": {
+					"default": true,
+					"wrapper": true,
+					"props": {
+						"className": "icp-countdown-separator"
+					}
+				}
+			},
+			"template": {
+				"type": "element",
+				"props": {
+					"name": "outer",
+					"shouldRender": "computed.separatorShow"
+				}
+			}
+		}
+	}
+}

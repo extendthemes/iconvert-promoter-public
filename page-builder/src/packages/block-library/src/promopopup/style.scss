@@ -1,0 +1,218 @@
+@import "./animate.min.scss";
+@import "./blocks/promopopup-close/style";
+@import "./skeleton-backround/style.scss";
+
+.wp-block-cspromo-promopopup__outer {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	blockquote,
+	caption,
+	figcaption,
+	p {
+		text-wrap: initial;
+	}
+
+	transition-property: $theme-transition-properties !important;
+	@include full-width-this-block-and-descendants();
+
+	// responsive classes for outer
+	@media (min-width: 1024px) {
+		&.h-hide-lg {
+			display: none !important;
+		}
+	}
+
+	@media (min-width: 768px) and (max-width: 1023px) {
+		&.h-hide-md {
+			display: none !important;
+		}
+	}
+
+	@media (max-width: 767px) {
+		&.h-hide-sm {
+			display: none !important;
+		}
+
+		&.h-hide-sm-force {
+			display: none !important;
+		}
+	}
+
+	@media (max-width: 767px) {
+		&.kubio-hide-on-mobile {
+			display: none !important;
+		}
+	}
+
+	@media (min-width: 768px) and (max-width: 1023px) {
+		&.kubio-hide-on-tablet {
+			display: none !important;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		&.kubio-hide-on-desktop {
+			display: none !important;
+		}
+	}
+}
+.wp-block-cspromo-promopopup__wrapperContainer {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: inherit;
+	justify-content: inherit;
+	position: absolute;
+	width: 100%;
+}
+.cs-popup-action a {
+	cursor: pointer;
+}
+.wp-block-cspromo-promopopupclose {
+	pointer-events: all;
+}
+.wp-block-cspromo-promopopupclose .wp-block-cspromo-icon__inner svg {
+	margin: 0 auto;
+}
+
+.cs-inner-scroll-content {
+	padding: 2px;
+}
+.wp-block-cspromo-promopopup__outer {
+	&,
+	* {
+		box-sizing: border-box;
+	}
+}
+body.single-cs-promo-popups {
+	background-color: #f6f6f6;
+	// overflow: hidden;
+
+	#wpadminbar {
+		display: none;
+	}
+
+	.wp-site-blocks {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.entry-content
+		> *:not(.alignwide):not(.alignfull):not(.alignleft):not(
+			.alignright
+		):not(.is-style-wide) {
+		max-width: none;
+		width: auto;
+	}
+
+	// .cs-popup-container {
+	// 	opacity: 1;
+	// 	visibility: visible;
+	// }
+
+	.cs-popup-container-type-floating-bar.cs-fb-position-above-content {
+		position: relative !important;
+
+		.wp-block-cspromo-promopopup__outer {
+			position: relative !important;
+		}
+	}
+}
+
+.kubio-iframe {
+	body.single-cs-promo-popups {
+		margin-top: 0 !important;
+	}
+}
+
+.cs-popup-outer {
+	&-type-slidein-popup,
+	&-type-simple-popup {
+		pointer-events: none;
+		.wp-block-cspromo-promopopup__wrapperContainer > * {
+			pointer-events: auto;
+		}
+	}
+}
+
+.entry-content-iconvert-promoter {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	// z-index: 99999999;
+}
+.entry-content-iconvert-promoter .cs-popup-container.visible {
+	width: 100%;
+	height: 100%;
+}
+
+.wp-block-cspromo-promopopupoverflow {
+	.wp-block-cspromo-promopopupoverflow__inner {
+		overflow-x: hidden;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+
+		/* Firefox */
+		scrollbar-width: var(--moz-scrollbar-width, auto);
+		scrollbar-color: var(--scrollbar-handle, #000000)
+			var(--scrollbar-track, "rgba(0, 0, 0, 0.38)");
+		&:hover {
+			scrollbar-color: var(
+					--scrollbar-handle-hover,
+					rgba(var(--kubio-color-6), 0.79)
+				)
+				var(--scrollbar-track, "rgba(0, 0, 0, 0.38)");
+		}
+
+		/* Chrome, Edge, and Safari */
+		&::-webkit-scrollbar {
+			width: var(--scrollbar-width, "8px");
+		}
+		&::-webkit-scrollbar-track {
+			background: var(--scrollbar-track, "rgba(0, 0, 0, 0.38)");
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--scrollbar-handle, #000000);
+			&:hover {
+				background-color: var(
+					--scrollbar-handle-hover,
+					rgba(var(--kubio-color-6), 0.79)
+				);
+			}
+		}
+	}
+}
+
+.cs-popup-container-type-fullscreen-mat {
+	.wp-block-cspromo-promopopup__container {
+		position: static !important;
+	}
+}
+
+
+.cspromo-content-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+
+	> * {
+		width: 100%;
+	}
+}
+
+.wp-block-cspromo-promopopup__outer {
+	&.align-items-top {
+		align-items: flex-start !important;
+
+		.wp-block-cspromo-promopopup__wrapperContainer {
+			align-items: flex-start !important;
+		}
+	}
+}

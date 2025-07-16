@@ -1,0 +1,97 @@
+.kubio-transform-control, .kubio-transform-presets {
+  .box-shadow-preset__item {
+	position: relative;
+  }
+
+  .kubio-transform-container {
+	position: relative;
+	background-color: #f0f0f0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
+	overflow: hidden;
+	cursor: pointer;
+  }
+
+  .kubio-transform-preview:first-of-type {
+	border: dotted 1px #000;
+	position: absolute;
+	background: transparent;
+	border-radius: 4px;
+	opacity: 1;
+	left: 0;
+	right: 0;
+	top: 50%;
+    margin-top: -30px;
+  }
+
+  .kubio-transform-preview {
+	transition: all 0.5s;
+	width: 60px;
+	height: 60px;
+	background-color: #007CBA;
+	opacity: 0.3;
+	margin: 20px auto;
+	background-size: 8px 8px;
+	background-position: -1px -1px;
+	// background-image: linear-gradient(90deg,rgba(255,255,255, .6) 2px,transparent 0),linear-gradient(180deg,rgba(255,255,255, .6) 2px,transparent 0);
+  }
+
+  .kubio-horizontal-align-container {
+	align-items: flex-start;
+  }
+
+  .kubio-streched-radio-group {
+	margin-top: 0;
+  }
+
+  .kubio-background-type-container > .components-button > svg {
+	height: 20px;
+  }
+
+  .kubio-sortable-accordion-info {
+	flex: 1;
+	.h-svg-icon {
+	  display: none;
+	}
+  }
+
+  .kubio-sortable-accordion .kubio-sortable-accordion-title .kubio-sortable-accordion-info .kubio-sortable-accordion-title__text {
+  	max-width: unset;
+	width: 100%;
+  	overflow: visible;
+  }
+
+  .kubio-sortable-accordion .accordion__item, .kubio-sortable-accordion .accordion__item:hover {
+	border: none;
+	margin: 0;
+	color: unset;
+
+	.accordion__button > div {
+	  cursor: default;
+	}
+  }
+
+  .kubio-sortable-accordion .accordion__button:hover {
+	background: none;
+  }
+
+  .kubio-sortable-accordion .kubio-sortable-accordion-title .kubio-sortable-accordion-info {
+	margin: 0 0 10px 0;
+  }
+
+  .kubio-sortable-accordion .accordion__item:last-of-type .kubio-sortable-accordion-info {
+	margin: 0;
+  }
+
+  .accordion__item.kubio-sortable-accordion-list {
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+}
+
+.kubio-transform-origin-popover {
+  .h-select-control__button.components-button.is-small {
+	min-width: unset;
+  }
+}

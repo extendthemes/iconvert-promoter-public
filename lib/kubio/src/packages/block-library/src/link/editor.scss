@@ -1,0 +1,10 @@
+//Display the reach text for button / link as inline element
+@include c(link) {
+  .block-editor-rich-text__editable {
+	display: inline-block;
+	margin: 0;
+	&:after {
+	  display: none !important;
+	}
+  }
+}

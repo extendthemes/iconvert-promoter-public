@@ -1,0 +1,43 @@
+{
+    "name": "@cspromo/editor",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {
+        "@kubio/block-patterns": "file:../../../../../kubio/src/packages/block-patterns",
+        "@kubio/constants": "file:../../../../../kubio/src/packages/constants",
+        "@kubio/core": "file:../../../../../kubio/src/packages/core",
+        "@kubio/editor": "file:../../../../../kubio/src/packages/editor",
+        "@kubio/editor-data": "file:../../../../../kubio/src/packages/editor-data",
+        "@kubio/global-data": "file:../../../../../kubio/src/packages/global-data",
+        "@kubio/icons": "file:../../../../../kubio/src/packages/icons",
+        "@kubio/utils": "file:../../../../../kubio/src/packages/utils",
+        "@kubio/wp-global-styles": "file:../../../../../kubio/src/packages/wp-global-styles"
+    },
+    "publishConfig": {
+        "access": "restricted"
+    },
+    "devDependencies": {
+        "@wordpress/block-editor": "8.5.1",
+        "@wordpress/block-library": "7.3.1",
+        "@wordpress/components": "19.8.0",
+        "@wordpress/compose": "5.4.0",
+        "@wordpress/core-data": "4.4.1",
+        "@wordpress/data": "6.6.0",
+        "@wordpress/editor": "12.5.1",
+        "@wordpress/element": "4.4.0",
+        "@wordpress/hooks": "3.6.0",
+        "@wordpress/i18n": "4.6.0",
+        "@wordpress/icons": "8.2.0",
+        "@wordpress/interface": "4.5.0",
+        "@wordpress/keyboard-shortcuts": "3.4.0",
+        "@wordpress/keycodes": "3.6.0",
+        "@wordpress/plugins": "4.4.0",
+        "@wordpress/url": "3.7.0",
+        "classnames": "^2.2.5",
+        "lodash": "4.17.20"
+    }
+}

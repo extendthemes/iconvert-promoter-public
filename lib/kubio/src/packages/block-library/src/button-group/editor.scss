@@ -1,0 +1,33 @@
+@include c(buttongroup) {
+  .block-list-appender.wp-block {
+	display: inline-flex;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	padding: 0;
+	margin-left: 0;
+	margin-right: 0;
+
+	.block-editor-block-list__insertion-point-inserter {
+	  left: 0;
+	}
+  }
+
+  .kubio-block-inserter.kubio-block-inserter__inline {
+	margin-top: 8px;
+	margin-left: 1em;
+	margin-right: -1em;
+  }
+
+  // This fixes #35511 where box-sizing doesn't work properly on this element because of the negative margins and
+  // the Gutenberg's management of outline overlay with an absolute ::after.
+  @include e('outer') {
+	border: 1px solid transparent;
+  }
+}
+
+// Fixes #36134.
+// Firefox doesn't handle white-space:pre-wrap in the same way as Chrome and will throw extra white space on richText.
+.wp-block-kubio-button .block-editor-rich-text__editable.rich-text {
+  display: flex;
+}

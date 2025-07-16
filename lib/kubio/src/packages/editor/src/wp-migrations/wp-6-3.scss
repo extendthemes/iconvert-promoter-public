@@ -1,0 +1,27 @@
+.kubio-wp-6-3 {
+	.components-popover__content:empty {
+		display: none !important;
+	}
+
+	.kubio-ai-wizard-error-tooltip {
+		margin-top: -85px;
+		bottom: auto;
+		top: 0px;
+	}
+
+	&.modal-open {
+		.kubio-popover-slot-container {
+			z-index: 999999999;
+
+			.kubio-ai-wizard-error-tooltip-wrapper .components-popover__content {
+				background: transparent;
+			}
+		}
+
+		.kubio-ai-wizard-footer {
+			.kubio-ai-wizard-error-tooltip-wrapper .components-popover__content {
+				background: transparent;
+			}
+		}
+	}
+}

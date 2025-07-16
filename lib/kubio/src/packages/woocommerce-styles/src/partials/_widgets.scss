@@ -1,0 +1,25 @@
+.widget_shopping_cart {
+	.cart_list {
+		li.woocommerce-mini-cart-item.mini_cart_item {
+			margin-bottom: 1rem;
+			border-bottom: 1px solid rgba(var(--kubio-color-6-variant-1), 1);
+
+			span.quantity {
+				font-size: 80%;
+			}
+
+			> a:not([class]) {
+				font-weight: normal;
+
+				img {
+					width: 48px;
+				}
+			}
+
+			&:last-of-type {
+				border-bottom: none;
+				margin-bottom: 0;
+			}
+		}
+	}
+}

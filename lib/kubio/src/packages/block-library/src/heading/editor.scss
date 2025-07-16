@@ -1,0 +1,20 @@
+@include c('heading') {
+	@include e('text') {
+	}
+
+	white-space: normal !important; // the rich text editor adds a pre-wrap which changs the display of heading;
+
+  //firefox only.
+  @-moz-document url-prefix() {
+	  //this is needed for firefox for space to work
+	  white-space: pre-wrap !important;
+  }
+}
+
+.editor-styles-wrapper {
+	@include c('heading') {
+		a {
+			text-decoration: underline;
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+    "name": "@kubio/format-library",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {
+        "@kubio/controls": "file:../controls",
+        "@kubio/core": "file:../core",
+        "@kubio/global-data": "file:../global-data",
+        "@kubio/icons": "file:../icons",
+        "@kubio/utils": "file:../utils"
+    },
+    "devDependencies": {
+        "@wordpress/block-editor": "14.3.4",
+        "@wordpress/components": "28.8.4",
+        "@wordpress/element": "6.8.1",
+        "@wordpress/i18n": "5.8.2",
+        "@wordpress/icons": "10.8.2",
+        "@wordpress/rich-text": "7.8.3",
+        "classnames": "^2.2.5",
+        "lodash": "4.17.21"
+    }
+}

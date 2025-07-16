@@ -1,0 +1,253 @@
+{
+	"name": "cspromo/promopopup",
+	"category": "kubio-basic",
+	"usesContext": [ "postId", "postType" ],
+	"attributes": {
+		"kubio": {
+			"type": "object"
+		},
+		"defaultTemplateWidth": {
+			"type": "object"
+		},
+		"defaultTemplateHeight": {
+			"type": "object"
+		},
+		"alignH": {
+			"type": "string",
+			"default": "center"
+		},
+		"align": {
+			"type": "string",
+			"default": "center"
+		},
+		"contentPosition": {
+			"type": "string",
+			"default": "over-content"
+		},
+		"popup_type": {
+			"type": "string"
+		},
+		"popup_id": {
+			"type": "string"
+		},
+		"effectPlay": {
+			"type": "string"
+		},
+		"marginWidthControllTop": {
+			"type": "number"
+		},
+		"marginWidthControllBottom": {
+			"type": "number"
+		},
+		"marginWidthControllLeft": {
+			"type": "number"
+		},
+		"marginWidthControllRight": {
+			"type": "number"
+		},
+		"showNotice": {
+			"type": "object",
+			"default": {
+				"label": "Effects when we show our popup",
+				"effectActive": "",
+				"effectActiveOption": "",
+				"effectFading": "animate__fadeIn",
+				"effectZooming": "animate__zoomIn",
+				"effectBouncing": "animate__bounceIn",
+				"effectSliding": "animate__slideInDown",
+				"effectRotating": "animate__rotateIn",
+				"effectAttentionSeekers": "animate__bounce",
+				"effectLightSpeed": "animate__lightSpeedInRight",
+				"effectSpecials": "animate__rollIn",
+				"effectFlippers": "animate__flipInX"
+			}
+		},
+		"hideNotice": {
+			"type": "object",
+			"default": {
+				"label": "Effect when we hide",
+				"effectActive": "",
+				"effectActiveOption": "",
+				"effectFading": "animate__fadeOut",
+				"effectZooming": "animate__zoomOut",
+				"effectBouncing": "animate__bounceOut",
+				"effectSliding": "animate__slideOutDown",
+				"effectRotating": "animate__rotateOut",
+				"effectAttentionSeekers": "animate__bounceOut",
+				"effectLightSpeed": "animate__lightSpeedOutRight",
+				"effectSpecials": "animate__rollOut",
+				"effectFlippers": "animate__flipOutX"
+			}
+		},
+		"additionalCSS": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"kubio": {
+			"default": {
+				"props": {
+					"internal": {
+						"type": "object"
+					},
+					"overlapOptions": false
+				},
+				"style": {
+					"descendants": {
+						"outer": {
+							"width": {
+								"unit": "%",
+								"value": 100
+							}
+						},
+						"wrapperContainer": {
+							"flex": 1,
+							"position": "relative",
+							"transform": {
+								"translate": [
+									{
+										"axis": "x",
+										"value": {
+											"value": 0,
+											"unit": "px"
+										}
+									},
+									{
+										"axis": "y",
+										"value": {
+											"value": 0,
+											"unit": "px"
+										}
+									}
+								]
+							}
+						},
+						"container": {
+							"alignItems": "start",
+							"justifyContent": "start",
+							"width": {
+								"value": "",
+								"unit": "px"
+							},
+							"background": {
+								"color": "rgba(var(--kubio-color-5),1)"
+							},
+							"margin": {},
+							"customHeight": {
+								"type": "fit-to-content",
+								"minHeight": {
+									"value": "",
+									"unit": "px"
+								}
+							}
+						},
+						"contentWidth": {
+							"maxWidth": {
+								"value": 100,
+								"unit": "%"
+							}
+						}
+					}
+				}
+			},
+			"supports": {
+				"advanced": {
+					"responsive": false
+				}
+			},
+			"elementsEnum": {
+				"WRAPPER": "wrapper",
+				"WRAPPER_CONTENT": "wrapperContent",
+				"OUTER": "outer",
+				"WRAPPER_CONTAINER": "wrapperContainer",
+				"CONTAINER": "container",
+				"VSPACE": "v-space",
+				"CSS_WRAPPER": "css-wrapper",
+				"CONTENT_WIDTH": "contentWidth"
+			},
+			"elementsByName": {
+				"wrapper": {},
+				"wrapperContent": {
+					"props": {
+						"className": "lcs-popup-content"
+					}
+				},
+				"outer": {},
+				"css-wrapper": {},
+				"v-space": {
+					"selector": "> .position-relative:not(:last-child)"
+				},
+				"contentWidth": {
+					"selector": "> *:not(.wp-block-cspromo-promopopupclose__outer):not(.background-wrapper)"
+				},
+				"wrapperContainer": {},
+				"container": {
+					"default": true,
+					"wrapper": true,
+					"props": {
+						"className": [
+							"h-y-container",
+							"cspromo-content-container"
+						]
+					},
+					"supports": {
+						"background": true
+					}
+				}
+			},
+			"template": {
+				"type": "element",
+				"props": {
+					"name": "wrapper"
+				},
+				"children": [
+					{
+						"type": "element",
+						"props": {
+							"name": "css-wrapper"
+						}
+					},
+					{
+						"type": "element",
+						"props": {
+							"name": "wrapperContent"
+						},
+						"children": [
+							{
+								"type": "element",
+								"props": {
+									"name": "outer"
+								},
+								"children": [
+									{
+										"type": "element",
+										"props": {
+											"name": "wrapperContainer"
+										},
+										"children": [
+											{
+												"type": "element",
+												"props": {
+													"name": "container"
+												},
+												"children": [
+													{
+														"type": "background"
+													},
+													{
+														"type": "wp:InnerBlocks"
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

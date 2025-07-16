@@ -1,0 +1,22 @@
+{
+    "name": "@kubio/woocommerce-styles",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "dependencies": {
+        "@kubio/advanced-panel": "file:../advanced-panel",
+        "@kubio/controls": "file:../controls",
+        "@kubio/core": "file:../core",
+        "@kubio/editor": "file:../editor",
+        "@kubio/global-data": "file:../global-data"
+    },
+    "devDependencies": {
+        "@wordpress/components": "28.8.4",
+        "@wordpress/data": "10.8.3",
+        "@wordpress/element": "6.8.1",
+        "@wordpress/hooks": "4.8.2",
+        "@wordpress/i18n": "5.8.2"
+    }
+}

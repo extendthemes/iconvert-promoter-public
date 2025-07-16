@@ -1,0 +1,84 @@
+@import "~@kubio/base-styles/_variables";
+@import "~@kubio/base-styles/_bem";
+@import "~@kubio/base-styles/mixins";
+
+//.kubio-inspector {
+@import "components/style";
+@import "style-controls/style";
+@import "notices/style";
+//}
+
+// The `.kubio-ui-reset` class should be used on elements on canvas which should not be affected by edited styles.
+.editor-styles-wrapper .kubio-ui-reset {
+	azimuth: revert;
+	border-collapse: revert;
+	border-spacing: revert;
+	caption-side: revert;
+	color: revert;
+	cursor: revert;
+	direction: revert;
+	elevation: revert;
+	empty-cells: revert;
+	font-family: revert;
+	font-size: revert;
+	font-style: revert;
+	font-variant: revert;
+	font-weight: revert;
+	font: revert;
+	letter-spacing: revert;
+	line-height: revert;
+	list-style-image: revert;
+	list-style-position: revert;
+	list-style-type: revert;
+	list-style: revert;
+	orphans: revert;
+	pitch-range: revert;
+	pitch: revert;
+	quotes: revert;
+	richness: revert;
+	speak-header: revert;
+	speak-numeral: revert;
+	speak-punctuation: revert;
+	speak: revert;
+	speech-rate: revert;
+	stress: revert;
+	text-align: revert;
+	text-indent: revert;
+	text-transform: revert;
+	visibility: revert;
+	voice-family: revert;
+	volume: revert;
+	white-space: revert;
+	widows: revert;
+	word-spacing: revert;
+}
+
+.kubio-preserve-caps,
+.kubio-preserve-caps label {
+	text-transform: unset !important;
+}
+
+.kubio-popup-inside-modal {
+	.components-popover__fallback-container,
+	.kubio-popover-slot-container {
+		z-index: 10000000;
+	}
+}
+
+.kubio-control {
+	.components-base-control__label {
+		display: block;
+		margin-bottom: 0;
+		text-transform: initial;
+		font-size: 13px;
+		font-weight: 400;
+	}
+
+	.components-popover__content {
+		overflow: hidden !important;
+	}
+
+	.components-base-control__field {
+		margin-bottom: 0;
+	}
+}

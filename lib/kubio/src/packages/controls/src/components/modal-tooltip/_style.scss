@@ -1,0 +1,22 @@
+
+.kubio-modal-tooltip {
+  z-index: 9999999999999999;
+  background: rgb(69, 69, 69);
+  border-radius: 2px;
+  color: white;
+  display: inline-block;
+  font-size: 11px;
+  min-width: 32px;
+  padding: 5px;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  transition: opacity 120ms ease 0s;
+  user-select: none;
+  line-height: 1.4;
+  opacity: 1;
+
+  &[data-hidden] {
+	opacity: 0;
+  }
+}

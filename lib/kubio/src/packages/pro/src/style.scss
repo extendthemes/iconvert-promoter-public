@@ -1,0 +1,133 @@
+@import "./styles/pro-banner";
+
+$btn-upgrade-color: rgba(0, 124, 186);
+$btn-upgrade-color-hover: rgba(0, 124, 186);
+$btn-upgrade-bg-color: rgba(0, 124, 186, 0.09);
+$btn-upgrade-bg-color-hover: rgba(0, 124, 186, 0.2);
+
+$btn-try-color: rgb(235, 116, 66);
+$btn-try-color-hover: rgb(235, 116, 66);
+$btn-try-bg-color: rgba(235, 116, 66, 0.09);
+$btn-try-bg-color-hover: rgba(235, 116, 66, 0.2);
+
+.kubio-feature-available-in-pro {
+	margin-top: 10px !important;
+	background-color: #fff;
+
+	button {
+		margin-top: 5px;
+	}
+}
+
+.kubio-upgrade-to-pro-popup-slot {
+	z-index: 999999999;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.kubio-feature-upgrade-to-pro-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right:0;
+	background-color: #ffffff9c;
+	z-index: 10;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	.kubio-feature-upgrade-to-pro {
+		width:  60%;
+		.upgrade-to-pro__content {
+			min-width: auto;
+			max-width: none;
+		}
+	}
+}
+
+.kubio-feature-upgrade-to-pro {
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 15px 10px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+
+	.upgrade-to-pro__content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		min-width: 250px;
+		max-width: 400px;
+		width: 100%;
+
+		.label-title {
+			cursor: default;
+			display: block;
+			text-align: center;
+			font-size: 14px;
+			margin: 0;
+			max-width: 250px;
+		}
+
+		&-buttons {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: nowrap;
+			gap: 10px;
+			margin-top: 10px;
+		}
+	}
+
+	button.components-button {
+		font-weight: 600;
+		font-size: 12px;
+		padding: 6px 14px;
+		height: auto;
+		border: 1px solid currentColor;
+		// white-space: nowrap;
+	}
+
+	.btn-upgrade {
+		background-color: $btn-upgrade-bg-color;
+		color: $btn-upgrade-color;
+
+		&:hover,
+		&:focus,
+		&:active {
+			&:not(:disabled) {
+				background-color: $btn-upgrade-bg-color-hover;
+				color: $btn-upgrade-color-hover;
+			}
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 var(--wp-admin-border-width-focus) currentColor;
+		}
+	}
+
+	.btn-try {
+		background-color: $btn-try-bg-color;
+		color: $btn-try-color;
+
+		&:hover,
+		&:focus,
+		&:active {
+			&:not(:disabled) {
+				background-color: $btn-try-bg-color-hover;
+				color: $btn-try-color-hover;
+			}
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 var(--wp-admin-border-width-focus) currentColor;
+		}
+	}
+}

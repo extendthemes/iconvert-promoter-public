@@ -1,0 +1,34 @@
+.kubio-link-control-container {
+	> .components-base-control__field {
+		display: flex;
+		align-items: flex-end;
+
+		.components-button.kubio-popover-options-icon.is-small.has-icon {
+			margin-left: 10px;
+			margin-top: 0;
+			margin-right: 0;
+			margin-bottom: 0;
+
+			svg {
+				width: 12px;
+				height: 12px;
+			}
+		}
+	}
+
+	> .kubio-popover-options-button__options-button {
+		margin-top: 20px;
+	}
+}
+
+.components-base-control.kubio-link-control-container {
+	margin-bottom: 10px !important;
+
+	.components-base-control__field {
+		margin-bottom: -1px;
+	}
+}
+
+.components-popover__content .kubio-link-control-container {
+	min-width: 300px;
+}

@@ -1,0 +1,15 @@
+{
+    "name": "@kubio/interface-store",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "types": "build-types/index.d.ts",
+    "dependencies": {},
+    "devDependencies": {
+        "@wordpress/data": "10.8.3",
+        "@wordpress/deprecated": "4.12.0",
+        "@wordpress/preferences": "4.12.0"
+    }
+}

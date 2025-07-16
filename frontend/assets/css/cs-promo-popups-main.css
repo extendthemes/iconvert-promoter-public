@@ -1,0 +1,149 @@
+.popup-vertical-align-top {
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
+
+body.admin-bar .wp-block-cspromo-promopopup__outer {
+  top: 32px;
+}
+
+#kubio.cs-promo-popups-template-default .interface-interface-skeleton__body {
+  background-color: unset;
+}
+
+#kubio.cs-promo-popups-template-default :where(.editor-styles-wrapper) {
+  background: unset !important;
+}
+
+#kubio.cs-promo-popups-template-default :where(.wp-block) {
+  max-width: unset !important;
+}
+
+#kubio.cs-promo-popups-template-default div[data-kubio="cspromo/promopopup"] {
+  overflow-y: scroll;
+  max-width: unset;
+}
+
+#kubio.cs-promo-popups-template-default
+  div[data-kubio="cspromo/promopopup"]
+  div[data-kubio="cspromo/column"],
+#kubio.cs-promo-popups-template-default
+  div[data-kubio="cspromo/promopopup"]
+  div[data-kubio="cspromo/row"] {
+  max-width: 100% !important;
+}
+
+/*
+#kubio.cs-promo-popups-template-default .is-root-container:first-child{
+    display: flex;
+    height: 100%;
+}
+*/
+/*align-items-lg-center align-items-md-center align-items-center*/
+#kubio.cs-promo-popups-template-default .cs-popup:first-child,
+#kubio.cs-promo-popups-template-default .entry-content {
+  position: unset;
+  transform: unset;
+  margin: unset;
+  height: 100%;
+}
+
+/*Promo block corections*/
+.wp-block-cspromo-promopopup__outer {
+  display: flex;
+  min-height: 100%;
+  height: auto;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  background-color: unset;
+}
+
+.wp-block-cspromo-promopopup__container {
+  position: relative;
+}
+
+/*Promo corections end*/
+.cs-popup .cs-popup-content div:first-child {
+  overflow: hidden;
+}
+
+#kubio-site-edit-content-holder {
+  flex: 1 1 0%;
+  padding-bottom: 40vh;
+}
+
+#kubio-site-edit-content-holder div.h-section-global-spacing {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+body#kubio.kubio-iframe-holder--show #kubio-site-edit-content-holder {
+  flex: unset;
+  padding-bottom: unset;
+}
+
+.cs-popup-container {
+  visibility: hidden;
+  opacity: 0;
+  /* position: fixed !important; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  height: 100%;
+  z-index: 999999;
+}
+.cs-popup-container.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cs-popup-container-type-floating-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  bottom: auto;
+  height: auto;
+}
+.cs-popup-container-type-floating-bar .wp-block-cspromo-promopopup__outer {
+  display: flex;
+  height: auto;
+  position: relative;
+  width: 100%;
+}
+
+.cs-popup-container-type-inline-promotion-bar.cs-popup-container {
+  position: relative;
+  top: auto;
+}
+.cs-popup-container-type-inline-promotion-bar.cs-popup-container
+  .wp-block-cspromo-promopopup__outer {
+  display: flex;
+  height: auto;
+  position: relative;
+  width: 100%;
+  top: auto;
+}
+
+/*# sourceMappingURL=iconvertpr-popups-main.css.map */
+
+.animate__None {
+  -webkit-animation-name: animationNone;
+  animation-name: animationNone;
+}
+
+@-webkit-keyframes animationNone {
+  0% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}

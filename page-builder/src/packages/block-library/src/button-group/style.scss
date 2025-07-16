@@ -1,0 +1,16 @@
+.wp-block-cspromo-buttongroupextended {
+	display: block;
+	width: 100%;
+
+	.wp-block-cspromo-buttongroupextended__spacing{
+		display: inline-block;
+		width: 100%;
+	}
+
+	// overflow: hidden;
+
+	//	try to fix issue: http://mantis.iconvert.pro/view.php?id=36038 - lowable if something else is broken by those rules
+	// [data-kubio] & {
+	// 	display: inline-block;
+	// }
+}

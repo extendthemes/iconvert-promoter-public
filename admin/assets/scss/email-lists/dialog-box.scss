@@ -1,0 +1,35 @@
+.ic-dialog {
+  .modal-footer {
+    justify-content: flex-start;
+    border-top: 0;
+    padding-top: 0;
+    padding-left: 15px;
+    .button {
+      margin-right: 10px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .modal-body {
+    margin-bottom: 0;
+    padding-bottom: 10px;
+  }
+}
+
+.ic-sync-modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.ic-sync-modal-wrapper .progress {
+  width: 100%;
+  flex-grow: 1;
+  height: 20px;
+  background-color: $primary;
+}

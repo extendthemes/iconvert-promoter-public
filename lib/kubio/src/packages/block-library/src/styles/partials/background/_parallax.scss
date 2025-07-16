@@ -1,0 +1,10 @@
+.paraxify,
+%paraxify {
+	background-attachment: fixed;
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.paraxify--ios.paraxify {
+	background-attachment: scroll;
+}

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns:if="ant:if" basedir="." default="start">
+
+    <!-- MACROS -->
+    <taskdef resource="net/sf/antcontrib/antlib.xml" />
+    <macrodef name="quite_file_replace">
+        <attribute name="file" />
+        <attribute name="token" />
+        <attribute name="value" />
+        <sequential>
+            <if>
+                <available file="@{file}" />
+                <then>
+                    <replace file="@{file}" token="@{token}" value="@{value}" />
+                </then>
+                <else>
+                    <echo>Nothing to replace.File @{file} does not exists</echo>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+
+    <!-- SETTING VARIBALES -->
+    <property description="System environment variables" environment="env" />
+    <property name="source_dir" value="${basedir}" />
+    <property name="build_dir" value="${basedir}/../build" />
+    <property name="zip_dir" value="${basedir}/../zip" />
+    <property name="compose_dir" value="${basedir}/../compose" />
+    <!-- determine plugin version number -->
+    <condition property="version" value="${env.VERSION}" else="${env.VERSION_BASE}">
+        <isset property="env.VERSION" />
+    </condition>
+    <condition property="build_version" value="${version}${env.VERSION_SUFFIX}" else="${version}">
+        <isset property="env.VERSION_SUFFIX" />
+    </condition>
+
+    <!-- ############################################################################# -->
+
+    <!-- SET PLUGIN NAME ( folder and slug ) -->
+
+    <condition property="domain-suffix" value="-pro" else="">
+        <not>
+            <equals arg1="${env.OPTRIX_FREE}" arg2="true" />
+        </not>
+    </condition>
+
+    <property name="plugin_name" value="iconvert-promoter${domain-suffix}" />
+
+    <condition property="is_pro_build" value="true" else="free">
+        <not>
+            <equals arg1="${env.OPTRIX_FREE}" arg2="true" />
+        </not>
+    </condition>
+
+
+    <condition property="plugin_label" value="iConvert Promoter PRO" else="iConvert Promoter">
+        <not>
+            <equals arg1="${env.OPTRIX_FREE}" arg2="true" />
+        </not>
+    </condition>
+
+
+    <condition property="npm_build_script" value="build" else="build-free">
+        <not>
+            <equals arg1="${env.OPTRIX_FREE}" arg2="true" />
+        </not>
+    </condition>
+
+    <target description="Clean Up" name="clean">
+        <echo message="Change new lines to unix style" />
+        <delete quiet="false" failonerror="false" dir="${zip_dir}" />
+        <delete quiet="false" failonerror="false" dir="${compose_dir}" />
+        <!-- <delete quiet="false" failonerror="false" dir="${build_dir}/page-builder/node_modules"
+        /> -->
+
+        <delete quiet="false" failonerror="false">
+            <fileset dir="${build_dir}">
+                <exclude name="**\*node_modules\**" />
+            </fileset>
+        </delete>
+
+        <delete quiet="false" failonerror="false">
+            <fileset dir="${build_dir}\node_modules\.cache" />
+        </delete>
+
+
+        <mkdir dir="${zip_dir}" />
+        <mkdir dir="${compose_dir}" />
+    </target>
+
+    <target description="Prepare archive content" name="prepare_content">
+        <copy todir="${build_dir}">
+            <fileset dir="${source_dir}">
+                <exclude name="**\*.svn" />
+                <exclude name="**\*build.xml" />
+                <exclude name="**\*.sh" />
+                <exclude name=".vscode\**" />
+                <exclude name="**\*wp-cli.phar" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target description="NPM" name="npm">
+        <exec executable="npm" failonerror="true">
+            <arg value="--prefix" />
+            <arg value="${build_dir}" />
+            <arg value="install" />
+        </exec>
+        <exec executable="npm" failonerror="true">
+            <arg value="--prefix" />
+            <arg value="${build_dir}" />
+            <arg value="run" />
+            <arg value="${npm_build_script}" />
+        </exec>
+    </target>
+
+    <target description="Composer" name="composer">
+        <exec executable="php8.2" failonerror="true">
+            <arg value="/usr/local/bin/composer2" />
+            <arg value="install" />
+            <arg value="--no-dev" />
+            <arg value="--verbose" />
+            <arg value="--optimize-autoloader" />
+            <arg value="-d" />
+            <arg value="${build_dir}" />
+        </exec>
+    </target>
+
+    <target description="Set Version" name="set_version">
+        <quite_file_replace file="${build_dir}/iconvert-promo-plugin.php" token="@@buildversion@@"
+            value="${build_version}" />
+        <quite_file_replace file="${build_dir}/iconvert-promo-plugin.php" token="@@buildnumber@@"
+            value="${env.BUILD_NUMBER}" />
+        <quite_file_replace file="${build_dir}/iconvert-promo-plugin.php" token="@@plugin-name@@"
+            value="${plugin_label}" />
+        <quite_file_replace file="${build_dir}/iconvert-promo-plugin.php" token="@@build_type@@"
+            value="${is_pro_build}" />
+
+        <quite_file_replace file="${build_dir}/readme.txt" token="@@buildversion@@"
+            value="${build_version}" />
+    </target>
+
+
+    <target description="Compose Artifact" name="compose_artifact">
+        <copy todir="${compose_dir}/${plugin_name}">
+            <fileset dir="${build_dir}">
+                <exclude name="**\*.svn" />
+                <exclude name="**\*.vscode" />
+                <exclude name=".vscode" />
+                <exclude name="src\**" />
+                <exclude name="lib\kubio\src\**" />
+                <exclude name="page-builder\src\**" />
+                <exclude name="**\*bin\**" />
+                <exclude name="**\*node_modules\**" />
+                <!-- <exclude name="**\*composer.json" /> -->
+                <exclude name="**\*package.json" />
+                <exclude name="**\*package-lock.json" />
+                <exclude name="**\*.env" />
+                <exclude name="**\*.env.kubio" />
+                <exclude name="**\*.env.example" />
+                <exclude name="**\*.env.jenkins" />
+                <exclude name="**\*.nvmrc" />
+                <exclude name="**\*.editorconfig" />
+                <exclude name="**\*.eslintignore" />
+                <exclude name="**\*.eslintrc.js" />
+                <exclude name="**\*.npmrc" />
+                <exclude name="**\*.prettierrc.js" />
+                <exclude name="**\*.prettierignore" />
+                <exclude name="**\*.stylelintrc.json" />
+                <exclude name="**\*babel.config.js" />
+                <exclude name="**\*build.sh" />
+                <exclude name="**\*build.xml" />
+                <exclude name="**\*phpcs.xml" />
+                <exclude name="**\*composer.lock" />
+                <exclude name="**\*jsconfig.json" />
+                <exclude name="**\*lerna.json" />
+                <exclude name="**\*tsconfig.base.json" />
+                <exclude name="**\*tsconfig.json" />
+                <exclude name="**\*webpack.config.js" />
+                <exclude name="**\*wp-cli.phar" />
+                <exclude name="pro\**" if:true="${env.OPTRIX_FREE}" />
+                <exclude name="**\*.sh" />
+                <exclude name="**\*.deepsource.toml" />
+                <exclude name="**\*.php-version" />
+                <exclude name="**\*.node-version" />
+                <!-- ignore all dot files -->
+                <exclude name="**\.*" />
+                 <!-- ignore .git folder -->
+                <exclude name="**\*.svn" />
+                <exclude name="**\*.git" />
+
+                <!-- ignore js / scss source files -->
+                <exclude name="frontend\assets\js\src\**" />
+                <exclude name="frontend\assets\scss\**" />
+
+                <exclude name="admin\assets\js\src\**" />
+                <exclude name="admin\assets\js\scss\**" />
+            </fileset>
+        </copy>
+    </target>
+
+
+    <target description="Fix new line" name="fix">
+        <echo message="Change new lines to unix style" />
+        <fixcrlf srcdir="${compose_dir}" includes="**/*.php **/*.css **/*.js  **/README*" eol="unix"
+            eof="asis" />
+    </target>
+
+
+    <target description="Start Build" name="start">
+
+        <antcall target="clean"></antcall>
+        <antcall target="prepare_content"></antcall>
+        <antcall target="npm"></antcall>
+        <antcall target="composer"></antcall>
+        <antcall target="set_version"></antcall>
+        <antcall target="compose_artifact"></antcall>
+        <antcall target="fix"></antcall>
+
+        <zip destfile="${zip_dir}/${plugin_name}-v${build_version}-build${env.BUILD_NUMBER}.zip">
+            <zipfileset dir="${compose_dir}">
+                <include name="${plugin_name}/**/**" />
+            </zipfileset>
+        </zip>
+    </target>
+
+</project>

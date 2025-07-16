@@ -1,0 +1,375 @@
+$nav-sidebar-width: 300px;
+
+.edit-site-navigation-panel {
+	height: 100%;
+	position: relative;
+	width: 0;
+	overflow: hidden;
+	background: $gray-900;
+	transition: width 100ms linear;
+	@include reduce-motion("transition");
+
+	// Footer is visible from medium so we subtract footer's height
+	@include break-medium() {
+		height: calc(100% - #{$button-size-small + $border-width});
+	}
+
+	.navigation-add-new-entity {
+		.components-navigation__item-badge {
+			svg {
+				width: 20px;
+			}
+		}
+	}
+}
+
+.edit-site-navigation-panel__inner {
+	position: relative;
+	width: $nav-sidebar-width;
+	height: 100%;
+	overflow: hidden;
+	// Inner container is hidden to remove menu from the accessibility tree when not visible.
+	// Setting visibility here (rather than on the parent container) preserves the slide transition.
+	visibility: hidden;
+	// Transition settings should match parent container.
+	transition: visibility 100ms linear;
+	@include reduce-motion("transition");
+}
+
+.edit-site-navigation-panel.is-open {
+	width: $nav-sidebar-width;
+
+	.edit-site-navigation-panel__inner {
+		visibility: visible;
+	}
+}
+
+.edit-site-navigation-panel__site-title-container {
+	height: $header-height;
+	padding-left: $header-height;
+	margin: 0 $grid-unit-20 0 $grid-unit-10;
+	display: flex;
+	align-items: center;
+}
+
+.edit-site-navigation-panel__site-title {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	/* Matches menu items */
+	line-height: 20px;
+	color: $gray-300;
+
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.edit-site-navigation-panel__scroll-container {
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: calc(100% - #{$header-height});
+
+	$track-color: rgba(0, 0, 0, 0.1);
+	$thumb-color: rgb(255 255 255 / 48%);
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $thumb-color;
+	}
+
+	& {
+		scrollbar-width: thin;
+		scrollbar-color: $thumb-color $track-color;
+	}
+
+	.components-navigation__menu-title-search {
+		input[type="search"].components-search-control__input {
+			color: #000000;
+		}
+	}
+}
+
+.edit-site-navigation-panel__back-to-dashboard.components-button.is-tertiary {
+	height: $button-size;
+	margin-top: $grid-unit-30;
+	padding: $grid-unit $grid-unit-20 $grid-unit $grid-unit;
+
+	&:focus:not(:disabled) {
+		border-bottom-color: transparent;
+	}
+}
+
+.edit-site-navigation-panel__preview {
+	display: none;
+	border: $border-width solid $gray-400;
+	width: $nav-sidebar-width;
+	padding: $grid-unit-20;
+	background: $white;
+	box-shadow: $shadow-popover;
+	border-radius: $radius-block-ui;
+	position: absolute;
+	top: $header-height + $grid-unit-15 + 1px; // +1px for the header border
+	left: $nav-sidebar-width + $grid-unit-15;
+	color: $gray-900;
+	z-index: 32;
+
+	@include break-medium {
+		display: block;
+	}
+}
+
+.edit-site-navigation-panel__template-item {
+	display: block;
+
+	.components-button {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		height: auto;
+		min-height: $button-size;
+		text-align: left;
+		padding-left: $grid-unit-20;
+		padding-right: $grid-unit-20;
+		color: inherit;
+	}
+}
+
+.edit-site-navigation-panel__template-item-title {
+	font-size: 14px;
+	line-height: 20px;
+
+	em {
+		margin-right: 1ch;
+	}
+}
+
+.components-navigation__item {
+	&.kubio-navigation-item-active {
+		button {
+			opacity: 1;
+
+			span {
+				color: #ffffff !important;
+			}
+		}
+
+		background-color: var(--wp-admin-theme-color, #00669b);
+		color: rgb(255, 255, 255);
+	}
+
+	button:hover {
+		svg {
+			fill: #fff;
+		}
+	}
+
+	span.components-truncate {
+		white-space: nowrap;
+		display: block;
+	}
+}
+
+.components-navigation__item + .edit-site-navigation-panel__template-item {
+	margin-top: $grid-unit-20;
+}
+
+.edit-site-navigation-panel__template-item
+	+ .edit-site-navigation-panel__template-item {
+	margin-top: $grid-unit-10;
+}
+
+.edit-site-navigation-panel__info-wrapper {
+	padding: $grid-unit-05 0;
+}
+
+.edit-site-navigation-panel__template-item-description {
+	padding-top: $grid-unit-10;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.edit-site-navigation-panel__new-template-dropdown {
+	margin: 0 0 0 $grid-unit-15;
+
+	button {
+		margin: 0;
+	}
+}
+
+.edit-site-navigation-panel__new-template-popover {
+	@include break-small() {
+		min-width: 300px;
+	}
+}
+
+.components-navigation__item-title {
+	max-width: 50ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	margin: 0px auto 0px 0px;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 20px;
+	color: inherit;
+}
+
+.edit-site-navigation-panel__content-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+
+	&.kubio-navigation-item-active {
+		opacity: 1 !important;
+
+		* {
+			color: rgb(221, 221, 221) !important;
+			cursor: default;
+		}
+	}
+
+	.components-button {
+		display: flex;
+		height: auto;
+		min-height: 40px;
+
+		.components-navigation__item-title {
+			max-width: 22ch;
+		}
+	}
+
+	.components-navigation__item-badge {
+		margin-left: 0;
+		margin-right: 0 !important;
+		display: inline-flex;
+		padding: 4px 8px 4px 0;
+		border-radius: 2px;
+		animation: 250ms ease-out 0s 1 normal none running fade-in;
+	}
+
+	.components-dropdown {
+		&.components-dropdown-menu {
+			&.kubio-more-menu {
+				.components-button.components-dropdown-menu__toggle {
+					position: absolute;
+					top: 50%;
+					right: 0;
+					transform: translate(0, -50%);
+					visibility: hidden;
+					&.is-opened {
+						visibility: visible;
+					}
+					svg {
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+
+	&:hover {
+		.components-dropdown {
+			&.components-dropdown-menu {
+				&.kubio-more-menu {
+					.components-button.components-dropdown-menu__toggle {
+						visibility: visible;
+					}
+				}
+			}
+		}
+	}
+}
+
+.edit-site-navigation-panel__template-item {
+	&.kubio-navigation-item-active,
+	&.kubio-navigation-item-active * {
+		opacity: 1 !important;
+
+		* {
+			cursor: default;
+		}
+	}
+}
+
+.edit-site-navigation-panel__scroll-container * {
+	color: rgb(221, 221, 221);
+}
+
+.components-navigation__menu-title-heading {
+	font-size: 1.125em !important;
+}
+
+// Add new Entity
+#add-new-entity-icon {
+	fill: #dddddd;
+	cursor: pointer;
+}
+
+.block-editor-block-new-entity-modal {
+	.components-input-control__backdrop {
+		border-color: #cccccc !important;
+	}
+
+	select {
+		option[disabled] {
+			color: #999;
+			cursor: default;
+			font-size: 75%;
+			line-height: 1.2em;
+		}
+	}
+
+	.add-button {
+		width: 100%;
+		text-align: center;
+		justify-content: center;
+	}
+}
+
+.kubio-new-page-btn {
+	position: relative;
+	width: 72px;
+	height: 32px;
+	margin-right: 12px;
+
+	&.has-icon {
+		padding: 12px;
+	}
+
+	svg {
+		position: absolute;
+		right: 4px;
+		margin: 0 !important;
+	}
+}
+
+.components-navigation__menu-title-heading {
+	span:nth-child(2) {
+		height: auto;
+		flex-direction: row;
+		align-items: center;
+		display: flex;
+	}
+}
+
+.components-navigation__item-badge {
+	margin-right: -12px !important;
+}
+
+.components-popover.edit-site-kubio-more-menu__content {
+	.components-popover__content {
+		margin-top: 9px;
+		margin-right: 0px !important;
+		min-width: 268px;
+	}
+	.components-menu-group {
+		.components-button {
+			svg {
+				width: 18px;
+				height: 18px;
+			}
+		}
+	}
+}

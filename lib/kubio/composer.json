@@ -1,0 +1,11 @@
+{
+	"name": "extendthemes/kubio",
+	"autoload": {
+		"psr-4": {
+			"KPromo\\": "lib/src/"
+		}
+	},
+	"config": {
+		"autoloader-suffix": "KubioPageBuilder"
+	}
+}

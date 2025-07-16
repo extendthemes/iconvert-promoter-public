@@ -1,0 +1,68 @@
+.h-template-lock-controls {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: auto;
+  min-width: 435px;
+
+  .components-button-group {
+	display: flex;
+	width: 100%;
+	flex: 0 0 auto;
+	justify-content: center;
+	$button-margin: 10px;
+	margin-bottom: -$button-margin;
+	flex-wrap: wrap;
+
+	.components-button {
+	  //in case the buttons are one per row
+	  margin-bottom: $button-margin;
+	  justify-content: center;
+	  padding: 10px 15px;
+	  box-shadow: none !important;
+	  width: calc(50% - 5px);
+
+
+	  &.is-secondary {
+		color: #454545 !important;
+		background: white;
+		border-color: #DDDDDD;
+
+		&:hover {
+		  background: #e6e6e6;
+		}
+
+		&:active {
+		  background: #cccccc;
+		}
+	  }
+
+	  &:first-child {
+		margin-right: 10px;
+	  }
+	  &:last-child{
+		border: 1px solid #e6e6e6;
+	  }
+	}
+  }
+
+  &__message {
+	flex: 1 0 0;
+	color: rgb(69, 69, 69);
+	font-size: 13px;
+  }
+
+  > *:not(:last-child) {
+	margin-bottom: 10px;
+  }
+
+
+}
+
+@media (max-width: 767px) {
+	.h-template-lock-controls {
+		min-width: 350px;
+	}
+}
+

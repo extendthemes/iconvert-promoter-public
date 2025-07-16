@@ -1,0 +1,50 @@
+{
+	"title": "Yes/No - Content",
+	"name": "cspromo/yes-no-inner",
+	"category": "kubio-basic",
+	"attributes": {
+		"kubio": {
+			"type": "object"
+		},
+
+		"action": {
+			"type": "string",
+			"default": "yes"
+		}
+	},
+	"parent": [ "cspromo/yes-no" ],
+	"supports": {
+		"html": false,
+		"inserter": false,
+		"kubio": {
+			"elementsEnum": {
+				"CONTAINER": "container",
+				"VSPACE": "v-space"
+			},
+			"elementsByName": {
+				"container": {
+					"wrapper": true,
+					"default": true,
+					"props": {
+						"tag": "div",
+						"className": "h-y-container"
+					}
+				},
+				"v-space": {
+					"selector": "> .position-relative:not(:last-child)"
+				}
+			},
+			"template": {
+				"type": "element",
+				"props": {
+					"name": "container"
+				},
+				"children": [
+					{
+						"type": "wp:InnerBlocks"
+					}
+				]
+			}
+		}
+	}
+}

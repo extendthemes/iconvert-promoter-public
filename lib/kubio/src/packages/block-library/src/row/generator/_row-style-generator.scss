@@ -1,0 +1,13 @@
+@mixin rowStyleGenerator($component) {
+	@include component($component) {
+		flex-basis: 100%;
+		position: relative;
+
+		&.wp-block {
+			@include when-inside-kubio-block() {
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+	}
+}

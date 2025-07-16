@@ -1,0 +1,14 @@
+{
+    "name": "@kubio/admin-panel",
+    "version": "1.0.0",
+    "author": "Extend Themes",
+    "license": "GPL-3.0-or-later",
+    "main": "build/index.js",
+    "module": "build-module/index.js",
+    "dependencies": {
+        "@kubio/log": "file:../log"
+    },
+    "devDependencies": {
+        "lodash": "4.17.21"
+    }
+}

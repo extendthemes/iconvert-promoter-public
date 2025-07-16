@@ -1,0 +1,13 @@
+[data-kubio-aos] {
+	visibility: hidden !important;
+	opacity: 0 !important;
+}
+
+[data-kubio-aos].animated {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+.kubio-aos-hide-animation {
+	animation-name: unset !important;
+}

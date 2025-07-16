@@ -1,0 +1,100 @@
+.ic-integrations-page {
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+
+  .ic-integrations-header {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .ic-integrations-content {
+    padding: 30px;
+    background-color: rgba(246, 247, 247, 1);
+  }
+
+  .ic-integrations-page-title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .ic-integrations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .ic-integration-provider-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(246, 247, 247, 1);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .iconvert-provider-actions {
+    padding-top: 28px;
+
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .input-group input {
+    background: #ffffff;
+  }
+
+  .accordion {
+    .accordion-head {
+      user-select: none;
+
+      background-color: rgb(255 255 255);
+      transition: background-color 0.2s ease-in-out;
+      cursor: pointer;
+      border-radius: 4px;
+      padding: 4px;
+
+      .dashicons-before {
+        transform: rotateX(180deg);
+        transform-origin: center;
+      }
+
+      &.collapsed .dashicons-before {
+        transform: rotate(0deg);
+      }
+
+      .group-name {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(30, 30, 30, 1);
+        gap: 10px;
+      }
+
+      .arrow-down-icon {
+        line-height: 16px;
+        align-items: center;
+        padding-right: 12px;
+      }
+    }
+
+    .wrapper-trigger-description {
+      .small {
+        font-size: 12px;
+      }
+    }
+  }
+
+  button.hidden {
+    display: none !important;
+  }
+
+  input[disabled],
+  button[disabled] {
+    pointer-events: none;
+  }
+}

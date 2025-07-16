@@ -1,0 +1,193 @@
+.icon-preview {
+	margin-bottom: 10px;
+	.icon-preview-header {
+		color: #5b5959;
+		font-size: 13px;
+		font-weight: 500;
+
+		&.title {
+			margin-bottom: 10px;
+		}
+	}
+
+	.kubio-preview-box-control__container {
+		height: 86px;
+
+		.icon-picker__icon-preview {
+			width: 54px;
+			height: 60px;
+		}
+
+		svg {
+			max-height: 60px;
+			fill: #007cba;
+		}
+	}
+}
+
+.components-popover.icon-picker .components-popover__content {
+	margin-left: -51px !important;
+	padding: 0;
+	width: auto;
+
+	.title-container {
+		height: 40px;
+		width: 100%;
+		background-color: #008ec2;
+		display: flex;
+		align-items: center;
+		padding-left: 20px;
+		padding-right: 10px;
+
+		.title-label {
+			height: 12px;
+			font-size: 12px;
+			text-transform: uppercase;
+			font-weight: 600;
+			color: white;
+		}
+	}
+}
+
+.icons-filters {
+	display: inline-table;
+	width: 100%;
+
+	> div {
+		display: table-cell;
+
+		&.search-filter {
+			width: 70%;
+		}
+	}
+}
+
+.search-filter {
+	.block-editor-kubio-inserter__search-input {
+		height: 30px !important;
+		width: 100%;
+	}
+}
+
+#icons-list {
+	.icons-packages-header {
+		height: 40px;
+		background-color: #fff;
+		padding: 12px;
+		display: inline-block;
+		font-size: 14px;
+		font-weight: 500;
+		color: #008ec2;
+	}
+
+	.icon-container.is-selected {
+		background-color: rgba(0, 124, 186, 0.1);
+		border: 1px solid $ui-menu-active;
+		color: $ui-menu-active;
+		z-index: 5;
+		svg {
+			fill: $ui-menu-active;
+		}
+	}
+
+	.svg-icon {
+		//margin: 10px 19px 7px 22px;
+		//margin: auto;
+		fill: $ui-menu-item;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		a {
+			&:focus {
+				box-shadow: unset;
+			}
+		}
+		svg {
+			margin: 10px 19px 7px 22px;
+			width: 32px;
+			height: 32px;
+		}
+
+		p {
+			margin: 0;
+			color: #b5bcc2;
+			text-transform: capitalize;
+		}
+	}
+}
+
+.icon-container {
+	background-color: #f0f0f0;
+	border: 1px solid #dddddd;
+	display: flex;
+	&:hover {
+		background-color: #ffffff;
+	}
+}
+
+.iconsWrapper {
+	scrollbar-width: thin;
+	display: flex;
+
+	.icon-filter-list-container {
+		flex: 75%;
+
+		.block-editor-inserter__search {
+			padding: 16px;
+			position: relative;
+		}
+
+		.block-editor-inserter__search-icon {
+			display: flex;
+			align-items: center;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 20px;
+
+			svg {
+				margin: 8px;
+			}
+		}
+	}
+
+	.package-filter {
+		flex: 25%;
+		border-left: solid 1px #dddddd;
+		h3 {
+			text-transform: uppercase;
+			margin: 15px 37px 15px 15px;
+			font-size: 14px;
+			font-weight: 500;
+			white-space: nowrap;
+		}
+		.package-filter-name {
+			&.is-selected {
+				background-color: rgba(0, 124, 186, 0.1);
+				border: 1px solid $ui-menu-active;
+				z-index: 5;
+			}
+			padding: 5px;
+			margin: 2.5px 10px;
+			font-size: 12px;
+			cursor: pointer;
+			&:hover {
+				background-color: #f0f0f0;
+			}
+
+			.kubio-pro-item__badge {
+				display: inline-block;
+				position: relative;
+				padding: 1px;
+				margin-left: 2px;
+				font-size: 10px;
+				float: right;
+			}
+		}
+	}
+}
+
+.fontpack-modal-popover {
+	display: none;
+}

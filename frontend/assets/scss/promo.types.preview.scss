@@ -1,0 +1,48 @@
+.cs-popup-container-preview {
+    &.cs-popup-container-type-lightbox-popup {
+        right: 0;
+        background-color: rgba(#000000, 0.5);
+    }
+    &.cs-fb-position-above-content {
+        position: absolute !important;
+        bottom: auto;
+        overflow: hidden;
+
+        .lcs-popup-content {
+            height: auto;
+
+            .cs-popup {
+                position: relative !important;
+            }
+        }
+    }
+
+    .align-items-center {
+        align-items: center !important;
+    }
+
+    .align-items-end {
+        align-items: flex-end !important;
+    }
+
+    .align-items-start {
+        align-items: flex-start !important;
+    }
+
+    .justify-content-center {
+        justify-content: center !important;
+    }
+
+    .justify-content-start {
+        justify-content: flex-start !important;
+    }
+
+    .justify-content-end {
+        justify-content: flex-end !important;
+    }
+    
+    img {
+        height: 100%;
+        max-height: 60vh;
+    }
+}

@@ -1,0 +1,15 @@
+// .kubio-wp-6-1 {
+	.kubio-url-control__popover:not(.kubio-url-control__popover--v2) {
+		.components-popover__content {
+			margin-top: 4px;
+		}
+	}
+
+	.kubio-url-control__popover--v2 {
+		transform: translateX(calc(50% - 12px)) !important;
+
+		.components-popover__content {
+			margin-top: 4px;
+		}
+	}
+// }

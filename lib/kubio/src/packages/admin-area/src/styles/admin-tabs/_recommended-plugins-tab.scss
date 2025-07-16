@@ -1,0 +1,44 @@
+.recommended-plugins {
+  justify-content: center;
+  gap: 20px 30px;
+  overflow: hidden;
+
+  .plugin-card {
+	max-width: 485px;
+	min-width: 250px;
+	padding: 30px;
+	row-gap: 20px;
+
+	.card-image {
+	  width: 73px;
+	  height: 73px;
+	  margin-right: 20px;
+	  overflow: hidden;
+
+	  img {
+		width: 73px;
+		height: 73px;
+	  }
+	}
+
+	.title {
+	  font-weight: 600;
+	  font-size: 18px;
+	  line-height: 24px;
+	}
+
+	.install-plugin-button {
+	  width: max-content;
+	  margin: 0;
+	  padding: 10px 20px;
+	  border-radius: 4px;
+	  font-weight: 600;
+	  font-size: 14px;
+	  line-height: 17px;
+	}
+
+	.card-text {
+	  font-size: 14px;
+	}
+  }
+}

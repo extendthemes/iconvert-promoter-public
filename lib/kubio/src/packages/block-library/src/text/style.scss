@@ -1,0 +1,15 @@
+// this should not be hardcoded
+// .h-lead {
+// 	font-family: 'Open Sans';
+// 	font-weight: 300;
+// 	font-size: 1.25em;
+// 	line-height: 1.5;
+// 	text-transform: none;
+// 	color: rgb(37, 41, 42);
+// }
+
+@include component(text) {
+	a {
+		text-decoration: underline;
+	}
+}

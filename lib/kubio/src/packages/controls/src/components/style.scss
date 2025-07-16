@@ -1,0 +1,446 @@
+@import "./trbl-values-control/style";
+@import "./sortable-collapse/style";
+@import "./gradient-control-with-presets/style";
+@import "./sortable-accordion/style";
+@import "./mixins";
+@import "./color/style";
+@import "./font-picker/style";
+@import "./canvas-icon/style";
+@import "./layout-picker/style";
+@import "./icon-picker/style";
+@import "./tab-panel/style";
+@import "./range-with-unit/style";
+@import "./url-input/style";
+@import "./focal-point-media-picker/style";
+@import "./inline-labeled-control/style";
+@import "./input-control/style";
+@import "./media-picker/style";
+@import "./sortable-tree/style";
+@import "./link-control/style";
+@import "./toggle-group/style";
+@import "./box-control/style";
+@import "./border-control/style";
+@import "./custom-gradient-picker/style";
+@import "./circular-option-picker/style";
+@import "./select-with-icon-control/style";
+@import "./toggle-control/style";
+@import "./template-controls/style";
+@import "./preview-box-control/style";
+@import "./menu-item-options/style";
+@import "./placeholders/style";
+@import "./react-easy-crop/style";
+@import "./select-control/style";
+@import "./dropdown-with-hover/style";
+@import "./tinymce-control/style";
+@import "./codemirror-control/style";
+@import "./canvas-resize-control/style";
+@import "./pro-checkbox-control/style";
+@import "./pro-radio-control/style";
+@import "./modal-tooltip/style";
+@import "./suggestions-input/style.scss";
+@import "./unit-control/style";
+@import "./alert/style";
+@import "./kubio-popup/style.scss";
+
+.c-components-units-list {
+	float: right;
+	text-transform: uppercase;
+	font-size: 11px;
+	cursor: pointer;
+	padding-bottom: 0;
+
+	.c-components-units-list__item {
+		margin-left: 5px;
+		color: $ui-medium-gray;
+
+		&.is-selected {
+			font-weight: 500;
+			text-decoration: underline;
+			color: $ui-menu-active;
+		}
+
+		&:hover {
+			color: $ui-menu-active;
+		}
+	}
+}
+
+.kubio-row-controls {
+	.components-base-control {
+		margin-bottom: 0 !important;
+	}
+}
+
+.kubio-inlined-label-control {
+	display: flex;
+	align-items: center;
+
+	.kubio-inlined-label-control__label {
+		flex-grow: 1;
+		padding-right: 8px;
+	}
+
+	.kubio-inlined-label-control__control {
+		flex-grow: 0;
+	}
+
+	.components-base-control,
+	.components-base-control__field {
+		margin-bottom: 0 !important;
+	}
+}
+
+.kubio-media-picker-container {
+	//@include transparent-bg-grid;
+	position: relative;
+	padding-top: 56.25%;
+	//background: #ffffff;
+	border: 1px solid #cccccc;
+	cursor: auto;
+
+	> * {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		max-height: 100%;
+		max-width: 100%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+.kubio-button-100 {
+	width: 100%;
+	text-align: center;
+	justify-content: center;
+}
+
+.kubio-popover-options-button {
+	.kubio-popover-options-button__options-wrapper,
+	.kubio-popover-options-button__button-wrapper {
+		display: flex;
+		align-items: center;
+	}
+
+	.kubio-popover-options-button__options-item,
+	.kubio-popover-options-button__toggle {
+		margin-right: 10px;
+	}
+
+	.kubio-popover-options-button__options-item:last-of-type {
+		margin-right: 0;
+	}
+
+	.kubio-inlined-label-control__control {
+		.kubio-popover-options-button__options-wrapper {
+			justify-content: flex-end;
+		}
+	}
+}
+
+.kubio-box-shadow-label {
+	.kubio-inlined-label-control__control {
+		justify-content: flex-end;
+	}
+}
+
+.kubio-inlined-label-control,
+.kubio-popover-options-button-canvas {
+	.kubio-inlined-label-control__control {
+		text-align: right;
+	}
+}
+
+.kubio-inlined-label-control__control {
+	.kubio-color-popover-wrapper {
+		float: right;
+	}
+}
+
+.kubio-separator-line {
+	background: rgb(228, 231, 237);
+
+	height: 1px;
+	margin-left: -16px;
+	margin-right: -16px;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	width: calc(100% + 28px);
+
+	&.fit {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		width: 100% !important;
+	}
+}
+
+.kubio-options-popover {
+	.components-popover__content {
+		padding: 10px;
+		min-width: 200px;
+		overflow-x: hidden !important;
+
+		.kubio-separator-line {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+
+		.components-range-control__wrapper {
+			padding-left: 0;
+			margin-left: 0;
+		}
+	}
+
+	.kubio-options-popover-components-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		> * {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		.kubio-toggle-control {
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+	}
+}
+
+#kubio-editor {
+	$components-popover-z-index: 10000000;
+
+	.block-editor-block-lock-modal {
+		z-index: $components-popover-z-index + 1;
+	}
+
+	.reusable-blocks-menu-items__convert-modal {
+		z-index: $components-popover-z-index + 1;
+	}
+
+	.components-popover {
+		z-index: $components-popover-z-index;
+
+		> .components-popover__content {
+			overflow: hidden;
+		}
+	}
+}
+.components-color-picker__inputs-fields .components-text-control__input {
+	min-width: 38px;
+	appearance: none;
+}
+
+.components-text-control__input::-webkit-outer-spin-button,
+.components-text-control__input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.components-text-control__input {
+	-moz-appearance: textfield;
+}
+
+.kubio-inlined-label-control {
+	.components-base-control__label {
+		margin-bottom: 0;
+	}
+}
+
+.kubio-streched-radio-group:not(.extra-1) {
+	border: 1px solid $interface-colors-light-gray-border;
+	padding: 2px;
+	width: 100%;
+	height: 30px;
+	border-radius: 2px;
+	margin-top: 10px;
+
+	.components-button {
+		height: 24px;
+
+		justify-content: center;
+		border-radius: 2px;
+		box-shadow: none !important;
+		color: $ui-medium-gray;
+		padding-left: 4px;
+		padding-right: 4px;
+
+		&:first-child {
+			border-radius: 2px;
+		}
+
+		&.is-secondary {
+			&:active:not(:disabled) {
+				background: none;
+			}
+
+			&.radio-disabled:hover > svg {
+				fill: #cccccc;
+			}
+		}
+
+		&.is-primary {
+			color: white;
+
+			&:hover {
+				border: unset;
+				color: white !important;
+				background-color: $theme-controls-primary-color;
+				box-shadow: none !important;
+			}
+		}
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+
+		&:hover {
+			color: #454545 !important;
+			box-shadow: 0 0 0 1px inset $ui-menu-item-light !important;
+			//box-shadow: unset !important;
+		}
+
+		&:last-child {
+			border-radius: 2px;
+		}
+	}
+}
+
+// @TODO: Vlad - move this inside the color control
+.components-button.kubio-popover-options-icon.is-small.has-icon:not(.extra-1) {
+	border: 1px solid $ui-menu-item-light;
+	min-width: 30px;
+	height: 30px;
+	padding: 7px;
+	bottom: 58px;
+	//margin: 0;
+
+	&:hover {
+		border: 1px solid $ui-menu-active;
+		background-color: rgba(0, 122, 184, 0.1);
+	}
+
+	&.disabled-icon {
+		color: #cccccc;
+		opacity: 1;
+		border: 1px solid #cccccc;
+
+		&:hover {
+			background-color: #ffffff;
+			color: #cccccc;
+			border: 1px solid #cccccc;
+		}
+	}
+}
+
+.components-select-control__input,
+.components-input-control__input {
+	color: #454545 !important;
+	line-height: inherit !important;
+}
+
+.kubio-sortable-accordion .accordion__panel {
+	> .components-flex.components-input-control {
+		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	> .icon-preview {
+		margin-bottom: 0;
+	}
+}
+
+.components-textarea-control__input {
+	border-color: #cccccc !important;
+}
+
+.interface-complementary-area {
+	&.edit-post-sidebar {
+		.kubio-inspector {
+			.components-base-control {
+				margin-bottom: 10px;
+
+				&:last-of-type {
+					margin-top: auto;
+				}
+			}
+
+			.editor-post-taxonomies__hierarchical-terms-input {
+				margin-bottom: 12px;
+			}
+
+			form .components-select-control .components-input-control__label {
+				padding-bottom: 8px;
+			}
+		}
+	}
+}
+
+.components-notice {
+	margin-top: 10px;
+	padding: 5px 12px;
+	border-left-width: 2px;
+	border-color: rgb(204, 24, 24);
+
+	.components-notice__content {
+		margin: 0;
+		font-weight: 500;
+	}
+
+	&.is-error {
+		margin-left: 0;
+		margin-right: 0;
+		// background-color: rgba(204, 24, 24, 0.1);
+	}
+}
+
+.kubio-border-control,
+.kubio-range-with-unit,
+.kubio-box-control-unlinked,
+.kubio-spacing-box-container,
+.kubio-input-control-container {
+	.components-input-control__backdrop {
+		border-color: #ccc !important;
+	}
+
+	.components-input-control {
+		gap: 0;
+	}
+}
+
+.kubio-is-default-editor .components-base-control {
+	&:not(.kubio-url-control-container) {
+		margin-bottom: 10px;
+	}
+
+	&:last-child {
+		margin-bottom: 0px;
+	}
+}
+
+.kubio-inspector,
+.block-editor-block-inspector {
+	.components-panel__body {
+		&.is-opened {
+			.components-panel__body-title {
+				margin-bottom: 10px;
+			}
+		}
+
+		> .components-base-control {
+			margin-bottom: 10px;
+
+			&:last-child {
+				margin-bottom: 0px;
+			}
+
+			// .components-base-control,
+			// .kubio-control {
+			// 	margin-bottom: unset;
+			// }
+		}
+	}
+}

@@ -1,0 +1,12 @@
+@mixin cspromo_wrap_animation($name) {
+  @-webkit-keyframes cspromo_#{$name} {
+    @content;
+  }
+
+  @keyframes cspromo_#{$name} {
+    @content;
+  }
+}
+
+@import "./animations/slide-out";
+@import "./animations/slide-in";

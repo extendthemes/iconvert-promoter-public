@@ -1,0 +1,187 @@
+{
+  "definitions": {
+	"separators": {
+	  "properties": {
+		"top": {},
+		"bottom": {}
+	  }
+	},
+	"separator": {
+	  "type": "object",
+	  "properties": {
+		"enabled": {},
+		"color": {},
+		"position": {},
+		"height": {},
+		"negative": {},
+		"overlap": {},
+		"type": {}
+	  },
+	  "default": {
+		"enabled": false,
+		"color": "white",
+		"position": "top",
+		"height": {
+		  "value": 100,
+		  "unit": "px"
+		},
+		"negative": true,
+		"overlap": true,
+		"type": "tilt"
+	  }
+	}
+  },
+  "enums": {
+	"separators": {
+	  "brush-strokes": {
+		"hasNegative": false,
+		"defaultSize": 121
+	  },
+	  "corner-left": {
+		"hasNegative": false,
+		"defaultSize": 300,
+		"offset": "-1px"
+	  },
+	  "corner-right": {
+		"hasNegative": false,
+		"defaultSize": 300,
+		"offset": "-1px"
+	  },
+	  "cute-waves": {
+		"hasNegative": false,
+		"defaultSize": 150
+	  },
+	  "laced": {
+		"hasNegative": false,
+		"defaultSize": 170
+	  },
+	  "round": {
+		"hasNegative": false,
+		"defaultSize": 160
+	  },
+	  "small-waves": {
+		"hasNegative": false,
+		"offset": "-1px",
+		"defaultSize": 110
+	  },
+	  "techno": {
+		"hasNegative": false,
+		"defaultSize": 110
+	  },
+	  "torn-paper": {
+		"hasNegative": false,
+		"defaultSize": 170
+	  },
+	  "vintage": {
+		"hasNegative": false,
+		"defaultSize": 150
+	  },
+	  "watercolor": {
+		"hasNegative": false,
+		"defaultSize": 121
+	  },
+	  "zig-zag1": {
+		"hasNegative": false,
+		"defaultSize": 170
+	  },
+	  "tilt": {
+		"hasNegative": false,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "tilt-flipped": {
+		"hasNegative": false,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "triangle": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "triangle-asymmetrical": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "opacity-fan": {
+		"hasNegative": false,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "opacity-tilt": {
+		"hasNegative": false,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "mountains": {
+		"label": "Mountains",
+		"hasNegative": false,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "pyramids": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "waves": {
+		"label": "Waves",
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "wave-brush": {
+		"hasNegative": false,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "waves-pattern": {
+		"hasNegative": false,
+		"offset": "0px",
+		"defaultSize": 170
+	  },
+	  "clouds": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 170
+	  },
+	  "curve": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "curve-asymmetrical": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "drops": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 170
+	  },
+	  "arrow": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "book": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "split": {
+		"hasNegative": true,
+		"offset": "0px",
+		"defaultSize": 100
+	  },
+	  "zigzag": {
+		"label": "Toothed",
+		"hasNegative": false,
+		"offset": "0px",
+		"defaultSize": 170
+	  }
+	}
+  }
+}

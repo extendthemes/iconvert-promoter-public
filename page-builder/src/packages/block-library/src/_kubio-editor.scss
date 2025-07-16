@@ -1,0 +1,22 @@
+@import "~@kubio/block-library/src/styles/editor";
+@import "~@kubio/block-library/src/common/editor";
+@import "~@kubio/block-library/src/column/editor";
+@import "~@kubio/block-library/src/icon/editor";
+@import "~@kubio/block-library/src/icon-list/editor";
+@import "~@kubio/block-library/src/text/editor";
+@import "~@kubio/block-library/src/heading/editor";
+@import "~@kubio/block-library/src/image/editor";
+@import "~@kubio/block-library/src/video/editor";
+@import "~@kubio/block-library/src/spacer/editor";
+@import "~@kubio/block-library/src/divider/editor";
+@import "~@kubio/block-library/src/social-icons/editor";
+
+.scrollbar-container.kubio-divider-list .h-separator {
+	display: flex;
+}
+// reset the control labels because woocommerce messed up
+.kubio-control .components-base-control__label {
+	text-transform: none;
+	font-size: inherit;
+	font-weight: normal;
+}

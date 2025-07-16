@@ -1,0 +1,37 @@
+.kubio-reorder-controls-toolbar {
+
+  .kubio-toolbar-reorder-controls {
+	border-right: 1px solid #1e1e1e;
+  }
+
+  //for when the toolbar si on top. All the other separators are this color
+  &.is-fixed {
+	.kubio-toolbar-reorder-controls {
+	  border-right: 1px solid #e0e0e0;
+	}
+  }
+  //desktop
+
+}
+
+.kubio-reorder-controls-toolbar {
+  &.kubio-on--mobile,
+  &.kubio-on--tablet {
+	.block-editor-block-toolbar__block-controls {
+	  border-right: none !important
+	}
+
+	.block-editor-block-mover__move-button-container {
+	  display: none !important;
+	}
+
+	.kubio-toolbar-reorder-controls {
+
+	  .block-editor-block-mover__move-button-container {
+		display: flex !important;
+	  }
+	}
+  }
+}
+
+

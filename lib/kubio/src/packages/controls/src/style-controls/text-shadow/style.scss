@@ -1,0 +1,30 @@
+@import 'text-shadow-presets/style';
+@import 'text-shadow-custom/style';
+@import 'text-shadow-popup/style';
+
+.kubio-box-shadow-popover {
+	padding: 15px;
+	//width: 600px;
+	.components-tab-panel__tab-content {
+		width: 400px;
+		//height: 475px;
+		max-height: 475px;
+	}
+}
+
+//.fa-icon-text-shadow {
+//	padding: 1px;
+//	margin: 5px;
+//	font-size: 16px;
+//	cursor: pointer;
+//
+//	&:hover {
+//		cursor: pointer;
+//		color: $theme-controls-primary-color;
+//	}
+//}
+
+.text-shadow-control {
+	display: flex;
+	justify-content: space-between;
+}

@@ -1,0 +1,23 @@
+.components-select-control.kubio-select-control-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+
+	.components-flex__item {
+		flex-grow: 1;
+		flex-basis: 0;
+	}
+}
+
+.components-select-control {
+	> .components-input-control__container {
+		components-select-control__input.css-7wrw87-Select.e12x0a390 {
+			color: $ui-medium-gray;
+			font-size: 12px;
+		}
+		.components-input-control__backdrop {
+			border-color: $interface-colors-light-gray-border !important;
+		}
+	}
+}

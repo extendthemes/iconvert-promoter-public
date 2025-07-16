@@ -1,0 +1,131 @@
+@mixin banner-size($banner-height) {
+	height: $banner-height;
+	line-height: $banner-height;
+}
+
+@mixin banner-size--small() {
+	padding: 0 7px;
+	font-size: 9px;
+	@include banner-size(16px);
+}
+
+@mixin banner-size--big() {
+	padding: 0 9px;
+	font-size: 11px;
+	@include banner-size(20px);
+}
+
+@mixin banner-position--top-right() {
+	top: 5px;
+	right: 5px;
+}
+
+@mixin banner-position--center-right() {
+	top: 50%;
+	transform: translateY(-50%);
+	right: 5px;
+}
+
+@mixin banner-base-style() {
+	position: absolute;
+	background-color: #d0021b;
+	color: white;
+	border-radius: 3px;
+}
+
+.kubio-pro-item {
+	position: relative;
+
+	.kubio-pro-item__badge {
+		@include banner-base-style();
+	}
+
+	////select-with-icon component(hero/nav)\
+	&.block-editor-block-types-list__item,
+	&.block-editor-block-patterns-list__item,
+	&.h-select-with-icon__item,
+	&.kubio-color-scheme-base-control,
+	&.kubio-navigation-new-page__modal__card,
+	&.category-item {
+		.kubio-pro-item__badge {
+			@include banner-size--big();
+			@include banner-position--top-right();
+		}
+	}
+	&.kubio-pro-item--small,
+	&.components-button,
+	&.kubio-checkbox-wrapper,
+	&.kubio-radio-control-wrapper,
+	&.h-select-control__item {
+		.kubio-pro-item__badge {
+			@include banner-size--small();
+			@include banner-position--top-right();
+		}
+	}
+
+	&.right {
+		.kubio-pro-item__badge {
+			@include banner-size--big();
+			@include banner-position--top-right();
+		}
+	}
+
+	&.kubio-gradient-data-container {
+		.kubio-pro-item__badge {
+			@include banner-size--small();
+			@include banner-position--top-right();
+		}
+	}
+}
+
+//Select component
+.kubio-streched-radio-group {
+	.kubio-pro-item {
+		.kubio-pro-item__badge {
+			@include banner-size--small();
+			@include banner-position--center-right();
+		}
+	}
+}
+
+.kubio-background-type-container {
+	position: relative;
+	z-index: 1;
+	
+	.kubio-pro-item .kubio-pro-item__badge {
+		margin-top: -10px;
+		margin-right: -10px;
+		z-index: 999;
+	}
+}
+
+.kubio-upgrade-to-pro-popup {
+	z-index: 10000002;
+
+	&.sidebar-popover-container {
+		.components-popover__content {
+			overflow: visible;
+			border: none;
+			padding: 15px;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			text-align: center;
+			box-shadow: 0 0 0 1px rgb(0 0 0 / 30%);
+			min-width: 250px;
+		}
+
+		.kubio-feature-upgrade-to-pro {
+			margin: 0;
+			border: none;
+			padding: 0;
+		}
+	}
+
+
+	&.kubio-pro-popover-large {
+		.upgrade-to-pro__content {
+			min-width: 400px;
+		}
+	}
+}

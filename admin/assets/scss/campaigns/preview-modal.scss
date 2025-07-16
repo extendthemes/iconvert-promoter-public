@@ -1,0 +1,48 @@
+.ic-dialog-preview {
+  &.modal {
+    z-index: 999999;
+    .modal-dialog {
+      width: 100%;
+      max-width: 90%;
+
+      .modal-body {
+        height: 80vh;
+        background: #c1c1c1;
+        padding: 0;
+
+        .bootbox-body {
+          height: 100%;
+          max-width: 100%;
+          overflow: hidden;
+
+          iframe {
+            background-color: #fff;
+          }
+
+          .icp-preview-loader {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f6f7f7;
+            position: absolute;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+
+            .spinner-border {
+              opacity: 0.5;
+              $spinner-width: 60px;
+              position: absolute;
+              top: calc(50% - #{calc($spinner-width / 2)});
+              left: calc(50% - #{calc($spinner-width / 2)});
+              width: #{$spinner-width};
+              height: #{$spinner-width};
+            }
+          }
+        }
+      }
+    }
+  }
+}

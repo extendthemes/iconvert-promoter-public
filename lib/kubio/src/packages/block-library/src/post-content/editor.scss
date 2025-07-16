@@ -1,0 +1,25 @@
+.wp-block.entry-content {
+	max-width: unset;
+}
+
+.kubio-post-content-rendered-placeholder {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	cursor: no-drop;
+}
+
+.block-editor-block-list__layout.is-root-container {
+	> [data-kubio]:not(.wp-block-kubio-section):not(.wp-block-kubio-header):not(.wp-block-kubio-footer):not(.wp-block-kubio-query-layout) {
+		margin: 0 auto 1.75em;
+	}
+}
+
+.editor-styles-wrapper  {
+	[data-type='core/post-content'] > .block-list-appender.wp-block {
+		display: none;
+	}
+}

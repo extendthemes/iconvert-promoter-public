@@ -1,0 +1,52 @@
+.wp-block-cspromo-yes-no {
+	.wp-block-cspromo-yes-no__views-container {
+		display: none;
+	}
+
+	&[data-current-action="yes"] {
+		.wp-block-cspromo-yes-no__buttons-container {
+			display: none;
+		}
+
+		.wp-block-cspromo-yes-no__views-container {
+			display: block;
+		}
+
+		[data-action-content="yes"] {
+			display: block;
+		}
+
+		[data-action-content="no"] {
+			display: none;
+		}
+	}
+
+	&[data-current-action="no"] {
+		.wp-block-cspromo-yes-no__buttons-container {
+			display: none;
+		}
+
+		.wp-block-cspromo-yes-no__views-container {
+			display: block;
+		}
+
+		[data-action-content="no"] {
+			display: block;
+		}
+
+		[data-action-content="yes"] {
+			display: none;
+		}
+	}
+
+	.wp-block-cspromo-yes-no__buttons-container {
+		display: flex;
+		align-items: center;
+	}
+
+	.cspromo-yes-no-button {
+		display: inline-flex;
+		align-items: center;
+		cursor: pointer;
+	}
+}

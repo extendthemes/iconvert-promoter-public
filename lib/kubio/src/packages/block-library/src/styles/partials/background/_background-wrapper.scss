@@ -1,0 +1,45 @@
+.background-wrapper {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
+	overflow: hidden;
+	border-radius: inherit;
+	/* prevent iframe issues on drag*/
+	pointer-events: none;
+	margin: 0 !important;
+}
+
+.background-layer {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -10;
+	overflow: hidden;
+}
+
+.overlay-layer,
+.shape-layer,
+.overlay-image-layer {
+	position: absolute;
+	top: -1px;
+	bottom: -1px;
+	left: 0;
+	right: 0;
+}
+
+.overlay-layer {
+	z-index: 1;
+}
+
+.shape-layer {
+	z-index: 2;
+}
+
+.overlay-image-layer {
+	z-index: 1;
+}

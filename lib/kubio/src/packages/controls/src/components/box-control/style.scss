@@ -1,0 +1,45 @@
+.components-flex__block {
+	.components-base-control__field {
+		margin-bottom: 0;
+	}
+}
+
+.kubio-border-control-button {
+	padding: 7px !important;
+}
+
+.kubio-box-control-unlinked-container {
+	margin-bottom: 10px;
+}
+
+.component-box-control__input-controls-wrapper.kubio-box-control-unlinked {
+	padding-top: 0;
+	margin-right: 0;
+
+	> .component-box-control__input-controls > *:not(:first-child) {
+		margin-left: -1px;
+	}
+
+	.components-unit-control__select {
+		background-color: #f0f0f0 !important;
+	}
+}
+
+.kubio-spacing-box-container {
+	.components-unit-control__select {
+		background-color: #f0f0f0 !important;
+	}
+}
+
+.kubio-border-radius-icon-container {
+	svg {
+		width: 18px;
+		position: absolute;
+		bottom: -2px;
+		fill: $interface-colors-light-gray-border;
+	}
+}
+
+.kubio-border-radius-selected {
+	fill: $theme-controls-primary-color !important;
+}

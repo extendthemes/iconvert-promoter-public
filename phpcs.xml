@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards for Gutenberg Plugin">
+	<description>
+		Sniffs for WordPress plugins, with minor modifications for Gutenberg
+	</description>
+
+	<arg value="ps" />
+	<arg name="extensions" value="php" />
+	<file>./lib</file>
+	<file>./page-builder</file>
+	<file>./Core/</file>
+	<file>./admin</file>
+	<!-- Exclude generated files -->
+	<exclude-pattern>
+		./packages/block-serialization-spec-parser/parser.php
+	</exclude-pattern>
+	<!-- These special comments are markers for the build process -->
+	<exclude name="Squiz.Commenting.FunctionComment.Missing" />
+	<exclude name="Squiz.Commenting.FileComment.Missing" />
+	<exclude name="Squiz.Commenting.ClassComment.Missing" />
+	<exclude name="Squiz.Commenting.ClassComment.SpacingAfter" />
+	<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag" />
+	<exclude name="Generic.Commenting.DocComment.Empty" />
+	<exclude name="Generic.Commenting.DocComment.MissingShort" />
+	<exclude name="Squiz.Commenting.VariableComment.Missing" />
+	<exclude name="Squiz.Commenting.FunctionCommentThrowTag.Missing" />
+	<exclude name="Squiz.Commenting.InlineComment.WrongStyle" />
+	<exclude name="Generic.Files.LineLength" />
+	<exclude name="PEAR.Functions.FunctionCallSignature" />
+
+	<config name="text_domain" value="iconvert-promoter" />
+
+
+	<!-- rules -->
+
+	<rule ref="WordPress-Core">
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid" />
+		<exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found" />
+		<!-- Ignore filename error since it requires WP core build process change -->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+		<exclude name="WordPress.NamingConventions.ValidHookName.UseUnderscores" />
+		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.Found" />
+	</rule>
+	<rule ref="WordPress.WP.I18n" />
+	<rule ref="VariableAnalysis.CodeAnalysis.VariableAnalysis">
+		<properties>
+			<property name="allowUnusedParametersBeforeUsed" value="true" />
+		</properties>
+	</rule>
+	<rule ref="Generic.CodeAnalysis.EmptyStatement" />
+	<rule ref="WordPress.WP.I18n.MissingArgDomainDefault">
+		<exclude-pattern>
+			packages/block-library/src/*
+		</exclude-pattern>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses" />
+	<rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall" />
+	<rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration" />
+	<rule ref="SlevomatCodingStandard.Functions.DisallowArrowFunction" />
+
+
+	<!-- All SQL queries should be prepared as close to the time of querying the database as
+	possible. -->
+	<rule ref="WordPress.DB.PreparedSQL" />
+	<rule ref="WordPress.DB.PreparedSQL.InterpolatedNotPrepared">
+		<!-- Ideally this wouldn't trigger on "safe" items, but it's triggered on any variable in
+		the SQL. -->
+		<type>warning</type>
+	</rule>
+
+	<!-- Verify that placeholders in prepared queries are used correctly. -->
+	<rule ref="WordPress.DB.PreparedSQLPlaceholders" />
+
+	<!-- Nonces. These are triggered on any GET/POST access items. -->
+	<rule ref="WordPress.Security.NonceVerification">
+		<!-- This is triggered on all GET/POST access, it can't be an error. -->
+		<type>warning</type>
+	</rule>
+
+	<!-- Sanitized Input rules -->
+	<rule ref="WordPress.Security.ValidatedSanitizedInput">
+		<type>warning</type>
+	</rule>
+
+	<!-- Prohibit the use of the backtick operator. -->
+	<rule ref="Generic.PHP.BacktickOperator">
+		<severity>7</severity>
+	</rule>
+
+	<!-- Prohibit the use of HEREDOC or NOWDOC. -->
+	<rule ref="Squiz.PHP.Heredoc">
+		<severity>7</severity>
+	</rule>
+
+	<!-- Prohibit the use of the `goto` PHP language construct. -->
+	<rule ref="Generic.PHP.DiscourageGoto.Found">
+		<type>error</type>
+		<severity>7</severity>
+		<message>The "goto" language construct should not be used.</message>
+	</rule>
+
+	<!-- Check for error logs in plugin -->
+	<rule ref="WordPress.PHP.DevelopmentFunctions">
+		<type>warning</type>
+	</rule>
+
+	<!-- No PHP short open tags allowed. -->
+	<rule ref="Generic.PHP.DisallowShortOpenTag" />
+	<rule ref="Generic.PHP.DisallowShortOpenTag.Found">
+		<severity>7</severity>
+	</rule>
+	<rule ref="Generic.PHP.DisallowShortOpenTag.EchoFound">
+		<severity>7</severity>
+	</rule>
+
+	<!-- Alternative PHP open tags not allowed. -->
+	<rule ref="Generic.PHP.DisallowAlternativePHPTags">
+		<severity>7</severity>
+	</rule>
+
+	<!-- Prevent path disclosure when using add_theme_page(). -->
+	<rule ref="WordPress.Security.PluginMenuSlug">
+		<severity>6</severity>
+	</rule>
+
+	<!-- While most plugins shouldn't query the database directly, if they do, it should be done
+	correctly. -->
+	<!-- Don't use the PHP database functions and classes, use the WP abstraction layer instead. -->
+	<rule ref="WordPress.DB.RestrictedClasses">
+		<severity>7</severity>
+	</rule>
+
+	<rule ref="WordPress.DB.RestrictedFunctions">
+		<severity>7</severity>
+	</rule>
+
+	<!-- Check for code WP does better -->
+	<rule ref="WordPress.WP.AlternativeFunctions">
+		<type>error</type>
+		<exclude name="WordPress.WP.AlternativeFunctions.json_encode_json_encode" />
+		<exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents" />
+		<exclude name="WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents" />
+	</rule>
+
+	<rule ref="Generic.PHP.ForbiddenFunctions">
+		<properties>
+			<property name="forbiddenFunctions" type="array">
+				<element key="move_uploaded_file" value="null" />
+				<element key="passthru" value="null" />
+				<element key="proc_open" value="null" />
+				<element key="create_function" value="null" />
+				<element key="eval" value="null" />
+				<element key="str_rot13" value="null" />
+			</property>
+		</properties>
+		<type>error</type>
+		<severity>7</severity>
+	</rule>
+
+	<rule ref="Squiz.PHP.DiscouragedFunctions">
+		<properties>
+			<property name="forbiddenFunctions" type="array">
+				<element key="set_time_limit" value="null" />
+				<element key="ini_set" value="null" />
+				<element key="ini_alter" value="null" />
+				<element key="dl" value="null" />
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Check for use of deprecated WordPress classes, functions and function parameters. -->
+	<rule ref="WordPress.WP.DeprecatedClasses" />
+	<rule ref="WordPress.WP.DeprecatedFunctions" />
+	<rule ref="WordPress.WP.DeprecatedParameters" />
+	<rule ref="WordPress.DateTime.RestrictedFunctions" />
+
+	<!-- Check for deprecated WordPress constants. -->
+	<rule ref="WordPress.WP.DiscouragedConstants">
+		<type>error</type>
+		<severity>7</severity>
+	</rule>
+
+	<!-- Check for discouraged WordPress functions. -->
+	<rule ref="WordPress.WP.DiscouragedFunctions">
+		<severity>6</severity>
+	</rule>
+
+	<!-- Check for usage of deprecated parameter values in WP functions and provide alternative
+	based on the parameter passed. -->
+	<rule ref="WordPress.WP.DeprecatedParameterValues">
+		<severity>7</severity>
+	</rule>
+
+	<!-- No ByteOrderMark allowed - important to prevent issues with content being sent before
+	headers. -->
+	<rule ref="Generic.Files.ByteOrderMark">
+		<severity>7</severity>
+	</rule>
+
+	<!-- Call-time pass-by-reference has been deprecated since PHP 5.3 and should not be used. -->
+	<rule ref="Generic.Functions.CallTimePassByReference">
+		<severity>7</severity>
+	</rule>
+
+
+</ruleset>
